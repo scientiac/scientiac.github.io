@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://scientiac.tilde.team/sitemap.xml
+Sitemap: https://scientiac.github.io/sitemap.xml
