@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://scientiac.github.io/sitemap.xml
