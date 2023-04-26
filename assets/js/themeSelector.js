@@ -77,8 +77,8 @@ function updateThemeSelector() {
 
   // get colors
   const colors = {
-    fill: getComputedStyle(q('html'))['backgroundColor'],
-    stroke: getComputedStyle(q('.codewithlove'))['color']
+    fill: getComputedStyle(q('.main-background'))['color'],
+    stroke: getComputedStyle(q('.main-background'))['backgroundColor']
   }
 
   document.querySelector('meta[name="theme-color"]').setAttribute("content", colors.fill);
