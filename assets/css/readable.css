@@ -2,13 +2,14 @@
 
 /* Font family support */
 html, html[data-font-family="serif"] {
-  --font-family: Latin Modern;
+  --font-family: var(--font-family-swap);
 }
 html[data-font-family="sans-serif"] {
-  --font-family: Latin Modern;
+  --font-family: var(--font-family-swap);
 }
 html[data-font-family="monospace"] {
-  --font-family: Latin Modern;
+  --font-family: var(--font-family-swap);
+  /* --font-family: Latin Modern; */
 }
 
 /* Color scheme support */
@@ -61,6 +62,7 @@ html[data-theme="dark"][data-high-contrast="on"] {
   font-family: var(--font-family);
 
   background-color: var(--background-color);
+  background: var(--background-image);
   color: var(--color);
 }
 
