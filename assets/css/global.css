@@ -1,6 +1,6 @@
 .main-background {
-	color: var(--background-color-0);
-	background-color: var(--text-highlight-0);
+	background-color: var(--background-color-0);
+	color: var(--text-highlight-4);
 	border-radius: var(--half-line);
 	padding: calc(0.2 * var(--one-line));
 }
