@@ -347,8 +347,12 @@
         <loc>https://scientiac.github.io/syndications/list/1/</loc>
     </url>
     <url>
-        <loc>https://scientiac.github.io/syndications/posse/</loc>
+        <loc>https://scientiac.github.io/syndications/posse-2023-04-25/</loc>
         <lastmod>2023-04-25</lastmod>
+    </url>
+    <url>
+        <loc>https://scientiac.github.io/syndications/posse-2023-04-26/</loc>
+        <lastmod>2023-04-26</lastmod>
     </url>
     <url>
         <loc>https://scientiac.github.io/writings/</loc>

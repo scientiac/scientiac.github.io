@@ -5,8 +5,17 @@
 	<link href="https://scientiac.github.io/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://scientiac.github.io"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2023-04-25T00:00:00+00:00</updated>
+	<updated>2023-04-26T00:00:00+00:00</updated>
 	<id>https://scientiac.github.io/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Second Day</title>
+		<published>2023-04-26T00:00:00+00:00</published>
+		<updated>2023-04-26T00:00:00+00:00</updated>
+		<link href="https://scientiac.github.io/syndications/posse-2023-04-26/" type="text/html"/>
+		<id>https://scientiac.github.io/syndications/posse-2023-04-26/</id>
+		<content type="html">&lt;p&gt;This is day two of redesigning the site, it is going fine, I added designs, and it&#x27;s cool now. Some new fonts and SVG backgrounds, and we have a completely different design. I&#x27;m loving it. My favorite theme if you as is everforest-dark every time. &lt;&#x2F;p&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Life, Love, Twilight and a Butterfly</title>
 		<published>2023-04-25T00:00:00+00:00</published>
@@ -27,8 +36,8 @@
 		<title>POSSE</title>
 		<published>2023-04-25T00:00:00+00:00</published>
 		<updated>2023-04-25T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/syndications/posse/" type="text/html"/>
-		<id>https://scientiac.github.io/syndications/posse/</id>
+		<link href="https://scientiac.github.io/syndications/posse-2023-04-25/" type="text/html"/>
+		<id>https://scientiac.github.io/syndications/posse-2023-04-25/</id>
 		<content type="html">&lt;p&gt;So, this is the mini-blog thingy that I was planning to make for some time now. And maybe I&#x27;ll share my thoughts following POSSE (Publish on your Own Site, Syndicate Elsewhere) and share the link to this to everywhere else. I have an RSS feed for this, which I&#x27;ll try to use for fetching and scripting if needed and anybody can just use it normally as intended as well.&lt;&#x2F;p&gt;
 </content>
 	</entry>
