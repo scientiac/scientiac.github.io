@@ -307,6 +307,26 @@ button, a.button {
  overflow: scroll;
  }
 
+.pagination {
+   max-width: 80ch;
+   background-color: var(--background-color-1);
+   border-radius: var(--half-line);
+   margin: 1rem 0rem;
+	 padding: calc( 0.6 * var(--half-line));
+	 line-height: calc( 0.6 * var(--half-line));
+   text-align: center;
+   display: grid;
+   grid-template-columns: 25% 50% 25%;
+}
+
+.pagination a {
+   background-color: var(--background-color-0);
+   text-decoration: none;
+   border-radius: 0.8rem;
+   margin: 0.5rem 0.8rem;
+   padding: 1rem;
+}
+
 @media all and (max-width: 45rem)
 {
   

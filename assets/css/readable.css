@@ -1,15 +1,29 @@
-/* readable.css 1.0.2-beta */
+/* readable.css 1.1.0, licensed 0BSD */
 
 /* Font family support */
 html, html[data-font-family="serif"] {
+
+/* Original
+  --font-family: serif;
+*/
+
   --font-family: var(--font-family-swap);
 }
 html[data-font-family="sans-serif"] {
+
+/* Original
+  --font-family: sans-serif;
+*/
+
   --font-family: var(--font-family-swap);
 }
 html[data-font-family="monospace"] {
+
+/* Original
+  --font-family: monospace;
+*/
+
   --font-family: var(--font-family-swap);
-  /* --font-family: Latin Modern; */
 }
 
 /* Color scheme support */
@@ -22,7 +36,7 @@ html[data-high-contrast="on"], html[data-theme="light"][data-high-contrast="on"]
 }
 
 html[data-theme="dark"] {
-  --background-color: #222830;
+  --background-color: #1f272d;
   --color: #fff;
 }
 html[data-theme="dark"][data-high-contrast="on"] {
@@ -51,6 +65,11 @@ html[data-theme="dark"][data-high-contrast="on"] {
 
 /* Generic styles */
 :root {
+
+/* Original
+  --column-width: 67ch;
+*/
+
   --column-width: 80ch;
   --form-width: 50ch;
   --line-width: 0.125rem;
@@ -62,7 +81,10 @@ html[data-theme="dark"][data-high-contrast="on"] {
   font-family: var(--font-family);
 
   background-color: var(--background-color);
+
+/* Additional */
   background: var(--background-image);
+
   color: var(--color);
 }
 
@@ -88,7 +110,10 @@ summary {
 
 blockquote:not(.exclude) {
   padding-left: var(--one-line);
+
+/* Additional */
   background-color: var(--background-color-1);
+
   border-left: var(--line-width) solid;
 }
 
@@ -131,7 +156,7 @@ p, ul, ol, figcaption, nav, td, th, label {
   line-height: var(--line-height);
 }
 
-h1, h2, h3, h4, h5, h6, p, blockquote, hr, footer, header, nav, figure, figcaption, ul, ol, details, :is(body, article, main) > :is(img, video):not(.exclude), table, article > aside, article > aside {
+h1, h2, h3, h4, h5, h6, p, blockquote, hr, footer, header, nav, figure, figcaption, :is(ul, ol):not(li > *), :is(body, article, main) > :is(img, video, details):not(.exclude), table, article > aside, article > aside {
   margin: var(--one-line) 0;
 }
 
@@ -165,9 +190,20 @@ h3, h4, h5, h6 {
 
 /* Navbar */
 
+/* Original
+nav:not(.exclude:not([data-style]), [data-style="none"]) { 
+This styling only affects the first nav element that is the direct child of the body 
+*/
+
 :is(body, header) > nav:first-of-type:not(.exclude) { /* This styling only affects the first nav element that is the direct child of the body */
   text-align: center;
   border-width: var(--line-width) 0;
+
+/* Original
+  border-style: solid;
+  line-height: var(--line-height);
+*/
+
   background-color: var(--background-color-1);
   border-radius: var(--half-line);
   line-height: var(--line-height) 100px;
@@ -176,19 +212,53 @@ h3, h4, h5, h6 {
   flex-flow: row wrap;
 }
 
-:is(body, header) > nav:first-of-type:not(.exclude) > * {
+nav:not(.exclude:not([data-style]), [data-style="none"]) > * {
   flex-grow: 1;
+
+/* Original
+  margin: calc((var(--line-height) * 0.5rem) - var(--line-width)) var(--half-line); 
+Put half a line's height on both top and bottom, then remove the width of the border 
+*/
+
   margin: 0 var(--half-line);
   text-transform: uppercase;
 }
 
+nav[data-style="blockout"],
+nav:is([data-style="boxes"], [data-style="roundesque"]) a:is(:hover, :focus) {
+	background-color: var(--color);
+	color: var(--background-color);
+}
+
+nav[data-style="blockout"] a {
+	text-decoration: none;
+}
+
+nav[data-style="blockout"] a:is(:hover, :focus) {
+	background-color: var(--background-color);
+	color: var(--color);
+}
+
+nav[data-style]:is([data-style="boxes"], [data-style="roundesque"]) {
+	border: 0;
+}
+
+nav:is([data-style="boxes"], [data-style="roundesque"]) a {
+	text-decoration: none;
+	border: var(--line-width) solid;
+}
+
+nav[data-style="roundesque"] a {
+	border-radius: calc(0.25 * var(--one-line));
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  :is(body, header) > nav:first-of-type:not(.exclude) a {
+  nav[data-style="classy"] span > a {
     text-decoration: none;
     display: inline-block;
   }
 
-  :is(body, header) > nav:first-of-type:not(.exclude) a::after {
+  nav[data-style="classy"] span > a::after {
     content: '';
     width: 0;
     height: var(--line-width);
@@ -197,7 +267,7 @@ h3, h4, h5, h6 {
     transition: 150ms;
   }
 
-  :is(body, header) > nav:first-of-type:not(.exclude) a:is(:hover, :focus)::after {
+  nav[data-style="classy"] span > a:is(:hover, :focus)::after {
     width: 100%;
   }
 }
@@ -244,7 +314,7 @@ form:not(.exclude) :is(label:not(input:is([type="checkbox"], [type="radio"]) + l
   margin: var(--half-line) 0;
 }
 
-form:not(.exclude) :is(input:not([type="checkbox"], [type="radio"]), textarea, select) {
+form:not(.exclude) :is(input:not([type="checkbox"], [type="radio"]), textarea, select), button {
   box-sizing: border-box;
   padding: var(--half-line);
   background: transparent;
@@ -252,6 +322,10 @@ form:not(.exclude) :is(input:not([type="checkbox"], [type="radio"]), textarea, s
   color: inherit;
   font: inherit;
   width: 100%;
+}
+
+button {
+	width: initial;
 }
 
 form:not(.exclude) label:not(input:is([type="checkbox"], [type="radio"]) + label) {
