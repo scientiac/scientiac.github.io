@@ -2,28 +2,13 @@
 
 /* Font family support */
 html, html[data-font-family="serif"] {
-
-/* Original
   --font-family: serif;
-*/
-
-  --font-family: var(--font-family-swap);
 }
 html[data-font-family="sans-serif"] {
-
-/* Original
   --font-family: sans-serif;
-*/
-
-  --font-family: var(--font-family-swap);
 }
 html[data-font-family="monospace"] {
-
-/* Original
   --font-family: monospace;
-*/
-
-  --font-family: var(--font-family-swap);
 }
 
 /* Color scheme support */
@@ -65,12 +50,7 @@ html[data-theme="dark"][data-high-contrast="on"] {
 
 /* Generic styles */
 :root {
-
-/* Original
   --column-width: 67ch;
-*/
-
-  --column-width: 80ch;
   --form-width: 50ch;
   --line-width: 0.125rem;
   --line-height: 1.5;
@@ -81,10 +61,6 @@ html[data-theme="dark"][data-high-contrast="on"] {
   font-family: var(--font-family);
 
   background-color: var(--background-color);
-
-/* Additional */
-  background: var(--background-image);
-
   color: var(--color);
 }
 
@@ -110,10 +86,6 @@ summary {
 
 blockquote:not(.exclude) {
   padding-left: var(--one-line);
-
-/* Additional */
-  background-color: var(--background-color-1);
-
   border-left: var(--line-width) solid;
 }
 
@@ -189,38 +161,18 @@ h3, h4, h5, h6 {
 }
 
 /* Navbar */
-
-/* Original
-nav:not(.exclude:not([data-style]), [data-style="none"]) { 
-This styling only affects the first nav element that is the direct child of the body 
-*/
-
-:is(body, header) > nav:first-of-type:not(.exclude) { /* This styling only affects the first nav element that is the direct child of the body */
+nav:not(.exclude:not([data-style]), [data-style="none"]) { /* This styling only affects the first nav element that is the direct child of the body */
   text-align: center;
   border-width: var(--line-width) 0;
-
-/* Original
   border-style: solid;
   line-height: var(--line-height);
-*/
-
-  background-color: var(--background-color-1);
-  border-radius: var(--half-line);
-  line-height: var(--line-height) 100px;
-  padding: calc((var(--line-height) * 0.5rem) - var(--line-width)); /* Put half a line's height on both top and bottom, then remove the width of the border */
   display: flex;
   flex-flow: row wrap;
 }
 
 nav:not(.exclude:not([data-style]), [data-style="none"]) > * {
   flex-grow: 1;
-
-/* Original
-  margin: calc((var(--line-height) * 0.5rem) - var(--line-width)) var(--half-line); 
-Put half a line's height on both top and bottom, then remove the width of the border 
-*/
-
-  margin: 0 var(--half-line);
+  margin: calc((var(--line-height) * 0.5rem) - var(--line-width)) var(--half-line); /* Put half a line's height on both top and bottom, then remove the width of the border */
   text-transform: uppercase;
 }
 

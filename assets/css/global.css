@@ -1,3 +1,43 @@
+/* Shadows */
+
+/* Font family support from themes.css */
+
+html, html[data-font-family="serif"] {
+  --font-family: var(--font-family-swap);
+}
+
+html[data-font-family="sans-serif"] {
+  --font-family: var(--font-family-swap);
+}
+
+html[data-font-family="monospace"] {
+  --font-family: var(--font-family-swap);
+}
+
+/* Generic styles */
+/* Additional (background image support) */
+:root {
+  --column-width: 80ch;
+  background: var(--background-image);
+}
+
+/* Navbar */
+:is(body, header) > nav:first-of-type:not(.exclude) { /* This styling only affects the first nav element that is the direct child of the body */
+  text-align: center;
+  border-width: 0;
+  background-color: var(--background-color-1);
+  border-radius: var(--half-line);
+  padding: calc((var(--line-height) * 0.5rem) - var(--line-width));
+}
+
+nav:not(.exclude:not([data-style]), [data-style="none"]) > * {
+  flex-grow: 1;
+  margin: 0 var(--half-line);
+  text-transform: uppercase;
+}
+
+/* Shadows End */
+
 .main-background {
 	background-color: var(--background-color-0);
 	color: var(--text-highlight-4);
@@ -310,10 +350,10 @@ button, a.button {
 .pagination {
    max-width: 80ch;
    background-color: var(--background-color-1);
+	 border-width: 0;
    border-radius: var(--half-line);
    margin: 1rem 0rem;
-	 padding: calc( 0.6 * var(--half-line));
-	 line-height: calc( 0.6 * var(--half-line));
+	 padding: var(--half-line));
    text-align: center;
    display: grid;
    grid-template-columns: 25% 50% 25%;
@@ -322,9 +362,10 @@ button, a.button {
 .pagination a {
    background-color: var(--background-color-0);
    text-decoration: none;
+	 text-transform: uppercase;
    border-radius: 0.8rem;
    margin: 0.5rem 0.8rem;
-   padding: 1rem;
+   padding: 0.5rem;
 }
 
 @media all and (max-width: 45rem)
