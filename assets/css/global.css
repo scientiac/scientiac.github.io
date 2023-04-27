@@ -377,3 +377,27 @@ button, a.button {
      position: absolute;
   }
 }
+
+@media print {
+
+  .logo-container {
+    display: none !important;
+    position: absolute;
+  }
+
+  nav {
+    display: none !important;
+    position: absolute;
+  }
+
+  footer{
+    display: none !important;
+    position: absolute;
+  }
+
+  #themeSelector {
+    display: none !important;
+    position: absolute;	
+  }
+
+}
