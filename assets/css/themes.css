@@ -19,7 +19,7 @@
 	--text-highlight-3: #427b58;
 	--text-highlight-4: #b57614;
 	--text-highlight-5: #79740e;
-  --logo-mode: url('/res/logo-l.svg');
+  --logo-mode: url('/res/colors/logo-gruvbox-light.svg');
   --font-family-swap: Latin Modern;
 }
 
@@ -35,7 +35,7 @@
 	--text-highlight-3: #8ec07c;
 	--text-highlight-4: #fabd2f;
 	--text-highlight-5: #b8bb26;
-  --logo-mode: url('/res/logo-d.svg');
+  --logo-mode: url('/res/colors/logo-gruvbox-dark.svg');
   --font-family-swap: Latin Modern;
 }
 
@@ -51,7 +51,7 @@
 	--text-highlight-3: #19c434;
 	--text-highlight-4: #f8cb2b;
 	--text-highlight-5: #e6994a;
-  --logo-mode: url('/res/logo-d.svg');
+  --logo-mode: url('/res/colors/logo-night-solis.svg');
   --font-family-swap: Latin Modern;
 }
 
@@ -67,7 +67,7 @@
 	--text-highlight-3: #ce6f8f;
 	--text-highlight-4: #f2ce00;
 	--text-highlight-5: #00a3cc;
-  --logo-mode: url('/res/logo-d.svg');
+  --logo-mode: url('/res/colors/logo-night-spaceduck.svg');
   --font-family-swap: Latin Modern;
 }
 
@@ -83,7 +83,7 @@
 	--text-highlight-3: #88c0d0;
 	--text-highlight-4: #ebcb8b;
 	--text-highlight-5: #a3be8c;
-  --logo-mode: url('/res/logo-d.svg');
+  --logo-mode: url('/res/colors/logo-nord.svg');
   --font-family-swap: Latin Modern;
 }
 
@@ -99,7 +99,7 @@
 	--text-highlight-3: #88c0d0;
 	--text-highlight-4: #ebcb8b;
 	--text-highlight-5: #a3be8c;
-  --logo-mode: url('/res/logo-l.svg');
+  --logo-mode: url('/res/colors/logo-nord.svg');
   --font-family-swap: Latin Modern;
 }
 
@@ -115,7 +115,7 @@
 	--text-highlight-3: #f85552;
 	--text-highlight-4: #dfa000;
 	--text-highlight-5: #35a77c;
-  --logo-mode: url('/res/logo-l.svg');
+  --logo-mode: url('/res/colors/logo-everforest-light.svg');
   --font-family-swap: Latin Modern;
 }
 
@@ -131,7 +131,7 @@
 	--text-highlight-3: #e67e80;
 	--text-highlight-4: #dbbc7f;
 	--text-highlight-5: #83c092;
-  --logo-mode: url('/res/logo-d.svg');
+  --logo-mode: url('/res/colors/logo-everforest-dark.svg');
   --font-family-swap: Latin Modern;
 }
 
@@ -147,7 +147,7 @@
 	--text-highlight-3: #99d1ce;
 	--text-highlight-4: #edb443;
 	--text-highlight-5: #2aa889;
-  --logo-mode: url('/res/logo-d.svg');
+  --logo-mode: url('/res/colors/logo-night-gotham.svg');
   --font-family-swap: Latin Modern;
 }
 
@@ -163,7 +163,7 @@
 	--text-highlight-3: hsl(207, 82%, 66%);
 	--text-highlight-4: hsl(39, 67%, 69%);
 	--text-highlight-5: hsl(95, 38%, 62%);
-  --logo-mode: url('/res/logo-d.svg');
+  --logo-mode: url('/res/colors/logo-one-dark.svg');
   --font-family-swap: Latin Modern;
 }
 
@@ -179,7 +179,7 @@
 	--text-highlight-3: hsl(198, 99%, 37%);
 	--text-highlight-4: hsl(35, 99%, 40%);
 	--text-highlight-5: hsl(119, 34%, 47%);
-  --logo-mode: url('/res/logo-l.svg');
+  --logo-mode: url('/res/colors/logo-one-light.svg');
   --font-family-swap: Latin Modern;
 }
 
@@ -195,7 +195,7 @@
 	--text-highlight-3: #7aa2f7;
 	--text-highlight-4: #e0af68;
 	--text-highlight-5: #9ece6a;
-  --logo-mode: url('/res/logo-d.svg');
+  --logo-mode: url('/res/colors/logo-tokio-night.svg');
   --font-family-swap: Latin Modern;
 }
 
@@ -211,7 +211,7 @@
 	--text-highlight-3: #34548a;
 	--text-highlight-4: #8f5e15;
 	--text-highlight-5: #485e30;
-  --logo-mode: url('/res/logo-l.svg');
+  --logo-mode: url('/res/colors/logo-tokio-night-light.svg');
   --font-family-swap: Latin Modern;
 }
 
@@ -227,7 +227,7 @@
 	--text-highlight-3: #179299;
 	--text-highlight-4: #df8e1d;
 	--text-highlight-5: #40a02b;
-  --logo-mode: url('/res/logo-l.svg');
+  --logo-mode: url('/res/colors/logo-catppuccin-latte.svg');
   --font-family-swap: Latin Modern;
 }
 
@@ -243,7 +243,7 @@
 	--text-highlight-3: #81c8be;
 	--text-highlight-4: #e5c890;
 	--text-highlight-5: #a6d189;
-  --logo-mode: url('/res/logo-d.svg');
+  --logo-mode: url('/res/colors/logo-catppuccin-frappe.svg');
   --font-family-swap: Latin Modern;
 }
 
@@ -259,7 +259,7 @@
 	--text-highlight-3: #8bd5ca;
 	--text-highlight-4: #eed49f;
 	--text-highlight-5: #a6da95;
-  --logo-mode: url('/res/logo-d.svg');
+  --logo-mode: url('/res/colors/logo-catppuccin-macchiato.svg');
   --font-family-swap: Latin Modern;
 }
 
@@ -275,7 +275,7 @@
 	--text-highlight-3: #94e2d5;
 	--text-highlight-4: #f9e2af;
 	--text-highlight-5: #a6e3a1;
-  --logo-mode: url('/res/logo-d.svg');
+  --logo-mode: url('/res/colors/logo-catppuccin-mocha.svg');
   --font-family-swap: Latin Modern;
 }
 
@@ -291,7 +291,7 @@
 	--text-highlight-3: #50fa7b;
 	--text-highlight-4: #ffb86c;
 	--text-highlight-5: #f1fa8c;
-  --logo-mode: url('/res/logo-d.svg');
+  --logo-mode: url('/res/colors/logo-dracula.svg');
   --font-family-swap: Latin Modern;
 }
 
@@ -307,7 +307,7 @@
 	--text-highlight-3: #f85552;
 	--text-highlight-4: #dfa000;
 	--text-highlight-5: #35a77c;
-  --logo-mode: url('/res/logo-l.svg');
+  --logo-mode: url('/res/colors/logo-everforest-light.svg');
   --font-family-swap: 'Nova Mono', monospace;
 }
 
@@ -324,7 +324,7 @@
 	--text-highlight-3: #34548a;
 	--text-highlight-4: #8f5e15;
 	--text-highlight-5: #485e30;
-  --logo-mode: url('/res/logo-l.svg');
+  --logo-mode: url('/res/colors/logo-tokio-night-light.svg');
   --font-family-swap: 'Philosopher', sans-serif;
 }
 
@@ -340,6 +340,6 @@
 	--text-highlight-3: #427b58;
 	--text-highlight-4: #b57614;
 	--text-highlight-5: #79740e;
-  --logo-mode: url('/res/logo-l.svg');
+  --logo-mode: url('/res/colors/logo-gruvbox-light.svg');
   --font-family-swap: 'Ubuntu', sans-serif;
 }
