@@ -108,6 +108,36 @@ nav:not(.exclude:not([data-style]), [data-style="none"]) > * {
 	text-decoration: underline;
 }
 
+.syndicate-pagedate {
+	text-align: center;
+	padding-top: calc(0.8 * var(--one-line));
+}
+
+.syndicate-inside {
+	background-color: var(--background-color-1);
+	padding: calc(0.1 * var(--one-line));
+	border-radius: var(--half-line);
+	margin: calc(0.5 * var(--one-line)) 0;
+}
+
+.syndicate-inside-text {
+	background-color: var(--background-color-0);
+	padding: var(--one-line);
+	border-radius: 0 0 var(--half-line) var(--half-line);
+	margin: 0;
+}
+
+.syndicate-inside-title {
+	margin: 0;
+	padding: calc(0.5 * var(--one-line));
+	background-color: var(--background-color-0);
+	border-radius: var(--half-line) var(--half-line) 0 0;
+}
+
+.syndicate-inside code {
+		background-color: var(--background-color-0);
+}
+
 #aboutTheAuthor h2 {
 	margin-bottom: 0;
 }
