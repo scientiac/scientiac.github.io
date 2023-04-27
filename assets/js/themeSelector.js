@@ -10,6 +10,10 @@ const themes = {
     'storific',
     'articalistic'
   ],
+  dyslexic: [
+    'light',
+    'dark'
+  ],
   everforest: [
     'light',
     'dark'

@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Philosopher&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nova+Mono&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barrio&display=swap');
 
 :root[data-theme] {
 	--background-color: var(--background-color-0);
@@ -342,4 +343,38 @@
 	--text-highlight-5: #79740e;
   --logo-mode: url('/res/colors/logo-gruvbox-light.svg');
   --font-family-swap: 'Ubuntu', sans-serif;
+}
+
+
+:root[data-theme="dyslexic-light"] {
+	--background-image: hsl(230, 1%, 98%);
+	--background-color-0: hsl(230, 1%, 98%);
+	--background-color-1: hsl(20, 13%, 93%);
+	--color: hsl(230, 8%, 24%);
+	--color-comments: hsl(230, 4%, 64%);
+	--text-highlight-0: hsl(5, 74%, 59%);
+	--text-highlight-1: hsl(221, 87%, 60%);
+	--text-highlight-2: hsl(301, 63%, 40%);
+	--text-highlight-3: hsl(198, 99%, 37%);
+	--text-highlight-4: hsl(35, 99%, 40%);
+	--text-highlight-5: hsl(119, 34%, 47%);
+  --logo-mode: url('/res/colors/logo-one-light.svg');
+  --font-family-swap: OpenDyslexicaltaItalic;
+}
+
+
+:root[data-theme="dyslexic-dark"] {
+	--background-image: #2d353b;
+	--background-color-0: #2d353b;
+	--background-color-1: #232a2e;
+	--color: #d3c6aa;
+	--color-comments: #859289;
+	--text-highlight-0: #a7c080;
+	--text-highlight-1: #7fbbb3;
+	--text-highlight-2: #d699b6;
+	--text-highlight-3: #e67e80;
+	--text-highlight-4: #dbbc7f;
+	--text-highlight-5: #83c092;
+  --logo-mode: url('/res/colors/logo-everforest-dark.svg');
+  --font-family-swap: OpenDyslexicaltaItalic;
 }
