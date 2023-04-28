@@ -1,7 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Philosopher&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nova+Mono&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Barrio&display=swap');
+
+@font-face {
+  font-family: 'OpenDyslexicAltaRegular';
+  src: url('/assets/fonts/OpenDyslexicAlta-Regular.ttf') format('truetype');
+}
 
 :root[data-theme] {
 	--background-color: var(--background-color-0);
@@ -359,7 +363,7 @@
 	--text-highlight-4: hsl(35, 99%, 40%);
 	--text-highlight-5: hsl(119, 34%, 47%);
   --logo-mode: url('/res/colors/logo-one-light.svg');
-  --font-family-swap: OpenDyslexicaltaItalic;
+  --font-family-swap: OpenDyslexicAltaRegular;
 }
 
 
@@ -376,5 +380,5 @@
 	--text-highlight-4: #dbbc7f;
 	--text-highlight-5: #83c092;
   --logo-mode: url('/res/colors/logo-everforest-dark.svg');
-  --font-family-swap: OpenDyslexicaltaItalic;
+  --font-family-swap: OpenDyslexicAltaRegular;
 }

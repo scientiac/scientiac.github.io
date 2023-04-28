@@ -132,7 +132,7 @@ nav:not(.exclude:not([data-style]), [data-style="none"]) > * {
 
 .syndicate-inside-title {
 	margin: 0;
-	padding: calc(0.5 * var(--one-line));
+	padding: calc(0.2 * var(--one-line));
 	background-color: var(--background-color-0);
 	border-radius: var(--half-line) var(--half-line) 0 0;
 }
