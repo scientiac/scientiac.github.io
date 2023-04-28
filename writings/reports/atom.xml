@@ -14,7 +14,7 @@
 		<link href="https://scientiac.github.io/blog/arduino-firefly/" type="text/html"/>
 		<id>https://scientiac.github.io/blog/arduino-firefly/</id>
 		<content type="html">&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;firefly.jpg&quot; alt=&quot;Firefly&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;introduction&quot;&gt;Introduction:&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;&#x2F;h2&gt;
 &lt;p&gt;The purpose of this report is to document the process of building a fire extinguishing and gas sensing car using Arduino. The car is designed to detect fire using a flame IR sensor and go towards it to extinguish it if necessary. It also detects gas leaks and alerts the user via SMS. This report will detail the steps taken to design and build the car, as well as the challenges encountered and the solutions implemented.&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;materials-used&quot;&gt;Materials Used:&lt;&#x2F;h3&gt;
 &lt;ol&gt;
