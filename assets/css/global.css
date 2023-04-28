@@ -110,21 +110,24 @@ nav:not(.exclude:not([data-style]), [data-style="none"]) > * {
 
 .syndicate-pagedate {
 	text-align: center;
-	padding-top: calc(0.8 * var(--one-line));
+	padding: calc(0.6 * var(--one-line));
 }
 
 .syndicate-inside {
-	background-color: var(--background-color-1);
-	padding: calc(0.1 * var(--one-line));
+  background-color: var(--background-color-1);
 	border-radius: var(--half-line);
+	padding: calc(0.1 * var(--one-line));
 	margin: calc(0.5 * var(--one-line)) 0;
 }
 
 .syndicate-inside-text {
 	background-color: var(--background-color-0);
-	padding: var(--one-line);
+	padding: calc(0.2 * var(--one-line));
 	border-radius: 0 0 var(--half-line) var(--half-line);
-	margin: 0;
+}
+
+.syndicate-inside-text p {
+ margin: calc(0.6 * var(--one-line));
 }
 
 .syndicate-inside-title {
