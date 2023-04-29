@@ -1,11 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Philosopher&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nova+Mono&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
-
-@font-face {
-  font-family: 'OpenDyslexicAltaRegular';
-  src: url('/assets/fonts/OpenDyslexicAlta-Regular.ttf') format('truetype');
-}
 
 :root[data-theme] {
 	--background-color: var(--background-color-0);
@@ -313,7 +305,7 @@
 	--text-highlight-4: #dfa000;
 	--text-highlight-5: #35a77c;
   --logo-mode: url('/res/colors/logo-everforest-light.svg');
-  --font-family-swap: 'Nova Mono', monospace;
+  --font-family-swap: 'NovaMonoBook', monospace;
 }
 
 
@@ -330,7 +322,7 @@
 	--text-highlight-4: #8f5e15;
 	--text-highlight-5: #485e30;
   --logo-mode: url('/res/colors/logo-tokio-night-light.svg');
-  --font-family-swap: 'Philosopher', sans-serif;
+  --font-family-swap: 'ElMessiriMedium', sans-serif;
 }
 
 :root[data-theme="genre-articalistic"] {
@@ -346,7 +338,7 @@
 	--text-highlight-4: #b57614;
 	--text-highlight-5: #79740e;
   --logo-mode: url('/res/colors/logo-gruvbox-light.svg');
-  --font-family-swap: 'Ubuntu', sans-serif;
+  --font-family-swap: 'RepoRegular', sans-serif;
 }
 
 
