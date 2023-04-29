@@ -83,8 +83,9 @@ This is neither a paper nor a thesis, it&#x27;s just my take on love today. So, 
     <div class="container">
       
 
-
-<div class="section syndicate-inside" id="html-content-holder">
+<div id="html-content-holder">
+<br style="display: block;margin: 1px 0;">
+<div class="section syndicate-inside">
 
 <h2 class="title syndicate-inside-title">
   Experimenting with Feelings
@@ -107,9 +108,11 @@ This is neither a paper nor a thesis, it&#x27;s just my take on love today. So, 
 </div>
 
 </div>
+<br style="display: block;margin: 1px 0;">
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
 
 <center>
   <input id="btn-Preview-Image" type="button" value="Get Image" />
@@ -117,26 +120,35 @@ This is neither a paper nor a thesis, it&#x27;s just my take on love today. So, 
 
 
 <script>
+
 $(document).ready(function() {
 
-
-  var element = $("#html-content-holder"); // global variable
-  var getCanvas; // global variable
+  var element = document.getElementById("html-content-holder"); // global variable
   var newData;
 
   $("#btn-Preview-Image").on('click', function() {
-    html2canvas(element, {
-      onrendered: function(canvas) {
-        getCanvas = canvas;
-        var imgageData = getCanvas.toDataURL("image/png");
+    var rect = element.getBoundingClientRect(); // get the size and position of the element in the viewport
+    domtoimage.toPng(element, {
+        width: rect.width * 3, // triple the width of the image
+        height: rect.height * 3, // triple the height of the image
+      style: {
+        transform: "scale(3)", // scale the image by a factor of 3
+        transformOrigin: "top left",
+        borderRadius: "10px", // add the border radius style
+        }
+      })
+      .then(function (dataUrl) {
         var a = document.createElement("a");
-        a.href = imgageData; //Image Base64 Goes here
-        a.download = "Image.png"; //File name Here
-        a.click(); //Downloaded file
-      }
-    });
+        a.href = dataUrl;
+        a.download = "Image.png";
+        a.click();
+      })
+      .catch(function (error) {
+        console.error('Oops, something went wrong!', error);
+      });
   });
-});  
+});
+
 </script>
 
 
