@@ -5,8 +5,19 @@
 	<link href="https://scientiac.github.io/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://scientiac.github.io"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2023-04-28T00:00:00+00:00</updated>
+	<updated>2023-04-29T00:00:00+00:00</updated>
 	<id>https://scientiac.github.io/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Experimenting with Feelings</title>
+		<published>2023-04-29T00:00:00+00:00</published>
+		<updated>2023-04-29T00:00:00+00:00</updated>
+		<link href="https://scientiac.github.io/syndications/posse-2023-04-29/" type="text/html"/>
+		<id>https://scientiac.github.io/syndications/posse-2023-04-29/</id>
+		<content type="html">&lt;p&gt;Yeah! Yeah! Yeah! This is one of those hot takes on &amp;quot;Love&amp;quot; ooOooh!!&lt;&#x2F;p&gt;
+&lt;p&gt;Human nature is weird. Like, how someone would behave when they feel like they&#x27;re loved and how the behavior would change when they feel like they are indifferent to them. It&#x27;s quite fascinating that the behavioral and psychological pattern change, how cute turns into offensive and feelings turn into conscious infatuation. Apparently hope plays quite a big role in it. One could argue that &amp;quot;love&amp;quot; is nothing but just hopefulness. And when one gets hopeless, everybody knows how that goes. &lt;&#x2F;p&gt;
+&lt;p&gt;This is neither a paper nor a thesis, it&#x27;s just my take on love today. So, I suppose it&#x27;s better incomplete and a hot take than a &amp;quot;WHAT I SAY IS ALWAYS TRUE&amp;quot; of a vibe. Bye!&lt;&#x2F;p&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Project Firefly</title>
 		<published>2023-04-28T00:00:00+00:00</published>
