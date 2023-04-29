@@ -55,6 +55,10 @@ nav:not(.exclude:not([data-style]), [data-style="none"]) > * {
   color: var(--text-highlight-0);
 }
 
+#html-content-holder {
+	padding: 1px;
+}
+
 .main-background {
 	background-color: var(--background-color-0);
 	color: var(--text-highlight-4);
