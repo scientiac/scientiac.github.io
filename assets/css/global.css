@@ -46,6 +46,15 @@ nav:not(.exclude:not([data-style]), [data-style="none"]) > * {
 
 /* Shadows End */
 
+#btn-Preview-Image {
+	padding: calc(0.4 * var(--one-line)) calc(0.6 * var(--one-line));
+	margin: 0;
+	border: none;
+	border-radius: var(--half-line);
+	background-color: var(--background-color-1);
+  color: var(--text-highlight-0);
+}
+
 .main-background {
 	background-color: var(--background-color-0);
 	color: var(--text-highlight-4);

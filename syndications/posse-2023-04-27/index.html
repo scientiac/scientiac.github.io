@@ -82,7 +82,7 @@ And talking about my achievement today, I unlocked a pimple on my face due to sl
       
 
 
-<div class="section syndicate-inside">
+<div class="section syndicate-inside" id="html-content-holder">
 
 <h2 class="title syndicate-inside-title">
   Continuing the Redesign
@@ -104,6 +104,37 @@ And talking about my achievement today, I unlocked a pimple on my face due to sl
 </div>
 
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+
+<center>
+  <input id="btn-Preview-Image" type="button" value="Get Image" />
+</center>
+
+
+<script>
+$(document).ready(function() {
+
+
+  var element = $("#html-content-holder"); // global variable
+  var getCanvas; // global variable
+  var newData;
+
+  $("#btn-Preview-Image").on('click', function() {
+    html2canvas(element, {
+      onrendered: function(canvas) {
+        getCanvas = canvas;
+        var imgageData = getCanvas.toDataURL("image/png");
+        var a = document.createElement("a");
+        a.href = imgageData; //Image Base64 Goes here
+        a.download = "Image.png"; //File name Here
+        a.click(); //Downloaded file
+      }
+    });
+  });
+});  
+</script>
 
 
     </div>
