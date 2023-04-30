@@ -97,7 +97,7 @@
     </div>
     
 
-  <div class="syndicate-inside-text"><p>Yes! The freshman year is over now. And I already feel like I have more responsibilities than usual. It feels good for some time until the feeling that you're getting old hits you. This year passed with a blink of an eye, I remember getting inside the college and feeling exited about what I was going to be. Let's see how the life as a middle child in the college goes. Wow! Three more binks and I'll be a graduate, it's scary.</p>
+  <div id="BTN-Preview-Image" class="syndicate-inside-text"><p>Yes! The freshman year is over now. And I already feel like I have more responsibilities than usual. It feels good for some time until the feeling that you're getting old hits you. This year passed with a blink of an eye, I remember getting inside the college and feeling exited about what I was going to be. Let's see how the life as a middle child in the college goes. Wow! Three more binks and I'll be a graduate, it's scary.</p>
 </div>
 
 </div>
@@ -129,6 +129,44 @@ $(document).ready(function() {
         a.click();
       })
       .catch(function(error) {
+        console.error('Oops, something went wrong!', error);
+      });
+  });
+});
+
+</script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+
+<script>
+
+$(document).ready(function() {
+
+  var element = document.getElementById("html-content-holder"); // global variable
+  var newData;
+
+  $("#BTN-Preview-Image").on('click', function() {
+    var originalWidth = element.offsetWidth; // get the original width of the element
+    var newWidth = originalWidth + 6; // add 6px to the width for the transparent border (3px on each side)
+
+    domtoimage.toPng(element, {
+        width: newWidth * 3, // triple the width of the image
+        height: element.offsetHeight * 3, // triple the height of the image
+        style: {
+          transform: "scale(3) translateX(3px)", // scale the image by a factor of 3 and move it to the right by 3px
+          transformOrigin: "top left",
+          borderRadius: "10px", // add the border radius style
+        }
+      })
+      .then(function (dataUrl) {
+        var a = document.createElement("a");
+        a.href = dataUrl;
+        a.download = "Image.png";
+        a.click();
+      })
+      .catch(function (error) {
         console.error('Oops, something went wrong!', error);
       });
   });

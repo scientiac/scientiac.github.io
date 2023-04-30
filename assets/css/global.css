@@ -51,11 +51,14 @@ nav:not(.exclude:not([data-style]), [data-style="none"]) > * {
 	cursor: pointer;
 }
 
-/*
+#BTN-Preview-Image {
+	cursor: pointer;
+}
+
 #html-content-holder {
 	padding: 1px;
 }
-*/
+
 
 .main-background {
 	background-color: var(--background-color-0);
