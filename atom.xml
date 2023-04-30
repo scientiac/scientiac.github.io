@@ -5,8 +5,17 @@
 	<link href="https://scientiac.github.io/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://scientiac.github.io"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2023-04-29T00:00:00+00:00</updated>
+	<updated>2023-04-30T00:00:00+00:00</updated>
 	<id>https://scientiac.github.io/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Chapter Two: Sophomore</title>
+		<published>2023-04-30T00:00:00+00:00</published>
+		<updated>2023-04-30T00:00:00+00:00</updated>
+		<link href="https://scientiac.github.io/syndications/posse-2023-04-30/" type="text/html"/>
+		<id>https://scientiac.github.io/syndications/posse-2023-04-30/</id>
+		<content type="html">&lt;p&gt;Yes! The freshman year is over now. And I already feel like I have more responsibilities than usual. It feels good for some time until the feeling that you&#x27;re getting old hits you. This year passed with a blink of an eye, I remember getting inside the college and feeling exited about what I was going to be. Let&#x27;s see how the life as a middle child in the college goes. Wow! Three more binks and I&#x27;ll be a graduate, it&#x27;s scary.&lt;&#x2F;p&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Exponential Fluctuations</title>
 		<published>2023-04-29T00:00:00+00:00</published>
