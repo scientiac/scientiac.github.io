@@ -5,8 +5,18 @@
 	<link href="https://scientiac.github.io/syndicate/posse/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://scientiac.github.io"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2023-04-30T00:00:00+00:00</updated>
+	<updated>2023-05-02T00:00:00+00:00</updated>
 	<id>https://scientiac.github.io/syndicate/posse/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Eww! Yuck!</title>
+		<published>2023-05-02T00:00:00+00:00</published>
+		<updated>2023-05-02T00:00:00+00:00</updated>
+		<link href="https://scientiac.github.io/syndications/posse-2023-05-02/" type="text/html"/>
+		<id>https://scientiac.github.io/syndications/posse-2023-05-02/</id>
+		<content type="html">&lt;p&gt;&lt;strong&gt;Gnome&lt;&#x2F;strong&gt; is officially out of the system now. I loved it but I love &lt;code&gt;hyprland&lt;&#x2F;code&gt; better now. Anyways, the consistency with GTK apps was what I liked about it and the essence of that still remains in &lt;code&gt;hyprland&lt;&#x2F;code&gt; with &lt;code&gt;EWW&lt;&#x2F;code&gt; which is configured in &lt;code&gt;yuck&lt;&#x2F;code&gt;, hence the title.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;EWW&lt;&#x2F;strong&gt; works as almost all the things, but some standalone apps are still better to have, so I have used &lt;code&gt;swaync&lt;&#x2F;code&gt; as the notification daemon and &lt;code&gt;rofi-wayland&lt;&#x2F;code&gt; as the launcher. Overall the system is pretty usable now and I just love hyprland&#x27;s animations.&lt;&#x2F;p&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Chapter Two: Sophomore</title>
 		<published>2023-04-30T00:00:00+00:00</published>
