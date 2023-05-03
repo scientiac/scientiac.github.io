@@ -5,16 +5,35 @@
 	<link href="https://scientiac.space/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://scientiac.space"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2023-05-02T00:00:00+00:00</updated>
+	<updated>2023-05-03T00:00:00+00:00</updated>
 	<id>https://scientiac.space/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Officially a Space Explorer</title>
+		<published>2023-05-03T00:00:00+00:00</published>
+		<updated>2023-05-03T00:00:00+00:00</updated>
+		<link href="https://scientiac.space/syndications/posse-2023-05-03/" type="text/html"/>
+		<id>https://scientiac.space/syndications/posse-2023-05-03/</id>
+		<content type="html">&lt;center&gt;
+&lt;p&gt;&lt;strong&gt;Domain&lt;&#x2F;strong&gt;&lt;br &#x2F;&gt;
+&lt;code&gt;dō-mān′&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;center&gt;
+&lt;ol&gt;
+&lt;li&gt;A territory over which rule or control is exercised.&lt;&#x2F;li&gt;
+&lt;li&gt;A sphere of activity, influence, or knowledge: synonym: field.&lt;&#x2F;li&gt;
+&lt;li&gt;The set of all possible values of an independent variable of a function.&lt;&#x2F;li&gt;
+&lt;li&gt;An open connected set that contains at least one point.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;Yep! I have my own domain now. My own territory, my own space, &lt;a href=&quot;https:&#x2F;&#x2F;scientiac.space&quot;&gt;scientiac.space&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Eww! Yuck!</title>
 		<published>2023-05-02T00:00:00+00:00</published>
 		<updated>2023-05-02T00:00:00+00:00</updated>
 		<link href="https://scientiac.space/syndications/posse-2023-05-02/" type="text/html"/>
 		<id>https://scientiac.space/syndications/posse-2023-05-02/</id>
-		<content type="html">&lt;p&gt;&lt;strong&gt;Gnome&lt;&#x2F;strong&gt; is officially out of the system now. I loved it but I love &lt;code&gt;hyprland&lt;&#x2F;code&gt; better now. Anyways, the consistency with GTK apps was what I liked about it and the essence of that still remains in &lt;code&gt;hyprland&lt;&#x2F;code&gt; with &lt;code&gt;EWW&lt;&#x2F;code&gt; which is configured in &lt;code&gt;yuck&lt;&#x2F;code&gt;, hence the title.&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;strong&gt;EWW&lt;&#x2F;strong&gt; works as almost all the things, but some standalone apps are still better to have, so I have used &lt;code&gt;swaync&lt;&#x2F;code&gt; as the notification daemon and &lt;code&gt;rofi-wayland&lt;&#x2F;code&gt; as the launcher. Overall the system is pretty usable now and I just love hyprland&#x27;s animations.&lt;&#x2F;p&gt;
+		<content type="html">&lt;p&gt;Gnome is officially out of the system now. I loved it but I love hyprland better now. Anyways, the consistency with GTK apps was what I liked about it and the essence of that still remains in hyprland with EWW which is configured in yuck, hence the title.&lt;&#x2F;p&gt;
+&lt;p&gt;EWW works as almost all the things, but some standalone apps are still better to have, so I have used swaync as the notification daemon and rofi-wayland as the launcher. Overall the system is pretty usable now, and I just love hyprland&#x27;s animations.&lt;&#x2F;p&gt;
 </content>
 	</entry>
 	<entry xml:lang="en">
