@@ -2,17 +2,17 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
 	<title>Scientiac</title>
 	<subtitle>That guy from the internet, scientist something.</subtitle>
-	<link href="https://scientiac.github.io/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://scientiac.github.io"/>
+	<link href="https://scientiac.space/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://scientiac.space"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
 	<updated>2023-05-02T00:00:00+00:00</updated>
-	<id>https://scientiac.github.io/atom.xml</id>
+	<id>https://scientiac.space/atom.xml</id>
 	<entry xml:lang="en">
 		<title>Eww! Yuck!</title>
 		<published>2023-05-02T00:00:00+00:00</published>
 		<updated>2023-05-02T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/syndications/posse-2023-05-02/" type="text/html"/>
-		<id>https://scientiac.github.io/syndications/posse-2023-05-02/</id>
+		<link href="https://scientiac.space/syndications/posse-2023-05-02/" type="text/html"/>
+		<id>https://scientiac.space/syndications/posse-2023-05-02/</id>
 		<content type="html">&lt;p&gt;&lt;strong&gt;Gnome&lt;&#x2F;strong&gt; is officially out of the system now. I loved it but I love &lt;code&gt;hyprland&lt;&#x2F;code&gt; better now. Anyways, the consistency with GTK apps was what I liked about it and the essence of that still remains in &lt;code&gt;hyprland&lt;&#x2F;code&gt; with &lt;code&gt;EWW&lt;&#x2F;code&gt; which is configured in &lt;code&gt;yuck&lt;&#x2F;code&gt;, hence the title.&lt;&#x2F;p&gt;
 &lt;p&gt;&lt;strong&gt;EWW&lt;&#x2F;strong&gt; works as almost all the things, but some standalone apps are still better to have, so I have used &lt;code&gt;swaync&lt;&#x2F;code&gt; as the notification daemon and &lt;code&gt;rofi-wayland&lt;&#x2F;code&gt; as the launcher. Overall the system is pretty usable now and I just love hyprland&#x27;s animations.&lt;&#x2F;p&gt;
 </content>
@@ -21,8 +21,8 @@
 		<title>Chapter Two: Sophomore</title>
 		<published>2023-04-30T00:00:00+00:00</published>
 		<updated>2023-04-30T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/syndications/posse-2023-04-30/" type="text/html"/>
-		<id>https://scientiac.github.io/syndications/posse-2023-04-30/</id>
+		<link href="https://scientiac.space/syndications/posse-2023-04-30/" type="text/html"/>
+		<id>https://scientiac.space/syndications/posse-2023-04-30/</id>
 		<content type="html">&lt;p&gt;Yes! The freshman year is over now. And I already feel like I have more responsibilities than usual. It feels good for some time until the feeling that you&#x27;re getting old hits you. This year passed with a blink of an eye, I remember getting inside the college and feeling exited about what I was going to be. Let&#x27;s see how the life as a middle child in the college goes. Wow! Three more binks and I&#x27;ll be a graduate, it&#x27;s scary.&lt;&#x2F;p&gt;
 </content>
 	</entry>
@@ -30,8 +30,8 @@
 		<title>Exponential Fluctuations</title>
 		<published>2023-04-29T00:00:00+00:00</published>
 		<updated>2023-04-29T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/syndications/posse-2023-04-29-second/" type="text/html"/>
-		<id>https://scientiac.github.io/syndications/posse-2023-04-29-second/</id>
+		<link href="https://scientiac.space/syndications/posse-2023-04-29-second/" type="text/html"/>
+		<id>https://scientiac.space/syndications/posse-2023-04-29-second/</id>
 		<content type="html">&lt;center&gt;
 &lt;p&gt;Sometimes It&#x27;s the end of the world,&lt;br &#x2F;&gt;
 sometimes MEH! It is what it is.&lt;br &#x2F;&gt;
@@ -48,8 +48,8 @@ a minute will change it all.&lt;&#x2F;p&gt;
 		<title>Experimenting with Feelings</title>
 		<published>2023-04-29T00:00:00+00:00</published>
 		<updated>2023-04-29T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/syndications/posse-2023-04-29/" type="text/html"/>
-		<id>https://scientiac.github.io/syndications/posse-2023-04-29/</id>
+		<link href="https://scientiac.space/syndications/posse-2023-04-29/" type="text/html"/>
+		<id>https://scientiac.space/syndications/posse-2023-04-29/</id>
 		<content type="html">&lt;p&gt;Yeah! Yeah! Yeah! This is one of those hot takes on &amp;quot;Love&amp;quot; ooOooh!!&lt;&#x2F;p&gt;
 &lt;p&gt;Human nature is weird. Like, how someone would behave when they feel like they&#x27;re loved and how the behavior would change when they feel like they are indifferent to them. It&#x27;s quite fascinating that the behavioral and psychological pattern change, how cute turns into offensive and feelings turn into conscious infatuation. Apparently hope plays quite a big role in it. One could argue that &amp;quot;love&amp;quot; is nothing but just hopefulness. And when one gets hopeless, everybody knows how that goes. &lt;&#x2F;p&gt;
 &lt;p&gt;This is neither a paper nor a thesis, it&#x27;s just my take on love today. So, I suppose it&#x27;s better incomplete and a hot take than a &amp;quot;WHAT I SAY IS ALWAYS TRUE&amp;quot; of a vibe. Bye!&lt;&#x2F;p&gt;
@@ -59,8 +59,8 @@ a minute will change it all.&lt;&#x2F;p&gt;
 		<title>Project Firefly</title>
 		<published>2023-04-28T00:00:00+00:00</published>
 		<updated>2023-04-28T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/arduino-firefly/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/arduino-firefly/</id>
+		<link href="https://scientiac.space/blog/arduino-firefly/" type="text/html"/>
+		<id>https://scientiac.space/blog/arduino-firefly/</id>
 		<content type="html">&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;firefly.jpg&quot; alt=&quot;Firefly&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;&#x2F;h2&gt;
 &lt;p&gt;The purpose of this report is to document the process of building a fire extinguishing and gas sensing car using Arduino. The car is designed to detect fire using a flame IR sensor and go towards it to extinguish it if necessary. It also detects gas leaks and alerts the user via SMS. This report will detail the steps taken to design and build the car, as well as the challenges encountered and the solutions implemented.&lt;&#x2F;p&gt;
@@ -95,8 +95,8 @@ a minute will change it all.&lt;&#x2F;p&gt;
 		<title>Some Fleabag</title>
 		<published>2023-04-28T00:00:00+00:00</published>
 		<updated>2023-04-28T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/syndications/posse-2023-04-28/" type="text/html"/>
-		<id>https://scientiac.github.io/syndications/posse-2023-04-28/</id>
+		<link href="https://scientiac.space/syndications/posse-2023-04-28/" type="text/html"/>
+		<id>https://scientiac.space/syndications/posse-2023-04-28/</id>
 		<content type="html">&lt;p&gt;I kinda binged fleabag and it was quite awesome. It&#x27;s more of a six-hour movie than a show, I&#x27;d say. I had watched season 1 and season 2 wasn&#x27;t difficult to finish. This is one of those series which I hated the first season, and it made my mind with the second. It&#x27;s a masterpiece as it ended with an actual ending and wasn&#x27;t extended due to public demand or just money.&lt;&#x2F;p&gt;
 &lt;p&gt;Yeah! The fact that it ended is my second favorite thing about the show.&lt;&#x2F;p&gt;
 </content>
@@ -105,8 +105,8 @@ a minute will change it all.&lt;&#x2F;p&gt;
 		<title>Continuing the Redesign</title>
 		<published>2023-04-27T00:00:00+00:00</published>
 		<updated>2023-04-27T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/syndications/posse-2023-04-27/" type="text/html"/>
-		<id>https://scientiac.github.io/syndications/posse-2023-04-27/</id>
+		<link href="https://scientiac.space/syndications/posse-2023-04-27/" type="text/html"/>
+		<id>https://scientiac.space/syndications/posse-2023-04-27/</id>
 		<content type="html">&lt;p&gt;I made link previews, made logo dynamic with color changes, stylized POSSE views and little improvements like: isolating readable.css and improving the paginator layout. &lt;&#x2F;p&gt;
 &lt;p&gt;And talking about my achievement today, I unlocked a pimple on my face due to sleeplessness. Yayyyy!&lt;&#x2F;p&gt;
 </content>
@@ -115,8 +115,8 @@ a minute will change it all.&lt;&#x2F;p&gt;
 		<title>Second Day</title>
 		<published>2023-04-26T00:00:00+00:00</published>
 		<updated>2023-04-26T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/syndications/posse-2023-04-26/" type="text/html"/>
-		<id>https://scientiac.github.io/syndications/posse-2023-04-26/</id>
+		<link href="https://scientiac.space/syndications/posse-2023-04-26/" type="text/html"/>
+		<id>https://scientiac.space/syndications/posse-2023-04-26/</id>
 		<content type="html">&lt;p&gt;This is day two of redesigning the site, it is going fine, I added designs, and it&#x27;s cool now. Some new fonts and SVG backgrounds, and we have a completely different design. I&#x27;m loving it. My favorite theme if you ask is everforest-dark every time. &lt;&#x2F;p&gt;
 </content>
 	</entry>
@@ -124,8 +124,8 @@ a minute will change it all.&lt;&#x2F;p&gt;
 		<title>Life, Love, Twilight and a Butterfly</title>
 		<published>2023-04-25T00:00:00+00:00</published>
 		<updated>2023-04-25T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/life-love-twilight-and-a-butterfly/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/life-love-twilight-and-a-butterfly/</id>
+		<link href="https://scientiac.space/blog/life-love-twilight-and-a-butterfly/" type="text/html"/>
+		<id>https://scientiac.space/blog/life-love-twilight-and-a-butterfly/</id>
 		<content type="html">&lt;p&gt;I&#x27;ve seen life in terms of science. Always tend to prefer science&#x27;s explanation better than any reasoning one might give to life. Because it makes sense. The relief of knowing the end. Believing in what might happen in the last moments. My preferred answers to all the things is scientific, that gives me the relief that it&#x27;ll be true most of the time. &lt;&#x2F;p&gt;
 &lt;p&gt;Yet science fails sometimes. The tried, and tested methods might not be applicable, something that happens regularly doesn&#x27;t make it true. Consciously and subconsciously, I am still speaking of what science has proven. It has proven itself to be wrong most of the time. That, something should not be thought as one universal truth, but rather a possible truth for the current instance of time. &lt;&#x2F;p&gt;
 &lt;p&gt;Looking outside the window, hearing the barking dogs, the sky is cloudy and it&#x27;s mildly raining. The streetlights are glowing everywhere, though it&#x27;s a moonless night, the world is still bright with life. The world around me is sleeping, it&#x27;s silent, I can hear each raindrop individually, the insects chirping, the wind and my heartbeat. A mosquito is flying around me, with its own goals, to get food, to get energy, to continue itself and preserve its kind. I have a different goal, to kill the mosquito and sleep well. Life&#x27;s keeping us both alive and awake in this night when everyone is sleeping and consciously dead. Everything is keeping me awake. Myself, the mosquito, the weather, the light outside my house, my phone and many unknown unknowns. &lt;&#x2F;p&gt;
@@ -140,8 +140,8 @@ a minute will change it all.&lt;&#x2F;p&gt;
 		<title>POSSE</title>
 		<published>2023-04-25T00:00:00+00:00</published>
 		<updated>2023-04-25T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/syndications/posse-2023-04-25/" type="text/html"/>
-		<id>https://scientiac.github.io/syndications/posse-2023-04-25/</id>
+		<link href="https://scientiac.space/syndications/posse-2023-04-25/" type="text/html"/>
+		<id>https://scientiac.space/syndications/posse-2023-04-25/</id>
 		<content type="html">&lt;p&gt;So, this is the mini-blog thingy that I was planning to make for some time now. And maybe I&#x27;ll share my thoughts following POSSE (Publish on your Own Site, Syndicate Elsewhere) and share the link to this to everywhere else. I have an RSS feed for this, which I&#x27;ll try to use for fetching and scripting if needed and anybody can just use it normally as intended as well.&lt;&#x2F;p&gt;
 </content>
 	</entry>
@@ -149,8 +149,8 @@ a minute will change it all.&lt;&#x2F;p&gt;
 		<title>I Do Not Know</title>
 		<published>2023-04-08T00:00:00+00:00</published>
 		<updated>2023-04-08T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/i-do-not-know/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/i-do-not-know/</id>
+		<link href="https://scientiac.space/blog/i-do-not-know/" type="text/html"/>
+		<id>https://scientiac.space/blog/i-do-not-know/</id>
 		<content type="html">&lt;p&gt;I wish my wish never comes true,&lt;br &#x2F;&gt;
 and this life I was never born to,&lt;br &#x2F;&gt;
 that the bang had never happened,&lt;br &#x2F;&gt;
@@ -193,8 +193,8 @@ the power to do impossible things.&lt;&#x2F;p&gt;
 		<title>Indistinct</title>
 		<published>2023-04-08T00:00:00+00:00</published>
 		<updated>2023-04-08T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/indistinct/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/indistinct/</id>
+		<link href="https://scientiac.space/blog/indistinct/" type="text/html"/>
+		<id>https://scientiac.space/blog/indistinct/</id>
 		<content type="html">&lt;p&gt;Paths were taken, decisions were made.&lt;br &#x2F;&gt;
 Personality and values were given up.&lt;br &#x2F;&gt;
 Being different to being a different person.&lt;br &#x2F;&gt;
@@ -225,8 +225,8 @@ What remained of the person you strove to become?&lt;&#x2F;p&gt;
 		<title>Compulsion</title>
 		<published>2023-04-02T00:00:00+00:00</published>
 		<updated>2023-04-02T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/compulsion/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/compulsion/</id>
+		<link href="https://scientiac.space/blog/compulsion/" type="text/html"/>
+		<id>https://scientiac.space/blog/compulsion/</id>
 		<content type="html">&lt;p&gt;It&#x27;s fun for the first time, no joke is funny twice.&lt;br &#x2F;&gt;
 A mistake for the first time, crime if is done twice.&lt;br &#x2F;&gt;
 Sacrifice for the first time, all fine till it&#x27;s twice.&lt;br &#x2F;&gt;
@@ -257,8 +257,8 @@ It&#x27;ll always be better with, a second point from you.&lt;&#x2F;p&gt;
 		<title>Scared</title>
 		<published>2023-03-21T00:00:00+00:00</published>
 		<updated>2023-03-21T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/scared/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/scared/</id>
+		<link href="https://scientiac.space/blog/scared/" type="text/html"/>
+		<id>https://scientiac.space/blog/scared/</id>
 		<content type="html">&lt;p&gt;I&#x27;m too scared, and it is not my fault.&lt;br &#x2F;&gt;
 Choosing these words, became difficult.&lt;&#x2F;p&gt;
 &lt;p&gt;Minor details, I&#x27;ve begun to care for.&lt;br &#x2F;&gt;
@@ -281,8 +281,8 @@ All gathers inside, into scary feelings.&lt;&#x2F;p&gt;
 		<title>Daisy</title>
 		<published>2023-03-12T00:00:00+00:00</published>
 		<updated>2023-03-12T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/daisy/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/daisy/</id>
+		<link href="https://scientiac.space/blog/daisy/" type="text/html"/>
+		<id>https://scientiac.space/blog/daisy/</id>
 		<content type="html">&lt;p&gt;My hands are frozen, and my heart shivers.&lt;br &#x2F;&gt;
 My eyes are in pain, my brain just jitters.&lt;br &#x2F;&gt;
 I&#x27;ve been scared, and I cannot feel a thing.&lt;br &#x2F;&gt;
@@ -313,8 +313,8 @@ Daisies as they are, everywhere they&#x27;ll grow.&lt;&#x2F;p&gt;
 		<title>Midnight</title>
 		<published>2023-03-09T00:00:00+00:00</published>
 		<updated>2023-03-09T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/midnight/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/midnight/</id>
+		<link href="https://scientiac.space/blog/midnight/" type="text/html"/>
+		<id>https://scientiac.space/blog/midnight/</id>
 		<content type="html">&lt;p&gt;It&#x27;s midnight!&lt;&#x2F;p&gt;
 &lt;p&gt;Only light is that of the moon,&lt;br &#x2F;&gt;
 only light that I trust won&#x27;t go.&lt;br &#x2F;&gt;
@@ -346,8 +346,8 @@ I&#x27;m writing you one and I&#x27;ll send it later.&lt;&#x2F;p&gt;
 		<title>Moonshine</title>
 		<published>2023-03-09T00:00:00+00:00</published>
 		<updated>2023-03-09T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/moonshine/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/moonshine/</id>
+		<link href="https://scientiac.space/blog/moonshine/" type="text/html"/>
+		<id>https://scientiac.space/blog/moonshine/</id>
 		<content type="html">&lt;p&gt;I compare you to the moon in the sky,&lt;br &#x2F;&gt;
 you&#x27;re different each day, like lua&#x27;s phases,&lt;br &#x2F;&gt;
 the craters I see, are your subtle dimples,&lt;br &#x2F;&gt;
@@ -370,8 +370,8 @@ you yourself, is who I&#x27;m entangled with.&lt;&#x2F;p&gt;
 		<title>Sleep</title>
 		<published>2023-02-24T00:00:00+00:00</published>
 		<updated>2023-02-24T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/sleep/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/sleep/</id>
+		<link href="https://scientiac.space/blog/sleep/" type="text/html"/>
+		<id>https://scientiac.space/blog/sleep/</id>
 		<content type="html">&lt;p&gt;Bye! goodnight, It&#x27;s time, to sleep.&lt;br &#x2F;&gt;
 Then, flash bright, I dive, void deep.&lt;br &#x2F;&gt;
 Fine, my mind, it&#x27;s hard, to keep.&lt;br &#x2F;&gt;
@@ -405,8 +405,8 @@ Purr! my queen, go girl! you slayy.&lt;&#x2F;p&gt;
 		<title>Too Late</title>
 		<published>2023-02-24T00:00:00+00:00</published>
 		<updated>2023-02-24T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/too-late/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/too-late/</id>
+		<link href="https://scientiac.space/blog/too-late/" type="text/html"/>
+		<id>https://scientiac.space/blog/too-late/</id>
 		<content type="html">&lt;p&gt;I&#x27;ve seen those eyes a thousand times,&lt;br &#x2F;&gt;
 flipping through your pictures, I sleep.&lt;br &#x2F;&gt;
 I&#x27;ve been dreaming a lot about you lately,&lt;br &#x2F;&gt;
@@ -442,8 +442,8 @@ but now to lose, it&#x27;s too late.&lt;&#x2F;p&gt;
 		<title>Vacuum In A Jar</title>
 		<published>2023-01-30T00:00:00+00:00</published>
 		<updated>2023-01-30T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/vacuum-in-a-jar/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/vacuum-in-a-jar/</id>
+		<link href="https://scientiac.space/blog/vacuum-in-a-jar/" type="text/html"/>
+		<id>https://scientiac.space/blog/vacuum-in-a-jar/</id>
 		<content type="html">&lt;p&gt;Sometimes, my poems start with &amp;quot;sometimes&amp;quot;.&lt;br &#x2F;&gt;
 Those sometimes I cry.&lt;br &#x2F;&gt;
 Time, I do always write about it.&lt;br &#x2F;&gt;
@@ -492,8 +492,8 @@ A story for my emptiness, you&#x27;re pure.&lt;&#x2F;p&gt;
 		<title>Shut Up</title>
 		<published>2023-01-20T00:00:00+00:00</published>
 		<updated>2023-01-20T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/shut-up/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/shut-up/</id>
+		<link href="https://scientiac.space/blog/shut-up/" type="text/html"/>
+		<id>https://scientiac.space/blog/shut-up/</id>
 		<content type="html">&lt;p&gt;The voices in my head, they talk but are afraid,&lt;br &#x2F;&gt;
 I see the things in red, am I the only slayed,&lt;br &#x2F;&gt;
 all my things they&#x27;re swayed, feelings say I&#x27;m dead,&lt;br &#x2F;&gt;
@@ -531,8 +531,8 @@ maybe the voices in me are better dead, for my conscience to be by my side inste
 		<title>Wait</title>
 		<published>2023-01-04T00:00:00+00:00</published>
 		<updated>2023-01-04T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/wait/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/wait/</id>
+		<link href="https://scientiac.space/blog/wait/" type="text/html"/>
+		<id>https://scientiac.space/blog/wait/</id>
 		<content type="html">&lt;p&gt;Did you think, the wait was over?&lt;br &#x2F;&gt;
 Oh! it&#x27;s has just began.&lt;br &#x2F;&gt;
 Your thoughts and dreams, and what not,&lt;br &#x2F;&gt;
@@ -595,8 +595,8 @@ it&#x27;ll be worth the wait.&lt;&#x2F;p&gt;
 		<title>Peeking Through My Window</title>
 		<published>2023-01-03T00:00:00+00:00</published>
 		<updated>2023-01-03T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/peeking-through-my-window/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/peeking-through-my-window/</id>
+		<link href="https://scientiac.space/blog/peeking-through-my-window/" type="text/html"/>
+		<id>https://scientiac.space/blog/peeking-through-my-window/</id>
 		<content type="html">&lt;h3 id=&quot;synopsis&quot;&gt;Synopsis&lt;&#x2F;h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;A room, a pen and a keyboard.&lt;br &#x2F;&gt;
@@ -635,8 +635,8 @@ The realizations, they are, all I have now.&lt;&#x2F;p&gt;
 		<title>Untitled</title>
 		<published>2023-01-02T00:00:00+00:00</published>
 		<updated>2023-01-02T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/untitled/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/untitled/</id>
+		<link href="https://scientiac.space/blog/untitled/" type="text/html"/>
+		<id>https://scientiac.space/blog/untitled/</id>
 		<content type="html">&lt;p&gt;Poems, the way I speak.&lt;br &#x2F;&gt;
 Eyes, they talk but weak.&lt;br &#x2F;&gt;
 Gestures, that&#x27;s all I&#x27;ll give.&lt;br &#x2F;&gt;
@@ -667,8 +667,8 @@ Like life, this poem, everything&#x27;s untitled.&lt;&#x2F;p&gt;
 		<title>Missed</title>
 		<published>2023-01-01T00:00:00+00:00</published>
 		<updated>2023-01-01T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/missed/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/missed/</id>
+		<link href="https://scientiac.space/blog/missed/" type="text/html"/>
+		<id>https://scientiac.space/blog/missed/</id>
 		<content type="html">&lt;p&gt;What have I done for you?&lt;br &#x2F;&gt;
 Do I expect some things?&lt;br &#x2F;&gt;
 I&#x27;ve always been there, your shadow.&lt;br &#x2F;&gt;
@@ -715,8 +715,8 @@ You missed me, middle of the alls.&lt;&#x2F;p&gt;
 		<title>Dear Hell</title>
 		<published>2022-12-30T00:00:00+00:00</published>
 		<updated>2022-12-30T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/dear-hell/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/dear-hell/</id>
+		<link href="https://scientiac.space/blog/dear-hell/" type="text/html"/>
+		<id>https://scientiac.space/blog/dear-hell/</id>
 		<content type="html">&lt;p&gt;All the times, I smile, the thoughts.&lt;br &#x2F;&gt;
 Every time, I wish those, feelings.&lt;br &#x2F;&gt;
 Many times, I wonder, emotions.&lt;br &#x2F;&gt;
@@ -751,8 +751,8 @@ Dear Hell, I only trust you, clean me!&lt;&#x2F;p&gt;
 		<title>Changes</title>
 		<published>2022-12-26T00:00:00+00:00</published>
 		<updated>2022-12-26T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/changes/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/changes/</id>
+		<link href="https://scientiac.space/blog/changes/" type="text/html"/>
+		<id>https://scientiac.space/blog/changes/</id>
 		<content type="html">&lt;p&gt;Me, my place, the things I do.&lt;br &#x2F;&gt;
 Plans, the thoughts, those nightmares too.&lt;br &#x2F;&gt;
 Friends, the days, the one who&#x27;s boo.&lt;br &#x2F;&gt;
@@ -783,8 +783,8 @@ Time changes, we change, the truth behold!&lt;&#x2F;p&gt;
 		<title>How I use the Internet Today</title>
 		<published>2022-12-02T00:00:00+00:00</published>
 		<updated>2022-12-02T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/how-i-use-the-internet-today/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/how-i-use-the-internet-today/</id>
+		<link href="https://scientiac.space/blog/how-i-use-the-internet-today/" type="text/html"/>
+		<id>https://scientiac.space/blog/how-i-use-the-internet-today/</id>
 		<content type="html">&lt;p&gt;Today&#x27;s internet is a nightmare to use and navigate, in my opinion. I have little knowledge about the old internet. So, I don&#x27;t have much to say about it, but from what I have experienced in the old internet is that it was actually decentralized. Firstly,  our internet is occupied by the tech giants. When I talk about the internet, a normal person would think that it&#x27;s something that makes Facebook work or something that helps us to chat with people in WhatsApp. The concept of internet being a social, decentralized hub where people can express themselves in their own way has been shadowed by the famous monopoly, i.e. meta(in my opinion, but there&#x27;s google as well), and now it is seen as the place where we play by the rules of a company and express ourselves in short microblogs with limited number of words and a single UI where everyone is forced to be in the same place because they will be alone if they want to try something new. &lt;&#x2F;p&gt;
 &lt;p&gt;The other things are search engines and advertisements. The search engines today show us results which are paid for by the owner to show on the top of the search result or optimized in such a way that the search engines will show us the particular sites on the top. Either way, it provides people to choose specific words and hijack the search results of a person, shadowing the factual results. Many websites that I see on the top are websites written by bots and hosted just for the sake of people clicking it and watching their ad, i.e. to earn money without any real information.&lt;&#x2F;p&gt;
 &lt;p&gt;Talking about ads, the ads too are harmful nowadays. The ads today are mostly targeted and changes according to the user&#x27;s web usage and interests. Targeted ads may be a good way to earn money from but are equally bad because it can be about anything, a news website might have ads for a gambling app or a good writer may have an ad which supports something illegal. They are not chosen and trusted by the owner of the website which puts their reputation in danger as well as the person surfing a good website may get scammed because they trusted the ad from the site they trust.&lt;&#x2F;p&gt;
@@ -827,8 +827,8 @@ Time changes, we change, the truth behold!&lt;&#x2F;p&gt;
 		<title>Some Thoughts On Privacy</title>
 		<published>2022-11-17T00:00:00+00:00</published>
 		<updated>2022-11-17T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/some-thoughts-on-privacy/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/some-thoughts-on-privacy/</id>
+		<link href="https://scientiac.space/blog/some-thoughts-on-privacy/" type="text/html"/>
+		<id>https://scientiac.space/blog/some-thoughts-on-privacy/</id>
 		<content type="html">&lt;ul&gt;
 &lt;li&gt;and also on privacy respecting media.&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
@@ -890,8 +890,8 @@ Author: Lykso
 		<title>Who He Was</title>
 		<published>2022-10-31T00:00:00+00:00</published>
 		<updated>2022-10-31T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/who-he-was/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/who-he-was/</id>
+		<link href="https://scientiac.space/blog/who-he-was/" type="text/html"/>
+		<id>https://scientiac.space/blog/who-he-was/</id>
 		<content type="html">&lt;p&gt;He had lived a life of a villagen; who was neither a villager nor a citizen. He was seen as a citizen by his village friends and a villager by his city friends. To his view he was a citizen as he lived in a town for studying and went to his village if there was a holiday of any sort.&lt;&#x2F;p&gt;
 &lt;p&gt;And because of that he knew the customs of the both worlds. The tradition and behaviours of village as well as the city had moulded him and his behaviours, as he wanted to be treated as native by both of his friend groups.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;village&quot;&gt;Village:&lt;&#x2F;h2&gt;
@@ -918,8 +918,8 @@ Author: Lykso
 		<title>Here I Lie With Truth</title>
 		<published>2022-09-27T00:00:00+00:00</published>
 		<updated>2022-09-27T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/here-i-lie-with-truth/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/here-i-lie-with-truth/</id>
+		<link href="https://scientiac.space/blog/here-i-lie-with-truth/" type="text/html"/>
+		<id>https://scientiac.space/blog/here-i-lie-with-truth/</id>
 		<content type="html">&lt;p&gt;There&#x27;s a lot of things going on in my mind, right now.&lt;br &#x2F;&gt;
 Too many things I want to bring them out, but how?&lt;br &#x2F;&gt;
 Pain, mistakes, regrets, just aches that I have, oh wow!&lt;br &#x2F;&gt;
@@ -954,8 +954,8 @@ It hurts to write and it hurts while writing, it&#x27;s true.&lt;&#x2F;p&gt;
 		<title>Emotions</title>
 		<published>2022-08-28T00:00:00+00:00</published>
 		<updated>2022-08-28T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/emotions/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/emotions/</id>
+		<link href="https://scientiac.space/blog/emotions/" type="text/html"/>
+		<id>https://scientiac.space/blog/emotions/</id>
 		<content type="html">&lt;h2 id=&quot;a-poem-written-by-two-different-brains-with-different-emotions&quot;&gt;A poem written by two different brains with different emotions.&lt;&#x2F;h2&gt;
 &lt;p&gt;Incharge, I thought I was,&lt;br &#x2F;&gt;
 thought I could control them.&lt;br &#x2F;&gt;
@@ -996,8 +996,8 @@ Somewhere, I know, I have to yield.&lt;&#x2F;p&gt;
 		<title>Love Of My Life</title>
 		<published>2022-08-18T00:00:00+00:00</published>
 		<updated>2022-08-18T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/love-of-my-life/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/love-of-my-life/</id>
+		<link href="https://scientiac.space/blog/love-of-my-life/" type="text/html"/>
+		<id>https://scientiac.space/blog/love-of-my-life/</id>
 		<content type="html">&lt;p&gt;Those few moments before disasters,&lt;br &#x2F;&gt;
 Moments of breakups and pain,&lt;br &#x2F;&gt;
 Moments of failures and pain,&lt;br &#x2F;&gt;
@@ -1046,8 +1046,8 @@ My one true friend, my love.&lt;&#x2F;p&gt;
 		<title>Please Pretend</title>
 		<published>2022-08-11T00:00:00+00:00</published>
 		<updated>2022-08-11T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/please-pretend/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/please-pretend/</id>
+		<link href="https://scientiac.space/blog/please-pretend/" type="text/html"/>
+		<id>https://scientiac.space/blog/please-pretend/</id>
 		<content type="html">&lt;p&gt;I pretend to be an expert,&lt;br &#x2F;&gt;
 I pretend to be a master,&lt;br &#x2F;&gt;
 just pretend to do the work,&lt;br &#x2F;&gt;
@@ -1095,8 +1095,8 @@ Pretend! You&#x27;ll see the good they have.&lt;&#x2F;p&gt;
 		<title>Facebook a Choice, Not an Obligation</title>
 		<published>2022-07-03T00:00:00+00:00</published>
 		<updated>2022-07-03T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/facebook-a-choice-not-an-obligation/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/facebook-a-choice-not-an-obligation/</id>
+		<link href="https://scientiac.space/blog/facebook-a-choice-not-an-obligation/" type="text/html"/>
+		<id>https://scientiac.space/blog/facebook-a-choice-not-an-obligation/</id>
 		<content type="html">&lt;h2 id=&quot;a-brief-reminder-of-the-freedom-of-choice-and-privacy&quot;&gt;A brief reminder of the freedom of choice and privacy.&lt;&#x2F;h2&gt;
 &lt;p&gt;Last year, I decided to ditch Facebook and meta in overall because of the raising privacy concerns and addictive nature of these mainstream social media platforms. Of course backed by my knowledge of privacy and the help of different online communities, especially the Linux community talking about internet privacy and the openness of FOSS I quickly realized that the world of internet is not a very good place to be in, especially the social media platforms without federation and very high filtration of what people can&#x2F;not, want&#x2F;not to see. I realized that the posts that I am scrolling through are picked and compiled for my tastes and to keep me stuck in the place for so long that I see enough ads and decide to buy one of the products that I see is what I want but don&#x27;t need.&lt;&#x2F;p&gt;
 &lt;p&gt;I felt that the social media should not have any filtration over its contents by a person to person basis but have a good moderation for a set of people&#x2F;community where one thing of one community may think what they are doing is good&#x2F;legal while the other communities because of their social norms sees bad&#x2F;illegal. Another thing is the arrangement of posts, the posts should be arranged in a chronological manner with respect to time (new posts on the top and older at the bottom.). It should be private and should have an ability to federate with other platforms if one decides to not use it but wants to be in touch with the people inside it. And last but not the least It should be open by which everyone is ensured that they are safe and the company&#x2F;organization is not using our data for their own betterment behind our back.&lt;&#x2F;p&gt;
@@ -1123,8 +1123,8 @@ Pretend! You&#x27;ll see the good they have.&lt;&#x2F;p&gt;
 		<title>Chain Rejection</title>
 		<published>2022-07-02T00:00:00+00:00</published>
 		<updated>2022-07-02T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/chain-rejection/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/chain-rejection/</id>
+		<link href="https://scientiac.space/blog/chain-rejection/" type="text/html"/>
+		<id>https://scientiac.space/blog/chain-rejection/</id>
 		<content type="html">&lt;p&gt;Everybody has experienced rejection.&lt;br &#x2F;&gt;
 Some are brutal, some meh! It&#x27;s fine.&lt;br &#x2F;&gt;
 I have experienced both, and yeah brutal.&lt;br &#x2F;&gt;
@@ -1161,8 +1161,8 @@ I am welcomed, It was fun, Thank You!&lt;&#x2F;p&gt;
 		<title>You</title>
 		<published>2022-06-07T00:00:00+00:00</published>
 		<updated>2022-06-07T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/you/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/you/</id>
+		<link href="https://scientiac.space/blog/you/" type="text/html"/>
+		<id>https://scientiac.space/blog/you/</id>
 		<content type="html">&lt;p&gt;I&#x27;m sleepless, and not tired,&lt;br &#x2F;&gt;
 happy but scared.&lt;br &#x2F;&gt;
 I&#x27;m dreaming, yet awake,&lt;br &#x2F;&gt;
@@ -1197,8 +1197,8 @@ Conclusion: You&#x27;re too beautiful.&lt;&#x2F;p&gt;
 		<title>Time</title>
 		<published>2022-05-30T00:00:00+00:00</published>
 		<updated>2022-05-30T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/time/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/time/</id>
+		<link href="https://scientiac.space/blog/time/" type="text/html"/>
+		<id>https://scientiac.space/blog/time/</id>
 		<content type="html">&lt;p&gt;Tik, tik, tik&lt;br &#x2F;&gt;
 It&#x27;s flowing! Or is it?&lt;br &#x2F;&gt;
 Multiple consequences, resulted from different decisions,&lt;br &#x2F;&gt;
@@ -1237,8 +1237,8 @@ Aww crap! I&#x27;m Late for college!&lt;&#x2F;p&gt;
 		<title>Using Light Mode</title>
 		<published>2022-04-30T00:00:00+00:00</published>
 		<updated>2022-04-30T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/light-mode/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/light-mode/</id>
+		<link href="https://scientiac.space/blog/light-mode/" type="text/html"/>
+		<id>https://scientiac.space/blog/light-mode/</id>
 		<content type="html">&lt;p&gt;I have been a fan of dark mode for a long time. People including myself are so invested into dark mode that everything whether it supports or not is on the dark scheme, or even worse &amp;quot;pure black&amp;quot;. Every website turns black no matter what the creator had intended. Every app goes dark forcefully with mismatched buttons and forms but we still use it.&lt;&#x2F;p&gt;
 &lt;p&gt;I have read many articles about people changing their display modes to &#x27;light&#x27; and saying that &amp;quot;dark-mode&amp;quot; isn&#x27;t as beneficial as we considered it to be. We all assumed that dark mode reduced the strain in our eyes and also saved battery. I cannot be a 100 percent sure and say that it doesn&#x27;t.&lt;&#x2F;p&gt;
 &lt;p&gt;I recommend reading the article published by The Nielson Norman Group¹ about dark vs light mode, where they have concluded that using Light mode resulted in better performance than using the dark mode for most people.&lt;&#x2F;p&gt;
@@ -1260,8 +1260,8 @@ As of me, I will be continuing the experiment and keep changing things and try d
 		<title>I in My Wonderland</title>
 		<published>2022-03-31T00:00:00+00:00</published>
 		<updated>2022-03-31T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/wonderland/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/wonderland/</id>
+		<link href="https://scientiac.space/blog/wonderland/" type="text/html"/>
+		<id>https://scientiac.space/blog/wonderland/</id>
 		<content type="html">&lt;p&gt;I wonder what a blind man sees.&lt;br &#x2F;&gt;
 Does he see darkness like I do&lt;br &#x2F;&gt;
 or does he feel colors through his ears?&lt;&#x2F;p&gt;
@@ -1293,8 +1293,8 @@ Where the world is driven by it. Yes, wonders!&lt;&#x2F;p&gt;
 		<title>Fear</title>
 		<published>2022-02-28T00:00:00+00:00</published>
 		<updated>2022-02-28T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/fear/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/fear/</id>
+		<link href="https://scientiac.space/blog/fear/" type="text/html"/>
+		<id>https://scientiac.space/blog/fear/</id>
 		<content type="html">&lt;p&gt;Why is this thing in my mind?&lt;br &#x2F;&gt;
 Is it what is keeping me alive.&lt;br &#x2F;&gt;
 I just can&#x27;t be afraid all my life.&lt;br &#x2F;&gt;
@@ -1321,8 +1321,8 @@ That I just  have not a lot of time.&lt;&#x2F;p&gt;
 		<title>Sweet Poison</title>
 		<published>2022-01-11T00:00:00+00:00</published>
 		<updated>2022-01-11T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/sweet-poison/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/sweet-poison/</id>
+		<link href="https://scientiac.space/blog/sweet-poison/" type="text/html"/>
+		<id>https://scientiac.space/blog/sweet-poison/</id>
 		<content type="html">&lt;p&gt;Some mistakes I fix myself.&lt;br &#x2F;&gt;
 And others I don&#x27;t want to fix.&lt;br &#x2F;&gt;
 Those mistakes I find myself.&lt;br &#x2F;&gt;
@@ -1349,8 +1349,8 @@ Don&#x27;t forget some poisons are sweeter.&lt;&#x2F;p&gt;
 		<title>You Won&#x27;t Understand</title>
 		<published>2022-01-06T00:00:00+00:00</published>
 		<updated>2022-01-06T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/you-wont-understand/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/you-wont-understand/</id>
+		<link href="https://scientiac.space/blog/you-wont-understand/" type="text/html"/>
+		<id>https://scientiac.space/blog/you-wont-understand/</id>
 		<content type="html">&lt;p&gt;You...&lt;br &#x2F;&gt;
 Don&#x27;t think the way I think.&lt;br &#x2F;&gt;
 Don&#x27;t count the things I do.&lt;br &#x2F;&gt;
@@ -1390,8 +1390,8 @@ Just need to communicate.&lt;&#x2F;p&gt;
 		<title>Variable Constants</title>
 		<published>2021-12-28T00:00:00+00:00</published>
 		<updated>2021-12-28T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/variable-constants/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/variable-constants/</id>
+		<link href="https://scientiac.space/blog/variable-constants/" type="text/html"/>
+		<id>https://scientiac.space/blog/variable-constants/</id>
 		<content type="html">&lt;h3 id=&quot;things-can-be-replaced&quot;&gt;Things can be replaced.&lt;&#x2F;h3&gt;
 &lt;h3 id=&quot;like&quot;&gt;Like,&lt;&#x2F;h3&gt;
 &lt;p&gt;The phone that I am &amp;quot;typing&amp;quot; this poem on...&lt;&#x2F;p&gt;
@@ -1422,8 +1422,8 @@ Just need to communicate.&lt;&#x2F;p&gt;
 		<title>Monopoly</title>
 		<published>2021-10-30T00:00:00+00:00</published>
 		<updated>2021-10-30T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/monopoly/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/monopoly/</id>
+		<link href="https://scientiac.space/blog/monopoly/" type="text/html"/>
+		<id>https://scientiac.space/blog/monopoly/</id>
 		<content type="html">&lt;h2 id=&quot;a-brief-introduction-to-strategy-of-big-tech-companies&quot;&gt;A brief introduction to strategy of big tech companies.&lt;&#x2F;h2&gt;
 &lt;p&gt;Everything in this world requires competition and challenges  so that it could evolve. So if there is nobody to compete with, there cannot be development. This is a serious issue in today&#x27;s tech world where tech giants like Google, Facebook, Microsoft have gained total monopoly in their fields. &lt;&#x2F;p&gt;
 &lt;p&gt;Starting with google, the operating system you use which is android is Google&#x27;s product (Though the actual operating system is open source the services built on top of it are mostly made by google and are closed source.) ,the phone app you&#x27;re using is from google, the photos app , YouTube, Calendar, Email, Maps, Podcasts, Assistant etc. are Google&#x27;s products but no one searches alternative for  because they are interconnected among themselves. If you just delete your email account your photos backed up in the cloud , your youtube libraries , your location history and addresses ,your browsing history, bookmarks, your phone book, the services logged in with google, everything will be deleted so, you will not be able to (and will not even consider to)  get out of it&#x27;s system.&lt;&#x2F;p&gt;
@@ -1436,8 +1436,8 @@ Just need to communicate.&lt;&#x2F;p&gt;
 		<title>Nova Launcher (Dracula Theme)</title>
 		<published>2021-10-27T00:00:00+00:00</published>
 		<updated>2021-10-27T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/dracula-nova/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/dracula-nova/</id>
+		<link href="https://scientiac.space/blog/dracula-nova/" type="text/html"/>
+		<id>https://scientiac.space/blog/dracula-nova/</id>
 		<content type="html">&lt;h2 id=&quot;dracula-everywhere&quot;&gt;&#x27;Dracula&#x27; everywhere!&lt;&#x2F;h2&gt;
 &lt;p&gt;I have created a dracula themed nova launcher layout and wanted to share it.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;install-using-git&quot;&gt;Install using Git&lt;&#x2F;h2&gt;
@@ -1562,8 +1562,8 @@ Just need to communicate.&lt;&#x2F;p&gt;
 		<title>Dark (Realization)</title>
 		<published>2021-10-18T00:00:00+00:00</published>
 		<updated>2021-10-18T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/dark/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/dark/</id>
+		<link href="https://scientiac.space/blog/dark/" type="text/html"/>
+		<id>https://scientiac.space/blog/dark/</id>
 		<content type="html">&lt;h2 id=&quot;something-that-my-hyperactive-brain-came-up-with&quot;&gt;Something that my hyperactive brain came up with.&lt;&#x2F;h2&gt;
 &lt;p&gt;I live in a dark place. There is no light and the cold freezes me near to death. I can barely be alive, these decisions are hard to make. Should I burn my clothes or should I keep them on. Should die feeling the warmth or is it better to live longer shivering in the cold? Is it better to hide my feelings and be happy in front of others or should I make them pity about me and get relieved thinking they know the pain? &lt;&#x2F;p&gt;
 &lt;p&gt;I am a human being, I can think about the consequences. I can see the effects of my choices. I can predict the outcome. I can do calculations more than any animal on the planet can do. That may be a good thing but the dilemmas, the multiple consequences, the positives and the negatives, values and cultures, my religions, my gender, peoples expectations, judgments and a lot other things like those add a lot of variables to the decision. Should I break all the cultures that has been taught to me to marry the girl I love or is it better to break up with her and marry someone who my religion and the stars lining on the sky think is best for me. This is just an example, but there are more dilemmas as we gradually move from a superstitious and highly religious society to a scientific and more literate society. &lt;&#x2F;p&gt;
@@ -1579,8 +1579,8 @@ Just need to communicate.&lt;&#x2F;p&gt;
 		<title>You Were Born</title>
 		<published>2021-10-12T00:00:00+00:00</published>
 		<updated>2021-10-12T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/existance/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/existance/</id>
+		<link href="https://scientiac.space/blog/existance/" type="text/html"/>
+		<id>https://scientiac.space/blog/existance/</id>
 		<content type="html">&lt;p&gt;With the big bang&lt;br &#x2F;&gt;
 Dust was formed.&lt;br &#x2F;&gt;
 Those combined&lt;br &#x2F;&gt;
@@ -1677,8 +1677,8 @@ You were born.&lt;&#x2F;p&gt;
 		<title>My Experience with Bricks and Bootloops</title>
 		<published>2021-10-10T00:00:00+00:00</published>
 		<updated>2021-10-10T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/bricks/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/bricks/</id>
+		<link href="https://scientiac.space/blog/bricks/" type="text/html"/>
+		<id>https://scientiac.space/blog/bricks/</id>
 		<content type="html">&lt;h2 id=&quot;the-scariest-moment-when-flashing-custom-roms-for-amateurs&quot;&gt;The scariest moment when flashing custom ROMs(for amateurs).&lt;&#x2F;h2&gt;
 &lt;p&gt;If someone told me to root a phone five years since now, I would get scared of damaging the device. I didn&#x27;t have internet at that time and also a very little knowledge of what it could do. I just knew that it could let me see the passwords of connected WIFI as well as the passwords of WPS enabled WiFi which at that time was like a treasure to me. A friend of mine had rooted his phone and he shared his experience that his phone was completely dead a few days after while adding a module. He shared stories of phones blasting and catching fire because of root and since I didn&#x27;t have internet there was nothing to do except to believe in his stories. Those stories caused me to think that I would never root my device ever.&lt;&#x2F;p&gt;
 &lt;p&gt;But after some years we had internet in our own house and I used to watch life hacks, hacking videos, new gadgets and inventions, new and useful apps for android, phone reviews, customizing android, and all sorts of tech videos on YouTube. On some hacking videos (hacking with an android, I didn&#x27;t have a computer at that time.) I again stumbled upon root. Then I watched videos describing benefits and disadvantages of rooting. I loved to watch what a phone could do with Magisk modules and was very eager to try rooting. But still deep inside my brain there was a feeling that I would damage my new phone.&lt;&#x2F;p&gt;
@@ -1692,8 +1692,8 @@ You were born.&lt;&#x2F;p&gt;
 		<title>RSS</title>
 		<published>2021-10-08T00:00:00+00:00</published>
 		<updated>2021-10-08T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/rss/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/rss/</id>
+		<link href="https://scientiac.space/blog/rss/" type="text/html"/>
+		<id>https://scientiac.space/blog/rss/</id>
 		<content type="html">&lt;h2 id=&quot;despite-being-old-it-s-gold&quot;&gt;Despite being old it&#x27;s gold.&lt;&#x2F;h2&gt;
 &lt;p&gt;RSS stands for Really Simple Syndication. It refers to files easily read by a computer, called XML files, that automatically update information. A link to a website is created using this tech and that very link is identified by an RSS reader software which then fetches the information from that particular linked site and shows it to the user. RSS was created by Dan Libby and Ramanathan V. Guha in 1999 with a motive of making it easier to subscribe to web feeds.
 Checking each site one by one will take forever. Signing up for their newsletters could ensure you keep up with the latest updates and information, but it&#x27;s also easy to mistake the emails as spam or to ignore them altogether in your crowded inbox. Then again, relying solely on the site&#x27;s social media updates might mean you miss something important you wanted to know about.&lt;&#x2F;p&gt;
@@ -1769,8 +1769,8 @@ Checking each site one by one will take forever. Signing up for their newsletter
 		<title>Sad? Just Smile!</title>
 		<published>2021-10-06T00:00:00+00:00</published>
 		<updated>2021-10-06T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/smile/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/smile/</id>
+		<link href="https://scientiac.space/blog/smile/" type="text/html"/>
+		<id>https://scientiac.space/blog/smile/</id>
 		<content type="html">&lt;h2 id=&quot;more-than-just-a-self-help-technique&quot;&gt;More than just a self help technique.&lt;&#x2F;h2&gt;
 &lt;p&gt;Many people I know are constantly sad and tensed, and I wonder why it is the case. Because I am a pretty chill guy, my sadness lasts for a very short time. It might be because I have very fewer responsibilities and don&#x27;t have to do much work. I don&#x27;t know how it actually feels like, maybe I haven&#x27;t experienced something they have experienced. I see people stressing out and wonder why they don&#x27;t be &amp;quot;just happy&amp;quot;. It sounds dumb, but that&#x27;s what I feel, why wouldn&#x27;t they just feel happy about what they are doing. I know that It&#x27;s like telling a person with depression to just be happy. But actually that is the feeling I get when I see these people. It&#x27;s totally fine to be sad, I am an adult and I do cry sometimes, but that doesn&#x27;t mean that I am sad all the time. Or even if I am feeling bad I smile, and after a while it goes away. If there&#x27;s no need to look sad (like, in a funeral or anything else.) I just like to handle the situations smiling or even giggling. That has its own benefits, but a huge negative is that it makes you a little &amp;quot;not serious&amp;quot;. I have experienced this a lot, mostly when I am giving a suggestion and my friends doesn&#x27;t give a damn about it. Is it really necessary to be bold every time and say the things you want to say in a so called &amp;quot;serious&amp;quot; manner? I usually don&#x27;t talk in groups but a single person  and I do try to make attempts to make the other laugh in a conversation, but that&#x27;s everyone I guess, because who would really like to be very serious in a conversation. There&#x27;s a huge role of a person&#x27;s expressions in a conversation. If the speaker is smiling and talking, the listener will definitely smile despite the pain inside them, the person will feel fresh after taking with you even if they were sad. If you&#x27;re feeling angry, and you talk with someone in an angry manner, you will get the same expression from them because that&#x27;s how it works. A simple smile can determine the day of that person you were just talking to. Now that I think of it, it feels more simple. It&#x27;s like Newton&#x27;s third law of &#x27;motion&#x27;, but with an &amp;quot;e&amp;quot; on the front. If you smile they will smile back, if you are angry they get angry back at you, if you help they will help you back, if you are sad they will feel the same (though it&#x27;s not the same thing that you&#x27;re experiencing, but they do). &lt;&#x2F;p&gt;
 &lt;p&gt;It&#x27;s funny how people don&#x27;t realize that they both are angry and arguing with each other because one person was a little angry which started a chain reaction on their anger now they both are fighting. I am not funny nor am I very handsome and charming, but a smile is all it takes to make a person next to you feel happy, and I do smile.&lt;&#x2F;p&gt;
@@ -1782,8 +1782,8 @@ Checking each site one by one will take forever. Signing up for their newsletter
 		<title>Sometimes</title>
 		<published>2021-10-04T00:00:00+00:00</published>
 		<updated>2021-10-04T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/sometimes/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/sometimes/</id>
+		<link href="https://scientiac.space/blog/sometimes/" type="text/html"/>
+		<id>https://scientiac.space/blog/sometimes/</id>
 		<content type="html">&lt;p&gt;There are times when I feel lost.&lt;br &#x2F;&gt;
 Flying inside those galaxies,&lt;br &#x2F;&gt;
 though far from my sight, I see it.&lt;br &#x2F;&gt;
@@ -1819,8 +1819,8 @@ end of time.&lt;&#x2F;p&gt;
 		<title>My Journey to Linux and Privacy</title>
 		<published>2021-10-02T00:00:00+00:00</published>
 		<updated>2021-10-02T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/destination-linux/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/destination-linux/</id>
+		<link href="https://scientiac.space/blog/destination-linux/" type="text/html"/>
+		<id>https://scientiac.space/blog/destination-linux/</id>
 		<content type="html">&lt;h2 id=&quot;butterfly-effect-of-my-encounter-with-kde&quot;&gt;Butterfly effect of my encounter with KDE.&lt;&#x2F;h2&gt;
 &lt;p&gt;I first came across linux a couple years ago [In 2017] when I was surfing the internet about customizing the windows desktop, and I saw a video about customizing the KDE Desktop. I clicked on that video and realized that the thing he was using wasn&#x27;t windows but something else. I quickly searched about KDE and I found Linux. At that time I didn&#x27;t have my own personal computer that I could modify, not even windows. I was just curious if it was possible to customize computers as I used to customize my smartphone a lot.&lt;&#x2F;p&gt;
 &lt;p&gt;Linux isn&#x27;t something that you understand with a random video especially if the video contains words like &#x27;distro&#x27;, &#x27;desktop environment&#x27;,etc. So, I started searching about those things. And as I learnt new things about linux new terms and words kept comming up and I searched about them and got some information about them as well. No sooner I started researching about linux, I realized that it was very vast. I realized almost everything on a linux system can be replaced by an alternative program.&lt;&#x2F;p&gt;
@@ -1847,8 +1847,8 @@ end of time.&lt;&#x2F;p&gt;
 		<title>Terminal and CLI</title>
 		<published>2021-10-01T00:00:00+00:00</published>
 		<updated>2021-10-01T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/terminal-and-cli/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/terminal-and-cli/</id>
+		<link href="https://scientiac.space/blog/terminal-and-cli/" type="text/html"/>
+		<id>https://scientiac.space/blog/terminal-and-cli/</id>
 		<content type="html">&lt;h2 id=&quot;it-s-like-alcohol-bitter-in-the-beginning-obsessive-later&quot;&gt;It&#x27;s like alcohol, bitter in the beginning, obsessive later.&lt;&#x2F;h2&gt;
 &lt;p&gt;A terminal in reality is a hardware component that is used to enter and transcribe data to the computer but the terminal we are talking about is an emulator of the hardware; a terminal emulator.&lt;&#x2F;p&gt;
 &lt;p&gt;We linux users without the use of terminal suffer to do basic stuff. Searching for a command from a huge list of buttons is a hassle, if you know what the command is you can immediately execute the particular command in a split second. Since, the GUI is built around the terminal interface rather than making a GUI application and then implimenting the termnal functionality, it is much easier as well as faster to execute simple commmands in the terminal to get the work done. &lt;&#x2F;p&gt;
@@ -1879,8 +1879,8 @@ end of time.&lt;&#x2F;p&gt;
 		<title>Search Engines</title>
 		<published>2021-08-31T00:00:00+00:00</published>
 		<updated>2021-08-31T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/search-engines/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/search-engines/</id>
+		<link href="https://scientiac.space/blog/search-engines/" type="text/html"/>
+		<id>https://scientiac.space/blog/search-engines/</id>
 		<content type="html">&lt;h2 id=&quot;finding-things-in-the-web&quot;&gt;Finding things in the web.&lt;&#x2F;h2&gt;
 &lt;pre&gt;&lt;code&gt;
                                          _,aggdd888bbgg,,_
@@ -1956,8 +1956,8 @@ The world&#x27;s first search engine was &#x27;Archie&#x27;(1990). The most famo
 		<title>Linux Distributions</title>
 		<published>2021-08-30T00:00:00+00:00</published>
 		<updated>2021-08-30T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/distro/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/distro/</id>
+		<link href="https://scientiac.space/blog/distro/" type="text/html"/>
+		<id>https://scientiac.space/blog/distro/</id>
 		<content type="html">&lt;h2 id=&quot;one-operating-syatem-thousand-choices&quot;&gt;One operating syatem , thousand choices.&lt;&#x2F;h2&gt;
 &lt;p&gt;Linux Distribution or Distro is an operating system based on a Linux Kernel which is configured in a certain manner. A typical Linux distribution comprises a Linux kernel, GNU tools and libraries, additional software, documentation, a window system (Xorg or Wayland), a window manager, and a desktop environment. They also vary upon what device they are made for ;desktops, servers, laptops, netbooks, mobile phones ,tablets or a toaster. There  are thousands of distros out there which have different and unique user experience. They are classified by packaging systems, installation method, user experience, software availablity, release cycle, philosophy, use cases, etc. So, a complete chart of classification is difficult to make.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;some-of-the-famous-linux-distros-are&quot;&gt;Some of the famous Linux distros are :&lt;&#x2F;h2&gt;
@@ -2003,8 +2003,8 @@ The world&#x27;s first search engine was &#x27;Archie&#x27;(1990). The most famo
 		<title>KDE Connect</title>
 		<published>2021-08-29T00:00:00+00:00</published>
 		<updated>2021-08-29T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/kdeconnect/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/kdeconnect/</id>
+		<link href="https://scientiac.space/blog/kdeconnect/" type="text/html"/>
+		<id>https://scientiac.space/blog/kdeconnect/</id>
 		<content type="html">&lt;h2 id=&quot;quality-integration-between-android-and-linux&quot;&gt;Quality integration between Android and Linux.&lt;&#x2F;h2&gt;
 &lt;p&gt;KDE Connect is a KDE application that connects your phone to your computer if you have a Linux Desktop (Windows integration is on beta). It is very Powerful, I can say that it is the best among all the Phone - Computer integration softwares across all the operating systems. The Features of KDE connect are as follows : &lt;&#x2F;p&gt;
 &lt;h3 id=&quot;sharing-files&quot;&gt;Sharing Files&lt;&#x2F;h3&gt;
@@ -2055,8 +2055,8 @@ Then, set the following command on the &amp;quot;run command&amp;quot; section o
 		<title>Desktop Environments</title>
 		<published>2021-08-28T00:00:00+00:00</published>
 		<updated>2021-08-28T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/de/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/de/</id>
+		<link href="https://scientiac.space/blog/de/" type="text/html"/>
+		<id>https://scientiac.space/blog/de/</id>
 		<content type="html">&lt;h2 id=&quot;linux-you-want-it-you-get-it&quot;&gt;Linux : You want it, you get it.&lt;&#x2F;h2&gt;
 &lt;p&gt;A desktop environment is a set of programs running on the top of an operating system which share a common graphical user interface. It is also known as graphical shell. It determines the user experience, look and feel, customisability, usability and many others aspects of a graphical experience. It is abbreviated as DE. A desktop environment can determine the whole user experience of a operating system.
 Every operating system has a desktop environment but Linux is the one with multiple swappable desktop environment. Since Linux is very modular  you can swap almost anything from it which also includes the DE. &lt;&#x2F;p&gt;
@@ -2094,8 +2094,8 @@ Every operating system has a desktop environment but Linux is the one with multi
 		<title>Alternative Frontends</title>
 		<published>2021-08-27T00:00:00+00:00</published>
 		<updated>2021-08-27T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/frontends/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/frontends/</id>
+		<link href="https://scientiac.space/blog/frontends/" type="text/html"/>
+		<id>https://scientiac.space/blog/frontends/</id>
 		<content type="html">&lt;h2 id=&quot;another-step-for-better-privacy&quot;&gt;Another step for better privacy.&lt;&#x2F;h2&gt;
 &lt;p&gt;The frontend is the interactive and visual part of a software which is designed to be beautiful and user friendly. Alternative Frontends are those softwares which helps in viewing contents of a different platform with different visuals provided that another (Alternative) backend extracts data from that platform. Since we don&#x27;t interact with the backend of the software Frontends are what we normally describe as websites or applications.&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;there-are-some-frontends-to-platforms-that-help-us-get-the-publicly-available-data-from-them-without-the-need-to-log-in-some-of-them-are-as-follows&quot;&gt;There are some frontends to platforms that help us get the publicly available data from them without the need to log in. Some of them are as follows :&lt;&#x2F;h3&gt;
@@ -2129,8 +2129,8 @@ Every operating system has a desktop environment but Linux is the one with multi
 		<title>HTML</title>
 		<published>2021-08-26T00:00:00+00:00</published>
 		<updated>2021-08-26T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/html/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/html/</id>
+		<link href="https://scientiac.space/blog/html/" type="text/html"/>
+		<id>https://scientiac.space/blog/html/</id>
 		<content type="html">&lt;h2 id=&quot;a-standard-markup-language-for-documents-in-the-web&quot;&gt;A standard markup language for documents in the web.&lt;&#x2F;h2&gt;
 &lt;p&gt;HTML (Hyper Text Markup Language) is a language that makes the documents of the website readable to human which we normally see while browsing the web. It was created by Tim Berners-Lee in 1989. We don’t know the exact date of HTML creation, since it was a long term project, but the birthdate of the first HTML website is known to be on August 6, 1991.  The first publicly available description of HTML was a document called &amp;quot;HTML Tags&amp;quot;, first mentioned on the Internet by non other than Tim Berners-Lee. &lt;&#x2F;p&gt;
 &lt;p&gt;Every webpage may actually be a HTML file. Each HTML file is just a plain-text file, but with a .html file extension instead of .txt, and is made up of many HTML tags as well as the content for a web page.
@@ -2147,8 +2147,8 @@ A website may often contain many html files that link to each other. HTML files 
 		<title>LBRY</title>
 		<published>2021-08-25T00:00:00+00:00</published>
 		<updated>2021-08-25T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/lbry/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/lbry/</id>
+		<link href="https://scientiac.space/blog/lbry/" type="text/html"/>
+		<id>https://scientiac.space/blog/lbry/</id>
 		<content type="html">&lt;h2 id=&quot;a-decentralized-platform-for-content-creators&quot;&gt;A decentralized platform for content creators.&lt;&#x2F;h2&gt;
 &lt;p&gt;LBRY is a new protocol that allows people to build apps on the top of it which then can interact with the contents available on the LBRY network. LBRY allows the creators to set a price for the stream (Like I-tunes) or give out the video for free (like YouTube). You can publish any kind of file such as video, audio, text, documents, etc. It uses Blockchain technology for the creation of databases on the network.&lt;&#x2F;p&gt;
 &lt;p&gt;The monetization scheme for content on the LBRY protocol is also based on the Blockchain technology developed by the creator of Bitcoin. Unlike YouTube that serves you ads for monetization LBRY lets people themselves interact with the creators by giving them the ability to treat creators in the form of cryptocurrency (LBC) .&lt;&#x2F;p&gt;
@@ -2192,8 +2192,8 @@ A website may often contain many html files that link to each other. HTML files 
 		<title>Evernote to Joplin</title>
 		<published>2021-08-24T00:00:00+00:00</published>
 		<updated>2021-08-24T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/joplin/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/joplin/</id>
+		<link href="https://scientiac.space/blog/joplin/" type="text/html"/>
+		<id>https://scientiac.space/blog/joplin/</id>
 		<content type="html">&lt;h2 id=&quot;there-s-always-an-open-source-alternative&quot;&gt;There&#x27;s always an open source alternative.&lt;&#x2F;h2&gt;
 &lt;p&gt;Using open source software is far better than using proprietary garbage. So this is one of my efforts to move to open source from a proprietary application that I use very often and love very much. Goodbye Evernote !&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;evernote&quot;&gt;Evernote&lt;&#x2F;h2&gt;
@@ -2259,8 +2259,8 @@ Drafted and edited on Joplin.
 		<title>Open Android Apps</title>
 		<published>2021-08-23T00:00:00+00:00</published>
 		<updated>2021-08-23T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/open-apps/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/open-apps/</id>
+		<link href="https://scientiac.space/blog/open-apps/" type="text/html"/>
+		<id>https://scientiac.space/blog/open-apps/</id>
 		<content type="html">&lt;h2 id=&quot;some-android-apps-that-can-be-replaced-with-garbage&quot;&gt;Some android apps that can be replaced with garbage.&lt;&#x2F;h2&gt;
 &lt;p&gt;Android is full of proprietary garbage. Most of the applications we use are closed source and cannot be trusted. But there are open source alternatives to most of the  proprietary apps that we use daily. &lt;&#x2F;p&gt;
 &lt;h2 id=&quot;list-of-proprietary-apps-and-their-alternatives&quot;&gt;List of proprietary apps and their alternatives :&lt;&#x2F;h2&gt;
@@ -2355,8 +2355,8 @@ Element is an open source, decentralized and federated messaging service client 
 		<title>Linux</title>
 		<published>2021-08-22T00:00:00+00:00</published>
 		<updated>2021-08-22T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/linux/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/linux/</id>
+		<link href="https://scientiac.space/blog/linux/" type="text/html"/>
+		<id>https://scientiac.space/blog/linux/</id>
 		<content type="html">&lt;h2 id=&quot;an-open-source-alternative-to-windows-and-mac-os&quot;&gt;An open source alternative to Windows and Mac OS.&lt;&#x2F;h2&gt;
 &lt;p&gt;Linux is a kernel developed by Linus Torvalds on September 17, 1991. GNU is the core utils of the operating system developed by Richard Stallman on September 27, 1983. Linux provides the kernel , which is the main connector between a hardware and a software and GNU provides the system utilities making GNU&#x2F;Linux a complete operating system. GNU&#x2F;Linux is commonly known as Linux Operating System.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;advantages&quot;&gt;Advantages&lt;&#x2F;h2&gt;
@@ -2399,8 +2399,8 @@ Element is an open source, decentralized and federated messaging service client 
 		<title>Matrix</title>
 		<published>2021-08-21T00:00:00+00:00</published>
 		<updated>2021-08-21T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/matrix/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/matrix/</id>
+		<link href="https://scientiac.space/blog/matrix/" type="text/html"/>
+		<id>https://scientiac.space/blog/matrix/</id>
 		<content type="html">&lt;h2 id=&quot;an-open-network-for-secure-decentralized-communication&quot;&gt;An open network for secure, decentralized communication&lt;&#x2F;h2&gt;
 &lt;pre&gt;&lt;code&gt;
 ┏━ ┏┳┓ ━┓
@@ -2435,8 +2435,8 @@ Element is an open source, decentralized and federated messaging service client 
 		<title>Open Source</title>
 		<published>2021-08-20T00:00:00+00:00</published>
 		<updated>2021-08-20T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/open-source/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/open-source/</id>
+		<link href="https://scientiac.space/blog/open-source/" type="text/html"/>
+		<id>https://scientiac.space/blog/open-source/</id>
 		<content type="html">&lt;h2 id=&quot;how-a-clean-secure-reliable-honest-and-better-software-is-created&quot;&gt;How a clean, secure, reliable, honest and better software is created.&lt;&#x2F;h2&gt;
 &lt;p&gt;Open source is source code that is made freely available to be modified by the public as well as can be redistributed. It is a decentralized software development model that encourage people for open collaboration. It began as a response to the limitation and weakness of the &amp;quot;closed source&amp;quot; proprietary code. &lt;&#x2F;p&gt;
 &lt;p&gt;Generally, open source refers to a computer program whose source code is available to the public for use or modification from its initial design. Code is released under the terms of a software license. Depending on the license terms, people can download, modify, and publish their version (fork) back to the community.Open source software is usually a free software product, where people have access to the source code. They can enhance the program’s performance, add some features, and fix errors. Some examples of such software are LibreOffice, Firefox, and VLC Media Player.&lt;&#x2F;p&gt;
@@ -2480,8 +2480,8 @@ Element is an open source, decentralized and federated messaging service client 
 		<title>Privacy and Security</title>
 		<published>2021-08-19T00:00:00+00:00</published>
 		<updated>2021-08-19T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/privacy/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/privacy/</id>
+		<link href="https://scientiac.space/blog/privacy/" type="text/html"/>
+		<id>https://scientiac.space/blog/privacy/</id>
 		<content type="html">&lt;h2 id=&quot;a-concept-extinct-a-long-time-ago-a-living-myth&quot;&gt;A Concept Extinct A Long Time Ago ( A living Myth )&lt;&#x2F;h2&gt;
 &lt;p&gt;If you think you are private and secure then think again. Do you use a smartphone? Do you use Google ? Do you use Facebook ?  If yes, your privacy has definitely been compromised. Your data might also have been leaked in one of the many data breaches throughout years. Every time you turn on the location of your device, every time you give google permission to your device&#x27;s sensors it&#x27;s collecting some data and sending it to google&#x27;s servers. Your data can be used by many ways by these organizations. For giving recommendations on YouTube that you might love watching to selling you products that you don&#x27;t even need.&lt;&#x2F;p&gt;
 &lt;p&gt;Have you ever had a conversation around your phone about &#x27;something&#x27;, then later saw an advertisement on Facebook or Instagram for that same &#x27;something&#x27;? Trust me it isn&#x27;t coincidence.&lt;&#x2F;p&gt;
@@ -2543,8 +2543,8 @@ Element is an open source, decentralized and federated messaging service client 
 		<title>Custom ROMs</title>
 		<published>2021-08-18T00:00:00+00:00</published>
 		<updated>2021-08-18T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/custom-rom/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/custom-rom/</id>
+		<link href="https://scientiac.space/blog/custom-rom/" type="text/html"/>
+		<id>https://scientiac.space/blog/custom-rom/</id>
 		<content type="html">&lt;h2 id=&quot;a-better-alternative-to-stock-roms&quot;&gt;A Better Alternative to Stock ROMs.&lt;&#x2F;h2&gt;
 &lt;p&gt;Since Android is an open source operating system, anybody can check and modify it&#x27;s source code. You yourself can modify it as per your liking if you know what you are doing. Custom ROMs are the product of the openness of  Android. If you have noticed, when you use a Samsung phone it feels different than a phone from Xaomi which is also one of the blessings of an open software. &lt;&#x2F;p&gt;
 &lt;p&gt;Custom ROMs are the modified versions of the original Android operating system that can be installed in place of the Stock ROMs ( The OS that&#x27;s already present on your device when you bought it. ) . Custom ROMs can be very beneficial if your phone supports it. &lt;&#x2F;p&gt;
@@ -2582,8 +2582,8 @@ Element is an open source, decentralized and federated messaging service client 
 		<title>Tildeverse</title>
 		<published>2021-08-17T00:00:00+00:00</published>
 		<updated>2021-08-17T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/tildeverse/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/tildeverse/</id>
+		<link href="https://scientiac.space/blog/tildeverse/" type="text/html"/>
+		<id>https://scientiac.space/blog/tildeverse/</id>
 		<content type="html">&lt;h2 id=&quot;a-decentralized-collection-of-like-minded-social-unix-communities&quot;&gt;A decentralized collection of like-minded social Unix communities.&lt;&#x2F;h2&gt;
 &lt;pre&gt;&lt;code&gt;                                       ,                                  
                          l.       ,:    ::                                
@@ -2686,8 +2686,8 @@ a nerd party.&lt;&#x2F;p&gt;
 		<title>Mastodon</title>
 		<published>2021-08-16T00:00:00+00:00</published>
 		<updated>2021-08-16T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/mastodon/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/mastodon/</id>
+		<link href="https://scientiac.space/blog/mastodon/" type="text/html"/>
+		<id>https://scientiac.space/blog/mastodon/</id>
 		<content type="html">&lt;h2 id=&quot;a-secure-decentralized-social-network&quot;&gt;A Secure Decentralized Social Network.&lt;&#x2F;h2&gt;
 &lt;p&gt;Mastodon is a federated social media platform ( Actually a microblogging platform similar to Twitter ) based on a communication protocol called Activity Pub. It was released on 16th March 2016 and was created to be a safe place to share Ideas between people without having to trust a single organization for all your data. It is a free and open source software and can be used to self host social networking service so that you have the option to keep your data with you or with whom you trust.&lt;&#x2F;p&gt;
 &lt;ul&gt;
@@ -2716,8 +2716,8 @@ a nerd party.&lt;&#x2F;p&gt;
 		<title>Fediverse</title>
 		<published>2021-08-15T00:00:00+00:00</published>
 		<updated>2021-08-15T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/fediverse/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/fediverse/</id>
+		<link href="https://scientiac.space/blog/fediverse/" type="text/html"/>
+		<id>https://scientiac.space/blog/fediverse/</id>
 		<content type="html">&lt;h2 id=&quot;a-group-of-social-media-platforms-using-common-federation-protocols&quot;&gt;A Group of Social Media Platforms Using Common federation Protocols.&lt;&#x2F;h2&gt;
 &lt;p&gt;Fediverse is an interconnected network of different services like Social Networking, Microblogging, Blogging, Video Hosting, File Hosting, and other services which can be independently hosted on different servers but can still communicate with each other. A service client can have multiple (hundreds and thousands) servers across the globe (called Instances) where each Instance (Server) has their own rules and regulations. 
 And since all the servers are running on a same base communication protocol they can communicate outside the boundaries of the servers and instances too. These services are connected in such a manner that a video hosting platform can communicate with a photo sharing platform or with a microblogging platform or any other platform. Every platform on fediverse can communicate with any other platform on the fediverse if they use the same communication protocol. &lt;&#x2F;p&gt;
@@ -2730,8 +2730,8 @@ And since all the servers are running on a same base communication protocol they
 		<title>Nostalgia - My first Love</title>
 		<published>2021-08-15T00:00:00+00:00</published>
 		<updated>2021-08-15T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/paru/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/paru/</id>
+		<link href="https://scientiac.space/blog/paru/" type="text/html"/>
+		<id>https://scientiac.space/blog/paru/</id>
 		<content type="html">&lt;p&gt;~ To Paru&lt;&#x2F;p&gt;
 &lt;p&gt;The more I think about it, the more it becomes clear that you are the most loving and my favorite person. I remember those days in Bhirgaun and gulp thinking those days were too good and will not return back. I think about how we played hide and seek, made temples under the flower bush and get overwhelmed by the warmth it brings to my heart. I remember how we played;  you being teacher and I being a student  , you being my mother and I being your son , you being my wife and I being your husband. I remember sleeping on your lap while you played with my hair. I still remember you as that little girl who herself is scared but catches my hand to comfort me while I was scared of the imaginary ghosts from the stories told by Sudip. I remember coming to your house and staying the night talking to you when I didn&#x27;t get a phone to use WI-FI. I remember being compared to you as we were on same grade and I didn&#x27;t get top three position on exam while you stood first.I remember everytime I met you I kissed you on your cheeks and you wiped it. I remember you being angry and scolding me and the next minute we were talking about how we liked each other. I remember you skipping to another grade and actually being senior to me (You wouldn&#x27;t know how angry I was that day.). I remember you leaving Dharan and being far from me when we didn&#x27;t even had WIFI to communicate. I remember being lonely and sad when I went to your house and you weren&#x27;t there (I still do). &lt;&#x2F;p&gt;
 &lt;p&gt;Since those Days we may be far from each other but I still love you the most . I still think about you and want you to call me, let me sleep on your lap and want you play with my hair while we share our stories , I want you to shout at me when I make mistakes and hit my stupid head while I irritate you with my weird interests. I am what I am because you were already in this world when I just came. Not every birthday can be special but some birthdays can. I want you to feel special  today because today is the day I love the most (even though I don&#x27;t remember the date). &lt;&#x2F;p&gt;
@@ -2744,8 +2744,8 @@ And since all the servers are running on a same base communication protocol they
 		<title>Gemini</title>
 		<published>2021-08-14T00:00:00+00:00</published>
 		<updated>2021-08-14T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/gemini/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/gemini/</id>
+		<link href="https://scientiac.space/blog/gemini/" type="text/html"/>
+		<id>https://scientiac.space/blog/gemini/</id>
 		<content type="html">&lt;h2 id=&quot;a-middle-ground-between-gopher-and-the-modern-web&quot;&gt;A Middle Ground Between Gopher and The Modern Web.&lt;&#x2F;h2&gt;
 &lt;p&gt;Gemini is a internet protocol started in June 2019 that is similar to Gopher or as they call it &amp;quot;The web, stripped right back to its essence&amp;quot;.
 Gemini can be seen as a middle ground between the old gopher protocol of the early 1990s and the modern web (http and https).&lt;&#x2F;p&gt;
@@ -2766,8 +2766,8 @@ Gemini can be seen as a middle ground between the old gopher protocol of the ear
 		<title>The End</title>
 		<published>2021-08-03T00:00:00+00:00</published>
 		<updated>2021-08-03T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/the-end/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/the-end/</id>
+		<link href="https://scientiac.space/blog/the-end/" type="text/html"/>
+		<id>https://scientiac.space/blog/the-end/</id>
 		<content type="html">&lt;p&gt;I am and will be yours and you are mine until the end. We are one single person, and will always be. Will never ever break apart. I vow to never leave you in your darkest times as well as mine. I will always be there with you.&lt;&#x2F;p&gt;
 &lt;p&gt;Why am I in this dark quiet place. Silence everywhere, why can&#x27;t I feel my heart beating ? Why the soil is not making any sound as I walk in it. Why is nobody here! Hello!! &lt;&#x2F;p&gt;
 &lt;p&gt;It&#x27;s been days, maybe weeks , why don&#x27;t I feel any hunger, thirst, not even tiredness. Am I alive or am I not? What&#x27;s that light over there ? Hello!!!&lt;&#x2F;p&gt;
@@ -2788,8 +2788,8 @@ As she heals from her never-known disease , me.&lt;&#x2F;p&gt;
 		<title>Firefly</title>
 		<published>2021-05-29T00:00:00+00:00</published>
 		<updated>2021-05-29T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/firefly/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/firefly/</id>
+		<link href="https://scientiac.space/blog/firefly/" type="text/html"/>
+		<id>https://scientiac.space/blog/firefly/</id>
 		<content type="html">&lt;p&gt;It&#x27;s about us both&lt;br &#x2F;&gt;
 Maybe, it&#x27;s not&lt;br &#x2F;&gt;
 Maybe It&#x27;s only about me&lt;br &#x2F;&gt;
@@ -2843,8 +2843,8 @@ Far far away from my firefly.&lt;&#x2F;p&gt;
 		<title>Waterfall</title>
 		<published>2021-05-11T00:00:00+00:00</published>
 		<updated>2021-05-11T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/waterfall/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/waterfall/</id>
+		<link href="https://scientiac.space/blog/waterfall/" type="text/html"/>
+		<id>https://scientiac.space/blog/waterfall/</id>
 		<content type="html">&lt;p&gt;Flowing water.&lt;br &#x2F;&gt;
 Sparkling droplets forming rainbow,&lt;br &#x2F;&gt;
 dispersing light from white to colors.&lt;br &#x2F;&gt;
@@ -2877,8 +2877,8 @@ beside the Waterfall.&lt;&#x2F;p&gt;
 		<title>The Universe In Her Eyes</title>
 		<published>2021-04-26T00:00:00+00:00</published>
 		<updated>2021-04-26T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/the-universe-in-her-eyes/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/the-universe-in-her-eyes/</id>
+		<link href="https://scientiac.space/blog/the-universe-in-her-eyes/" type="text/html"/>
+		<id>https://scientiac.space/blog/the-universe-in-her-eyes/</id>
 		<content type="html">&lt;p&gt;Stars in the heaven,&lt;br &#x2F;&gt;
 blazing like the burning flames.&lt;br &#x2F;&gt;
 Glowing, sparkling and twinkling.&lt;&#x2F;p&gt;
@@ -2902,8 +2902,8 @@ is where I experience nirvana.&lt;&#x2F;p&gt;
 		<title>A Man Whose Heart Wasn&#x27;t Broken</title>
 		<published>2020-12-17T00:00:00+00:00</published>
 		<updated>2020-12-17T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/a-man-whose-heart-wasnt-broken/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/a-man-whose-heart-wasnt-broken/</id>
+		<link href="https://scientiac.space/blog/a-man-whose-heart-wasnt-broken/" type="text/html"/>
+		<id>https://scientiac.space/blog/a-man-whose-heart-wasnt-broken/</id>
 		<content type="html">&lt;p&gt;A wise old man once said and I quote,&lt;&#x2F;p&gt;
 &lt;p&gt;&amp;quot;She didn&#x27;t break my heart, she just made me very sad that my dopamine levels got very low. The only thing that could help to increase my dopamine and serotonin levels was to eat food. Excessive intake of so called &amp;quot;Tasty&amp;quot; food containing excess amount of saturated fat and cholesterol caused plaques to build up in my arteries.
 Due to the buildup of plaque, my arteries started to narrow down, decreasing the blood flow to my heart. The reduced blood flow caused chest pain, shortness of breath and other problems. Days passed by, but the plaque gradually went on increasing. One day I woke up and found out that I was unconscious for 2 days. The plaque had completely blocked one of my arteries. I had a heart attack . She didn&#x27;t break my heart but she gave me a heart attack.&amp;quot;&lt;&#x2F;p&gt;
@@ -2914,8 +2914,8 @@ Due to the buildup of plaque, my arteries started to narrow down, decreasing the
 		<title>Creations</title>
 		<published>2020-11-26T00:00:00+00:00</published>
 		<updated>2020-11-26T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/creations/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/creations/</id>
+		<link href="https://scientiac.space/blog/creations/" type="text/html"/>
+		<id>https://scientiac.space/blog/creations/</id>
 		<content type="html">&lt;p&gt;In the inception&lt;&#x2F;p&gt;
 &lt;p&gt;I created god,&lt;br &#x2F;&gt;
 gave it magic,&lt;br &#x2F;&gt;
@@ -2942,8 +2942,8 @@ used and threw me away, after then.&lt;&#x2F;p&gt;
 		<title>Torrent and Torrenting</title>
 		<published>2020-11-13T00:00:00+00:00</published>
 		<updated>2020-11-13T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/torrenting/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/torrenting/</id>
+		<link href="https://scientiac.space/blog/torrenting/" type="text/html"/>
+		<id>https://scientiac.space/blog/torrenting/</id>
 		<content type="html">&lt;h2 id=&quot;a-decentralized-file-transfer-protocol-and-activity&quot;&gt;A decentralized file transfer protocol and activity.&lt;&#x2F;h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -2990,8 +2990,8 @@ used and threw me away, after then.&lt;&#x2F;p&gt;
 		<title>The Beauty Of Night</title>
 		<published>2020-11-12T00:00:00+00:00</published>
 		<updated>2020-11-12T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/the-beauty-of-night/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/the-beauty-of-night/</id>
+		<link href="https://scientiac.space/blog/the-beauty-of-night/" type="text/html"/>
+		<id>https://scientiac.space/blog/the-beauty-of-night/</id>
 		<content type="html">&lt;p&gt;After the daytime colorful and bright,&lt;br &#x2F;&gt;
 The sun goes down and then comes night.&lt;br &#x2F;&gt;
 No light , no colors, lack of sight,&lt;br &#x2F;&gt;
@@ -3014,8 +3014,8 @@ All of these shows the beauty of night.&lt;&#x2F;p&gt;
 		<title>Love</title>
 		<published>2020-01-01T00:00:00+00:00</published>
 		<updated>2020-01-01T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/love/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/love/</id>
+		<link href="https://scientiac.space/blog/love/" type="text/html"/>
+		<id>https://scientiac.space/blog/love/</id>
 		<content type="html">&lt;p&gt;You Are So Precious To Me&lt;&#x2F;p&gt;
 &lt;p&gt;You are my forever and today.&lt;&#x2F;p&gt;
 &lt;p&gt;My only wish is you and only you&lt;&#x2F;p&gt;

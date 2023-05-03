@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://scientiac.github.io/sitemap.xml
+Sitemap: https://scientiac.space/sitemap.xml

@@ -2,17 +2,17 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
 	<title>Scientiac - Reports</title>
 	<subtitle>That guy from the internet, scientist something.</subtitle>
-	<link href="https://scientiac.github.io/writings/reports/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://scientiac.github.io"/>
+	<link href="https://scientiac.space/writings/reports/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://scientiac.space"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
 	<updated>2023-04-28T00:00:00+00:00</updated>
-	<id>https://scientiac.github.io/writings/reports/atom.xml</id>
+	<id>https://scientiac.space/writings/reports/atom.xml</id>
 	<entry xml:lang="en">
 		<title>Project Firefly</title>
 		<published>2023-04-28T00:00:00+00:00</published>
 		<updated>2023-04-28T00:00:00+00:00</updated>
-		<link href="https://scientiac.github.io/blog/arduino-firefly/" type="text/html"/>
-		<id>https://scientiac.github.io/blog/arduino-firefly/</id>
+		<link href="https://scientiac.space/blog/arduino-firefly/" type="text/html"/>
+		<id>https://scientiac.space/blog/arduino-firefly/</id>
 		<content type="html">&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;firefly.jpg&quot; alt=&quot;Firefly&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;&#x2F;h2&gt;
 &lt;p&gt;The purpose of this report is to document the process of building a fire extinguishing and gas sensing car using Arduino. The car is designed to detect fire using a flame IR sensor and go towards it to extinguish it if necessary. It also detects gas leaks and alerts the user via SMS. This report will detail the steps taken to design and build the car, as well as the challenges encountered and the solutions implemented.&lt;&#x2F;p&gt;
