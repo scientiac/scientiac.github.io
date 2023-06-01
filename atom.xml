@@ -5,12 +5,12 @@
 	<link href="https://scientiac.space/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://scientiac.space"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2023-05-31T00:00:00+00:00</updated>
+	<updated>2023-06-01T00:00:00+00:00</updated>
 	<id>https://scientiac.space/atom.xml</id>
 	<entry xml:lang="en">
 		<title>Project Pieyes</title>
-		<published>2023-05-31T00:00:00+00:00</published>
-		<updated>2023-05-31T00:00:00+00:00</updated>
+		<published>2023-06-01T00:00:00+00:00</published>
+		<updated>2023-06-01T00:00:00+00:00</updated>
 		<link href="https://scientiac.space/blog/gesture-controlled-arm/" type="text/html"/>
 		<id>https://scientiac.space/blog/gesture-controlled-arm/</id>
 		<content type="html">&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;pieyes.gif&quot; alt=&quot;Pieyes&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
