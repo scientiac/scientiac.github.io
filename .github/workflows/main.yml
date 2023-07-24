@@ -1,28 +1,19 @@
+# On every push this script is executed
 on: push
+name: Build and deploy GH Pages
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.ref != 'refs/heads/main'
-    steps:
-      - name: 'checkout'
-        uses: actions/checkout@v3.0.0
-      - name: 'build'
-        uses: shalzz/zola-deploy-action@v0.17.2
-        env:
-          PAGES_BRANCH: gh-pages
-          BUILD_DIR: .
-          TOKEN: ${{ secrets.TOKEN }}
-          # BUILD_ONLY: true
-  build_and_deploy:
-    runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
-      - name: 'checkout'
+      - name: checkout
         uses: actions/checkout@v3.0.0
-      - name: 'build and deploy'
+      - name: build_and_deploy
         uses: shalzz/zola-deploy-action@v0.17.2
         env:
-          PAGES_BRANCH: master
-          BUILD_DIR: .
-          TOKEN: ${{ secrets.PUBLIC_TOKEN }}
-          REPOSITORY: scientiac/scientiac.space
+          # Target branch
+          PAGES_BRANCH: gh-pages
+          # Provide personal access token
+          #TOKEN: ${{ secrets.TOKEN }}
+          # Or if publishing to the same repo, use the automatic token
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
