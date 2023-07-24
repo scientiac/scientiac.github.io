@@ -1,0 +1,9 @@
+* scientiac.github.io
+
+This is my personal blog built with [[https://www.getzola.org/][zola]] static site generator.
+
+** This site primarily uses:
+
+[[https://readable-css.freedomtowrite.org/][Readable CSS]]
+
+[[latex.vercel.app/][LaTeX Fonts]]
