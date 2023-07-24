@@ -1,6 +1,6 @@
 * scientiac.space
 
-This is my personal blog built with [[https://www.getzola.org/][zola]] static site generator.
+This is my personal blog built with the [[https://www.getzola.org/][zola]] static site generator.
 
 ** This site primarily uses:
 
