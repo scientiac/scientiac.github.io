@@ -4,7 +4,7 @@ template = "standalone.html"
 page_template = "page.html"
 +++
 
-### [research::map](map.scientiac.space)
+### [research::map](https://map.scientiac.space)
 A map of things I am working on.
 
 ## Information
