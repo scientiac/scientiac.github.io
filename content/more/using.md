@@ -4,12 +4,12 @@ title = "Currently Using"
 
 ## PC
 
-* OS - Fedora (Gnome)
-* Browser - Librewolf (Firefox)
-* Terminal - Alacritty
+* OS - Fedora (Hyprland)
+* Browser - Firefox/Brave
+* Terminal - Wezterm
 * Text Editor/IDE - Neovim
 * Vector Graphics - Inkscape 
-* Static Site Generator - Zola
+* Static Site Generator - Zola and Hugo
 * Shell - Bash, Nu
 * Prompt - Starship
 
@@ -19,17 +19,17 @@ title = "Currently Using"
 * Gemini Client - Lagrange
 * Note-taking - Obsidian 
 * Video Player - MPV
-* Communication - Matrix, Signal, Briar, Telegram
+* Communication - Matrix, Signal, Telegram
 * Password Manager - Bitwarden
 * Email - Proton, Team(Tilde), Gmail
 
 ## Smartphone
 
-* ROM(OS) - EvolutionX
+* ROM(OS) - crDroid
 * Launcher - Nova Launcher
 * RSS Reader - Read You
-* Browser - Iceraven (Firefox)
-* App Store - Droidify (F-droid)
+* Browser - Firefox/Brave
+* App Store - Neo Store (F-droid)
 * Email Client - K9-mail
 * Download Manager - Navi
 * Torrent Client - Libre Torrent
@@ -39,12 +39,12 @@ title = "Currently Using"
 * Terminal Emulator - Termux
 * Video Player - VLC
 * Reddit Client - Infinity
+* Lemmy Client - Thunder
 * Podcast Aggregator - Antennapod
 
 ## TV?
 
 * OS - Android
-* Launcher - Flauncher
 * Youtube - S-tube
 * Movies and Series - Cloudstream
 * Browser - TV Bro
