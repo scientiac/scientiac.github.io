@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>Scientiac - Reports</title>
+	<subtitle>That guy from the internet, scientist something.</subtitle>
+	<link href="https://scientiac.space/writings/reports/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://scientiac.space"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2023-06-01T00:00:00+00:00</updated>
+	<id>https://scientiac.space/writings/reports/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Project Pieyes</title>
+		<published>2023-06-01T00:00:00+00:00</published>
+		<updated>2023-06-01T00:00:00+00:00</updated>
+		<link href="https://scientiac.space/blog/gesture-controlled-arm/" type="text/html"/>
+		<id>https://scientiac.space/blog/gesture-controlled-arm/</id>
+		<content type="html">&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;pieyes.gif&quot; alt=&quot;Pieyes&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;&#x2F;h2&gt;
+&lt;p&gt;The purpose of this report is to document the process of building a CV robotic arm prototype using Arduino. The arm is designed to be controlled with natural hand gestures removing the need to look at the buttons on a screen or a controller to control it. &lt;&#x2F;p&gt;
+&lt;h3 id=&quot;materials-used&quot;&gt;Materials Used:&lt;&#x2F;h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Arduino Uno &lt;&#x2F;li&gt;
+&lt;li&gt;16 Channel Servo driver &lt;&#x2F;li&gt;
+&lt;li&gt;Buck Converter &lt;&#x2F;li&gt;
+&lt;li&gt;Jumper Cables &lt;&#x2F;li&gt;
+&lt;li&gt;3D Printed MK2 Chassis&lt;&#x2F;li&gt;
+&lt;li&gt;4 Servos&lt;&#x2F;li&gt;
+&lt;li&gt;A Portable Computer with Camera&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;software-used&quot;&gt;Software Used:&lt;&#x2F;h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Arduino IDE V2&lt;&#x2F;li&gt;
+&lt;li&gt;Python 3 &lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;design&quot;&gt;Design:&lt;&#x2F;h3&gt;
+&lt;p&gt;The first step in building the CV controlled arm is to make a schematic of it. The arm is based on the MK2 Model, which is pretty easy to 3D-print and assemble. 4 servos are used for the base, the lower arm, the upper arm and the gripper. The servos are connected to the Servo Driver and the Servo Driver is connected to 5 volts DC power. The Arduino is used to control the Servo Driver to send PWM signals to servo.&lt;&#x2F;p&gt;
+&lt;p&gt;The decisions for what signals to send for recognized gestures handled by a Python script which sends serial to Arduino via the USB. The Arduino receives the signal which is now converted to mechanical output.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;construction&quot;&gt;Construction:&lt;&#x2F;h3&gt;
+&lt;p&gt;The assembly of the base is a bit tricky with gears and servos to be attached to it, but the upper part is easily attached. The four servos are placed on the right place according to MK2 schematics and are connected to 16 Channel Servo Driver. (I connected 0,2,4 and 7 as base, lower arm, upper arm and gripper respectively on the Servo Driver.) While connecting the Servo Driver to Arduino; the VCC is connected to 5 volts and Grounds of Arduino and Servo Driver are connected. From Arduino the analogue 5 pin is connected to SCL and analogue 4 pin is connected to SDA respectively.(This connects the Servo Driver to the Arduino.) &lt;&#x2F;p&gt;
+&lt;p&gt;The servo diver is connected to 5 volts DC converted from 12 volts power supply using a buck converter. USB connected to the Arduino supplies power to Arduino as well as the Servo Driver but not the Servos connected to the Driver. The USB also doubles as a data transmission device to send serial input to the Arduino from the laptop running the python script.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;programming&quot;&gt;Programming&lt;&#x2F;h3&gt;
+&lt;h4 id=&quot;in-arduino&quot;&gt;In Arduino:&lt;&#x2F;h4&gt;
+&lt;pre&gt;&lt;code&gt;
+
+#include &amp;lt;Wire.h&amp;gt;
+#include &amp;lt;Adafruit_PWMServoDriver.h&amp;gt;
+
+&#x2F;&#x2F; called this way, it uses the default address 0x40
+Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x40);
+
+#define SERVOMIN 100   &#x2F;&#x2F; This is the &#x27;minimum&#x27; pulse length count (out of 4096)
+#define SERVOMAX 450   &#x2F;&#x2F; This is the &#x27;maximum&#x27; pulse length count (out of 4096)
+#define SERVO_FREQ 50  &#x2F;&#x2F; Analog servos run at ~50 Hz updates
+
+&#x2F;&#x2F; our servo # counter
+uint8_t servonum = 0;
+char prevSerial = &#x27;\0&#x27;;
+char data;
+
+&#x2F;&#x2F; Setting the default state of the arm.
+int val1 = 312, val2 = 350, val3 = 174, val4 = 0;
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println(&amp;quot;Running...&amp;quot;);
+
+  pwm.begin();
+  pwm.setOscillatorFrequency(27000000);
+  pwm.setPWMFreq(SERVO_FREQ);
+
+  delay(10);
+}
+
+void loop() {
+
+  &#x2F;&#x2F; checking if serial is available or not and setting values to &amp;quot;data&amp;quot; as soon as the serial changes
+  if (Serial.available() &amp;gt; 0) {
+    data = Serial.read();
+
+    if (data == &#x27;W&#x27;) {
+      if (val4 &amp;lt; SERVOMAX) {
+        Serial.print(&amp;quot;Gripper IN&amp;quot;);
+        Serial.println(val4);
+        pwm.setPWM(7, 0, val4);
+        val4 += 4;
+      }
+    }
+
+    if (data == &#x27;A&#x27;) {
+      if (val4 &amp;gt; SERVOMIN) {
+        Serial.print(&amp;quot;Gripper OUT&amp;quot;);
+        Serial.println(val4);
+        pwm.setPWM(7, 0, val4);
+        val4 -= 4;
+      }
+    }
+
+    if (data == &#x27;Y&#x27;) {
+      if (val2 &amp;lt; SERVOMAX) {
+        Serial.print(&amp;quot;Arm Base IN&amp;quot;);
+        Serial.println(val2);
+        pwm.setPWM(2, 0, val2);
+        val2 += 4;
+      }
+    }
+
+    if (data == &#x27;C&#x27;) {
+      if (val2 &amp;gt; SERVOMIN) {
+        Serial.print(&amp;quot;Arm Base OUT&amp;quot;);
+        Serial.println(val2);
+        pwm.setPWM(2, 0, val2);
+        val2 -= 4;
+      }
+    }
+
+    if (data == &#x27;B&#x27;) {
+      if (val3 &amp;lt; SERVOMAX) {
+        Serial.print(&amp;quot;Arm Top IN&amp;quot;);
+        Serial.println(val3);
+        pwm.setPWM(4, 0, val3);
+        val3 += 4;
+      }
+    }
+
+    if (data == &#x27;X&#x27;) {
+      if (val3 &amp;gt; SERVOMIN) {
+        Serial.print(&amp;quot;Arm Top OUT&amp;quot;);
+        Serial.println(val3);
+        pwm.setPWM(4, 0, val3);
+        val3 -= 4;
+      }
+    }
+
+    if (data == &#x27;D&#x27;) {
+      if (val1 &amp;lt; SERVOMAX) {
+        Serial.print(&amp;quot;Base IN&amp;quot;);
+        Serial.println(val1);
+        pwm.setPWM(0, 0, val1);
+        val1 += 4;
+      }
+    }
+
+    if (data == &#x27;Z&#x27;) {
+      if (val1 &amp;gt; SERVOMIN) {
+        Serial.print(&amp;quot;Base IN&amp;quot;);
+        Serial.println(val1);
+        pwm.setPWM(0, 0, val1);
+        val1 -= 4;
+      }
+    }
+
+    if (data == &#x27;S&#x27;) {
+      Serial.println(&amp;quot;stop&amp;quot;);
+    }
+  }
+}
+
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;in-laptop&quot;&gt;In Laptop:&lt;&#x2F;h4&gt;
+&lt;pre&gt;&lt;code&gt;
+#!&#x2F;bin&#x2F;python
+
+import cv2
+import mediapipe as mp
+import math
+from serial import Serial
+
+mp_drawing = mp.solutions.drawing_utils
+mp_hands = mp.solutions.hands
+
+def calculate_distance(x1, y1, x2, y2):
+    return math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+
+def is_fist(landmarks):
+    # Check if all finger tips are below their corresponding middle joints
+    return (
+        landmarks[mp_hands.HandLandmark.THUMB_TIP].y &amp;lt; landmarks[mp_hands.HandLandmark.THUMB_IP].y and
+        landmarks[mp_hands.HandLandmark.INDEX_FINGER_TIP].y &amp;lt; landmarks[mp_hands.HandLandmark.INDEX_FINGER_PIP].y and
+        landmarks[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].y &amp;lt; landmarks[mp_hands.HandLandmark.MIDDLE_FINGER_PIP].y and
+        landmarks[mp_hands.HandLandmark.RING_FINGER_TIP].y &amp;lt; landmarks[mp_hands.HandLandmark.RING_FINGER_PIP].y and
+        landmarks[mp_hands.HandLandmark.PINKY_TIP].y &amp;lt; landmarks[mp_hands.HandLandmark.PINKY_PIP].y
+    )
+
+def get_hand_side(landmarks):
+    # Check if the wrist is to the left or right of the index finger tip
+    if landmarks[mp_hands.HandLandmark.WRIST].x &amp;lt; landmarks[mp_hands.HandLandmark.INDEX_FINGER_TIP].x:
+        return &amp;quot;Left&amp;quot;
+    else:
+        return &amp;quot;Right&amp;quot;
+
+def main():
+    cap = cv2.VideoCapture(0)
+
+    with mp_hands.Hands(max_num_hands=1) as hands:
+        while cap.isOpened():
+            ret, frame = cap.read()
+
+            if not ret:
+                print(&amp;quot;Unable to capture frame.&amp;quot;)
+                break
+
+            # Flip the frame horizontally to mirror the image
+            frame = cv2.flip(frame, 1)
+
+            # Convert the image from BGR to RGB
+            image_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+            # Process the image with MediaPipe Hands
+            results = hands.process(image_rgb)
+
+            # Check for hand landmarks
+            if results.multi_hand_landmarks:
+                for hand_landmarks in results.multi_hand_landmarks:
+                    # Draw hand landmarks on the image
+                    mp_drawing.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+
+                    # Get the coordinates of the index finger and thumb landmarks
+                    index_finger = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
+                    thumb = hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_TIP]
+                    wrist = hand_landmarks.landmark[mp_hands.HandLandmark.WRIST]
+
+                    # Convert landmark coordinates to pixel values
+                    height, width, _ = frame.shape
+                    x1, y1 = int(index_finger.x * width), int(index_finger.y * height)
+                    x2, y2 = int(thumb.x * width), int(thumb.y * height)
+
+                    # Calculate the distance between the index finger and thumb
+                    distance = calculate_distance(x1, y1, x2, y2)
+
+                    # Count the number of fingers that are up
+                    fingers_up = 0
+                    landmarks = hand_landmarks.landmark
+                    if landmarks[mp_hands.HandLandmark.THUMB_TIP].y &amp;lt; landmarks[mp_hands.HandLandmark.THUMB_IP].y:
+                        fingers_up += 1
+                    if landmarks[mp_hands.HandLandmark.INDEX_FINGER_TIP].y &amp;lt; landmarks[mp_hands.HandLandmark.INDEX_FINGER_PIP].y:
+                        fingers_up += 1
+                    if landmarks[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].y &amp;lt; landmarks[mp_hands.HandLandmark.MIDDLE_FINGER_PIP].y:
+                        fingers_up += 1
+                    if landmarks[mp_hands.HandLandmark.RING_FINGER_TIP].y &amp;lt; landmarks[mp_hands.HandLandmark.RING_FINGER_PIP].y:
+                        fingers_up += 1
+                    if landmarks[mp_hands.HandLandmark.PINKY_TIP].y &amp;lt; landmarks[mp_hands.HandLandmark.PINKY_PIP].y:
+                        fingers_up += 1
+
+                    # Determine if the hand is right or left
+                    hand_side = get_hand_side(hand_landmarks.landmark)
+
+                    # Determine if there is a fist or not
+                    is_hand_fist = is_fist(hand_landmarks.landmark)
+
+                    # Display the number of fingers, distance, hand side, and fist status on the image
+                    cv2.putText(frame, str(fingers_up), (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                    cv2.putText(frame, str(int(distance)), (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                    cv2.putText(frame, hand_side, (10, 110), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                    cv2.putText(frame, str(is_hand_fist), (10, 150), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+
+                    # Combine the values
+                    combined_values = [fingers_up, int(distance), hand_side, str(is_hand_fist)]
+
+                    # Print the combined values
+                    print(combined_values)
+
+                    # Print the corresponding letter based on the conditions
+                    if fingers_up == 2 and distance &amp;lt; 60:
+                        print(&amp;quot;Gripper IN&amp;quot;)                    
+                        input_value = &#x27;A&#x27;
+                        ardu = Serial(&#x27;&#x2F;dev&#x2F;ttyUSB0&#x27;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    elif fingers_up == 2 and distance &amp;gt; 60:
+                        print(&amp;quot;Gripper OUT&amp;quot;)
+                        input_value = &#x27;W&#x27;
+                        ardu = Serial(&#x27;&#x2F;dev&#x2F;ttyUSB0&#x27;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    elif fingers_up == 4 and hand_side == &amp;quot;Right&amp;quot; and not is_hand_fist:
+                        print(&amp;quot;Arm Base IN&amp;quot;)
+                        input_value = &#x27;C&#x27;
+                        ardu = Serial(&#x27;&#x2F;dev&#x2F;ttyUSB0&#x27;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    elif fingers_up == 4 and hand_side == &amp;quot;Left&amp;quot; and not is_hand_fist:
+                        print(&amp;quot;Arm Base OUT&amp;quot;)
+                        input_value = &#x27;Y&#x27;
+                        ardu = Serial(&#x27;&#x2F;dev&#x2F;ttyUSB0&#x27;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    elif not is_hand_fist and hand_side == &amp;quot;Right&amp;quot;:
+                        print(&amp;quot;Arm Top IN&amp;quot;)
+                        input_value = &#x27;B&#x27;
+                        ardu = Serial(&#x27;&#x2F;dev&#x2F;ttyUSB0&#x27;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    elif not is_hand_fist and hand_side == &amp;quot;Left&amp;quot;:
+                        print(&amp;quot;Arm Top OUT&amp;quot;)
+                        input_value = &#x27;X&#x27;
+                        ardu = Serial(&#x27;&#x2F;dev&#x2F;ttyUSB0&#x27;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    elif fingers_up == 5 and hand_side == &amp;quot;Right&amp;quot;:
+                        print(&amp;quot;Base IN&amp;quot;)
+                        input_value = &#x27;D&#x27;
+                        ardu = Serial(&#x27;&#x2F;dev&#x2F;ttyUSB0&#x27;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    elif fingers_up == 5 and hand_side == &amp;quot;Left&amp;quot;:
+                        print(&amp;quot;Base OUT&amp;quot;)
+                        input_value = &#x27;Z&#x27;
+                        ardu = Serial(&#x27;&#x2F;dev&#x2F;ttyUSB0&#x27;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    else:
+                        print(&amp;quot;STOP&amp;quot;)
+                        input_value = &#x27;S&#x27;
+                        ardu = Serial(&#x27;&#x2F;dev&#x2F;ttyUSB0&#x27;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+            # Display the mirrored image with landmarks
+            cv2.imshow(&#x27;Finger Tracking&#x27;, frame)
+
+            # Exit loop when &#x27;q&#x27; is pressed
+            if cv2.waitKey(1) &amp;amp; 0xFF == ord(&#x27;q&#x27;):
+                break
+
+    cap.release()
+    cv2.destroyAllWindows()
+
+if __name__ == &#x27;__main__&#x27;:
+    main()
+
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;testing&quot;&gt;Testing:&lt;&#x2F;h3&gt;
+&lt;p&gt;The arm was completed, and it was time to test it. The servos were connected to power supply and the USB was connected to the Arduino. With the necessary code uploaded to the Arduino, the python script was run, and hand gestures were read from the computer which then converted to Serial signals and the code in Arduino interprets those Serial signals as per the uploaded code. Here, in the first trial reading the Front and Back side of the hand gave same results, I replaced the code for Left and Right aligned hand, which showed Right when I showed my right-hand palm to the Camera, and left when I showed my right-hand back to the camera, and vice-versa for the left hand. Which fixed the issue.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;challenges-and-solutions&quot;&gt;Challenges and Solutions:&lt;&#x2F;h3&gt;
+&lt;p&gt;There were not many challenges to make a working prototype which my arm is at the moment. But further improvement on the gestures are going to be challenging like; to read and interpret natural human arm movements in digital form and to match the movement of robot arm with an actual human arm.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion:&lt;&#x2F;h3&gt;
+&lt;p&gt;In conclusion, the CV robotic arm is a working prototype for better control of devices requiring less time to adapt. It helps people to be familiar with using complex devices like robotic arm in a very short period of time. &lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Project Firefly</title>
+		<published>2023-04-28T00:00:00+00:00</published>
+		<updated>2023-04-28T00:00:00+00:00</updated>
+		<link href="https://scientiac.space/blog/arduino-firefly/" type="text/html"/>
+		<id>https://scientiac.space/blog/arduino-firefly/</id>
+		<content type="html">&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;firefly.jpg&quot; alt=&quot;Firefly&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;&#x2F;h2&gt;
+&lt;p&gt;The purpose of this report is to document the process of building a fire extinguishing and gas sensing car using Arduino. The car is designed to detect fire using a flame IR sensor and go towards it to extinguish it if necessary. It also detects gas leaks and alerts the user via SMS. This report will detail the steps taken to design and build the car, as well as the challenges encountered and the solutions implemented.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;materials-used&quot;&gt;Materials Used:&lt;&#x2F;h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Arduino Uno &lt;&#x2F;li&gt;
+&lt;li&gt;3 Flame IR Sensors&lt;&#x2F;li&gt;
+&lt;li&gt;MQ-2 Gas Sensor&lt;&#x2F;li&gt;
+&lt;li&gt;Motor Driver&lt;&#x2F;li&gt;
+&lt;li&gt;2 DC Motor&lt;&#x2F;li&gt;
+&lt;li&gt;Servo Motor&lt;&#x2F;li&gt;
+&lt;li&gt;Water Pump&lt;&#x2F;li&gt;
+&lt;li&gt;Fire Extinguisher (tested with water)&lt;&#x2F;li&gt;
+&lt;li&gt;SIM800L GSM Module&lt;&#x2F;li&gt;
+&lt;li&gt;Breadboard and Jumper Wires&lt;&#x2F;li&gt;
+&lt;li&gt;Power Supply (Battery)&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;design&quot;&gt;Design:&lt;&#x2F;h3&gt;
+&lt;p&gt;The first step in building the fire extinguishing and gas sensing car was to design a schematic. The car is powered by an Arduino Uno microcontroller, which controls the sensors, motors, and other components. The 3 flame IR sensors are used to detect fire from three different directions, and the MQ-2 gas sensor is used to detect gas leaks. The motor driver is used to control the DC and servo motors, which drive the car and the water pump, respectively. The fire extinguisher reservoir is mounted on top of the car and the pump pushes the extinguisher from the pipe which is spread by the back-and-forth motion of the servo motor. The SIM800L GSM module is used to send SMS alerts to the user in case of a gas leak.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;construction&quot;&gt;Construction:&lt;&#x2F;h3&gt;
+&lt;p&gt;Once the schematic was finalized, the next step was to build the car. The components were connected to the Arduino Uno using a breadboard and jumper wires. The flame IR sensors were mounted on the front of the car on in the front and two facing either sides, and the MQ-2 gas sensor was mounted on top. The DC motors were connected to the motor driver and were used to drive the car. The servo motor was connected to the L298N motor driver and was connected to the fire extinguisher. The water pump was connected to the Arduino Uno and was used to pump water from the reservoir to the fire extinguisher which moved in a to and fro motion to spread the water coming out of it.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;testing&quot;&gt;Testing:&lt;&#x2F;h3&gt;
+&lt;p&gt;Once the car was built, it was time to test it. The car was placed in a test environment and was subjected to various scenarios. The flame IR sensor was able to detect fire and direct the car towards it. The MQ-2 gas sensor was able to detect gas leaks and activate the SMS alert system. The fire extinguisher was successfully activated by the servo motor, and the water pump was able to pump water to the fire extinguisher.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;challenges-and-solutions&quot;&gt;Challenges and Solutions:&lt;&#x2F;h3&gt;
+&lt;p&gt;One of the major challenges encountered during the construction of the car was the calibration of the flame IR sensor. The sensor needed to be calibrated to detect the flame accurately and direct the car towards it. The heater connected to our room was also detected as a fire source which made it harder to test the bot. This was solved by testing the sensor with different fire sources and adjusting the code accordingly. Our test subject for demonstration was a burning paper which was used for the calibration of flame sensor.&lt;&#x2F;p&gt;
+&lt;p&gt;Another challenge was the activation of the fire extinguisher. The servo motor had to be calibrated to activate the extinguisher at the right time, and the water pump had to pump the water at the right pressure. This was solved by adjusting the code and the components until the system worked correctly.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion:&lt;&#x2F;h3&gt;
+&lt;p&gt;In conclusion, the fire extinguishing and gas sensing car using Arduino is a useful device that can prevent fires and detect gas leaks. The car is powered by an Arduino Uno microcontroller and uses sensors, motors, and other components to perform its functions. The car was designed and built with the help of a schematic, and was tested successfully. The challenges encountered during the construction were solved by adjusting the code and the components. The car can be further improved by adding more sensors and refining the code as the SMS functionality was still flaky. &lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>

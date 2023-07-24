@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>Scientiac - POSSE</title>
+	<subtitle>That guy from the internet, scientist something.</subtitle>
+	<link href="https://scientiac.space/syndicate/posse/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://scientiac.space"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2023-06-13T00:00:00+00:00</updated>
+	<id>https://scientiac.space/syndicate/posse/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Mental Liquidity</title>
+		<published>2023-06-13T00:00:00+00:00</published>
+		<updated>2023-06-13T00:00:00+00:00</updated>
+		<link href="https://scientiac.space/syndications/posse-2023-06-13/" type="text/html"/>
+		<id>https://scientiac.space/syndications/posse-2023-06-13/</id>
+		<content type="html">&lt;p&gt;I came across a &lt;a href=&quot;https:&#x2F;&#x2F;collabfund.com&#x2F;blog&#x2F;mental-liquidity&#x2F;&quot;&gt;blog&lt;&#x2F;a&gt; post about Mental Liquidity, and it got me into thinking how people do not want to change their mind, especially when it comes to generationally gapped individuals. One&#x27;s beliefs can be drastically different from the other and yet none would listen to the other and look at it from their perspective as well. Humans have evolved learning things and passing the technique that helped them survive to the new generation, so it isn&#x27;t a big deal to assume that they survived fine with those beliefs, and it is far optimal to pass on that belief than to gamble with new opinions.&lt;&#x2F;p&gt;
+&lt;p&gt;Anyway, I hope it doesn&#x27;t just remain as a new term in my vocabulary. I believe that one should be able to change their mind on things, change my mind!&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Officially a Space Explorer</title>
+		<published>2023-05-03T00:00:00+00:00</published>
+		<updated>2023-05-03T00:00:00+00:00</updated>
+		<link href="https://scientiac.space/syndications/posse-2023-05-03/" type="text/html"/>
+		<id>https://scientiac.space/syndications/posse-2023-05-03/</id>
+		<content type="html">&lt;center&gt;
+&lt;p&gt;&lt;strong&gt;Domain&lt;&#x2F;strong&gt;&lt;br &#x2F;&gt;
+&lt;code&gt;dō-mān′&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;center&gt;
+&lt;ol&gt;
+&lt;li&gt;A territory over which rule or control is exercised.&lt;&#x2F;li&gt;
+&lt;li&gt;A sphere of activity, influence, or knowledge: synonym: field.&lt;&#x2F;li&gt;
+&lt;li&gt;The set of all possible values of an independent variable of a function.&lt;&#x2F;li&gt;
+&lt;li&gt;An open connected set that contains at least one point.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;Yep! I have my own domain now. My own territory, my own space, &lt;a href=&quot;https:&#x2F;&#x2F;scientiac.space&quot;&gt;scientiac.space&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Eww! Yuck!</title>
+		<published>2023-05-02T00:00:00+00:00</published>
+		<updated>2023-05-02T00:00:00+00:00</updated>
+		<link href="https://scientiac.space/syndications/posse-2023-05-02/" type="text/html"/>
+		<id>https://scientiac.space/syndications/posse-2023-05-02/</id>
+		<content type="html">&lt;p&gt;Gnome is officially out of the system now. I loved it but I love hyprland better now. Anyways, the consistency with GTK apps was what I liked about it and the essence of that still remains in hyprland with EWW which is configured in yuck, hence the title.&lt;&#x2F;p&gt;
+&lt;p&gt;EWW works as almost all the things, but some standalone apps are still better to have, so I have used swaync as the notification daemon and rofi-wayland as the launcher. Overall the system is pretty usable now, and I just love hyprland&#x27;s animations.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Chapter Two: Sophomore</title>
+		<published>2023-04-30T00:00:00+00:00</published>
+		<updated>2023-04-30T00:00:00+00:00</updated>
+		<link href="https://scientiac.space/syndications/posse-2023-04-30/" type="text/html"/>
+		<id>https://scientiac.space/syndications/posse-2023-04-30/</id>
+		<content type="html">&lt;p&gt;Yes! The freshman year is over now. And I already feel like I have more responsibilities than usual. It feels good for some time until the feeling that you&#x27;re getting old hits you. This year passed with a blink of an eye, I remember getting inside the college and feeling exited about what I was going to be. Let&#x27;s see how the life as a middle child in the college goes. Wow! Three more binks and I&#x27;ll be a graduate, it&#x27;s scary.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Exponential Fluctuations</title>
+		<published>2023-04-29T00:00:00+00:00</published>
+		<updated>2023-04-29T00:00:00+00:00</updated>
+		<link href="https://scientiac.space/syndications/posse-2023-04-29-second/" type="text/html"/>
+		<id>https://scientiac.space/syndications/posse-2023-04-29-second/</id>
+		<content type="html">&lt;center&gt;
+&lt;p&gt;Sometimes It&#x27;s the end of the world,&lt;br &#x2F;&gt;
+sometimes MEH! It is what it is.&lt;br &#x2F;&gt;
+The same thing kills you sometimes,&lt;br &#x2F;&gt;
+and sometimes it makes you fly.&lt;br &#x2F;&gt;
+It&#x27;s never neutral, never stable,&lt;br &#x2F;&gt;
+never in an equilibrium.&lt;br &#x2F;&gt;
+6 hours worth of contemplation,&lt;br &#x2F;&gt;
+a minute will change it all.&lt;&#x2F;p&gt;
+&lt;&#x2F;center&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Experimenting with Feelings</title>
+		<published>2023-04-29T00:00:00+00:00</published>
+		<updated>2023-04-29T00:00:00+00:00</updated>
+		<link href="https://scientiac.space/syndications/posse-2023-04-29/" type="text/html"/>
+		<id>https://scientiac.space/syndications/posse-2023-04-29/</id>
+		<content type="html">&lt;p&gt;Yeah! Yeah! Yeah! This is one of those hot takes on &amp;quot;Love&amp;quot; ooOooh!!&lt;&#x2F;p&gt;
+&lt;p&gt;Human nature is weird. Like, how someone would behave when they feel like they&#x27;re loved and how the behavior would change when they feel like they are indifferent to them. It&#x27;s quite fascinating that the behavioral and psychological pattern change, how cute turns into offensive and feelings turn into conscious infatuation. Apparently hope plays quite a big role in it. One could argue that &amp;quot;love&amp;quot; is nothing but just hopefulness. And when one gets hopeless, everybody knows how that goes. &lt;&#x2F;p&gt;
+&lt;p&gt;This is neither a paper nor a thesis, it&#x27;s just my take on love today. So, I suppose it&#x27;s better incomplete and a hot take than a &amp;quot;WHAT I SAY IS ALWAYS TRUE&amp;quot; of a vibe. Bye!&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Some Fleabag</title>
+		<published>2023-04-28T00:00:00+00:00</published>
+		<updated>2023-04-28T00:00:00+00:00</updated>
+		<link href="https://scientiac.space/syndications/posse-2023-04-28/" type="text/html"/>
+		<id>https://scientiac.space/syndications/posse-2023-04-28/</id>
+		<content type="html">&lt;p&gt;I kinda binged fleabag and it was quite awesome. It&#x27;s more of a six-hour movie than a show, I&#x27;d say. I had watched season 1 and season 2 wasn&#x27;t difficult to finish. This is one of those series which I hated the first season, and it made my mind with the second. It&#x27;s a masterpiece as it ended with an actual ending and wasn&#x27;t extended due to public demand or just money.&lt;&#x2F;p&gt;
+&lt;p&gt;Yeah! The fact that it ended is my second favorite thing about the show.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Continuing the Redesign</title>
+		<published>2023-04-27T00:00:00+00:00</published>
+		<updated>2023-04-27T00:00:00+00:00</updated>
+		<link href="https://scientiac.space/syndications/posse-2023-04-27/" type="text/html"/>
+		<id>https://scientiac.space/syndications/posse-2023-04-27/</id>
+		<content type="html">&lt;p&gt;I made link previews, made logo dynamic with color changes, stylized POSSE views and little improvements like: isolating readable.css and improving the paginator layout. &lt;&#x2F;p&gt;
+&lt;p&gt;And talking about my achievement today, I unlocked a pimple on my face due to sleeplessness. Yayyyy!&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Second Day</title>
+		<published>2023-04-26T00:00:00+00:00</published>
+		<updated>2023-04-26T00:00:00+00:00</updated>
+		<link href="https://scientiac.space/syndications/posse-2023-04-26/" type="text/html"/>
+		<id>https://scientiac.space/syndications/posse-2023-04-26/</id>
+		<content type="html">&lt;p&gt;This is day two of redesigning the site, it is going fine, I added designs, and it&#x27;s cool now. Some new fonts and SVG backgrounds, and we have a completely different design. I&#x27;m loving it. My favorite theme if you ask is everforest-dark every time. &lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>POSSE</title>
+		<published>2023-04-25T00:00:00+00:00</published>
+		<updated>2023-04-25T00:00:00+00:00</updated>
+		<link href="https://scientiac.space/syndications/posse-2023-04-25/" type="text/html"/>
+		<id>https://scientiac.space/syndications/posse-2023-04-25/</id>
+		<content type="html">&lt;p&gt;So, this is the mini-blog thingy that I was planning to make for some time now. And maybe I&#x27;ll share my thoughts following POSSE (Publish on your Own Site, Syndicate Elsewhere) and share the link to this to everywhere else. I have an RSS feed for this, which I&#x27;ll try to use for fetching and scripting if needed and anybody can just use it normally as intended as well.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>
