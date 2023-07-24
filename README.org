@@ -1,4 +1,4 @@
-* scientiac.github.io
+* scientiac.space
 
 This is my personal blog built with [[https://www.getzola.org/][zola]] static site generator.
 
