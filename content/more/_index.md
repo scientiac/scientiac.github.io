@@ -7,6 +7,9 @@ page_template = "page.html"
 ### [research::map](https://map.scientiac.space)
 A map of things I am working on.
 
+### [gemini://](/gemini)
+About the gemini:// internet protocol and some related links.
+
 ## Information
 
 ### [Contact](contact)

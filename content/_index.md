@@ -1,5 +1,5 @@
 +++
-title="Scientiac's Weblog"
+title="scientiac::syntropy"
 description="A place where I freely share my thoughts."
 +++
 
