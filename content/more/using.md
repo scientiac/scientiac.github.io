@@ -4,18 +4,18 @@ title = "Currently Using"
 
 ## PC
 
-* OS - Fedora (Hyprland)
+* OS - NixOS (Sway)
 * Browser - Firefox/Brave
 * Terminal - Wezterm
 * Text Editor/IDE - Neovim
 * Vector Graphics - Inkscape 
 * Static Site Generator - Zola and Hugo
-* Shell - Bash, Nu
+* Shell - Bash
 * Prompt - Starship
 
 ## Cross Platform
 
-* PC-Smartphone Connection - KDE Connect
+<!-- * PC-Smartphone Connection - KDE Connect  -->
 * Gemini Client - Lagrange
 * Note-taking - Obsidian 
 * Video Player - MPV
