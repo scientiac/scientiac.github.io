@@ -57,7 +57,7 @@ To enable flakes, you should add the following configuration to your `configurat
 
 In general `nix flakes` does the following changes to the old nix workflow:
 
-1. It **replaces channels**  which was an imperative operation diverting from the fact that NixOS was meant to be fully declarative.
+1. It **replaces channels** which was an imperative operation which diverted from the fact that NixOS was meant to be fully declarative.
 2. **Ability to lock dependencies** by creating a flake.lock file ensuring reproducability.
 3. Makes it easier to **install external software** that is  not yet packaged in NIxpkgs.
 4. Adds a way to **import Nix expressions from elsewhere** on the internet.
@@ -72,4 +72,4 @@ In general `nix flakes` does the following changes to the old nix workflow:
 [Intro to Nix Flakes by TWEAG](https://www.tweag.io/blog/2020-05-25-flakes/)  
 [The Nix Hour (Youtube)](https://www.youtube.com/playlist?list=PLyzwHTVJlRc8yjlx4VR4LU5A5O44og9in)  
 
-> I will be updating more notes about on top of this [map](https://map.scientiac.space/thoughts/nixOS/).
+> I will be updating more notes about nixOS on top of this [map](https://map.scientiac.space/thoughts/nixOS/).
