@@ -72,4 +72,4 @@ In general `nix flakes` does the following changes to the old nix workflow:
 [Intro to Nix Flakes by TWEAG](https://www.tweag.io/blog/2020-05-25-flakes/)  
 [The Nix Hour (Youtube)](https://www.youtube.com/playlist?list=PLyzwHTVJlRc8yjlx4VR4LU5A5O44og9in)  
 
-> I will be updating more notes about nixOS on top of this [map](https://map.scientiac.space/nodes/nixOS/).
+> I will be updating more notes about nixOS on top of this [map](https://map.scientiac.space/nodes/nixOS).
