@@ -16,7 +16,7 @@ title = "Currently Using"
 ## Cross Platform
 
 <!-- * PC-Smartphone Connection - KDE Connect  -->
-* Gemini Client - Lagrange
+* Gemini Client - Lagrange/Amfora
 * Note-taking - Obsidian 
 * Video Player - MPV
 * Communication - Matrix, Signal, Telegram
@@ -25,7 +25,7 @@ title = "Currently Using"
 
 ## Smartphone
 
-* ROM(OS) - crDroid
+* ROM(OS) - evolutionX
 * Launcher - Nova Launcher
 * RSS Reader - Read You
 * Browser - Firefox/Brave
@@ -39,7 +39,7 @@ title = "Currently Using"
 * Terminal Emulator - Termux
 * Video Player - VLC
 * Reddit Client - Infinity
-* Lemmy Client - Thunder
+* Lemmy Client - Eternity
 * Podcast Aggregator - Antennapod
 
 ## TV?
