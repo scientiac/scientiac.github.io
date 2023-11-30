@@ -195,7 +195,7 @@ The whole Linux ecosystem isn't convergent yet, and many apps go beyond the scre
 
 ### It would have been much better if it had...
 
-Some features like, the semi-automatic screen rotation that android has nowadays which would show a small prompt to rotate the screen upon rotating the device but without automatically rotating it. Also, gestures in apps like video players to scroll and double taps to skip. Which would make the droidian experience much better. And, maybe a qr-code scanner to connect to wifi networks.
+Some features like, the semi-automatic screen rotation that android has nowadays which would show a small prompt to rotate the screen upon rotating the device but without automatically rotating it. Also, gestures in apps like video players to scroll and double taps to skip, which would make the droidian experience much better. And, maybe a qr-code scanner to connect to wifi networks.
 
 ### Lastly, Some Mentions
 Waydroid has been a life saver for using essential video calling apps and surprisingly banking apps. But, the default waydroid experience is very buggy. It is not the fault of droidian devs though, waydroid is a completely different project.
