@@ -52,7 +52,7 @@ Then, the UI was not tailored for the device I was using, it was vanilla phosh w
 
 Then, The Camera was not working at all. Now, the `droidian-camera` does work but it's laggy. Though it technically can capture videos the frame rate drops very randomly and the video comes out to be choppy. The file size of the choppy video is also very high.
 
-Then, Apps like telegram and nessenger from firefox did not connect to calls at all. Now, microphone is generally supported by all apps and voice calling via other apps work fine.
+Then, Apps like telegram and messenger from Firefox did not connect to calls at all. Now, microphone is generally supported by all apps and voice calling via other apps work fine.
 
 Then, Waydroid used to work without much problems. Now, upon launching Waydroid and trying to video-call the entire shell crashes and the only way to bring back the UI is by a forced restart.
 
