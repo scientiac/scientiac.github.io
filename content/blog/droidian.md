@@ -132,7 +132,7 @@ I am writing this blog on my laptop while taking screenshots from my phone and s
 
 ## Customization
 
-The thing that introduced Linux to me and made it interesting was the customizability of it. I encountered Linux when YouTube recommended a video of KDE while I was searching for ways to customize windows. So, you can pretty much assume that I don't use things without giving some of it my touch.
+The thing that introduced Linux to me and made it interesting was the customizability of it. I encountered Linux when YouTube recommended a video of KDE while I was searching for ways to customize windows. So, you can pretty much assume that I don't use things without giving some of my touch to it.
 
 ### Colors and Textures
 
