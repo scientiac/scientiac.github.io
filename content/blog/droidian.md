@@ -205,6 +205,6 @@ Gnome Online Accounts made it very easy to sync my contacts saved on google cont
 ### So,
 My experience with Linux on Mobile was interesting, though it has a lot to improve, I didn't expect it to be "functional enough" that I could use it for days without diving back to android. I will use this for some more days, maybe until the Gnome Asia 2023 event ends. 
 
-There is lot more to try yet but I want to end this experiment for now. 
+There is lot more to try but, I want to end this experiment for now. 
 
 Goodnight!
