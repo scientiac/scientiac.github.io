@@ -31,7 +31,7 @@ writings=["Articles"]
 
 ## Firstly...
 
-I have been playing around and testing Droidian on my *Xaomi Redmi Note 9 Pro Max (miatoll - excalibur)* as a daily driver since November 17th. Before this I had tried Droidian about an year ago on this very device.
+I have been playing around and testing Droidian on my *Xaomi Redmi Note 9 Pro Max (miatoll - excalibur)* as a daily driver since November 17th. Before this I had tried Droidian about a year ago on this very device.
 
 > Note: The screenshots attached here are of my customized version of phosh and GTK colors, the default UI will look different.
 
