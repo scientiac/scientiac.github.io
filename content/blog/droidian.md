@@ -76,7 +76,7 @@ The `gnome-calls` app is the only app I know which can make "noisy notifications
 
 ### Maps
 
-Yes, Gnome Maps works on this device but It does not show my real time location. And coming from using Google Maps, it isn't a very pleasant of an experience.
+Yes, Gnome Maps works on this device but it does not show my real time location. And coming from using Google Maps, it isn't a very pleasant of an experience.
 
 <img alt="Gnome Maps" src="/images/droidian/gnome_maps.png" style="width: 15rem;"/>
 
