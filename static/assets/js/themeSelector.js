@@ -77,8 +77,6 @@ function updateThemeSelector() {
 
   q('#themeSelector').innerHTML = html;
 
-  // Update favicon
-
   // get colors
   const colors = {
     fill: getComputedStyle(q('.main-background'))['backgroundColor'],

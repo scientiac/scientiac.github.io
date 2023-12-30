@@ -1,4 +1,7 @@
 /* Shadows */
+:root{
+  --box-shadow: 0 0 0.6rem var(--color-comments);
+}
 
 /* Font family support from themes.css */
 
@@ -36,6 +39,7 @@ img {
   background-color: var(--background-color-1);
   border-radius: var(--half-line);
   padding: calc((var(--line-height) * 0.5rem) - var(--line-width));
+  box-shadow: var(--box-shadow);
 }
 
 nav:not(.exclude:not([data-style]), [data-style="none"]) > * {
@@ -304,6 +308,7 @@ button, a.button {
 /* Theme Selector */
 #themeSelector {
 	list-style: none;
+  z-index: 201;
 	padding: calc(0.4 * var(--one-line)) calc(0.6 * var(--one-line));
 	margin: 0;
 	border-radius: var(--half-line);
@@ -314,6 +319,7 @@ button, a.button {
 	bottom: 2rem;
 	max-height: calc(100% - 4rem);
 	overflow: auto;
+  box-shadow: var(--box-shadow);
 }
 
 #themeSelector a.current, #currentTheme {
@@ -330,6 +336,40 @@ button, a.button {
 }
 
 #themeSelector details {
+	margin: 0
+}
+
+/* Navigation Mobile */
+#linkSelector {
+	list-style: none;
+  z-index: 200;
+	padding: calc(0.4 * var(--one-line)) calc(0.6 * var(--one-line));
+	margin: 0;
+	border-radius: var(--half-line);
+	background-color: var(--background-color-1);
+	display: inline-block;
+	position: fixed;
+	right: 2rem;
+	bottom: 6rem;
+	max-height: calc(100% - 4rem);
+  overflow: auto;
+  box-shadow: var(--box-shadow);
+}
+
+#linkSelector a.current, #currentLink {
+	color: var(--text-highlight-0);
+	text-decoration: none;
+}
+
+#linkSelector > details > summary {
+	list-style: none;
+}
+
+#linkSelector details > li {
+	margin-left: var(--one-line);
+}
+
+#linkSelector details {
 	margin: 0
 }
 
