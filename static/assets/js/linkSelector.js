@@ -1,9 +1,9 @@
 const links = {
-  '/home': '/',
-  '/blog': '/blog',
-  '/writings': '/writings',
-  '/posse': '/syndications',
-  '/more': '/more',
+  '/home/': '/',
+  '/blog/': '/blog',
+  '/writings/': '/writings',
+  '/posse/': '/syndications',
+  '/more/': '/more',
   'rss': {
     'everything': '/atom.xml',
     'articles': '/writings/articles/atom.xml',
