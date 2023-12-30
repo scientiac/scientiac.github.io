@@ -1,9 +1,9 @@
 const links = {
-  'home': '/',
-  'blog': '/blog',
-  'writings': '/writings',
-  'posse': '/syndications',
-  'more': '/more',
+  '/home': '/',
+  '/blog': '/blog',
+  '/writings': '/writings',
+  '/posse': '/syndications',
+  '/more': '/more',
   'rss': {
     'everything': '/atom.xml',
     'articles': '/writings/articles/atom.xml',
@@ -13,19 +13,24 @@ const links = {
   },
 }
 
-let selectedLink = localStorage.link || 'home';
+let selectedLink = localStorage.currentAlias || 'home';
 
 document.documentElement.dataset.link = selectedLink;
 
+
 function updateLinkSelector() {
-  let html = `<details><summary for="showLinkSelector">nav: <span id="currentLink">${selectedLink}</span></summary>`;
+  const currentPath = window.location.pathname;
+  const currentAlias = Object.entries(links).find(([_, path]) => path === currentPath)?.[0] || currentPath;
+
+  let html = `<details><summary for="showLinkSelector"><span id="currentLink">${currentAlias}</span></summary>`;
+
   for (var id of Object.keys(links)) {
     if (typeof links[id] === 'string') {
-      html += `<li><a${selectedLink === id ? ' class="current"' : ''} href="javascript:setLink('${id}')">${id}</a></li>`;
+      html += `<li><a${currentAlias === id ? ' class="current"' : ''} href="javascript:setLink('${id}')">${id}</a></li>`;
     } else {
-      html += `<li><details${selectedLink.split('-')[0] === id ? ' open' : ''}><summary>${id}</summary>`;
+      html += `<li><details${currentAlias.split('-')[0] === id ? ' open' : ''}><summary>${id}</summary>`;
       for (var alias in links[id]) {
-        html += ` <li><a${selectedLink === alias ? ' class="current"' : ''} href="javascript:setLink('${alias}')">${alias}</a></li>`;
+        html += ` <li><a${currentAlias === alias ? ' class="current"' : ''} href="javascript:setLink('${alias}')">${alias}</a></li>`;
       }
       html += `</details></li>`;
     }
@@ -33,6 +38,7 @@ function updateLinkSelector() {
   html += `</details>`;
   q('#linkSelector').innerHTML = html;
 }
+
 
 function setLink(alias) {
   let link;
@@ -51,7 +57,7 @@ function setLink(alias) {
     }
   }
   if (link) {
-    localStorage.setItem('link', alias);
+    localStorage.setItem('currentAlias', alias);
     document.documentElement.dataset.link = alias;
     selectedLink = alias;
     updateLinkSelector();
