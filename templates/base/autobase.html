@@ -47,7 +47,8 @@
     <meta name="theme-color" content="rgb(253, 246, 227)">
 
 
-		<script src="/assets/js/themeSelector.js"></script>
+		<script src="/assets/js/themeSelector.js" defer></script>
+    <script src="/assets/js/linkSelector.js" defer></script>
 
     <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/logo.css">
@@ -64,7 +65,7 @@
 </head>
 
 
-	<body onload="updateThemeSelector()">
+<body onload="updateThemeSelector(); updateLinkSelector();">
 
   <!------------------LOGO------------------->
   <div class="logo-container">
@@ -111,6 +112,6 @@
     </footer>
 
     <ol id="themeSelector" reversed></ol>
-</body>
+    <ol id="linkSelector"></ol>
 
 </html>

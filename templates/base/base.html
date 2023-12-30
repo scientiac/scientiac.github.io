@@ -43,7 +43,8 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="/res/favicon.svg">
 
-		<script src="/assets/js/themeSelector.js"></script>
+		<script src="/assets/js/themeSelector.js" defer></script>
+    <script src="/assets/js/linkSelector.js" defer></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="rgb(253, 246, 227)">
@@ -58,7 +59,7 @@
 </head>
 
 
-	<body onload="updateThemeSelector()">
+<body onload="updateThemeSelector(); updateLinkSelector();">
 
   <!------------------LOGO------------------->
   <div class="logo-container">
@@ -104,6 +105,7 @@
     </footer>
 
     <ol id="themeSelector" reversed></ol>
+    <ol id="linkSelector"></ol>
 </body>
 
 </html>
