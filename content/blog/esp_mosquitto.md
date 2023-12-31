@@ -17,7 +17,7 @@ Building a (two-bot) robot swarm isn't an easy task and I am only in the beginni
 2. *[Firmware]* MicroPython (for receiving)
 3. *[Software]* Python (for publishing)
 4. *[Software]* esptool
-5.*[Software]*  mosquitto (for serving)
+5. *[Software]*  mosquitto (for serving)
 6. *[Software]* adafruit-ampy
 
 ## Basic Setup
