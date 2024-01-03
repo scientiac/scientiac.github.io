@@ -149,11 +149,10 @@ Firstly a python script on the computer to send messages, it sends `on` and `off
     led_topic = "led"
     client = establish_connection()
 
-    while True:
-        client.publish(led_topic, "off")
-        time.sleep(500)
-        client.publish(led_topic, "off")
-        time.sleep(500)
+    client.publish(led_topic, "off")
+    time.sleep(500)
+    client.publish(led_topic, "off")
+    time.sleep(500)
 
 ```
 
