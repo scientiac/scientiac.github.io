@@ -48,8 +48,8 @@ const themes = {
   ],
 }
 const defaultThemes = {
-  light: "gruvbox-light",
-  dark: "gruvbox-dark"
+  light: "genre-storific",
+  dark: "night-spaceduck"
 }
 const prefersDark = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
 let theme = localStorage.theme || (prefersDark ? defaultThemes.dark : defaultThemes.light);
