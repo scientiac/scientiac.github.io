@@ -6,4 +6,4 @@ This is my personal blog built with the [[https://www.getzola.org/][zola]] stati
 
 [[https://readable-css.freedomtowrite.org/][Readable CSS]]
 
-[[latex.vercel.app/][LaTeX Fonts]]
+[[https://latex.vercel.app/][LaTeX Fonts]]
