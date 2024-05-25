@@ -112,10 +112,6 @@ nav:not(.exclude:not([data-style]), [data-style="none"]) > * {
 	border-radius: var(--half-line) var(--half-line) 0 0;
 }
 
-.syndicate code {
-	background-color: var(--background-color-0);
-}
-
 .syndicate p {
 	margin: calc(0.6 * var(--one-line));
 }
@@ -235,8 +231,8 @@ nav a[rel="next"] {
 	float: right;
 }
 
-.highlight, kbd, code {
-	background-color: var(--background-color-1);
+.highlight, kbd{
+	background-color: var(---color-1);
 }
 
 kbd, code {
