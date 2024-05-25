@@ -7,7 +7,7 @@ description = "That guy from the internet, scientist something."
 author = "scientiac"
 
 #favicon
-favicon = "static/res/favicon.png"
+favicon = "static/res/logo.png"
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = false
