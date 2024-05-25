@@ -2,13 +2,13 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="40mm"
-   height="40mm"
-   viewBox="0 0 40 40.000001"
+   width="96"
+   height="96"
+   viewBox="0 0 25.4 25.400001"
    version="1.1"
    id="svg2740"
    sodipodi:docname="logo.svg"
-   inkscape:export-filename="final_white.svg"
+   inkscape:export-filename="logo.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
    inkscape:version="1.3.2 (091e20ef0f, 2023-11-25)"
@@ -28,10 +28,10 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="3.57374"
-     inkscape:cx="55.683961"
-     inkscape:cy="75.830922"
-     inkscape:window-width="735"
+     inkscape:zoom="1.069841"
+     inkscape:cx="56.083099"
+     inkscape:cy="94.406551"
+     inkscape:window-width="770"
      inkscape:window-height="715"
      inkscape:window-x="0"
      inkscape:window-y="0"
@@ -410,7 +410,7 @@
     <g
        id="g1"
        inkscape:label="logo"
-       transform="translate(6.3271975,-0.136629)">
+       transform="matrix(0.62891752,0,0,0.62891752,34.515683,26.403472)">
       <path
          style="fill:#000000;fill-opacity:1;stroke:url(#radialGradient828);stroke-width:0.79375;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1;stroke-dasharray:none;stroke-opacity:1"
          d="m 108.70746,71.482562 -26.341305,12.9918"
