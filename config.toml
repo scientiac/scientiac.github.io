@@ -2,8 +2,9 @@
 base_url = "https://scientiac.space"
 
 #Title
-title = "Scientiac"
+title = "scientiac::syntropy"
 description = "That guy from the internet, scientist something."
+author = "scientiac"
 
 #favicon
 favicon = "static/res/favicon.png"
@@ -11,15 +12,6 @@ favicon = "static/res/favicon.png"
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = false
 
-# Whether to do syntax highlighting
-# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
-# highlight_code = true
-# highlight_theme = "gruvbox-dark"
-# highlight_theme = "css"
-# highlight_themes_css = [
-#   { theme = "base16-ocean-dark", filename = "syntax-theme-dark.css" },
-#   { theme = "base16-ocean-light", filename = "syntax-theme-light.css" },
-# ]
 
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = true
@@ -54,3 +46,8 @@ include_path = false
 # Whether to include the rendered content of the page/section in the index
 include_content = true
 
+[markdown]
+# Whether to do syntax highlighting
+# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
+highlight_code = true
+highlight_theme = "gruvbox-dark"
