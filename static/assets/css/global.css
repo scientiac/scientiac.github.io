@@ -251,7 +251,6 @@ kbd, code {
 }
 
 pre {
-	white-space: pre-wrap;
 	background-color: var(--background-color-1);
 }
 
