@@ -43,18 +43,24 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="/res/favicon.svg">
 
-		<script src="/assets/js/themeSelector.js" defer></script>
-    <script src="/assets/js/linkSelector.js" defer></script>
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="rgb(253, 246, 227)">
 
+
+		<script src="/assets/js/themeSelector.js" defer></script>
+    <script src="/assets/js/linkSelector.js" defer></script>
 
     <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/logo.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/readable.css">
 		<link rel="stylesheet" type="text/css" href="/assets/css/global.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/themes.css">
+
+    {% if page.taxonomies.writings %}
+    {% for tag in page.taxonomies.writings %}
+      <link rel="stylesheet" type="text/css" href="/assets/css/genre/{{tag}}.css" />
+    {% endfor %}
+    {% endif %}
 
 </head>
 
@@ -100,12 +106,12 @@
       <p class="codewithlove">I can't think of things to write on a footer. So, just <span class="main-background">imagine</span> something yourself.</p>
 
       <p><a href="/atom.xml">RSS</a> | <a href="https://map.scientiac.space" >research::map</a> | <a href="https://github.com/scientiac/scientiac.github.io" target="_blank">Source Code</a></p>
+
       <p>All articles are usable under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>.</p>
       {% endblock footer %}
     </footer>
 
     <ol id="themeSelector" reversed></ol>
     <ol id="linkSelector"></ol>
-</body>
 
 </html>
