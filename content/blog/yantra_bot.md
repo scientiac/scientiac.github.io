@@ -1,6 +1,6 @@
 +++
 title = "Manoid: A Waste Management Robot"
-date = 2024-06-06
+date = 2024-06-12
 [taxonomies]
 writings=["Reports"]
 +++
