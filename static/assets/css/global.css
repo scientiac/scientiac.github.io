@@ -32,6 +32,14 @@ img {
   width: 80%;
 }
 
+video {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+	border-radius: calc((var(--line-height) * 0.25rem));
+  width: 90%;
+}
+
 /* Navbar */
 :is(body, header) > nav:first-of-type:not(.exclude) { /* This styling only affects the first nav element that is the direct child of the body */
   text-align: center;
@@ -240,6 +248,11 @@ kbd, code {
 	margin: 0 calc(0.125 * var(--one-line));
 	font-weight: bold;
 	border-radius: 0.25rem;
+	background-color: var(--background-color-1);
+}
+
+code.language-text {
+	background-color: var(--color-1);
 }
 
 .highlight {

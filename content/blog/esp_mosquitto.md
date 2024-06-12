@@ -1,24 +1,28 @@
 +++
-title = "Project Swarmanoid: Communication"
+title = "Manoid: Communication"
 date = 2023-12-31
 [taxonomies]
 writings=["Reports"]
 +++
 
-![Esp with Led](/images/swarmanoid/led_esp.jpg)
+![Esp with Led](/images/manoid/led_esp.jpg)
 
 ## Introduction
 
-Building a (two-bot) robot swarm isn't an easy task and I am only in the beginning of it. This report will discuss on how to setup the microcontroller boards and how the communication will work for project `swarmanoid`. Also, the much difficult image processing and mapping is on the way, which I should be working on instead of writing this but I'll leave that for next year. Communication seems like a simple topic to work on for now.
+Building a clueless robot isn't an easy task and I am only in the beginning of it. This report will discuss on how to setup the microcontroller boards and how the communication will work for project `manoid` (A waste management robot). Also, the much difficult image processing and mapping is on the way, which I should be working on instead of writing this but I'll leave that for next year. Communication seems like a simple topic to work on for now.
+
+> **Note :** *I wrote the code for the bot [manoid](/blog/yantra-bot/) in arduino's '.ino' instead of using micropython's '.py' but micropython can be used to do the same as well.*
 
 ### Requirements:
 
-1. *[Hardware]* ESP8266 Microcontroller
-2. *[Firmware]* MicroPython (for receiving)
-3. *[Software]* Python (for publishing)
-4. *[Software]* esptool
-5. *[Software]*  mosquitto (for serving)
-6. *[Software]* adafruit-ampy
+| **Category**    | **Component**                 |
+|-----------------|-------------------------------|
+| Hardware        | ESP8266 Microcontroller       |
+| Firmware        | MicroPython (for receiving)   |
+| Software        | Python (for publishing)       |
+| Software        | esptool                       |
+| Software        | mosquitto (for serving)       |
+| Software        | adafruit-ampy                 |
 
 ## Basic Setup
 
@@ -59,7 +63,7 @@ The default flashing mode worked on my first `ESP8266` but when I tried to flash
 ```
 The above command gives you a blank screen, when you hit enter you'll get the prompt, type `help` and hit enter. This should show up:
 
-![repl](/images/swarmanoid/repl.png)
+![repl](/images/manoid/repl.png)
 
 ### MQTT
 
@@ -90,7 +94,7 @@ then run the server by the following command:
 
 This is how it'll look when a client named `tesseraclient` connects to the server:
 
-![mosquitto](/images/swarmanoid/mosquitto.png)
+![mosquitto](/images/manoid/mosquitto.png)
 
 ### Pushing Scripts to the Microcontroller
 
@@ -275,6 +279,6 @@ Upon connecting to the WIFI successfully the above script will import this file 
 ### Finally
 If everything works after installing all the python dependencies you will see this if you are supplying power to your microcontroller using a computer that can accept serial in upon doing a soft reboot and running your python (publisher) script from your computer.
 
-![final](/images/swarmanoid/working.png)
+![final](/images/manoid/working.png)
 
 This indicates that the publisher i.e. `python script` has connected to the server i.e. `mosquitto` and is now sending `on` and `off` messages to the server with topic `led` which then is sent to the subscriber i.e. `ESP8266` which is interpreted by the microcontroller as a command to enable and disable the set GPIO pin i.e. pin `15` if you look closely at the code.
