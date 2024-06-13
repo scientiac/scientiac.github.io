@@ -136,6 +136,8 @@ In the `main.py` file (tuning PID settings):
 2. Then open the file inside the project directory on `etc/esp32/esp32.ino` on your Arduino IDE set up to work with esp32 and change the parameters to fit your environment.
 3. And finally flash it!
 
+![Bot](/images/manoid/bot.png)
+
 > *You can test the bot manually by connecting to the mqtt server using an application (*like MyMQTT on android*) and sending values from `0` to `255` to the topics :  
 `/robot6_left_forward`   
 `/robot6_left_backward`   
