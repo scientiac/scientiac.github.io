@@ -4,8 +4,20 @@
 <head>
   <meta charset="utf-8">
   <title>Scientiac</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/themes.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/readable.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/global.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/logo.css">
 
-    <script src="/assets/js/themeSelector-mini.js" defer></script>
+    {% if page.taxonomies.writings %}
+    {% for tag in page.taxonomies.writings %}
+      <link rel="stylesheet" type="text/css" href="/assets/css/genre/{{tag}}.css" />
+    {% endfor %}
+    {% endif %}
+
+
+    <script src="/assets/js/themeSelector.js" defer></script>
 
     {% block rss %}
     <link rel="alternate" type="application/atom+xml" title="RSS" href="{{ get_url(path="atom.xml", trailing_slash=false) }}">
@@ -57,18 +69,6 @@
     <link rel="webmention" href="https://webmention.io/scientiac.space/webmention" />
     <link rel="pingback" href="https://webmention.io/scientiac.space/xmlrpc" />
     <!----------------/WebMentions------------------>
-
-    <link rel="stylesheet" type="text/css" href="/assets/css/themes.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/readable.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/global.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/logo.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css">
-
-    {% if page.taxonomies.writings %}
-    {% for tag in page.taxonomies.writings %}
-      <link rel="stylesheet" type="text/css" href="/assets/css/genre/{{tag}}.css" />
-    {% endfor %}
-    {% endif %}
 
 </head>
 
@@ -128,7 +128,7 @@
     </footer>
 
     <ol id="themeSelector" reversed></ol>
-    <script src="/assets/js/linkSelector-mini.js" defer></script>
+    <script src="/assets/js/linkSelector.js" defer></script>
     <ol id="linkSelector"></ol>
 
 </html>
