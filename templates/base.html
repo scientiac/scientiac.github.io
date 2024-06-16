@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 
 <head>
   <meta charset="utf-8">
   <title>Scientiac</title>
 
-  {% block rss %}
-  <link rel="alternate" type="application/atom+xml" title="RSS" href="{{ get_url(path="atom.xml", trailing_slash=false) }}">
-  {% endblock %}
+    <script src="/assets/js/themeSelector-mini.js" defer></script>
+
+    {% block rss %}
+    <link rel="alternate" type="application/atom+xml" title="RSS" href="{{ get_url(path="atom.xml", trailing_slash=false) }}">
+    {% endblock %}
 
     {% if page.taxonomies.writings %}
     {% for tag in page.taxonomies.writings %}
@@ -56,15 +58,11 @@
     <link rel="pingback" href="https://webmention.io/scientiac.space/xmlrpc" />
     <!----------------/WebMentions------------------>
 
-
-    <script src="/assets/js/themeSelector.js" defer></script>
-    <script src="/assets/js/linkSelector.js" defer></script>
-
-    <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/logo.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/readable.css">
-		<link rel="stylesheet" type="text/css" href="/assets/css/global.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/themes.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/readable.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/global.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/logo.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css">
 
     {% if page.taxonomies.writings %}
     {% for tag in page.taxonomies.writings %}
@@ -130,6 +128,7 @@
     </footer>
 
     <ol id="themeSelector" reversed></ol>
+    <script src="/assets/js/linkSelector-mini.js" defer></script>
     <ol id="linkSelector"></ol>
 
 </html>
