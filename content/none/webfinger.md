@@ -1,3 +1,9 @@
++++
+template = "none.html"
+path = ".well-known/webfinger"
+render = false
++++
+
 {
     "subject":"acct:scientiac@fosstodon.org",
     "aliases":
