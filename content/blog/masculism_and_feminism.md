@@ -34,3 +34,11 @@ I long for a society that supports and uplifts everyone, regardless of gender, p
 I was very scared to publish this in the internet, but, it's crucial to address these complex societal issues. They don't have easy solutions, but open dialogue is a vital step towards understanding the world we inhabit.
 
 This post is just the beginning of a larger conversation. I eagerly anticipate your responses and insights, as I recognize there's still much for me to learn.
+
+# Additions
+
+> ### **2024-09-18**
+>
+> *I decided to use the word "humanist" as a more neutral term to address similar values to feminism aiming to avoid the negative connotations some people associate with the word "feminist". The word "humanist" respects the feminist thought because it aligns with the feminist principles and by no means shadows the historical as well as ongoing struggles for women's rights. Feminism is in no way about female superiority or harming men, and to be a humanist is also being feminist without the mentioned wrong perspective of society and in general the male population.*
+>
+> *It is catered toward a male population who would hesitate to talk about feminism due to the polarization of the topic by the mass media. Understanding the values of "humanism" and providing the information that humanism is in fact feminism just hiding behind a curtain of insecurity of being misjudged for the looks and the negative protrayal.*
