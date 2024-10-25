@@ -7,7 +7,7 @@ description = "That guy from the internet, scientist or something."
 author = "scientiac"
 
 #favicon
-favicon = "static/res/logo.png"
+# favicon = "static/res/logo.png"
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = false
@@ -19,8 +19,8 @@ minify_html = true
 build_search_index = true
 
 # generate rss feed
-feed_filename = "atom.xml"
-generate_feed = true
+feed_filenames = [ "atom.xml" ]
+generate_feeds = true
 
 # make lists according to assigned tags
 taxonomies = [
@@ -30,13 +30,13 @@ taxonomies = [
 
 # Whether external links are to be opened in a new tab
 # If this is true, a `rel="noopener"` will always automatically be added for security reasons
-external_links_target_blank = true
+# external_links_target_blank = true
 
 # Whether to set rel="nofollow" for all external links
-external_links_no_follow = true
+# external_links_no_follow = true
 
 # Whether to set rel="noreferrer" for all external links
-external_links_no_referrer = true
+# external_links_no_referrer = true
 
 [search]
 # Whether to include the title of the page/section in the index
