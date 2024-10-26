@@ -4,8 +4,6 @@
 <head>
   <meta charset="utf-8">
   <title>scientiac::syntropy</title>
-    <link rel="preload" as="stylesheet" type="text/css" href="/assets/css/readable.css">
-    <link rel="preload" as="stylesheet" type="text/css" href="/assets/css/themes.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/themes.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/readable.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/global.css">
@@ -17,9 +15,6 @@
       <link rel="stylesheet" type="text/css" href="/assets/css/genre/{{tag}}.css" />
     {% endfor %}
     {% endif %}
-
-
-    <script src="/assets/js/themeSelector.js" defer></script>
 
     {% block rss %}
     <link rel="alternate" type="application/atom+xml" title="RSS" href="{{ get_url(path="atom.xml", trailing_slash=false) }}">
@@ -102,6 +97,7 @@
     <div class="container">
       {% block content %} {% endblock %}
     </div>
+    <script src="/assets/js/themeSelector.js" defer></script>
   </section>
 
   <!------------------HIDDEN------------------>
