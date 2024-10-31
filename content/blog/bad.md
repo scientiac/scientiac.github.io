@@ -1,5 +1,5 @@
 +++
-title = ""Bad""
+title = "\"Bad\""
 date = 2024-10-30
 [taxonomies]
 writings=["Poems"]
