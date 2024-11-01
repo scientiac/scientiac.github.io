@@ -2,16 +2,15 @@
 title = "Contact"
 +++
 
-## Protocols :
+## Sites :
 
-<https://scientiac.tilde.team>
-<gopher://tilde.team/1/~scientiac>
-<spartan://tilde.team/~scientiac>
-[finger scientiac@tilde.team](finger://tilde.team/scientiac)
+* <https://scientiac.space>
+* <https://carboxi.de>
+* <https://3o14.com>
 
 ## Socials :
 
 * Matrix: @thescientiac:matrix[dot]org
 * Mastodon : @scientiac@fosstodon.org
-* Email : scientiac@ctrl-c.club/tilde.team
+* Email : scientiac@tilde.team
 * Signal / Telegram : if you have my number

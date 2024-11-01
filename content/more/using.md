@@ -4,42 +4,34 @@ title = "Currently Using"
 
 ## PC
 
-* OS - NixOS (Sway)
-* Browser - Firefox/Brave
-* Terminal - Wezterm
+* OS - NixOS
+* DE - Gnome
+* Browser - Firefox
+* Terminal - Alacritty
 * Text Editor/IDE - Neovim
 * Vector Graphics - Inkscape 
-* Static Site Generator - Zola and Hugo
+* Static Site Generator - Zola
 * Shell - Bash
 * Prompt - Starship
 
 ## Cross Platform
 
-<!-- * PC-Smartphone Connection - KDE Connect  -->
-* Gemini Client - Lagrange/Amfora
-* Note-taking - Obsidian 
-* Video Player - MPV
+* Video Player - mpv
 * Communication - Matrix, Signal, Telegram
-* Password Manager - Bitwarden
-* Email - Proton, Team(Tilde), Gmail
+* Password Manager - Bitwarden (Keygurad)
+* Email - proton.me, tilde.team, gmail.com, cock.li
 
 ## Smartphone
 
-* ROM(OS) - evolutionX
-* Launcher - Nova Launcher
+* ROM(OS) - Blaze
 * RSS Reader - Read You
-* Browser - Firefox/Brave
-* App Store - Neo Store (F-droid)
-* Email Client - K9-mail
-* Download Manager - Navi
+* Browser - Firefox
+* App Store - Obtainium
+* Email Client - Thunderbird Android
 * Torrent Client - Libre Torrent
-* Gallery - Aves
 * Youtube - Revanced
-* Starmap - Stellarium
 * Terminal Emulator - Termux
-* Video Player - VLC
-* Reddit Client - Infinity
-* Lemmy Client - Eternity
+* Video Player - mpvkt
 * Podcast Aggregator - Antennapod
 
 ## TV?
@@ -48,9 +40,3 @@ title = "Currently Using"
 * Youtube - S-tube
 * Movies and Series - Cloudstream
 * Browser - TV Bro
-
-
-
-
-
-
