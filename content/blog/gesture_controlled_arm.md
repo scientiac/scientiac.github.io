@@ -42,8 +42,7 @@ The servo diver is connected to 5 volts DC converted from 12 volts power supply 
 
 #### In Arduino:
 
-```ino
-
+```cpp
 
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
