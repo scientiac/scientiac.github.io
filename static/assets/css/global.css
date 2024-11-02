@@ -629,6 +629,28 @@ details {
   }
 }
 
+.language {
+  display: flex;
+  justify-content: space-between;
+	margin: 0;
+  font-weight: bold;
+	background-color: var(--background-color-1);
+	padding: calc(0.25 * var(--one-line)) var(--half-line);
+	border-radius: var(--half-line) var(--half-line) 0 0;
+	font-family: monospace;
+}
+
+pre {
+  margin-top: 0px;
+}
+
+.language button {
+  all: unset;
+	color: var(--text-highlight-1);
+	cursor: pointer;
+}
+
+
 @media print {
 
   .logo-container {
