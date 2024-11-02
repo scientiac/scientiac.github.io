@@ -105,10 +105,10 @@
     --background-color-1: #efebd4;
     --color: #5c6a72;
     --color-comments: #a6b0a0;
-    --text-highlight-0: #8da101;
+    --text-highlight-0: #f85552;
     --text-highlight-1: #3a94c5;
     --text-highlight-2: #df69ba;
-    --text-highlight-3: #f85552;
+    --text-highlight-3: #8da101;
     --text-highlight-4: #dfa000;
     --text-highlight-5: #35a77c;
     --logo-mode: url('/res/colors/logo-everforest-light.svg');
@@ -121,10 +121,10 @@
     --background-color-1: #232a2e;
     --color: #d3c6aa;
     --color-comments: #859289;
-    --text-highlight-0: #a7c080;
+    --text-highlight-0: #e67e80;
     --text-highlight-1: #7fbbb3;
     --text-highlight-2: #d699b6;
-    --text-highlight-3: #e67e80;
+    --text-highlight-3: #a7c080;
     --text-highlight-4: #dbbc7f;
     --text-highlight-5: #83c092;
     --logo-mode: url('/res/colors/logo-everforest-dark.svg');
