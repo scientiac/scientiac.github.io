@@ -515,23 +515,23 @@ button:hover {
 
 /* For Alerts */
 .note {
-	background-color: var(--text-highlight-3);
+	background-color: var(--note-color);
 }
 
 .tip {
-	background-color: var(--text-highlight-1);
+	background-color: var(--tip-color);
 }
 
 .important {
-	background-color: var(--text-highlight-2);
+	background-color: var(--important-color);
 }
 
 .warning {
-	background-color: var(--text-highlight-0);
+	background-color: var(--warning-color);
 }
 
 .caution {
-	background-color: var(--text-highlight-4);
+	background-color: var(--caution-color);
 }
 
 /* For Spoilers */
