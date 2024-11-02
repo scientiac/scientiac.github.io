@@ -330,14 +330,6 @@ Blah blah <q>Inline Quote</q> hmm.
 
 You know, <span class="spoiler">This Theme is a pretty dumb name.</span> I know, crazy.
 
-With `solid` class:
-
-```html
-<span class="spoiler solid">Some spoiler</span>
-```
-
-You know, <span class="spoiler solid">This Theme is a pretty dumb name.</span> I know, crazy.
-
 ### Buttons Dialog
 
 ```html.j2
