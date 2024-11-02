@@ -1,5 +1,7 @@
 +++
 title = "Demo Page"
+[extra]
+katex = true
 +++
 
 ## Markdown
