@@ -29,4 +29,4 @@ Since it is based on Activity Pub anyone can communicate with anyone on the othe
 
 Mastodon includes a number of specific privacy features. Each message has a variety of privacy options available, and users can choose whether the message is public or private. Public messages display on a global feed, known as a timeline, and private messages are only shared on the timelines of the user's followers. Messages can also be marked as unlisted from timelines or direct between users. Users can also mark their accounts as completely private. In the timeline, polls can also be made and you can also create messages that can be displayed with an optional "content warning" feature, which requires readers to click on the content to reveal the rest of the message. Mastodon servers have used this feature to hide spoilers, trigger warnings, and not safe for work (NSFW) content, though some accounts use the feature to hide links and thoughts others might not want to read.
 
-Check out my article on [fediverse](https://scientiac.space/blog/fediverse/ for more details.
+Check out my article on [fediverse](https://scientiac.space/blog/fediverse/) for more details.
