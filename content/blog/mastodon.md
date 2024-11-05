@@ -7,7 +7,7 @@ writings=["Articles"]
 
 ## A Secure Decentralized Social Network.
 
-Mastodon is a federated social media platform (in the [fediverse](https://scientiac.space/blog/fediverse/)) ( Actually a microblogging platform similar to Twitter ) based on a communication protocol called Activity Pub. It was released on 16th March 2016 and was created to be a safe place to share Ideas between people without having to trust a single organization for all your data. It is a free and open source software and can be used to self host social networking service so that you have the option to keep your data with you or with whom you trust.
+Mastodon is a federated social media platform ( Actually a microblogging platform similar to Twitter ) based on a communication protocol called Activity Pub. It was released on 16th March 2016 and was created to be a safe place to share Ideas between people without having to trust a single organization for all your data. It is a free and open source software and can be used to self host social networking service so that you have the option to keep your data with you or with whom you trust.
 
 * Federation
 
@@ -28,3 +28,5 @@ Since it is based on Activity Pub anyone can communicate with anyone on the othe
 * Flexibility
 
 Mastodon includes a number of specific privacy features. Each message has a variety of privacy options available, and users can choose whether the message is public or private. Public messages display on a global feed, known as a timeline, and private messages are only shared on the timelines of the user's followers. Messages can also be marked as unlisted from timelines or direct between users. Users can also mark their accounts as completely private. In the timeline, polls can also be made and you can also create messages that can be displayed with an optional "content warning" feature, which requires readers to click on the content to reveal the rest of the message. Mastodon servers have used this feature to hide spoilers, trigger warnings, and not safe for work (NSFW) content, though some accounts use the feature to hide links and thoughts others might not want to read.
+
+Check out my article on [fediverse](https://scientiac.space/blog/fediverse/ for more details.
