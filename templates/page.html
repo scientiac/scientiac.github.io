@@ -66,8 +66,18 @@
   <input type="hidden" name="target" value="{{current_url}}">
 </form>
 
-{% set webmentions = load_data(path="webmention/webmentions.json") %}
-{{ webmentions | safe }}
+{% set data = load_data(path="webmention/webmentions.json", format="json") %}
+
+{% for links in data.links %}
+    {% if links.target == page.permalink %}
+        <div class="webmention">
+          <p><a href="{{ links.data.author.url }}">{{ links.data.author.name }}</a> replied in his post <a href="{{ links.source }}">{{ links.data.name }}</a></p>
+
+    <a class="u-url hidden" href="{{ page.permalink }}">{{ page.permalink }}</a>
+
+        </div>
+    {% endif %}
+{% endfor %}
 
 </div>
 
