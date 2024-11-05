@@ -25,7 +25,7 @@
         <a class="u-url hidden" href="{{ page.permalink }}">{{ page.permalink }}</a>
 
         <!-- h-card for the author, useful if you display author information -->
-        <a class="p-author h-card hidden" href="{{ config.base_url }}">
+        <a class="p-author h-card hidden" href="{{ config.base_url }}" rel="me">
           <img class="u-photo" src="{{ config.extra.profile }}" alt="Your profile picture">
             <span class="p-name">{{ config.author }}</span>
         </a>
@@ -63,6 +63,16 @@
 
   <input type="hidden" name="target" value="{{current_url}}">
 </form>
+
+{% set data = load_data(path="webmention/webmentions.json", format="json") %}
+
+{% for links in data.links %}
+    {% if links.target == page.permalink %}
+        <div class="webmention">
+          <p><a href="{{ links.data.author.url }}">@{{ links.data.author.name }}</a> mentioned in <a href="{{ links.source }}">{{ links.data.name }}</a></p>
+        </div>
+    {% endif %}
+{% endfor %}
 
 </div>
 

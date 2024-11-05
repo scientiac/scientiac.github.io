@@ -1,10 +1,11 @@
 # On every push this script is executed
 name: Zola on GitHub Pages
 
-on: 
- push:
-  branches:
-   - main
+on:
+  workflow_run:
+    workflows: ["Fetch Webmentions"]
+    types:
+      - completed
 
 jobs:
   build:
