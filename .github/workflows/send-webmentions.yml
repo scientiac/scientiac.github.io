@@ -1,0 +1,22 @@
+name: Send Webmentions (Delayed)
+
+on:
+  workflow_run:
+    workflows: ["Zola on GitHub Pages"]
+    types:
+      - completed
+
+jobs:
+  send_webmentions:
+    name: Send Webmentions with Delay
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Delay
+        run: sleep 60  # Waits for 1 minute (60 seconds) before running the next steps
+        
+      - name: Install Webmention Package
+        run: npm install @remy/webmention
+
+      - name: Send Webmentions
+        run: npx webmention https://scientiac.space/atom.xml --limit=0 --send
+

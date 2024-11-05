@@ -17,8 +17,4 @@ jobs:
       uses: shalzz/zola-deploy-action@v0.19.2
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Send Webmentions
-      run: |
-        npm install @remy/webmention
-        npx webmention https://scientiac.space/atom.xml --limit=0 --send
 
