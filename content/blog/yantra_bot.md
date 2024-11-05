@@ -13,6 +13,8 @@ writings=["Reports"]
 
 In today's world, efficient waste management is becoming increasingly crucial due to rapid urbanization and population growth. Traditional methods of waste collection and dumping are labor-intensive and often inefficient. By integrating robotics and advanced algorithms, we can streamline these processes, reduce human effort, and ensure a cleaner environment. This project, 'manoid', aims to demonstrate how a robot can autonomously detect, navigate, and manage waste using only a single overhead camera and advanced computer vision techniques.
 
+> I have written another blog post related to this: [Manoid: Communication](http://scientiac.space/blog/esp-mosquitto/)
+
 **Let's see how it was made.**
 
 ### Requirements:
