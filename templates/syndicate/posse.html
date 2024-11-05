@@ -24,6 +24,12 @@
 
         <a class="u-url hidden" href="{{ page.permalink }}">{{ page.permalink }}</a>
 
+        <!-- h-card for the author, useful if you display author information -->
+        <a class="p-author h-card hidden" href="{{ config.base_url }}">
+          <img class="u-photo" src="{{ config.extra.profile }}" alt="Your profile picture">
+            <span class="p-name">{{ config.author }}</span>
+        </a>
+
         <div class="section syndicate-inside-text e-content">
             {{ page.content | safe }}
         </div>
