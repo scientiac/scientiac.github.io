@@ -1,0 +1,34 @@
+name: Fetch Webmentions
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '*/30 * * * *'  # Runs every 30 minutes
+  workflow_dispatch:  # Allows manual triggering of the workflow if needed
+
+jobs:
+  fetch_webmentions:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Fetch Webmentions
+        env:
+          WEBMENTION_TOKEN: ${{ secrets.WEBMENTION_TOKEN }}
+        run: |
+          mkdir -p webmention
+          # Fetch webmentions and save (overwrite) to a single file
+          curl -s "https://webmention.io/api/mentions.json?token=${WEBMENTION_TOKEN}" -o webmention/webmentions.json
+
+      - name: Commit and Push Webmentions
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add webmention/webmentions.json
+          git commit -m "Update webmentions" || echo "No changes to commit"
+          git push
+
