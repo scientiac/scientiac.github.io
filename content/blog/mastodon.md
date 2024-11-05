@@ -7,7 +7,7 @@ writings=["Articles"]
 
 ## A Secure Decentralized Social Network.
 
-Mastodon is a federated social media platform ( Actually a microblogging platform similar to Twitter ) based on a communication protocol called Activity Pub. It was released on 16th March 2016 and was created to be a safe place to share Ideas between people without having to trust a single organization for all your data. It is a free and open source software and can be used to self host social networking service so that you have the option to keep your data with you or with whom you trust.
+Mastodon is a federated social media platform (in the [fediverse](https://scientiac.space/blog/fediverse/)) ( Actually a microblogging platform similar to Twitter ) based on a communication protocol called Activity Pub. It was released on 16th March 2016 and was created to be a safe place to share Ideas between people without having to trust a single organization for all your data. It is a free and open source software and can be used to self host social networking service so that you have the option to keep your data with you or with whom you trust.
 
 * Federation
 
