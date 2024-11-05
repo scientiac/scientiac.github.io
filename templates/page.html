@@ -6,7 +6,7 @@
     
     {% if page.date %}
     <div class="pagedate">
-        <time class="dt-published dateandtag hidden" datetime="{{ page.date | date(format="YYYY-MM-DDTHH:mm:ss") }}">
+        <time class="dt-published dateandtag hidden" datetime="{{ page.date }}T00:00:00Z">
             {{ page.date | date(format="%Y-%m-%d") }}
         </time>
         <code class="dateandtag">{{ page.date }}</code>
