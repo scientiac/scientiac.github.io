@@ -1,0 +1,42 @@
+name: Denoflow
+on:
+  repository_dispatch:
+  workflow_dispatch:
+  schedule:
+    - cron: "1 0 * * *"
+jobs:
+  denoflow:
+    runs-on: ubuntu-latest
+    concurrency: denoflow
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+      - run: make webmention
+        env:
+          WEBMENTION_TOKEN: ${{secrets.WEBMENTION_TOKEN}}
+        continue-on-error: true
+      - name: chown
+        run: sudo chown -R $USER:$USER ./
+      - name: git config
+        run: git config --global user.name "github-actions[bot]" && git config --global user.email github-actions-bot@users.noreply.github.com
+      - name: git add
+        run: git add data && git add webmentions
+      - run: git status
+      - id: isChanged
+        run: git diff-index --cached --quiet HEAD || echo '::set-output name=changed::true'
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v3
+        if: ${{ steps.isChanged.outputs.changed == 'true' }}
+        with:
+          token: ${{ secrets.PERSONAL_TOKEN }}
+          labels: automerge
+          add-paths: data,webmentions
+          commit-message: "chore: new item"
+          committer: "github-actions[bot] <github-actions-bot@users.noreply.github.com>"
+          author: "github-actions[bot] <github-actions-bot@users.noreply.github.com>"
+          branch: new-item
+          delete-branch: true
+          title: New item update
