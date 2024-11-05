@@ -2,6 +2,9 @@ name: Denoflow
 on:
   repository_dispatch:
   workflow_dispatch:
+  # push:
+  #   branches:
+  #     - main
   schedule:
     - cron: "1 0 * * *"
 jobs:
@@ -10,13 +13,14 @@ jobs:
     concurrency: denoflow
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - uses: denoland/setup-deno@v1
         with:
           deno-version: v1.x
-      - run: make webmention
+      - run: deno run -A https://deno.land/x/denoflow/cli.ts run
         env:
           WEBMENTION_TOKEN: ${{secrets.WEBMENTION_TOKEN}}
+          WEBMENTION_APP_TOKEN: ${{secrets.WEBMENTION_APP_TOKEN}}
         continue-on-error: true
       - name: chown
         run: sudo chown -R $USER:$USER ./
@@ -40,8 +44,3 @@ jobs:
           branch: new-item
           delete-branch: true
           title: New item update
-      - run: deno run -A https://deno.land/x/denoflow/cli.ts run
-        env:
-          WEBMENTION_TOKEN: ${{secrets.WEBMENTION_TOKEN}}
-          WEBMENTION_APP_TOKEN: ${{secrets.WEBMENTION_APP_TOKEN}}
-
