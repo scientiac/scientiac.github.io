@@ -3,7 +3,7 @@ base_url = "https://scientiac.space"
 
 #Title
 title = "scientiac::syntropy"
-description = "That guy from the internet, scientist or something."
+description = "A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does."
 author = "scientiac"
 
 # Whether to automatically compile all Sass files in the sass directory
@@ -34,3 +34,14 @@ include_content = true
 [markdown]
 highlight_code = true
 highlight_theme = "gruvbox-dark"
+
+[extra]
+author = "scientiac"
+email = "iac@scientiac.space"
+profile = "/res/thumbnail.png"
+
+bio = "A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does."
+
+github_user = "scientiac"
+image = "https://www.owenyoung.com/logo.png"
+webmention_path = "webmentions"
