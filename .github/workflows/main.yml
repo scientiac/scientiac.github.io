@@ -20,5 +20,5 @@ jobs:
     - name: Send Webmentions
       run: |
         npm install @remy/webmention
-        npx webmention https://webmention.app/check?token=${{ secrets.WEBMENTION_APP_TOKEN }}&url=https://scientiac.space/atom.xml --limit=0 --send
+        npx webmention https://scientiac.space/atom.xml --limit=0 --send
 
