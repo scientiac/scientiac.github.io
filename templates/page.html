@@ -6,7 +6,7 @@
     
     {% if page.date %}
     <div class="pagedate">
-        <time class="dt-published dateandtag hidden" datetime="{{ page.date | date(format="YYYY-MM-DD") }}">
+        <time class="dt-published dateandtag hidden" datetime="{{ page.date | date(format="YYYY-MM-DDTHH:mm:ss") }}">
             {{ page.date | date(format="%Y-%m-%d") }}
         </time>
         <code class="dateandtag">{{ page.date }}</code>
@@ -17,6 +17,9 @@
         {% endif %}
     </div>
     {% endif %}
+
+    <!-- URL of the page -->
+    <a class="u-url hidden" href="{{ page.permalink }}">{{ page.permalink }}</a>
 
     <div class="section">
 
