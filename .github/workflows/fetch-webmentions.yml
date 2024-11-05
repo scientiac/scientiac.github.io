@@ -20,15 +20,15 @@ jobs:
         env:
           WEBMENTION_TOKEN: ${{ secrets.WEBMENTION_TOKEN }}
         run: |
-          mkdir -p webmention
+          mkdir -p static/webmention
           # Fetch webmentions and save (overwrite) to a single file
-          curl -s "https://webmention.io/api/mentions.json?token=${WEBMENTION_TOKEN}" -o webmention/webmentions.json
+          curl -s "https://webmention.io/api/mentions.json?token=${WEBMENTION_TOKEN}" -o static/webmention/webmentions.json
 
       - name: Commit and Push Webmentions
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add webmention/webmentions.json
+          git add static/webmention/webmentions.json
           git commit -m "Update webmentions" || echo "No changes to commit"
           git push
 

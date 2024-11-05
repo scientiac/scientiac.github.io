@@ -66,6 +66,9 @@
   <input type="hidden" name="target" value="{{current_url}}">
 </form>
 
+{% set webmentions = load_data(path="webmention/webmentions.json") %}
+{{ webmentions | safe }}
+
 </div>
 
 <!-- Webmention -->
