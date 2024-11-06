@@ -25,10 +25,12 @@
         <a class="u-url hidden" href="{{ page.permalink }}">{{ page.permalink }}</a>
 
         <!-- h-card for the author, useful if you display author information -->
-        <a class="p-author h-card hidden" href="{{ config.base_url }}" rel="me">
-          <img class="u-photo" src="{{ config.extra.profile }}" alt="Your profile picture">
+        <div class="hidden p-author h-card">
+          <a class="u-url" href="{{ config.base_url }}" rel="me">
+            <img class="u-photo" src="{{ config.extra.profile }}" alt="Profile photo of {{ config.author }}">
             <span class="p-name">{{ config.author }}</span>
-        </a>
+          </a>
+        </div>
 
         <div class="section syndicate-inside-text e-content">
             {{ page.content | safe }}
