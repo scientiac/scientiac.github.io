@@ -71,8 +71,12 @@
 {% for links in data.links %}
     {% if links.target == page.permalink %}
         <div class="webmention">
-          <p><a href="{{ links.data.author.url }}">@{{ links.data.author.name }}</a> mentioned this post in <a href="{{ links.source }}">{{ links.data.name }}</a></p>
-        </div>
+        {% if links.data.name %}
+            <p><a href="{{ links.data.author.url }}">@{{ links.data.author.name }}</a> mentioned this post in <a href="{{ links.source }}">{{ links.data.name }}</a></p>
+        {% else %}
+            <p><a href="{{ links.data.author.url }}">@{{ links.data.author.name }}</a> mentioned this post in <a href="{{ links.source }}">the federated web</a></p>
+        {% endif %}
+          </div>
     {% endif %}
 {% endfor %}
 
