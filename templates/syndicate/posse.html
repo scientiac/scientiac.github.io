@@ -71,7 +71,7 @@
 {% for links in data.links %}
     {% if links.target == page.permalink %}
         <div class="webmention">
-          <p><a href="{{ links.data.author.url }}">@{{ links.data.author.name }}</a> mentioned in <a href="{{ links.source }}">{{ links.data.name }}</a></p>
+          <p><a href="{{ links.data.author.url }}">@{{ links.data.author.name }}</a> mentioned this post in <a href="{{ links.source }}">{{ links.data.name }}</a></p>
         </div>
     {% endif %}
 {% endfor %}
