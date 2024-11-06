@@ -694,6 +694,10 @@ pre {
   padding: var(--half-line); 
 }
 
+.webmention > div:nth-child(2) {
+	padding: 0 var(--half-line);
+}
+
 .activity-type {
   display: grid;
 	background-color: var(--background-color-0);
