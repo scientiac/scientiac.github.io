@@ -667,6 +667,44 @@ pre {
 	  height: 2.75rem;
 }
 
+.webmention {
+	border-radius: var(--half-line);
+	background-color: var(--background-color-1);
+  display: flex;
+	padding-left: var(--half-line);
+  justify-content: space-between;
+  align-items: center;
+  padding: calc(0.2 * var(--one-line)); 
+	
+	p {
+		margin: 0.5rem;
+		width: 100%;
+	}
+	
+	img {
+		width: 1.5rem;
+		border-radius: 50%;
+	}
+}
+
+.mention-profile {
+	display: grid;
+	background-color: var(--background-color-0);
+	border-radius: var(--half-line);
+  padding: var(--half-line); 
+}
+
+.activity-type {
+  display: grid;
+	background-color: var(--background-color-0);
+  padding: var(--half-line); 
+	border-radius: var(--half-line);
+	align-items: center;
+	code {
+		text-align: center;
+	}
+}
+
 @media print {
 
   .logo-container {

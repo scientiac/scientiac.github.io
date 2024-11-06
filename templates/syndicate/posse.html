@@ -44,7 +44,7 @@
 <div>
 <hr>
 
-<h2>Response</h2>
+<h2>Webmentions</h2>
 
 <form class="webmention-form" action="https://webmention.io/scientiac.space/webmention" method="post">
 
@@ -66,17 +66,32 @@
   <input type="hidden" name="target" value="{{current_url}}">
 </form>
 
+
 {% set data = load_data(path="webmention/webmentions.json", format="json") %}
 
 {% for links in data.links %}
     {% if links.target == page.permalink %}
+        <hr>
+        <h2>Responses</h2>
         <div class="webmention">
-        {% if links.data.name %}
-            <p><a href="{{ links.data.author.url }}">@{{ links.data.author.name }}</a> mentioned this post in <a href="{{ links.source }}">{{ links.data.name }}</a></p>
-        {% else %}
-            <p><a href="{{ links.data.author.url }}">@{{ links.data.author.name }}</a> mentioned this post in <a href="{{ links.source }}">the federated web</a></p>
-        {% endif %}
+
+          <div class="mention-profile">
+            {% if links.data.author.photo %}
+            <img src="{{ links.data.author.photo }}">
+            {% endif %}
+            <code><a href="{{ links.data.author.url }}">@{{ links.data.author.name }}</a></code>
           </div>
+
+          {% if links.data.name %}
+            <div><a class="external" href="{{ links.source }}">{{ links.data.name }}</a></div>
+          {% else %}
+            <div><a class="external" href="{{ links.source }}">The Federated Web</a></div>
+          {% endif %}
+
+          <div class="activity-type">
+            <code>Type: {{ links.activity.type }}</code>
+          </div>
+        </div>
     {% endif %}
 {% endfor %}
 
