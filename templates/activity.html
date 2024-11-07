@@ -12,9 +12,9 @@
 {% for links in data.links %}
     {% if links.target != "https://scientiac.space/" %}
         <div class="target-link">
-          <a href="{{ links.target }}">{{ links.target }}</a>
+          <code><a href="{{ links.target }}">{{ links.target }}</a></code>
         </div>
-        <div class="webmention">
+        <div class="webmention webmention-activity">
 
           <div class="mention-profile">
             {% if links.data.author.photo %}
@@ -24,13 +24,17 @@
           </div>
 
           {% if links.data.name %}
-          <div><a class="external" href="{{ links.source }}">{{ links.data.name }}</a></div>
+            <div><a class="external" href="{{ links.source }}">{{ links.data.name }}</a></div>
           {% else %}
-          <div>{{ links.data.content | safe }}</div>
+            {% if links.activity.type == "reply" %}
+              <div>{{ links.data.content | safe }}</div>
+            {% else %}
+              <div><a class="external" href="{{ links.source }}">The Internet</a></div>
+            {% endif %}
           {% endif %}
 
           <div class="activity-type">
-            <code>Type: {{ links.activity.type }}</code>
+            <code><a href="{{ links.source }}">Type: {{ links.activity.type }}</a></code>
           </div>
         </div>
     {% endif %}

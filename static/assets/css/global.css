@@ -668,7 +668,7 @@ pre {
 }
 
 .webmention {
-	border-radius: 0 0 var(--half-line) var(--half-line);
+	border-radius: var(--half-line);
 	background-color: var(--background-color-1);
   display: flex;
   justify-content: space-between;
@@ -679,6 +679,13 @@ pre {
 	p {
 		margin: 0.5rem;
 		width: 100%;
+	}
+}
+
+.webmention-activity {
+		border-radius: 0 0 var(--half-line) var(--half-line);
+	.mention-profile {
+			border-radius: 0 var(--half-line) var(--half-line) var(--half-line);
 	}
 }
 
@@ -715,8 +722,9 @@ pre {
 	
 	a {
 		background-color: var(--background-color-0);
-	  border-radius: 0 0 var(--half-line);
-		padding: calc(0.1 * var(--one-line)) calc(0.4 * var(--one-line));
+	  border-radius: var(--half-line) calc(0.3 * var(--half-line)) calc(0.3 * var(--half-line)) calc(0.3 * var(--half-line));
+		padding: calc(0.3 * var(--half-line));
+		padding-left: var(--half-line);
 	}
 }
 
