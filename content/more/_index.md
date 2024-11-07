@@ -4,11 +4,11 @@ template = "standalone.html"
 page_template = "page.html"
 +++
 
+### [Activity](activity)
+Activity on this site including webmentions and interactions.
+
 ### [research::map](https://map.scientiac.space)
 A map of things I am working on.
-
-### [gemini://](/gemini)
-About the gemini:// internet protocol and some related links.
 
 ## Information
 
