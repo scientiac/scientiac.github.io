@@ -85,11 +85,11 @@
           {% if links.data.name %}
             <div><a class="external" href="{{ links.source }}">{{ links.data.name }}</a></div>
           {% else %}
-            <div><a class="external" href="{{ links.source }}">Fediverse</a></div>
+            <div>{{ links.data.content | safe }}</div>
           {% endif %}
 
           <div class="activity-type">
-            <code>Type: {{ links.activity.type }}</code>
+            <code><a href="{{ links.source }}">Type: {{ links.activity.type }}</a></code>
           </div>
         </div>
     {% endif %}
