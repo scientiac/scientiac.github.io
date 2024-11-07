@@ -85,7 +85,11 @@
           {% if links.data.name %}
             <div><a class="external" href="{{ links.source }}">{{ links.data.name }}</a></div>
           {% else %}
-            <div>{{ links.data.content | safe }}</div>
+            {% if links.activity.type == "reply" %}
+              <div>{{ links.data.content | safe }}</div>
+            {% else %}
+              <div><a class="external" href="{{ links.source }}">The Internet</a></div>
+            {% endif %}
           {% endif %}
 
           <div class="activity-type">
