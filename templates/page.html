@@ -71,8 +71,6 @@
 
 {% set data = load_data(path="webmention/webmentions.json", format="json") %}
 
-<hr>
-<h2>Responses</h2>
 {% for links in data.links %}
     {% if links.target == page.permalink %}
         <div class="webmention">
