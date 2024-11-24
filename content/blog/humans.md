@@ -94,7 +94,7 @@ I am an introvert, I have no friends, I have no one to talk to, I am not what pe
 in our lives but the problem is that mostly they all hit at once(*Could it, be.. any worse?* `#chandler`).
 But, it seems that this is normal.
 
-Each generation perceives life differently. The entire perspective of life seen by our grandparents is different from our parnets and is different from how we perceive the world and I wonder the tension of views it creates when all the generations with their own good perspective of the world are together in the same place(*imagine them living in the same place*). 
+Each generation perceives life differently. The entire perspective of life seen by our grandparents is different from our parents and is different from how we perceive the world and I wonder the tension of views it creates when all the generations with their own good perspective of the world are together in the same place(*imagine them living in the same place*). 
 
 A grandchild disagreeing to both their father/mother's and grandparent's way of thinking (*In this sentence, all three generations can be permuted to any place.*) is the best way to create hate amongst family members. This is why, living alone and meeting people only during special occasions works best to have a healthy family. (*"I guess", because I haven't scientifically collected the data to say it with confdence.*)
 
