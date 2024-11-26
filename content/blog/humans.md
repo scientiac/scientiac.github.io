@@ -12,10 +12,10 @@ Nothing is visual, nothing is apparant, nothing is what it seems like it is.
 If only it was simple, to understand the person sitting infront of you smiling. 
 But, we never know what a person is feeling just by asking them. 
 Yet the words that describe emotions are getting heavier,
-I am happy, I am sad, I an unsatisfied, I am confused, I am worried, I am angry, I am sad, I am sad, I am sad, I am at the verge of depression.......... 
+I am happy, I am sad, I am unsatisfied, I am confused, I am worried, I am angry, I am sad, I am sad, I am sad, I am at the verge of depression.......... 
 
 {% alert(important=true) %}
-If there are italic voices inside "(*parenthesis*)" then that it me talking to myself in my head, feel free to ignore my head. 
+If there are italic voices inside "(*parenthesis*)" then that it is me talking to myself in my head, feel free to ignore my head. 
 {% end %}
 
 The problem is even worse in <mark>the social media</mark>. 
