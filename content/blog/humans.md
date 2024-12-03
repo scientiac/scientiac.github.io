@@ -8,8 +8,8 @@ writings=["Stories"]
 And he said...
 
 We humans are pathetic for hiding our emotions, the only thing that makes us humans.
-Nothing is visual, nothing is apparant, nothing is what it seems like it is. 
-If only it was simple, to understand the person sitting infront of you smiling. 
+Nothing is visual, nothing is apparent, nothing is what it seems like it is. 
+If only it was simple, to understand the person sitting in front of you smiling. 
 But, we never know what a person is feeling just by asking them. 
 Yet the words that describe emotions are getting heavier,
 I am happy, I am sad, I am unsatisfied, I am confused, I am worried, I am angry, I am sad, I am sad, I am sad, I am at the verge of depression.......... 
@@ -20,7 +20,7 @@ If there are italic voices inside "(*parenthesis*)" then that it is me talking t
 
 The problem is even worse in <mark>the social media</mark>. 
 The moment you stop interacting with them in real like, poof they are the happiest people on earth. 
-Yet, nobody is happy in this beautful place `#nature` `#mother_earth` `#savetheplanet`. 
+Yet, nobody is happy in this beautiful place `#nature` `#mother_earth` `#savetheplanet`. 
 Everyone has a problem to share and nobody wants a do what it takes (or get help) to solve their problem. 
 (*Ironically, this sentence proves that I am a "man".*) 
 
@@ -33,12 +33,12 @@ is supercharged by an arrangement of rocks that can think.
 (*thinking about it, we too are arrangements of rocks that can think, but you get the point.*)
 
 {% alert(note=true) %}
-This is a ckeckpoint, congratulations! you have sucessfully read to x% of this story.
+This is a checkpoint, congratulations! You have successfully read to x% of this story.
 {% end %}
 
 We were always attention seekers to begin with,
 but now our attention span is so bad that we need to be doing something to do something.
-I myself am addicted to the glowing box that I subconsciously(*umm, actuallly, mindlessly\**) pick it up 
+I myself am addicted to the glowing box that I subconsciously(*umm, actually, mindlessly\**) pick it up 
 and do something on it. 
 
 <center>
@@ -54,7 +54,7 @@ I was so invested in arranging the meaning of something, that I forgot what I wa
 the story below is after 5 minutes of reading what I wrote from top to this point.
 {% end %}
 
-(*Where were we? Yes! "attention span".*) We(*I?*) have lost our(*my*) abilty to focus.
+(*Where were we? Yes! "Attention span".*) We(*I?*) have lost our(*my*) abilty to focus.
 We need something to stimulate us all the time. 
 
 The time table is something like this:
@@ -79,9 +79,9 @@ Before Sleep: Just one last scroll through social media.
 ```
 
 Well, we never know when the thing we despise becomes a short break, then a habit and finally the ultimate form: addiction. 
-I mean I hate social media and yet I find myself endlessly scrolling and while still being aware of it multiple times a day.
-My excuse to it for myself is: I love technology, I am persuing a career in it and well this is a part of it, it is how I become 
-up to date to the things I need to know. Otherwise I will be behind this race(*Basically FOMO*). Sometimes I try to focus on 
+I mean I hate social media, and yet I find myself endlessly scrolling and while still being aware of it multiple times a day.
+My excuse to it for myself is: I love technology, I am pursuing a career in it and well this is a part of it, it is how I become 
+up to date to the things I need to know. Otherwise, I will be behind this race(*Basically FOMO*). Sometimes I try to focus on 
 only things that I think matters and control myself of being overly simulated and the next day(*withdrawls start*) all night scroll compensating 
 the day before.
 
