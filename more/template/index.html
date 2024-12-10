@@ -1,0 +1,569 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><title>scientiac::syntropy</title><link href=/assets/css/themes.css rel=stylesheet><link href=/assets/css/readable.css rel=stylesheet><link href=/assets/css/global.css rel=stylesheet><link href=/assets/css/fonts.css rel=stylesheet><link href=/assets/css/logo.css rel=stylesheet><link href=https://scientiac.space/atom.xml rel=alternate title=RSS type=application/atom+xml><meta content=scientiac.space property=og:site_name><meta content=https://scientiac.space/res/thumbnail-light.png property=og:image><title>Demo Page</title><meta content="Demo Page" name=og:title><meta content="Markdown
+Text can be bold, italic, strikethrough, and all at the same time.
+Link to another page.
+There should be whitespace between paragraphs1.
+Heading 1
+Heading 2
+Heading 3
+Heading 4
+Heading 5
+Heading 6
+This is a normal paragraph2 following a header.
+😭😂🥺🤣❤️✨🙏😍🥰😊
+Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
+
+
+&#34Original content is original only for a few seconds before getting old&#34
+
+Rule #21 of the internet
+
+
+
+Item 1
+Item 2
+
+Item 2.1
+Item 2.2
+
+
+Item 3
+Item 4
+
+
+Perform step #1
+Proceed to step #2
+Conclude with step #3
+
+
+
+Milk
+
+Eggs
+
+Flour
+
+Coffee
+
+Combustible lemons
+
+
+MareRatingAdditional info
+FluttershyBest poneShy and adorable
+Apple JackGood poneHonest and nice
+Pinkie PieFun poneParties and ADHD
+TwilightMain poneNeeerd
+Rainbow DashYesLooks badass
+RarityFancy poneGenerous
+Derpy HoovesM u f f i n s[REDACTED]
+
+let highlight = true;
+
+
+Extra
+KaTeX
+This Theme can render LaTeX using the KaTeX library. It can be enabled using the extra.katex config variable.
+$$\relax f(x) = \int_{-\infty}^\infty\hat{f}(\xi)\,e^{2 \pi i \xi x}\,d\xi$$
+
+$$\relax f(x) = \int_{-\infty}^\infty\hat{f}(\xi),e^{2 \pi i \xi x},d\xi$$
+$\relax f(x) = \int_{-\infty}^\infty\hat{f}(\xi)\,e^{2 \pi i \xi x}\,d\xi$
+
+$\relax f(x) = \int_{-\infty}^\infty\hat{f}(\xi),e^{2 \pi i \xi x},d\xi$
+Shortcodes
+This Theme provides a few useful shortcodes that simplify some tasks. They can be used on all pages.
+Alerts
+GitHub-style alerts. Simply wrap the text of desired alert inside the shortcode to get the desired look.
+Available alert types:
+
+note: Useful information that users should know, even when skimming content.
+tip: Helpful advice for doing things better or more easily.
+important: Key information users need to know to achieve their goal.
+warning: Urgent info that needs immediate user attention to avoid problems.
+caution: Advises about risks or negative outcomes of certain actions.
+
+{% alert(note=true) %}
+-&ampgt; Alert text &amplt;-
+{% end %}
+
+
+	Note
+	Useful information that users should know, even when skimming content.
+
+
+
+	Tip
+	Helpful advice for doing things better or more easily.
+
+
+
+	Important
+	Key information users need to know to achieve their goal.
+
+
+
+	Warning
+	Urgent info that needs immediate user attention to avoid problems.
+
+
+
+	Caution
+	Advises about risks or negative outcomes of certain actions.
+
+
+Images and Videos
+By default images and videos come with some generic styling, such as rounded corners and shadow. To fine-tune these, you can use shortcodes with different variable combinations.
+Available variables are:
+
+spoiler: Blurs image until hovered over/pressed on, useful for plot rich game screenshots.
+
+{{ image(url=&ampquot;image.png&ampquot;, alt=&ampquot;This is an image&ampquot;, spoiler=true) }}
+
+
+
+Image with an alt text, hidden behind a spoiler
+
+For videos it's all the same except for a few differences: no_hover and url_min variables are not available.
+Additionally, the following attributes can be set:
+
+autoplay: Start playing the video automatically.
+controls: Display video controls such as volume control, seeking and pause/resume.
+loop: Play the video again once it ends.
+muted: Turn off the audio by default.
+playsinline: Prevent the video from playing in fullscreen by default (depends on the browser).
+
+{{ video(url=&ampquot;video.webm&ampquot;, alt=&ampquot;This is a video&ampquot;, controls=false, autoplay=true, loop=true) }}
+
+
+
+
+WebM video example from MDN
+
+
+
+
+Duckling preening
+
+YouTube
+Allows to embed a YouTube video using youtube-nocookie.
+Available variables are:
+
+autoplay: Whether the video should autoplay.
+start: On which second video should start.
+
+{{ youtube(id=&ampquot;0Da8ZhKcNKQ&ampquot;) }}
+
+
+
+Mastodon
+Allows to embed a Mastodon post.
+Available variables are:
+
+host: The instance on which the post resides. If not set, it will fallback to the one set in the [extra.comments] section of config.toml.
+user: The poster. If not set, it will fallback to the one set in the [extra.comments] section of config.toml.
+id: The ID of the post, usually at the end of the URL.
+
+{{ mastodon(host=&ampquot;toot.community&ampquot;, user=&ampquot;sungsphinx&ampquot;, id=&ampquot;111789185826519979&ampquot;) }}
+
+
+
+Figure Captions (&amplt;figcaption&ampgt;)
+&amplt;figure&ampgt;
+  -&ampgt; Whatever content &amplt;-
+  &amplt;figcaption&ampgt;Caption of content above&amplt;/figcaption&ampgt;
+&amplt;/figure&ampgt;
+
+
+
+  The Office where Stanley works, it has yellow floor and beige walls
+
+Accordion (&amplt;details&ampgt;)
+&amplt;details&ampgt;
+  &amplt;summary&ampgt;Accordion title&amplt;/summary&ampgt;
+  -&ampgt; Contents here &amplt;-
+&amplt;/details&ampgt;
+
+
+  Reveal accordion
+Get it? I know, it's an awful pun.
+
+
+Side Comment (&amplt;small&ampgt;)
+&amplt;small&ampgt;Small, cute text that doesn&amp#39;t catch attention.&amplt;/small&ampgt;
+
+Small, cute text that doesn't catch attention.
+Abbreviation (&amplt;abbr&ampgt;)
+&amplt;abbr title=&ampquot;American Standard Code for Information Interchange&ampquot;&ampgt;ASCII&amplt;/abbr&ampgt;
+
+The ASCII art is awesome!
+Aside (&amplt;aside&ampgt;)
+&amplt;aside&ampgt;
+
+-&ampgt; Contents here &amplt;-
+&amplt;/aside&ampgt;
+
+
+Quill and a parchment
+
+
+A quill is a writing tool made from a moulted flight feather (preferably a primary wing-feather) of a large bird. Quills were used for writing with ink before the invention of the dip pen, the metal-nibbed pen, the fountain pen, and, eventually, the ballpoint pen.
+As with the earlier reed pen (and later dip pen), a quill has no internal ink reservoir and therefore needs to periodically be dipped into an inkwell during writing. The hand-cut goose quill is rarely used as a calligraphy tool anymore because many papers are now derived from wood pulp and would quickly wear a quill down. However it is still the tool of choice for a few scribes who have noted that quills provide an unmatched sharp stroke as well as greater flexibility than a steel pen.
+Keyboard Input (&amplt;kbd&ampgt;)
+&amplt;kbd&ampgt;⌘ Command&amplt;/kbd&ampgt;.
+
+To switch the keyboard layout, press ⌘ Super + Space.
+Mark Text (&amplt;mark&ampgt;)
+&amplt;mark&ampgt;Marked text&amplt;/mark&ampgt;
+
+You know what? I'm gonna say some very important stuff, so important that even bold is not enough.
+Deleted and Inserted Text (&amplt;del&ampgt; and &amplt;ins&ampgt;)
+&amplt;del&ampgt;Something deleted&amplt;/del&ampgt; &amplt;ins&ampgt;Something added&amplt;/ins&ampgt;
+
+Text deleted Text added
+Sample Output (&amplt;samp&ampgt;)
+&amplt;samp&ampgt;Sample Output&amplt;/samp&ampgt;
+
+Sample Output
+Inline Quotation (&amplt;q&ampgt;)
+&amplt;q&ampgt;Someone said something&amplt;/q&ampgt;
+
+Blah blah Inline Quote hmm.
+Unarticulated Annotation (&amplt;u&ampgt;)
+&amplt;u&ampgt;Gmarrar mitsakes&amplt;/u&ampgt;
+
+Yeet the sus drip while vibing with the TikTok fam on a cap-free boomerang.
+External Links
+&amplt;a class=&ampquot;external&ampquot; href=&ampquot;https://example.org&ampquot;&ampgt;External link&amplt;/a&ampgt;
+
+Link to site
+Spoilers
+&amplt;span class=&ampquot;spoiler&ampquot;&ampgt;Some spoiler&amplt;/span&ampgt;
+
+You know, This Theme is a pretty dumb name. I know, crazy.
+Buttons Dialog
+&amplt;div class=&ampquot;buttons&ampquot;&ampgt;
+  &amplt;a href=&ampquot;#top&ampquot;&ampgt;Go to Top&amplt;/a&ampgt;
+  &amplt;a class=&ampquot;colored external&ampquot; href=&ampquot;https://example.org&ampquot;&ampgt;Example&amplt;/a&ampgt;
+&amplt;/div&ampgt;
+
+
+  Go to Top
+  Example
+
+With centered and big classes:
+&amplt;div class=&ampquot;buttons centered&ampquot;&ampgt;
+  &amplt;button class=&ampquot;big colored&ampquot;&ampgt;Do Something…&amplt;/button&ampgt;
+&amplt;/div&ampgt;
+
+
+  Do Something
+
+1
+Footnote
+
+2
+Footnote (link)
+
+" name=description><meta content="Markdown
+Text can be bold, italic, strikethrough, and all at the same time.
+Link to another page.
+There should be whitespace between paragraphs1.
+Heading 1
+Heading 2
+Heading 3
+Heading 4
+Heading 5
+Heading 6
+This is a normal paragraph2 following a header.
+😭😂🥺🤣❤️✨🙏😍🥰😊
+Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
+
+
+&#34Original content is original only for a few seconds before getting old&#34
+
+Rule #21 of the internet
+
+
+
+Item 1
+Item 2
+
+Item 2.1
+Item 2.2
+
+
+Item 3
+Item 4
+
+
+Perform step #1
+Proceed to step #2
+Conclude with step #3
+
+
+
+Milk
+
+Eggs
+
+Flour
+
+Coffee
+
+Combustible lemons
+
+
+MareRatingAdditional info
+FluttershyBest poneShy and adorable
+Apple JackGood poneHonest and nice
+Pinkie PieFun poneParties and ADHD
+TwilightMain poneNeeerd
+Rainbow DashYesLooks badass
+RarityFancy poneGenerous
+Derpy HoovesM u f f i n s[REDACTED]
+
+let highlight = true;
+
+
+Extra
+KaTeX
+This Theme can render LaTeX using the KaTeX library. It can be enabled using the extra.katex config variable.
+$$\relax f(x) = \int_{-\infty}^\infty\hat{f}(\xi)\,e^{2 \pi i \xi x}\,d\xi$$
+
+$$\relax f(x) = \int_{-\infty}^\infty\hat{f}(\xi),e^{2 \pi i \xi x},d\xi$$
+$\relax f(x) = \int_{-\infty}^\infty\hat{f}(\xi)\,e^{2 \pi i \xi x}\,d\xi$
+
+$\relax f(x) = \int_{-\infty}^\infty\hat{f}(\xi),e^{2 \pi i \xi x},d\xi$
+Shortcodes
+This Theme provides a few useful shortcodes that simplify some tasks. They can be used on all pages.
+Alerts
+GitHub-style alerts. Simply wrap the text of desired alert inside the shortcode to get the desired look.
+Available alert types:
+
+note: Useful information that users should know, even when skimming content.
+tip: Helpful advice for doing things better or more easily.
+important: Key information users need to know to achieve their goal.
+warning: Urgent info that needs immediate user attention to avoid problems.
+caution: Advises about risks or negative outcomes of certain actions.
+
+{% alert(note=true) %}
+-&ampgt; Alert text &amplt;-
+{% end %}
+
+
+	Note
+	Useful information that users should know, even when skimming content.
+
+
+
+	Tip
+	Helpful advice for doing things better or more easily.
+
+
+
+	Important
+	Key information users need to know to achieve their goal.
+
+
+
+	Warning
+	Urgent info that needs immediate user attention to avoid problems.
+
+
+
+	Caution
+	Advises about risks or negative outcomes of certain actions.
+
+
+Images and Videos
+By default images and videos come with some generic styling, such as rounded corners and shadow. To fine-tune these, you can use shortcodes with different variable combinations.
+Available variables are:
+
+spoiler: Blurs image until hovered over/pressed on, useful for plot rich game screenshots.
+
+{{ image(url=&ampquot;image.png&ampquot;, alt=&ampquot;This is an image&ampquot;, spoiler=true) }}
+
+
+
+Image with an alt text, hidden behind a spoiler
+
+For videos it's all the same except for a few differences: no_hover and url_min variables are not available.
+Additionally, the following attributes can be set:
+
+autoplay: Start playing the video automatically.
+controls: Display video controls such as volume control, seeking and pause/resume.
+loop: Play the video again once it ends.
+muted: Turn off the audio by default.
+playsinline: Prevent the video from playing in fullscreen by default (depends on the browser).
+
+{{ video(url=&ampquot;video.webm&ampquot;, alt=&ampquot;This is a video&ampquot;, controls=false, autoplay=true, loop=true) }}
+
+
+
+
+WebM video example from MDN
+
+
+
+
+Duckling preening
+
+YouTube
+Allows to embed a YouTube video using youtube-nocookie.
+Available variables are:
+
+autoplay: Whether the video should autoplay.
+start: On which second video should start.
+
+{{ youtube(id=&ampquot;0Da8ZhKcNKQ&ampquot;) }}
+
+
+
+Mastodon
+Allows to embed a Mastodon post.
+Available variables are:
+
+host: The instance on which the post resides. If not set, it will fallback to the one set in the [extra.comments] section of config.toml.
+user: The poster. If not set, it will fallback to the one set in the [extra.comments] section of config.toml.
+id: The ID of the post, usually at the end of the URL.
+
+{{ mastodon(host=&ampquot;toot.community&ampquot;, user=&ampquot;sungsphinx&ampquot;, id=&ampquot;111789185826519979&ampquot;) }}
+
+
+
+Figure Captions (&amplt;figcaption&ampgt;)
+&amplt;figure&ampgt;
+  -&ampgt; Whatever content &amplt;-
+  &amplt;figcaption&ampgt;Caption of content above&amplt;/figcaption&ampgt;
+&amplt;/figure&ampgt;
+
+
+
+  The Office where Stanley works, it has yellow floor and beige walls
+
+Accordion (&amplt;details&ampgt;)
+&amplt;details&ampgt;
+  &amplt;summary&ampgt;Accordion title&amplt;/summary&ampgt;
+  -&ampgt; Contents here &amplt;-
+&amplt;/details&ampgt;
+
+
+  Reveal accordion
+Get it? I know, it's an awful pun.
+
+
+Side Comment (&amplt;small&ampgt;)
+&amplt;small&ampgt;Small, cute text that doesn&amp#39;t catch attention.&amplt;/small&ampgt;
+
+Small, cute text that doesn't catch attention.
+Abbreviation (&amplt;abbr&ampgt;)
+&amplt;abbr title=&ampquot;American Standard Code for Information Interchange&ampquot;&ampgt;ASCII&amplt;/abbr&ampgt;
+
+The ASCII art is awesome!
+Aside (&amplt;aside&ampgt;)
+&amplt;aside&ampgt;
+
+-&ampgt; Contents here &amplt;-
+&amplt;/aside&ampgt;
+
+
+Quill and a parchment
+
+
+A quill is a writing tool made from a moulted flight feather (preferably a primary wing-feather) of a large bird. Quills were used for writing with ink before the invention of the dip pen, the metal-nibbed pen, the fountain pen, and, eventually, the ballpoint pen.
+As with the earlier reed pen (and later dip pen), a quill has no internal ink reservoir and therefore needs to periodically be dipped into an inkwell during writing. The hand-cut goose quill is rarely used as a calligraphy tool anymore because many papers are now derived from wood pulp and would quickly wear a quill down. However it is still the tool of choice for a few scribes who have noted that quills provide an unmatched sharp stroke as well as greater flexibility than a steel pen.
+Keyboard Input (&amplt;kbd&ampgt;)
+&amplt;kbd&ampgt;⌘ Command&amplt;/kbd&ampgt;.
+
+To switch the keyboard layout, press ⌘ Super + Space.
+Mark Text (&amplt;mark&ampgt;)
+&amplt;mark&ampgt;Marked text&amplt;/mark&ampgt;
+
+You know what? I'm gonna say some very important stuff, so important that even bold is not enough.
+Deleted and Inserted Text (&amplt;del&ampgt; and &amplt;ins&ampgt;)
+&amplt;del&ampgt;Something deleted&amplt;/del&ampgt; &amplt;ins&ampgt;Something added&amplt;/ins&ampgt;
+
+Text deleted Text added
+Sample Output (&amplt;samp&ampgt;)
+&amplt;samp&ampgt;Sample Output&amplt;/samp&ampgt;
+
+Sample Output
+Inline Quotation (&amplt;q&ampgt;)
+&amplt;q&ampgt;Someone said something&amplt;/q&ampgt;
+
+Blah blah Inline Quote hmm.
+Unarticulated Annotation (&amplt;u&ampgt;)
+&amplt;u&ampgt;Gmarrar mitsakes&amplt;/u&ampgt;
+
+Yeet the sus drip while vibing with the TikTok fam on a cap-free boomerang.
+External Links
+&amplt;a class=&ampquot;external&ampquot; href=&ampquot;https://example.org&ampquot;&ampgt;External link&amplt;/a&ampgt;
+
+Link to site
+Spoilers
+&amplt;span class=&ampquot;spoiler&ampquot;&ampgt;Some spoiler&amplt;/span&ampgt;
+
+You know, This Theme is a pretty dumb name. I know, crazy.
+Buttons Dialog
+&amplt;div class=&ampquot;buttons&ampquot;&ampgt;
+  &amplt;a href=&ampquot;#top&ampquot;&ampgt;Go to Top&amplt;/a&ampgt;
+  &amplt;a class=&ampquot;colored external&ampquot; href=&ampquot;https://example.org&ampquot;&ampgt;Example&amplt;/a&ampgt;
+&amplt;/div&ampgt;
+
+
+  Go to Top
+  Example
+
+With centered and big classes:
+&amplt;div class=&ampquot;buttons centered&ampquot;&ampgt;
+  &amplt;button class=&ampquot;big colored&ampquot;&ampgt;Do Something…&amplt;/button&ampgt;
+&amplt;/div&ampgt;
+
+
+  Do Something
+
+1
+Footnote
+
+2
+Footnote (link)
+
+" name=og:description><link rel="shortcut icon" href=/res/logo.svg type=image/x-icon><meta content="width=device-width,initial-scale=1" name=viewport><meta content="rgb(253, 246, 227)" name=theme-color><link crossorigin href=https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css integrity=sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+ rel=stylesheet><script crossorigin defer integrity=sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg src=https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js></script><script crossorigin defer integrity=sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk src=https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js></script><script>document.addEventListener(`DOMContentLoaded`,(()=>{let b=`\$`,a=`\$\$`;renderMathInElement(document.body,{delimiters:[{left:a,right:a,display:!0},{left:b,right:b,display:!1},{left:`\\\\(`,right:`\\\\)`,display:!1},{left:`\\\\[`,right:`\\\\]`,display:!0}],throwOnError:!1})}))</script><script defer src=/assets/js/copy-button.js></script><link href=https://github.com/scientiac rel=me><link href=mailto:spandan@scientiac.space rel=me><link href=https://webmention.io/scientiac.space/webmention rel=webmention><meta content=@scientiac@fosstodon.org name=fediverse:creator><body onload=updateThemeSelector();><div class=logo-container><a href=/> <div class=inner-logo-container></div> </a></div><nav data-style=classy><span class=main-li><a href=/>Main</a></span><span><a href=/blog>Blog</a></span><span><a href=/writings>Writings</a></span><span><a href=/syndications>POSSE</a></span><span><a href=/more>More</a></span></nav><section class=section-body><div class=container><div class=h-entry><a class="u-url hidden" href=https://scientiac.space/more/template/>https://scientiac.space/more/template/</a><div class=section><h1 class="p-name title">Demo Page</h1><div class="hidden p-author h-card"><a class=u-url href=https://scientiac.space rel=me> <img alt="Profile photo of scientiac" class=u-photo src=/res/thumbnail.png> <span class=p-name>scientiac</span> </a></div><div class=e-content><h2 id=markdown>Markdown</h2><p>Text can be <strong>bold</strong>, <em>italic</em>, <del>strikethrough</del>, and <em><strong><del>all at the same time</del></strong></em>.<p><a href=https://scientiac.space/blog/you/>Link to another page</a>.<p>There should be whitespace between paragraphs<sup class=footnote-reference><a href=#1>1</a></sup>.<h1 id=heading-1>Heading 1</h1><h2 id=heading-2>Heading 2</h2><h3 id=heading-3>Heading 3</h3><h4 id=heading-4>Heading 4</h4><h5 id=heading-5>Heading 5</h5><h6 id=heading-6>Heading 6</h6><p>This is a normal paragraph<sup class=footnote-reference><a href=#2>2</a></sup> following a header.<p>😭😂🥺🤣❤️✨🙏😍🥰😊<pre style=color:#fdf4c1aa;background-color:#282828><code><span>Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
+</span></code></pre><blockquote><p>"Original content is original only for a few seconds before getting old"<blockquote><p>Rule #21 of the internet</blockquote></blockquote><ul><li>Item 1<li>Item 2 <ul><li>Item 2.1<li>Item 2.2</ul><li>Item 3<li><code>Item 4</code></ul><ol><li>Perform step #1<li>Proceed to step #2<li>Conclude with step #3</ol><ul><li><input disabled type=checkbox> Milk<li><input checked disabled type=checkbox> Eggs<li><input checked disabled type=checkbox> Flour<li><input disabled type=checkbox> Coffee<li><input checked disabled type=checkbox> Combustible lemons</ul><p><a href=https://upload.wikimedia.org/wikipedia/commons/2/24/Male_mallard_duck_2.jpg><img alt="Male mallard duck" src=https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Male_mallard_duck_2.jpg/800px-Male_mallard_duck_2.jpg></a><table><thead><tr><th style=text-align:left>Mare<th style=text-align:left>Rating<th style=text-align:left>Additional info<tbody><tr><td style=text-align:left>Fluttershy<td style=text-align:left>Best pone<td style=text-align:left>Shy and adorable<tr><td style=text-align:left>Apple Jack<td style=text-align:left>Good pone<td style=text-align:left>Honest and nice<tr><td style=text-align:left>Pinkie Pie<td style=text-align:left>Fun pone<td style=text-align:left>Parties and ADHD<tr><td style=text-align:left>Twilight<td style=text-align:left>Main pone<td style=text-align:left>Neeerd<tr><td style=text-align:left>Rainbow Dash<td style=text-align:left>Yes<td style=text-align:left>Looks badass<tr><td style=text-align:left>Rarity<td style=text-align:left>Fancy pone<td style=text-align:left>Generous<tr><td style=text-align:left>Derpy Hooves<td style=text-align:left><em>M u f f i n s</em><td style=text-align:left>[REDACTED]</table><pre class=language-rust data-lang=rust style=color:#fdf4c1aa;background-color:#282828><code class=language-rust data-lang=rust><span style=color:#fa5c4b>let</span><span> highlight </span><span style=color:#fe8019>= </span><span style=color:#d3869b>true</span><span>;
+</span></code></pre><hr><h2 id=extra>Extra</h2><h3 id=katex>KaTeX</h3><p>This Theme can render LaTeX using the <a href=https://katex.org>KaTeX</a> library. It can be enabled using the <code>extra.katex</code> config variable.<pre class=language-latex data-lang=latex style=color:#fdf4c1aa;background-color:#282828><code class=language-latex data-lang=latex><span style=color:#b8bb26>$$</span><span style=color:#fabd2f>\relax </span><span style=color:#fdf4c1>f</span><span style=color:#d3869b>(</span><span style=color:#fdf4c1>x</span><span style=color:#d3869b>) </span><span style=color:#fe8019>= </span><span style=color:#fabd2f>\int</span><span style=color:#fe8019>_</span><span>{</span><span style=color:#fe8019>-</span><span style=color:#fabd2f>\infty</span><span>}</span><span style=color:#fe8019>^</span><span style=color:#fabd2f>\infty\hat</span><span>{</span><span style=color:#fdf4c1>f</span><span>}</span><span style=color:#d3869b>(</span><span style=color:#fa5c4b>\xi</span><span style=color:#d3869b>)</span><span style=color:#b8bb26>\,</span><span style=color:#fdf4c1>e</span><span style=color:#fe8019>^</span><span>{</span><span style=color:#d3869b>2 </span><span style=color:#fa5c4b>\pi </span><span style=color:#fdf4c1>i </span><span style=color:#fa5c4b>\xi </span><span style=color:#fdf4c1>x</span><span>}</span><span style=color:#b8bb26>\,</span><span style=color:#fdf4c1>d</span><span style=color:#fa5c4b>\xi</span><span style=color:#b8bb26>$$
+</span></code></pre><p>$$\relax f(x) = \int_{-\infty}^\infty\hat{f}(\xi),e^{2 \pi i \xi x},d\xi$$<pre class=language-latex data-lang=latex style=color:#fdf4c1aa;background-color:#282828><code class=language-latex data-lang=latex><span style=color:#b8bb26>$</span><span style=color:#fabd2f>\relax </span><span style=color:#fdf4c1>f</span><span style=color:#d3869b>(</span><span style=color:#fdf4c1>x</span><span style=color:#d3869b>) </span><span style=color:#fe8019>= </span><span style=color:#fabd2f>\int</span><span style=color:#fe8019>_</span><span>{</span><span style=color:#fe8019>-</span><span style=color:#fabd2f>\infty</span><span>}</span><span style=color:#fe8019>^</span><span style=color:#fabd2f>\infty\hat</span><span>{</span><span style=color:#fdf4c1>f</span><span>}</span><span style=color:#d3869b>(</span><span style=color:#fa5c4b>\xi</span><span style=color:#d3869b>)</span><span style=color:#b8bb26>\,</span><span style=color:#fdf4c1>e</span><span style=color:#fe8019>^</span><span>{</span><span style=color:#d3869b>2 </span><span style=color:#fa5c4b>\pi </span><span style=color:#fdf4c1>i </span><span style=color:#fa5c4b>\xi </span><span style=color:#fdf4c1>x</span><span>}</span><span style=color:#b8bb26>\,</span><span style=color:#fdf4c1>d</span><span style=color:#fa5c4b>\xi</span><span style=color:#b8bb26>$
+</span></code></pre><p>$\relax f(x) = \int_{-\infty}^\infty\hat{f}(\xi),e^{2 \pi i \xi x},d\xi$<h3 id=shortcodes>Shortcodes</h3><p>This Theme provides a few useful <a href=https://www.getzola.org/documentation/content/shortcodes/>shortcodes</a> that simplify some tasks. They can be used on all pages.<h4 id=alerts>Alerts</h4><p><a href=https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts>GitHub-style</a> alerts. Simply wrap the text of desired alert inside the shortcode to get the desired look.<p>Available alert types:<ul><li><code>note</code>: Useful information that users should know, even when skimming content.<li><code>tip</code>: Helpful advice for doing things better or more easily.<li><code>important</code>: Key information users need to know to achieve their goal.<li><code>warning</code>: Urgent info that needs immediate user attention to avoid problems.<li><code>caution</code>: Advises about risks or negative outcomes of certain actions.</ul><pre class=language-jinja2 data-lang=jinja2 style=color:#fdf4c1aa;background-color:#282828><code class=language-jinja2 data-lang=jinja2><span style=color:#8ec07c>{% </span><span style=color:#fa5c4b>alert</span><span>(</span><span style=color:#fdf4c1>note</span><span style=color:#fe8019>=</span><span style=color:#d3869b>true</span><span>) </span><span style=color:#8ec07c>%}
+</span><span>-> Alert text &LT-
+</span><span style=color:#8ec07c>{% </span><span style=color:#fa5c4b>end </span><span style=color:#8ec07c>%}
+</span></code></pre><blockquote class=note><p class=alert-title>Note<p>Useful information that users should know, even when skimming content.</blockquote><blockquote class=tip><p class=alert-title>Tip<p>Helpful advice for doing things better or more easily.</blockquote><blockquote class=important><p class=alert-title>Important<p>Key information users need to know to achieve their goal.</blockquote><blockquote class=warning><p class=alert-title>Warning<p>Urgent info that needs immediate user attention to avoid problems.</blockquote><blockquote class=caution><p class=alert-title>Caution<p>Advises about risks or negative outcomes of certain actions.</blockquote><h4 id=images-and-videos>Images and Videos</h4><p>By default images and videos come with some generic styling, such as rounded corners and shadow. To fine-tune these, you can use shortcodes with different variable combinations.<p>Available variables are:<ul><li><code>spoiler</code>: Blurs image until hovered over/pressed on, useful for plot rich game screenshots.</ul><pre class=language-jinja2 data-lang=jinja2 style=color:#fdf4c1aa;background-color:#282828><code class=language-jinja2 data-lang=jinja2><span style=color:#8ec07c>{{ </span><span style=color:#fdf4c1>image</span><span>(</span><span style=color:#fdf4c1>url</span><span style=color:#fe8019>=</span><span style=color:#b8bb26>"image.png"</span><span>, </span><span style=color:#fdf4c1>alt</span><span style=color:#fe8019>=</span><span style=color:#b8bb26>"This is an image"</span><span>, </span><span style=color:#fdf4c1>spoiler</span><span style=color:#fe8019>=</span><span style=color:#d3869b>true</span><span>) </span><span style=color:#8ec07c>}}
+</span></code></pre><figure><img alt="Portal Gun blueprint" class=spoiler src=https://files.catbox.moe/lk7nee.jpg><figcaption>Image with an alt text, hidden behind a spoiler</figcaption></figure><p>For videos it's all the same except for a few differences: <code>no_hover</code> and <code>url_min</code> variables are not available.<p>Additionally, the following <a href=https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#attributes>attributes</a> can be set:<ul><li><code>autoplay</code>: Start playing the video automatically.<li><code>controls</code>: Display video controls such as volume control, seeking and pause/resume.<li><code>loop</code>: Play the video again once it ends.<li><code>muted</code>: Turn off the audio by default.<li><code>playsinline</code>: Prevent the video from playing in fullscreen by default (depends on the browser).</ul><pre class=language-jinja2 data-lang=jinja2 style=color:#fdf4c1aa;background-color:#282828><code class=language-jinja2 data-lang=jinja2><span style=color:#8ec07c>{{ </span><span style=color:#fdf4c1>video</span><span>(</span><span style=color:#fdf4c1>url</span><span style=color:#fe8019>=</span><span style=color:#b8bb26>"video.webm"</span><span>, </span><span style=color:#fdf4c1>alt</span><span style=color:#fe8019>=</span><span style=color:#b8bb26>"This is a video"</span><span>, </span><span style=color:#fdf4c1>controls</span><span style=color:#fe8019>=</span><span style=color:#d3869b>false</span><span>, </span><span style=color:#fdf4c1>autoplay</span><span style=color:#fe8019>=</span><span style=color:#d3869b>true</span><span>, </span><span style=color:#fdf4c1>loop</span><span style=color:#fe8019>=</span><span style=color:#d3869b>true</span><span>) </span><span style=color:#8ec07c>}}
+</span></code></pre><figure><video aria-title="Red flower wakes up" controls src=https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm></video><figcaption>WebM video example from MDN</figcaption></figure><figure><video aria-title="Duckling preening" controls src=https://upload.wikimedia.org/wikipedia/commons/transcoded/0/0e/Duckling_preening_%2881313%29.webm/Duckling_preening_%2881313%29.webm.720p.vp9.webm></video><figcaption>Duckling preening</figcaption></figure><h4 id=youtube>YouTube</h4><p>Allows to embed a YouTube video using youtube-nocookie.<p>Available variables are:<ul><li><code>autoplay</code>: Whether the video should autoplay.<li><code>start</code>: On which second video should start.</ul><pre class=language-jinja2 data-lang=jinja2 style=color:#fdf4c1aa;background-color:#282828><code class=language-jinja2 data-lang=jinja2><span style=color:#8ec07c>{{ </span><span style=color:#fdf4c1>youtube</span><span>(</span><span style=color:#fdf4c1>id</span><span style=color:#fe8019>=</span><span style=color:#b8bb26>"0Da8ZhKcNKQ"</span><span>) </span><span style=color:#8ec07c>}}
+</span></code></pre><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class=youtube-embed referrerpolicy=strict-origin-when-cross-origin src=https://www.youtube-nocookie.com/embed/0Da8ZhKcNKQ></iframe><h4 id=mastodon>Mastodon</h4><p>Allows to embed a Mastodon post.<p>Available variables are:<ul><li><code>host</code>: The instance on which the post resides. If not set, it will fallback to the one set in the <code>[extra.comments]</code> section of <code>config.toml</code>.<li><code>user</code>: The poster. If not set, it will fallback to the one set in the <code>[extra.comments]</code> section of <code>config.toml</code>.<li><code>id</code>: The ID of the post, usually at the end of the URL.</ul><pre class=language-jinja2 data-lang=jinja2 style=color:#fdf4c1aa;background-color:#282828><code class=language-jinja2 data-lang=jinja2><span style=color:#8ec07c>{{ </span><span style=color:#fdf4c1>mastodon</span><span>(</span><span style=color:#fdf4c1>host</span><span style=color:#fe8019>=</span><span style=color:#b8bb26>"toot.community"</span><span>, </span><span style=color:#fdf4c1>user</span><span style=color:#fe8019>=</span><span style=color:#b8bb26>"sungsphinx"</span><span>, </span><span style=color:#fdf4c1>id</span><span style=color:#fe8019>=</span><span style=color:#b8bb26>"111789185826519979"</span><span>) </span><span style=color:#8ec07c>}}
+</span></code></pre><iframe class=mastodon-embed src=https://toot.community/@sungsphinx/111789185826519979/embed></iframe><h3 id=figure-captions-figcaption>Figure Captions (<code>&LTfigcaption></code>)</h3><pre class=language-markdown data-lang=markdown style=color:#fdf4c1aa;background-color:#282828><code class=language-markdown data-lang=markdown><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>figure</span><span style=color:#83a598>>
+</span><span>  -> Whatever content &LT-
+</span><span>  </span><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>figcaption</span><span style=color:#83a598>></span><span>Caption of content above</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>figcaption</span><span style=color:#83a598>>
+</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>figure</span><span style=color:#83a598>>
+</span></code></pre><figure><p><img alt="The Office" src=https://i.ibb.co/MPDJRsT/ImMAXM3.png><figcaption>The Office where Stanley works, it has yellow floor and beige walls</figcaption></figure><h3 id=accordion-details>Accordion (<code>&LTdetails></code>)</h3><pre class=language-markdown data-lang=markdown style=color:#fdf4c1aa;background-color:#282828><code class=language-markdown data-lang=markdown><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>details</span><span style=color:#83a598>>
+</span><span>  </span><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>summary</span><span style=color:#83a598>></span><span>Accordion title</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>summary</span><span style=color:#83a598>>
+</span><span>  -> Contents here &LT-
+</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>details</span><span style=color:#83a598>>
+</span></code></pre><details><summary>Reveal accordion</summary> <p>Get it? I know, it's an awful pun. <img alt="Piano Accordion" src=https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/PianoAccordeon.jpg/916px-PianoAccordeon.jpg#transparent#no-hover></p></details><h3 id=side-comment-small>Side Comment (<code>&LTsmall></code>)</h3><pre class=language-html data-lang=html style=color:#fdf4c1aa;background-color:#282828><code class=language-html data-lang=html><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>small</span><span style=color:#83a598>></span><span>Small, cute text that doesn't catch attention.</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>small</span><span style=color:#83a598>>
+</span></code></pre><p><small>Small, cute text that doesn't catch attention.</small><h3 id=abbreviation-abbr>Abbreviation (<code>&LTabbr></code>)</h3><pre class=language-html data-lang=html style=color:#fdf4c1aa;background-color:#282828><code class=language-html data-lang=html><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>abbr </span><span style=color:#8ec07c>title=</span><span style=color:#b8bb26>"American Standard Code for Information Interchange"</span><span style=color:#83a598>></span><span>ASCII</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>abbr</span><span style=color:#83a598>>
+</span></code></pre><p>The <abbr title="American Standard Code for Information Interchange">ASCII</abbr> art is awesome!<h3 id=aside-aside>Aside (<code>&LTaside></code>)</h3><pre class=language-html data-lang=html style=color:#fdf4c1aa;background-color:#282828><code class=language-html data-lang=html><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>aside</span><span style=color:#83a598>>
+</span><span>
+</span><span>-> Contents here &LT-
+</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>aside</span><span style=color:#83a598>>
+</span></code></pre><aside><p>Quill and a parchment</p><img alt="Quill and a parchment" class="transparent no-hover" src=https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/%D7%A7%D7%9C%D7%A3%2C_%D7%A0%D7%95%D7%A6%D7%94_%D7%95%D7%93%D7%99%D7%95.jpg/326px-%D7%A7%D7%9C%D7%A3%2C_%D7%A0%D7%95%D7%A6%D7%94_%D7%95%D7%93%D7%99%D7%95.jpg style=border-radius:0;margin-block-end:0></aside><p>A quill is a writing tool made from a moulted flight feather (preferably a primary wing-feather) of a large bird. Quills were used for writing with ink before the invention of the dip pen, the metal-nibbed pen, the fountain pen, and, eventually, the ballpoint pen.<p>As with the earlier reed pen (and later dip pen), a quill has no internal ink reservoir and therefore needs to periodically be dipped into an inkwell during writing. The hand-cut goose quill is rarely used as a calligraphy tool anymore because many papers are now derived from wood pulp and would quickly wear a quill down. However it is still the tool of choice for a few scribes who have noted that quills provide an unmatched sharp stroke as well as greater flexibility than a steel pen.<h3 id=keyboard-input-kbd>Keyboard Input (<code>&LTkbd></code>)</h3><pre class=language-html data-lang=html style=color:#fdf4c1aa;background-color:#282828><code class=language-html data-lang=html><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>kbd</span><span style=color:#83a598>></span><span>⌘ Command</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>kbd</span><span style=color:#83a598>></span><span>.
+</span></code></pre><p>To switch the keyboard layout, press <kbd>⌘ Super</kbd> + <kbd>Space</kbd>.<h3 id=mark-text-mark>Mark Text (<code>&LTmark></code>)</h3><pre class=language-html data-lang=html style=color:#fdf4c1aa;background-color:#282828><code class=language-html data-lang=html><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>mark</span><span style=color:#83a598>></span><span>Marked text</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>mark</span><span style=color:#83a598>>
+</span></code></pre><p>You know what? I'm gonna say some <mark>very important</mark> stuff, so <mark>important</mark> that even <strong>bold</strong> is not enough.<h3 id=deleted-and-inserted-text-del-and-ins>Deleted and Inserted Text (<code>&LTdel></code> and <code>&LTins></code>)</h3><pre class=language-html data-lang=html style=color:#fdf4c1aa;background-color:#282828><code class=language-html data-lang=html><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>del</span><span style=color:#83a598>></span><span>Something deleted</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>del</span><span style=color:#83a598>> <</span><span style=color:#8ec07c;font-weight:700>ins</span><span style=color:#83a598>></span><span>Something added</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>ins</span><span style=color:#83a598>>
+</span></code></pre><p><del>Text deleted</del> <ins>Text added</ins><h3 id=sample-output-samp>Sample Output (<code>&LTsamp></code>)</h3><pre class=language-html data-lang=html style=color:#fdf4c1aa;background-color:#282828><code class=language-html data-lang=html><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>samp</span><span style=color:#83a598>></span><span>Sample Output</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>samp</span><span style=color:#83a598>>
+</span></code></pre><p><samp>Sample Output</samp><h3 id=inline-quotation-q>Inline Quotation (<code>&LTq></code>)</h3><pre class=language-html data-lang=html style=color:#fdf4c1aa;background-color:#282828><code class=language-html data-lang=html><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>q</span><span style=color:#83a598>></span><span>Someone said something</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>q</span><span style=color:#83a598>>
+</span></code></pre><p>Blah blah <q>Inline Quote</q> hmm.<h3 id=unarticulated-annotation-u>Unarticulated Annotation (<code>&LTu></code>)</h3><pre class=language-html data-lang=html style=color:#fdf4c1aa;background-color:#282828><code class=language-html data-lang=html><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>u</span><span style=color:#83a598>></span><span>Gmarrar mitsakes</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>u</span><span style=color:#83a598>>
+</span></code></pre><p><u>Yeet</u> the <u>sus</u> drip while <u>vibing</u> with the <u>TikTok</u> <u>fam</u> on a cap-free boomerang.<h3 id=external-links>External Links</h3><pre class=language-html data-lang=html style=color:#fdf4c1aa;background-color:#282828><code class=language-html data-lang=html><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>a </span><span style=color:#8ec07c>class=</span><span style=color:#b8bb26>"external" </span><span style=color:#8ec07c>href=</span><span style=color:#b8bb26>"https://example.org"</span><span style=color:#83a598>></span><span>External link</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>a</span><span style=color:#83a598>>
+</span></code></pre><p><a class=external href=https://example.org>Link to site</a><h3 id=spoilers>Spoilers</h3><pre class=language-html data-lang=html style=color:#fdf4c1aa;background-color:#282828><code class=language-html data-lang=html><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>span </span><span style=color:#8ec07c>class=</span><span style=color:#b8bb26>"spoiler"</span><span style=color:#83a598>></span><span>Some spoiler</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>span</span><span style=color:#83a598>>
+</span></code></pre><p>You know, <span class=spoiler>This Theme is a pretty dumb name.</span> I know, crazy.<h3 id=buttons-dialog>Buttons Dialog</h3><pre class=language-html.j2 data-lang=html.j2 style=color:#fdf4c1aa;background-color:#282828><code class=language-html.j2 data-lang=html.j2><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>div </span><span style=color:#8ec07c>class=</span><span style=color:#b8bb26>"buttons"</span><span style=color:#83a598>>
+</span><span>  </span><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>a </span><span style=color:#8ec07c>href=</span><span style=color:#b8bb26>"#top"</span><span style=color:#83a598>></span><span>Go to Top</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>a</span><span style=color:#83a598>>
+</span><span>  </span><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>a </span><span style=color:#8ec07c>class=</span><span style=color:#b8bb26>"colored external" </span><span style=color:#8ec07c>href=</span><span style=color:#b8bb26>"https://example.org"</span><span style=color:#83a598>></span><span>Example</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>a</span><span style=color:#83a598>>
+</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>div</span><span style=color:#83a598>>
+</span></code></pre><div class=buttons><a href=#top>Go to Top</a><a class="colored external" href=https://example.org>Example</a></div><p>With <code>centered</code> and <code>big</code> classes:<pre class=language-html.j2 data-lang=html.j2 style=color:#fdf4c1aa;background-color:#282828><code class=language-html.j2 data-lang=html.j2><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>div </span><span style=color:#8ec07c>class=</span><span style=color:#b8bb26>"buttons centered"</span><span style=color:#83a598>>
+</span><span>  </span><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>button </span><span style=color:#8ec07c>class=</span><span style=color:#b8bb26>"big colored"</span><span style=color:#83a598>></span><span>Do Something…</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>button</span><span style=color:#83a598>>
+</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>div</span><span style=color:#83a598>>
+</span></code></pre><div class="buttons centered"><button class="big colored">Do Something</button></div><div class=footnote-definition id=1><sup class=footnote-definition-label>1</sup><p>Footnote</div><div class=footnote-definition id=2><sup class=footnote-definition-label>2</sup><p><a href=https://example.org>Footnote (link)</a></div></div></div></div><div><hr><h2>Webmentions</h2><form action=https://webmention.io/scientiac.space/webmention class=webmention-form method=post><div id=email-comment><p>Have you written a <a href=https://indieweb.org/responses>response</a> to this? Let me know the URL, Or, you can send your response via <a href="mailto:iac@scientiac.space?subject=Reply%3A%20Demo%20Page">mail:</a><code>iac@scientiac.space</code></div><div class=send-webmention><input name=source type=url><button>Send Webmention</button></div><div><div class="ui message"></div></div><input name=target type=hidden value=https://scientiac.space/more/template/></form></div></div><script defer src=/assets/js/themeSelector.js></script></section><div class=hidden><a href=https://fosstodon.org/@scientiac rel=me>Mastodon</a></div><div class="hidden h-card"><img class="u-photo icon" alt=scientiac src=/res/thumbnail.png><a class="p-name u-url" href=https://scientiac.space rel=me>scientiac</a><p class=p-note>A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does.</div><footer><p class=codewithlove>I can't think of things to write on a footer. So, just <span class=main-background>imagine</span> something yourself.<p><a href=/atom.xml>RSS</a> | <a href=https://map.scientiac.space>research::map</a> | <a href=https://github.com/scientiac/scientiac.github.io target=_blank>Source Code</a><p>All articles are usable under <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank>CC BY-SA 4.0</a>.</footer><ol id=themeSelector reversed></ol>

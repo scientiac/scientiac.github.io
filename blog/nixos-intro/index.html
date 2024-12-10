@@ -1,0 +1,145 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><title>scientiac::syntropy</title><link href=/assets/css/themes.css rel=stylesheet><link href=/assets/css/readable.css rel=stylesheet><link href=/assets/css/global.css rel=stylesheet><link href=/assets/css/fonts.css rel=stylesheet><link href=/assets/css/logo.css rel=stylesheet><link href=/assets/css/genre/Articles.css rel=stylesheet><link href=https://scientiac.space/atom.xml rel=alternate title=RSS type=application/atom+xml><meta content=Articles property=og:type><meta content=scientiac.space property=og:site_name><meta content=https://scientiac.space/res/thumbnail-light.png property=og:image><title>NixOS: A Purely Functional Linux Distribution</title><meta content="NixOS: A Purely Functional Linux Distribution" name=og:title><meta content="There's a Problem
+Existing package and system configuration management tools suffer from an imperative model, where system administration actions such as package upgrades or changes to system configuration files are stateful: they destructively update the state of the system.
+This leads to many problems, such as the inability to roll back changes easily, to deploy multiple versions of a package side-by-side, to reproduce a configuration deterministically on another machine, or to reliably upgrade a system.
+The Solution
+A functional system configuration model.
+This means, all static parts of a system (such as software packages, configuration files and system startup scripts) are built by pure functions and are immutable, stored in a way analogous to a heap in a purely functional language.
+NixOS, a non-trivial Linux distribution that uses the Nix package manager to build the entire system configuration from a modular, purely functional specification.
+NixOs Features
+
+
+A reproducible and declarative system: This means that the operating system can be configured using a declarative system that can be reproducible in multiple devices.
+
+
+Atomic upgrades and rollbacks: This feature keeps track of  each time the system configuration is changed (generations) and makes it available to the user to roll back to the previous changes.
+
+
+Binary caching: This provides a unique compromise between the binary-oriented approach used by distributions such as Debian and the source-oriented approach used by distributions such as Gentoo. Binaries can be used for standard components, and custom-built packages and modules can be used automatically when a pre-built binary is not available.
+
+
+NixOS Commands
+Normal
+
+
+nixos-rebuild is a command to rebuild the entire system according to the declarations in /etc/nixos/configuration.nix . It consists of many flags like switch,boot,--flakes etc to specify the rebuild method.
+
+
+nix-collect-garbage is a tool to clear the garbage packages (the packages which were installed during a rebuild but now are not needed for the smooth functioning of the system as per the declarations), it comes handy to clear the previous generations which are not required anymore to fallback on.
+
+
+Imperative Operations
+
+
+nix-shell is a (legacy) tool to spawn temporary virtual environments with packages that are not in the system. You can use nix-shell -p git you'll be dropped into a nix-shell environment where you can use the git command and if you exit the shell the environment will be lost.
+
+
+nix-env a (legacy) tool to use nix package manager in an imperative style similar to other linux distributions. You can use nix-env -iA pkgs.firefox to install firefox and keep the changes in a stateful manner.
+
+
+nix-channel a (legacy) tool to manage channels (similar to repositories), it allows to do things like changing the version of the channel that the package manager will pull from. For eg: If you want to use the latest unstable branch but you are running a stable release version of system (22.04 or similar) you can change it by using the nix-channel.
+
+
+Flakes (Experimental Features)
+This is a feature of nix that improves reproducibility, composability and usability in the Nix ecosystem. A flake is a source tree (such as a Git repository) containing a file named flake.nix that provides a standardized interface to Nix artifacts such as packages or NixOS modules.
+To enable flakes, you should add the following configuration to your configuration.nix file
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = &amp#39;&amp#39;
+      experimental-features = nix-command flakes
+    &amp#39;&amp#39;;
+  };
+
+In general nix flakes does the following changes to the old nix workflow:
+
+It replaces channels which was an imperative operation which diverted from the fact that NixOS was meant to be fully declarative.
+Ability to lock dependencies by creating a flake.lock file ensuring reproducability.
+Makes it easier to install external software that is  not yet packaged in NIxpkgs.
+Adds a way to import Nix expressions from elsewhere on the internet.
+
+Sources:
+NixOS Research Paper
+Nix Research Paper
+NixOS Website
+Learning Resources
+How to Learn Nix
+Intro to Nix Flakes by TWEAG
+The Nix Hour (Youtube)
+
+I will be updating more notes about nixOS on top of this map.
+
+" name=description><meta content="There's a Problem
+Existing package and system configuration management tools suffer from an imperative model, where system administration actions such as package upgrades or changes to system configuration files are stateful: they destructively update the state of the system.
+This leads to many problems, such as the inability to roll back changes easily, to deploy multiple versions of a package side-by-side, to reproduce a configuration deterministically on another machine, or to reliably upgrade a system.
+The Solution
+A functional system configuration model.
+This means, all static parts of a system (such as software packages, configuration files and system startup scripts) are built by pure functions and are immutable, stored in a way analogous to a heap in a purely functional language.
+NixOS, a non-trivial Linux distribution that uses the Nix package manager to build the entire system configuration from a modular, purely functional specification.
+NixOs Features
+
+
+A reproducible and declarative system: This means that the operating system can be configured using a declarative system that can be reproducible in multiple devices.
+
+
+Atomic upgrades and rollbacks: This feature keeps track of  each time the system configuration is changed (generations) and makes it available to the user to roll back to the previous changes.
+
+
+Binary caching: This provides a unique compromise between the binary-oriented approach used by distributions such as Debian and the source-oriented approach used by distributions such as Gentoo. Binaries can be used for standard components, and custom-built packages and modules can be used automatically when a pre-built binary is not available.
+
+
+NixOS Commands
+Normal
+
+
+nixos-rebuild is a command to rebuild the entire system according to the declarations in /etc/nixos/configuration.nix . It consists of many flags like switch,boot,--flakes etc to specify the rebuild method.
+
+
+nix-collect-garbage is a tool to clear the garbage packages (the packages which were installed during a rebuild but now are not needed for the smooth functioning of the system as per the declarations), it comes handy to clear the previous generations which are not required anymore to fallback on.
+
+
+Imperative Operations
+
+
+nix-shell is a (legacy) tool to spawn temporary virtual environments with packages that are not in the system. You can use nix-shell -p git you'll be dropped into a nix-shell environment where you can use the git command and if you exit the shell the environment will be lost.
+
+
+nix-env a (legacy) tool to use nix package manager in an imperative style similar to other linux distributions. You can use nix-env -iA pkgs.firefox to install firefox and keep the changes in a stateful manner.
+
+
+nix-channel a (legacy) tool to manage channels (similar to repositories), it allows to do things like changing the version of the channel that the package manager will pull from. For eg: If you want to use the latest unstable branch but you are running a stable release version of system (22.04 or similar) you can change it by using the nix-channel.
+
+
+Flakes (Experimental Features)
+This is a feature of nix that improves reproducibility, composability and usability in the Nix ecosystem. A flake is a source tree (such as a Git repository) containing a file named flake.nix that provides a standardized interface to Nix artifacts such as packages or NixOS modules.
+To enable flakes, you should add the following configuration to your configuration.nix file
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = &amp#39;&amp#39;
+      experimental-features = nix-command flakes
+    &amp#39;&amp#39;;
+  };
+
+In general nix flakes does the following changes to the old nix workflow:
+
+It replaces channels which was an imperative operation which diverted from the fact that NixOS was meant to be fully declarative.
+Ability to lock dependencies by creating a flake.lock file ensuring reproducability.
+Makes it easier to install external software that is  not yet packaged in NIxpkgs.
+Adds a way to import Nix expressions from elsewhere on the internet.
+
+Sources:
+NixOS Research Paper
+Nix Research Paper
+NixOS Website
+Learning Resources
+How to Learn Nix
+Intro to Nix Flakes by TWEAG
+The Nix Hour (Youtube)
+
+I will be updating more notes about nixOS on top of this map.
+
+" name=og:description><link rel="shortcut icon" href=/res/logo.svg type=image/x-icon><meta content="width=device-width,initial-scale=1" name=viewport><meta content="rgb(253, 246, 227)" name=theme-color><script defer src=/assets/js/copy-button.js></script><link href=https://github.com/scientiac rel=me><link href=mailto:spandan@scientiac.space rel=me><link href=https://webmention.io/scientiac.space/webmention rel=webmention><meta content=@scientiac@fosstodon.org name=fediverse:creator><body onload=updateThemeSelector();><div class=logo-container><a href=/> <div class=inner-logo-container></div> </a></div><nav data-style=classy><span class=main-li><a href=/>Main</a></span><span><a href=/blog>Blog</a></span><span><a href=/writings>Writings</a></span><span><a href=/syndications>POSSE</a></span><span><a href=/more>More</a></span></nav><section class=section-body><div class=container><div class=h-entry><div class=pagedate><time class="dt-published dateandtag hidden" datetime=2023-09-27T00:00:00Z> 2023-09-27 </time><code class=dateandtag>2023-09-27</code><code class="u-category dateandtag">Genre: Articles</code></div><a class="u-url hidden" href=https://scientiac.space/blog/nixos-intro/>https://scientiac.space/blog/nixos-intro/</a><div class=section><h1 class="p-name title">NixOS: A Purely Functional Linux Distribution</h1><div class="hidden p-author h-card"><a class=u-url href=https://scientiac.space rel=me> <img alt="Profile photo of scientiac" class=u-photo src=/res/thumbnail.png> <span class=p-name>scientiac</span> </a></div><div class=e-content><h2 id=there-s-a-problem>There's a Problem</h2><p>Existing package and system configuration management tools suffer from an imperative model, where system administration actions such as package upgrades or changes to system configuration files are stateful: they destructively update the state of the system.<p>This leads to many problems, such as the inability to roll back changes easily, to deploy multiple versions of a package side-by-side, to reproduce a configuration deterministically on another machine, or to reliably upgrade a system.<h2 id=the-solution>The Solution</h2><p><strong>A functional system configuration model.</strong><p>This means, all static parts of a system (such as software packages, configuration files and system startup scripts) are built by pure functions and are immutable, stored in a way analogous to a heap in a purely functional language.<p>NixOS, a non-trivial Linux distribution that uses the Nix package manager to build the entire system configuration from a modular, purely functional specification.<h2 id=nixos-features>NixOs Features</h2><ul><li><p><strong>A <a href=https://reproducible-builds.org/>reproducible</a> and <a href=https://en.wikipedia.org/wiki/Declarative_programming>declarative</a> system</strong>: This means that the operating system can be configured using a declarative system that can be reproducible in multiple devices.</p><li><p><strong><a href=https://en.wikipedia.org/wiki/Atomicity_(database_systems)>Atomic</a> upgrades and rollbacks</strong>: This feature keeps track of each time the system configuration is changed (generations) and makes it available to the user to roll back to the previous changes.</p><li><p><strong><a href=https://en.wikipedia.org/wiki/Executable>Binary</a> caching</strong>: This provides a unique compromise between the binary-oriented approach used by distributions such as Debian and the <a href=https://en.wikipedia.org/wiki/Source_code>source</a>-oriented approach used by distributions such as Gentoo. Binaries can be used for standard components, and custom-built packages and modules can be used automatically when a pre-built binary is not available.</p></ul><h3 id=nixos-commands>NixOS Commands</h3><h4 id=normal>Normal</h4><ul><li><p><strong>nixos-rebuild</strong> is a command to rebuild the entire system according to the declarations in <code>/etc/nixos/configuration.nix</code> . It consists of many flags like <code>switch</code>,<code>boot</code>,<code>--flakes</code> etc to specify the rebuild method.</p><li><p><strong>nix-collect-garbage</strong> is a tool to clear the garbage packages (the packages which were installed during a rebuild but now are not needed for the smooth functioning of the system as per the declarations), it comes handy to clear the previous generations which are not required anymore to fallback on.</p></ul><h4 id=imperative-operations>Imperative Operations</h4><ul><li><p><strong>nix-shell</strong> is a (legacy) tool to spawn temporary virtual environments with packages that are not in the system. You can use <code>nix-shell -p git</code> you'll be dropped into a nix-shell environment where you can use the <code>git</code> command and if you exit the shell the environment will be lost.</p><li><p><strong>nix-env</strong> a (legacy) tool to use nix package manager in an imperative style similar to other linux distributions. You can use <code>nix-env -iA pkgs.firefox</code> to install firefox and keep the changes in a stateful manner.</p><li><p><strong>nix-channel</strong> a (legacy) tool to manage channels (similar to repositories), it allows to do things like changing the version of the channel that the package manager will pull from. For eg: If you want to use the latest unstable branch but you are running a stable release version of system (22.04 or similar) you can change it by using the nix-channel.</p></ul><h4 id=flakes-experimental-features>Flakes (Experimental Features)</h4><p>This is a feature of nix that improves reproducibility, composability and usability in the Nix ecosystem. A flake is a source tree (such as a Git repository) containing a file named <code>flake.nix</code> that provides a standardized interface to Nix artifacts such as packages or NixOS modules.<p>To enable flakes, you should add the following configuration to your <code>configuration.nix</code> file<pre class=language-nix data-lang=nix style=color:#fdf4c1aa;background-color:#282828><code class=language-nix data-lang=nix><span>  </span><span style=color:#fdf4c1>nix </span><span style=color:#fdf4c1;background-color:#932b1e>=</span><span> {
+</span><span>    </span><span style=color:#8ec07c>package </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>pkgs</span><span style=color:#fe8019>.</span><span style=color:#fdf4c1>nixFlakes</span><span>;
+</span><span>    </span><span style=color:#8ec07c>extraOptions </span><span style=color:#fe8019>= </span><span style=color:#b8bb26>''
+</span><span style=color:#b8bb26>      experimental-features = nix-command flakes
+</span><span style=color:#b8bb26>    ''</span><span>;
+</span><span>  }</span><span style=color:#fdf4c1;background-color:#932b1e>;</span><span>
+</span></code></pre><p>In general <code>nix flakes</code> does the following changes to the old nix workflow:<ol><li>It <strong>replaces channels</strong> which was an imperative operation which diverted from the fact that NixOS was meant to be fully declarative.<li><strong>Ability to lock dependencies</strong> by creating a flake.lock file ensuring reproducability.<li>Makes it easier to <strong>install external software</strong> that is not yet packaged in NIxpkgs.<li>Adds a way to <strong>import Nix expressions from elsewhere</strong> on the internet.</ol><p><em>Sources:</em><br> <a href=https://edolstra.github.io/pubs/nixos-jfp-final.pdf>NixOS Research Paper</a><br> <a href=https://edolstra.github.io/pubs/nspfssd-lisa2004-final.pdf>Nix Research Paper</a><br> <a href=https://nixos.org>NixOS Website</a><p><em>Learning Resources</em><br> <a href=https://ianthehenry.com/posts/how-to-learn-nix/>How to Learn Nix</a><br> <a href=https://www.tweag.io/blog/2020-05-25-flakes/>Intro to Nix Flakes by TWEAG</a><br> <a href="https://www.youtube.com/playlist?list=PLyzwHTVJlRc8yjlx4VR4LU5A5O44og9in">The Nix Hour (Youtube)</a><blockquote><p>I will be updating more notes about nixOS on top of this <a href=https://map.scientiac.space/nodes/nixOS>map</a>.</blockquote></div></div></div><div><hr><h2>Webmentions</h2><form action=https://webmention.io/scientiac.space/webmention class=webmention-form method=post><div id=email-comment><p>Have you written a <a href=https://indieweb.org/responses>response</a> to this? Let me know the URL, Or, you can send your response via <a href="mailto:iac@scientiac.space?subject=Reply%3A%20NixOS%3A%20A%20Purely%20Functional%20Linux%20Distribution">mail:</a><code>iac@scientiac.space</code></div><div class=send-webmention><input name=source type=url><button>Send Webmention</button></div><div><div class="ui message"></div></div><input name=target type=hidden value=https://scientiac.space/blog/nixos-intro/></form></div></div><script defer src=/assets/js/themeSelector.js></script></section><div class=hidden><a href=https://fosstodon.org/@scientiac rel=me>Mastodon</a></div><div class="hidden h-card"><img class="u-photo icon" alt=scientiac src=/res/thumbnail.png><a class="p-name u-url" href=https://scientiac.space rel=me>scientiac</a><p class=p-note>A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does.</div><footer><p class=codewithlove>I can't think of things to write on a footer. So, just <span class=main-background>imagine</span> something yourself.<p><a href=/atom.xml>RSS</a> | <a href=https://map.scientiac.space>research::map</a> | <a href=https://github.com/scientiac/scientiac.github.io target=_blank>Source Code</a><p>All articles are usable under <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank>CC BY-SA 4.0</a>.</footer><ol id=themeSelector reversed></ol>

@@ -1,0 +1,155 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><title>scientiac::syntropy</title><link href=/assets/css/themes.css rel=stylesheet><link href=/assets/css/readable.css rel=stylesheet><link href=/assets/css/global.css rel=stylesheet><link href=/assets/css/fonts.css rel=stylesheet><link href=/assets/css/logo.css rel=stylesheet><link href=/assets/css/genre/Articles.css rel=stylesheet><link href=https://scientiac.space/atom.xml rel=alternate title=RSS type=application/atom+xml><meta content=Articles property=og:type><meta content=scientiac.space property=og:site_name><meta content=https://scientiac.space/res/thumbnail-light.png property=og:image><title>Beautifying Firefox with "chrome"</title><meta content='Beautifying Firefox with "chrome"' name=og:title><meta content="My mind goes hyperactive whenever exams are near, this semester is no different. I always find something very interesting to do every time an exam is around. This semester, I went into a rabbit hole of customizing Firefox to make it minimal (or immersive), I'd say.
+
+  
+  
+
+
+img: homepage and tabs-expanded view
+
+
+
+img: webpage view
+
+I am very much into customization, and I like to keep changing things around. When I was using gnome in arch Linux some years back I had come across rafaelmardojai/firefox-gnome-theme which I immediately installed to make my system consistent with the libadwaita style. That was the time when I realized the repo had almost 100% CSS in the GitHub language thingy bar. I knew what CSS was but never bothered to look into the Firefox theme, it simply worked.
+Fast-forward to a few months ago, the arc browser had the internet going crazy about it. I did like the UI being minimal and focused on viewing websites, hiding the settings that would normally show up all the time. Since you had to make an account to just use the browser, I didn't use it. Then I went searching for themes that replicated the UI on Firefox itself. I found KiKaraage/ArcWTF which I used for a while. This time I modified the CSS and restarted Firefox and kept on updating the CSS and restarting Firefox until I got what I wanted. I hated that I had to restart Firefox to apply the small change in userChrome.css that I was going to repeat because I didn't know what I was doing.
+I am currently using nix, so, eventually this was to come. I had to configure my Firefox with home-manager. This caused me to leave behind my arcWTF css because there was no easy way to simply put the chrome folder in its place with nix. But, there was a way to write userChrome within the nix configuration. This way of changing CSS was even more of a hassle because I had to first write it inside nix with no LSP for CSS, then I had to evaluate the nix file to put things into place and then restart Firefox.
+Aaah! That was really clunky but, I then made single userChrome.css and userContent.css files and then just imported them with nix to read the file instead of writing the CSS inside the .nix file, and it was a little better. Now started my journey to make the most minimal and at the same time good Firefox userstyle in a single .css file. I then found simplefox a goldmine for minimal Firefox config, but there was a single issue, I was used to the tabs being tree style and on the left sidebar. So, I installed sidebery and got some CSS from arcWTF to make the collapsed sidebar work.
+Then I got a new laptop, which currently has windows, but It has a gorgeous screen which in comparison to the previous laptop is the difference of 70% more DCI-P3 with a 3k OLED screen. I copied my CSS from my NixOS machine, and it was working pretty well. Until I had an idea to improve it further. For days, I kept editing the CSS and restarting my Firefox to change the .css with hit and trial getting more failures than success in the style actually being like I intended it to be. And then yesterday I was fed up with doing that and actually searched if there was a way of doing that without restarting Firefox (live).
+Surprise, surprise, it was not just possible but intentional. I wished I had known about this before. You just do the following things:
+
+Open the hamburger menu.
+Go to more tools.
+Click on web developer tools.
+The web developer interface will open, now on the top right side of the toolbox,
+Click on the 3 dot menu.
+Click on settings.
+Enable two options:
+
+
+    enable remote debugging
+
+
+
+    enable browser chrome and add-on debugging toolboxes.
+
+
+
+Then go to hamburger menu &ampgt; more tools &ampgt; browser toolbox or the shortcut Ctrl+Shift+Alt-I.
+Then it'll ask for confirmation with the following prompt:
+
+
+    An incoming request to permit remote debugging connection was detected. A remote client can take complete control over your browser!
+
+    Client Endpoint: 127.0.0.1:51146
+    Server Endpoint: 127.0.0.1:51141
+
+    Allow connection?
+
+
+
+Allow it and the toolbox opens. Go to the style editior from the menu.
+Find userChrome.css and enjoy live tinkering. When you are done, just click on save or Ctrl+S and it is permanent.
+For userContent.css just come to the Firefox homepage and hit Ctrl+Shift+C, go to the style editor and find the userContent.css.
+
+Finally
+I created this beautiful Firefox userstyle with a focus on minimalism and web content. It's called scifox because duh! It's my Firefox I will call it whatever I want. I am also working on a version with hidden panels that show up on hover to make it even more minimalistic and immersive. If you want to check that out, it's on the immersive branch.
+
+  
+  
+
+
+img: immersive homepage and tabs-expanded view
+
+
+
+img: immersive webpage view
+
+I have grown to prefer this minimal UI, and I absolutely love Adaptive Tab Bar Colour for making the whole UI follow the style the creator of the website intended. And one more thing, I am in love with uBlock Origin and can't live without it. So, if you are not a Firefox user give Firefox a go, I know it'll not disappoint you and even if it does Firefox is like Linux, you can pick and plug features make it work the way you want.
+
+Looking for the URL bar in webpage? Hover where it should be and you might just find it.
+
+" name=description><meta content="My mind goes hyperactive whenever exams are near, this semester is no different. I always find something very interesting to do every time an exam is around. This semester, I went into a rabbit hole of customizing Firefox to make it minimal (or immersive), I'd say.
+
+  
+  
+
+
+img: homepage and tabs-expanded view
+
+
+
+img: webpage view
+
+I am very much into customization, and I like to keep changing things around. When I was using gnome in arch Linux some years back I had come across rafaelmardojai/firefox-gnome-theme which I immediately installed to make my system consistent with the libadwaita style. That was the time when I realized the repo had almost 100% CSS in the GitHub language thingy bar. I knew what CSS was but never bothered to look into the Firefox theme, it simply worked.
+Fast-forward to a few months ago, the arc browser had the internet going crazy about it. I did like the UI being minimal and focused on viewing websites, hiding the settings that would normally show up all the time. Since you had to make an account to just use the browser, I didn't use it. Then I went searching for themes that replicated the UI on Firefox itself. I found KiKaraage/ArcWTF which I used for a while. This time I modified the CSS and restarted Firefox and kept on updating the CSS and restarting Firefox until I got what I wanted. I hated that I had to restart Firefox to apply the small change in userChrome.css that I was going to repeat because I didn't know what I was doing.
+I am currently using nix, so, eventually this was to come. I had to configure my Firefox with home-manager. This caused me to leave behind my arcWTF css because there was no easy way to simply put the chrome folder in its place with nix. But, there was a way to write userChrome within the nix configuration. This way of changing CSS was even more of a hassle because I had to first write it inside nix with no LSP for CSS, then I had to evaluate the nix file to put things into place and then restart Firefox.
+Aaah! That was really clunky but, I then made single userChrome.css and userContent.css files and then just imported them with nix to read the file instead of writing the CSS inside the .nix file, and it was a little better. Now started my journey to make the most minimal and at the same time good Firefox userstyle in a single .css file. I then found simplefox a goldmine for minimal Firefox config, but there was a single issue, I was used to the tabs being tree style and on the left sidebar. So, I installed sidebery and got some CSS from arcWTF to make the collapsed sidebar work.
+Then I got a new laptop, which currently has windows, but It has a gorgeous screen which in comparison to the previous laptop is the difference of 70% more DCI-P3 with a 3k OLED screen. I copied my CSS from my NixOS machine, and it was working pretty well. Until I had an idea to improve it further. For days, I kept editing the CSS and restarting my Firefox to change the .css with hit and trial getting more failures than success in the style actually being like I intended it to be. And then yesterday I was fed up with doing that and actually searched if there was a way of doing that without restarting Firefox (live).
+Surprise, surprise, it was not just possible but intentional. I wished I had known about this before. You just do the following things:
+
+Open the hamburger menu.
+Go to more tools.
+Click on web developer tools.
+The web developer interface will open, now on the top right side of the toolbox,
+Click on the 3 dot menu.
+Click on settings.
+Enable two options:
+
+
+    enable remote debugging
+
+
+
+    enable browser chrome and add-on debugging toolboxes.
+
+
+
+Then go to hamburger menu &ampgt; more tools &ampgt; browser toolbox or the shortcut Ctrl+Shift+Alt-I.
+Then it'll ask for confirmation with the following prompt:
+
+
+    An incoming request to permit remote debugging connection was detected. A remote client can take complete control over your browser!
+
+    Client Endpoint: 127.0.0.1:51146
+    Server Endpoint: 127.0.0.1:51141
+
+    Allow connection?
+
+
+
+Allow it and the toolbox opens. Go to the style editior from the menu.
+Find userChrome.css and enjoy live tinkering. When you are done, just click on save or Ctrl+S and it is permanent.
+For userContent.css just come to the Firefox homepage and hit Ctrl+Shift+C, go to the style editor and find the userContent.css.
+
+Finally
+I created this beautiful Firefox userstyle with a focus on minimalism and web content. It's called scifox because duh! It's my Firefox I will call it whatever I want. I am also working on a version with hidden panels that show up on hover to make it even more minimalistic and immersive. If you want to check that out, it's on the immersive branch.
+
+  
+  
+
+
+img: immersive homepage and tabs-expanded view
+
+
+
+img: immersive webpage view
+
+I have grown to prefer this minimal UI, and I absolutely love Adaptive Tab Bar Colour for making the whole UI follow the style the creator of the website intended. And one more thing, I am in love with uBlock Origin and can't live without it. So, if you are not a Firefox user give Firefox a go, I know it'll not disappoint you and even if it does Firefox is like Linux, you can pick and plug features make it work the way you want.
+
+Looking for the URL bar in webpage? Hover where it should be and you might just find it.
+
+" name=og:description><link rel="shortcut icon" href=/res/logo.svg type=image/x-icon><meta content="width=device-width,initial-scale=1" name=viewport><meta content="rgb(253, 246, 227)" name=theme-color><script defer src=/assets/js/copy-button.js></script><link href=https://github.com/scientiac rel=me><link href=mailto:spandan@scientiac.space rel=me><link href=https://webmention.io/scientiac.space/webmention rel=webmention><meta content=@scientiac@fosstodon.org name=fediverse:creator><body onload=updateThemeSelector();><div class=logo-container><a href=/> <div class=inner-logo-container></div> </a></div><nav data-style=classy><span class=main-li><a href=/>Main</a></span><span><a href=/blog>Blog</a></span><span><a href=/writings>Writings</a></span><span><a href=/syndications>POSSE</a></span><span><a href=/more>More</a></span></nav><section class=section-body><div class=container><div class=h-entry><div class=pagedate><time class="dt-published dateandtag hidden" datetime=2024-08-20T00:00:00Z> 2024-08-20 </time><code class=dateandtag>2024-08-20</code><code class="u-category dateandtag">Genre: Articles</code></div><a class="u-url hidden" href=https://scientiac.space/blog/firefox-userstyle/>https://scientiac.space/blog/firefox-userstyle/</a><div class=section><h1 class="p-name title">Beautifying Firefox with "chrome"</h1><div class="hidden p-author h-card"><a class=u-url href=https://scientiac.space rel=me> <img alt="Profile photo of scientiac" class=u-photo src=/res/thumbnail.png> <span class=p-name>scientiac</span> </a></div><div class=e-content><p>My mind goes hyperactive whenever exams are near, this semester is no different. I always find something very interesting to do every time an exam is around. This semester, I went into a rabbit hole of customizing Firefox to make it minimal (or immersive), I'd say.<div class=gallery style=flex-wrap:wrap;display:flex><img src=/images/firefox-userstyle/normal-home.png style=border-radius:1.75rem;width:19rem;padding:.25rem><img src=/images/firefox-userstyle/normal-tabs.png style=border-radius:1.75rem;width:19rem;padding:.25rem></div><div style=text-align:center><p><strong>img:</strong> <em>homepage and tabs-expanded view</em></div><p><img alt=normal-website src=/images/firefox-userstyle/normal-website.png><div style=text-align:center><p><strong>img:</strong> <em>webpage view</em></div><p>I am very much into customization, and I like to keep changing things around. When I was using gnome in arch Linux some years back I had come across <a href=https://github.com/rafaelmardojai/firefox-gnome-theme>rafaelmardojai/firefox-gnome-theme</a> which I immediately installed to make my system consistent with the <em>libadwaita</em> style. That was the time when I realized the repo had almost 100% CSS in the GitHub language thingy bar. I knew what CSS was but never bothered to look into the Firefox theme, it simply worked.<p>Fast-forward to a few months ago, the arc browser had the internet going crazy about it. I did like the UI being minimal and focused on viewing websites, hiding the settings that would normally show up all the time. Since you had to make an account to just use the browser, I didn't use it. Then I went searching for themes that replicated the UI on Firefox itself. I found <a href=https://github.com/KiKaraage/ArcWTF>KiKaraage/ArcWTF</a> which I used for a while. This time I modified the CSS and restarted Firefox and kept on updating the CSS and restarting Firefox until I got what I wanted. I hated that I had to restart Firefox to apply the small change in <code>userChrome.css</code> that I was going to repeat because I didn't know what I was doing.<p>I am currently using <code>nix</code>, so, eventually this was to come. I had to configure my Firefox with <code>home-manager</code>. This caused me to leave behind my arcWTF css because there was no easy way to simply put the chrome folder in its place with nix. But, there was a way to write <code>userChrome</code> within the nix configuration. This way of changing CSS was even more of a hassle because I had to first write it inside nix with no LSP for CSS, then I had to evaluate the nix file to put things into place and then restart Firefox.<p>Aaah! That was really clunky but, I then made single <code>userChrome.css</code> and <code>userContent.css</code> files and then just imported them with nix to read the file instead of writing the CSS inside the <code>.nix</code> file, and it was a little better. Now started my journey to make the most minimal and at the same time good Firefox userstyle in a single <code>.css</code> file. I then found <a href=https://github.com/migueravila/SimpleFox>simplefox</a> a goldmine for minimal Firefox config, but there was a single issue, I was used to the tabs being tree style and on the left sidebar. So, I installed <a href=https://addons.mozilla.org/en-US/firefox/addon/sidebery/>sidebery</a> and got some CSS from arcWTF to make the collapsed sidebar work.<p>Then I got a new laptop, which currently has windows, but It has a gorgeous screen which in comparison to the previous laptop is the difference of 70% more DCI-P3 with a 3k OLED screen. I copied my CSS from my NixOS machine, and it was working pretty well. Until I had an idea to improve it further. For days, I kept editing the CSS and restarting my Firefox to change the <code>.css</code> with hit and trial getting more failures than success in the style actually being like I intended it to be. And then yesterday I was fed up with doing that and actually searched if there was a way of doing that without restarting Firefox (live).<p>Surprise, surprise, it was not just possible but intentional. I wished I had known about this before. You just do the following things:<ol><li>Open the <code>hamburger menu</code>.<li>Go to <code>more tools</code>.<li>Click on <code>web developer tools</code>. The web developer interface will open, now on the top right side of the toolbox,<li>Click on the <code>3 dot menu</code>.<li>Click on <code>settings</code>.<li>Enable two options:</ol><pre style=color:#fdf4c1aa;background-color:#282828><code><span>
+</span><span>    enable remote debugging
+</span><span>
+</span></code></pre><pre style=color:#fdf4c1aa;background-color:#282828><code><span>
+</span><span>    enable browser chrome and add-on debugging toolboxes.
+</span><span>
+</span></code></pre><ol start=7><li>Then go to <code>hamburger menu > more tools > browser toolbox</code> or the shortcut <code>Ctrl+Shift+Alt-I</code>.<li>Then it'll ask for confirmation with the following prompt:</ol><pre style=color:#fdf4c1aa;background-color:#282828><code><span>
+</span><span>    An incoming request to permit remote debugging connection was detected. A remote client can take complete control over your browser!
+</span><span>
+</span><span>    Client Endpoint: 127.0.0.1:51146
+</span><span>    Server Endpoint: 127.0.0.1:51141
+</span><span>
+</span><span>    Allow connection?
+</span><span>
+</span></code></pre><ol start=9><li>Allow it and the toolbox opens. Go to the <code>style editior</code> from the menu.<li>Find <code>userChrome.css</code> and enjoy live tinkering. When you are done, just click on save or <code>Ctrl+S</code> and it is permanent.<li>For <code>userContent.css</code> just come to the Firefox homepage and hit <code>Ctrl+Shift+C</code>, go to the style editor and find the <code>userContent.css</code>.</ol><h2 id=finally>Finally</h2><p>I created this beautiful Firefox userstyle with a focus on minimalism and web content. It's called <a href=https://github.com/scientiac/scifox>scifox</a> because duh! It's my Firefox I will call it whatever I want. I am also working on a version with hidden panels that show up on hover to make it even more minimalistic and immersive. If you want to check that out, it's on the <a href=https://github.com/scientiac/scifox/tree/immersive>immersive</a> branch.<div class=gallery style=flex-wrap:wrap;display:flex><img src=/images/firefox-userstyle/immersive-home.png style=border-radius:1.75rem;width:19rem;padding:.25rem><img src=/images/firefox-userstyle/immersive-tabs.png style=border-radius:1.75rem;width:19rem;padding:.25rem></div><div style=text-align:center><p><strong>img:</strong> <em>immersive homepage and tabs-expanded view</em></div><p><img alt=website src=/images/firefox-userstyle/website.png><div style=text-align:center><p><strong>img:</strong> <em>immersive webpage view</em></div><p>I have grown to prefer this minimal UI, and I absolutely love <a href=https://addons.mozilla.org/en-US/firefox/addon/adaptive-tab-bar-colour/>Adaptive Tab Bar Colour</a> for making the whole UI follow the style the creator of the website intended. And one more thing, I am in love with <a href=https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/>uBlock Origin</a> and can't live without it. <strong>So, if you are not a Firefox user give Firefox a go, I know it'll not disappoint you and even if it does Firefox is like Linux, you can pick and plug features make it work the way you want.</strong><blockquote><p>Looking for the URL bar in webpage? Hover where it should be and you might just find it.</blockquote></div></div></div><div><hr><h2>Webmentions</h2><form action=https://webmention.io/scientiac.space/webmention class=webmention-form method=post><div id=email-comment><p>Have you written a <a href=https://indieweb.org/responses>response</a> to this? Let me know the URL, Or, you can send your response via <a href="mailto:iac@scientiac.space?subject=Reply%3A%20Beautifying%20Firefox%20with%20%22chrome%22">mail:</a><code>iac@scientiac.space</code></div><div class=send-webmention><input name=source type=url><button>Send Webmention</button></div><div><div class="ui message"></div></div><input name=target type=hidden value=https://scientiac.space/blog/firefox-userstyle/></form></div></div><script defer src=/assets/js/themeSelector.js></script></section><div class=hidden><a href=https://fosstodon.org/@scientiac rel=me>Mastodon</a></div><div class="hidden h-card"><img class="u-photo icon" alt=scientiac src=/res/thumbnail.png><a class="p-name u-url" href=https://scientiac.space rel=me>scientiac</a><p class=p-note>A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does.</div><footer><p class=codewithlove>I can't think of things to write on a footer. So, just <span class=main-background>imagine</span> something yourself.<p><a href=/atom.xml>RSS</a> | <a href=https://map.scientiac.space>research::map</a> | <a href=https://github.com/scientiac/scientiac.github.io target=_blank>Source Code</a><p>All articles are usable under <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank>CC BY-SA 4.0</a>.</footer><ol id=themeSelector reversed></ol>
