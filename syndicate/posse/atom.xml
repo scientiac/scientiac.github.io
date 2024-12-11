@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>scientiac::syntropy - POSSE</title>
+    <subtitle>A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://scientiac.space/syndicate/posse/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://scientiac.space"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2024-11-05T00:00:00+00:00</updated>
+    <id>https://scientiac.space/syndicate/posse/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Webmentions</title>
+        <published>2024-11-05T00:00:00+00:00</published>
+        <updated>2024-11-05T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2024-11-05/"/>
+        <id>https://scientiac.space/syndications/posse-2024-11-05/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2024-11-05/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;Indieweb is such a cool place. And the fact that you have webrings and
+webmentions makes it the most open and custom social media. The possibility of interactions and replies adds beauty with convenience to this unique form of communication.&lt;&#x2F;p&gt;
+&lt;p&gt;I just love it. Thanks &lt;a href=&quot;https:&#x2F;&#x2F;aaronparecki.com&#x2F;2018&#x2F;06&#x2F;30&#x2F;11&#x2F;your-first-webmention&quot;&gt;@aaronpk&lt;&#x2F;a&gt; for the tests.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Hurt</title>
+        <published>2024-11-04T00:00:00+00:00</published>
+        <updated>2024-11-04T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2024-11-04/"/>
+        <id>https://scientiac.space/syndications/posse-2024-11-04/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2024-11-04/">&lt;p&gt;Sometimes I want to hurt (not physically) people (when I am disappointed or dissatisfied).
+To maybe let them know that I am hurt (I know I Know it&#x27;s the wrong way).&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;d do things that would hurt me, to hurt them, but it hurts me back when they don&#x27;t feel a thing when the thing would have hurt me.
+Call it a weakness, call it &quot;doesn&#x27;t make sense&quot; but at last the one who gets hurt is the one who tried to hurt people (not those who hurt people).&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>What is Love?</title>
+        <published>2024-08-25T00:00:00+00:00</published>
+        <updated>2024-08-25T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2024-08-25/"/>
+        <id>https://scientiac.space/syndications/posse-2024-08-25/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2024-08-25/">&lt;center&gt;
+&lt;p&gt;Until next time,&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;em&gt;Love is when two people agree on what love is.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;code&gt;The Adventures of Scientiac, 2024&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;center&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Windblows</title>
+        <published>2024-07-31T00:00:00+00:00</published>
+        <updated>2024-07-31T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2024-07-31/"/>
+        <id>https://scientiac.space/syndications/posse-2024-07-31/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2024-07-31/">&lt;p&gt;I bought a new laptop. It&#x27;s Zenbook 14 OLED 2024, Ryzen 7 8840HS and well it came with Windows Home preinstalled as expected. I had never really daily drived windows. I had installed linux the first day I got my first laptop. Soooo, I am giving windows a try, it&#x27;s been some days and I haven&#x27;t used that many applicaitons.&lt;&#x2F;p&gt;
+&lt;p&gt;I have installed firefox and given it a nice css makeover, then I installed NixOS-WSL and set that as the default terminal and ported my terminal home manager config with git, bash, starship, and other tools over to it. And that&#x27;s all, I guess i will use the linux terminal and the windows GUI for some days now.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Breakdown</title>
+        <published>2024-05-25T00:00:00+00:00</published>
+        <updated>2024-05-25T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2024-05-25/"/>
+        <id>https://scientiac.space/syndications/posse-2024-05-25/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2024-05-25/">&lt;pre data-lang=&quot;text&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-text &quot;&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt; Did I grow old?
+&lt;&#x2F;span&gt;&lt;span&gt; Am I weak?
+&lt;&#x2F;span&gt;&lt;span&gt; Do I have something that nobody can change in me?
+&lt;&#x2F;span&gt;&lt;span&gt; Have I changed too much?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I stop writing?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I stop being curious?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I stop making things?
+&lt;&#x2F;span&gt;&lt;span&gt; Am I taking too much pressure?
+&lt;&#x2F;span&gt;&lt;span&gt; Am I hiding too much pressure?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I give up on asking for love?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I give up using the word &amp;quot;love&amp;quot;?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I give up myself being carefree?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I start pushing back everyone?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I fail too many times?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I start saying no to all?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I give up on responsibilities?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I give up on grammar?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I give up on being attractive?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I give up on sorries?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I?
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>The New Way</title>
+        <published>2024-04-23T00:00:00+00:00</published>
+        <updated>2024-04-23T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2024-04-23/"/>
+        <id>https://scientiac.space/syndications/posse-2024-04-23/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2024-04-23/">&lt;center&gt;
+&lt;p&gt;&lt;em&gt;It is only the way it is until we discover the new way it is, and then that is the way it is until we discover the new way it is, and so it goes until the world is no longer flat, electricity lights the night, and shoes are no longer tied with ribbons.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;code&gt;Poor Things, 2023&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;center&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>KDE Network Nepal</title>
+        <published>2024-02-27T00:00:00+00:00</published>
+        <updated>2024-02-27T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2024-02-27/"/>
+        <id>https://scientiac.space/syndications/posse-2024-02-27/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2024-02-27/">&lt;p&gt;The KDE Network is a group of KDE representatives in their respective cities&#x2F;countries promoting KDE, and it’s work in their local community. Additionally, they are responsible for helping to grow the community, and to act as a liaison between their local community and KDE.&lt;&#x2F;p&gt;
+&lt;p&gt;This is what I found when going through KDE wiki wondering how KDE as a community was structured. Seeing there were not many local groups listed, I wanted to contribute by forming a group here in Nepal. Hence, the introduction event with megarelease celebration.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;posse&#x2F;kde_network.png&quot; alt=&quot;KDE Network&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Attending GNOME.Asia 2023</title>
+        <published>2023-12-06T00:00:00+00:00</published>
+        <updated>2023-12-06T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-12-06/"/>
+        <id>https://scientiac.space/syndications/posse-2023-12-06/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-12-06/">&lt;p&gt;I&#x27;m back home from Kathmandu. This time it was an event from GNOME; the GNOME.Asia 2023. There were poeple from Fedora, GNOME, Phosh form different parts of world ; USA, Indonesia, India in Kathmandu, Nepal for a conference about FOSS. It was quite an event. Also, got to contribute to fedora by eating the 20th anniversary cake too😉, there should really be a badge for &quot;has eaten fedora cake&quot; in fedora badges.&lt;&#x2F;p&gt;
+&lt;p&gt;It was a very fun and educational experience. I realize that the people in FOSS are generally very generous, friendly and helpful.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>My First PC Game</title>
+        <published>2023-11-02T00:00:00+00:00</published>
+        <updated>2023-11-02T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-11-02/"/>
+        <id>https://scientiac.space/syndications/posse-2023-11-02/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-11-02/">&lt;p&gt;I&#x27;m not much of a gamer and haven&#x27;t gamed in a very long time even on mobile which was the only thing I had before I got my laptop.  Also, being a tinkerer, I spent most of my time tinkering with my Linux system and android custom ROMs.&lt;&#x2F;p&gt;
+&lt;p&gt;Today I felt like I was missing out a lot and kinda wanted to game. Gave it a quick search and found &quot;Hollow Knight&quot; which seems like my type of game so I purchased it on steam. Might as well call it my first desktop game. It feels special.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>You and What&#x27;s on Your Mind</title>
+        <published>2023-10-21T00:00:00+00:00</published>
+        <updated>2023-10-21T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-10-20/"/>
+        <id>https://scientiac.space/syndications/posse-2023-10-20/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-10-20/">&lt;p&gt;I think it&#x27;s normal to assume whats going one someone&#x27;s mind (prejudge) and make decisions based on it. Like, If I assume something about you and do something based on that assumption and you feel like I understand you, It&#x27;s a different feeling, a happy feeling. But, it&#x27;s a gamble, because what if the assumption is
+incorrect, what if how I acted ruined the interaction?&lt;&#x2F;p&gt;
+&lt;p&gt;So, I believe knowing a person requires a longer time then we want it to take and it will consist of mistakes and lucks that&#x27;ll slowly form a decent representation of a person in our mind. For a tech nerd like me the best example for the process of getting to know a person is like training an AI model. Like, look at how DALL.E could generate images a few years back and how it generates images in the current state.&lt;&#x2F;p&gt;
+&lt;p&gt;So, yeah! We don&#x27;t know a person within a month or even an year or a lifetime because knowing is only predicting what the other mind would think and it&#x27;s constantly changing and evolving. And when we think we know a person it&#x27;s only a close enough representation of the actual person in our head compared to what they really are, similar to DALL.E making images out of probability and assumptions.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Holidays and Plans</title>
+        <published>2023-10-04T00:00:00+00:00</published>
+        <updated>2023-10-04T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-10-04/"/>
+        <id>https://scientiac.space/syndications/posse-2023-10-04/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-10-04/">&lt;p&gt;3rd Semester of Computer Engineering is over now, and the vacation starts. This time, like all the semester endings, I have a lot of ideas and plans in mind and I hope to complete at least some of them if not all. Last vacation I looked into the Rust book and this holidays I want to try making a project in rust.&lt;&#x2F;p&gt;
+&lt;p&gt;The other thing is that I switched from Fedora to NixOS, the Nix language and the OS&#x27;s declerativeness has gotten me interested in Haskell and functional paradigm in general. Also, lambda calculus, currying, monads and other concepts originated from functional paradigm are very interesting.&lt;&#x2F;p&gt;
+&lt;p&gt;I hope to learn something flashy✨, something technical⚙ and something unique❄️ this holiday.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>GitHub Field Day</title>
+        <published>2023-08-14T00:00:00+00:00</published>
+        <updated>2023-08-14T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-08-14/"/>
+        <id>https://scientiac.space/syndications/posse-2023-08-14/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-08-14/">&lt;p&gt;I like the initiative by GitHub to bring like-minded people of tech in a single place by organising un-conferences around the globe. On one hand, I am excited to meet people like me but on the other hand, it&#x27;s GitHub(Microsoft) whose product I will become as the saying goes &quot;If you aren&#x27;t paying for the product, you are the product&quot;.&lt;&#x2F;p&gt;
+&lt;p&gt;Anyways, meeting my people is more important and about being a product, that should be handled strategically. I&#x27;ll try to include other git hosting platforms like gitlab, codeberg and forgejo whenever I say the word GitHub, think that&#x27;s more healthy.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>research::map</title>
+        <published>2023-07-24T00:00:00+00:00</published>
+        <updated>2023-07-24T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-07-27/"/>
+        <id>https://scientiac.space/syndications/posse-2023-07-27/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-07-27/">&lt;p&gt;I created a new section called &lt;a href=&quot;https:&#x2F;&#x2F;map.scientiac.space&quot;&gt;map.scientiac.space&lt;&#x2F;a&gt; to keep track of researches and notes I create throughout my journey in the tech world. It&#x27;s integrated with my obsidian workflow so, I can easily put in and out the things I want to track which is sooo cool!&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Mental Liquidity</title>
+        <published>2023-06-13T00:00:00+00:00</published>
+        <updated>2023-06-13T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-06-13/"/>
+        <id>https://scientiac.space/syndications/posse-2023-06-13/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-06-13/">&lt;p&gt;I came across a &lt;a href=&quot;https:&#x2F;&#x2F;collabfund.com&#x2F;blog&#x2F;mental-liquidity&#x2F;&quot;&gt;blog&lt;&#x2F;a&gt; post about Mental Liquidity, and it got me into thinking how people do not want to change their mind, especially when it comes to generationally gapped individuals. One&#x27;s beliefs can be drastically different from the other and yet none would listen to the other and look at it from their perspective as well. Humans have evolved learning things and passing the technique that helped them survive to the new generation, so it isn&#x27;t a big deal to assume that they survived fine with those beliefs, and it is far optimal to pass on that belief than to gamble with new opinions.&lt;&#x2F;p&gt;
+&lt;p&gt;Anyway, I hope it doesn&#x27;t just remain as a new term in my vocabulary. I believe that one should be able to change their mind on things, change my mind!&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Officially a Space Explorer</title>
+        <published>2023-05-03T00:00:00+00:00</published>
+        <updated>2023-05-03T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-05-03/"/>
+        <id>https://scientiac.space/syndications/posse-2023-05-03/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-05-03/">&lt;center&gt;
+&lt;p&gt;&lt;strong&gt;Domain&lt;&#x2F;strong&gt;&lt;br &#x2F;&gt;
+&lt;code&gt;dō-mān′&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;center&gt;
+&lt;ol&gt;
+&lt;li&gt;A territory over which rule or control is exercised.&lt;&#x2F;li&gt;
+&lt;li&gt;A sphere of activity, influence, or knowledge: synonym: field.&lt;&#x2F;li&gt;
+&lt;li&gt;The set of all possible values of an independent variable of a function.&lt;&#x2F;li&gt;
+&lt;li&gt;An open connected set that contains at least one point.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;Yep! I have my own domain now. My own territory, my own space, &lt;a href=&quot;https:&#x2F;&#x2F;scientiac.space&quot;&gt;scientiac.space&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Eww! Yuck!</title>
+        <published>2023-05-02T00:00:00+00:00</published>
+        <updated>2023-05-02T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-05-02/"/>
+        <id>https://scientiac.space/syndications/posse-2023-05-02/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-05-02/">&lt;p&gt;Gnome is officially out of the system now. I loved it but I love hyprland better now. Anyways, the consistency with GTK apps was what I liked about it and the essence of that still remains in hyprland with EWW which is configured in yuck, hence the title.&lt;&#x2F;p&gt;
+&lt;p&gt;EWW works as almost all the things, but some standalone apps are still better to have, so I have used swaync as the notification daemon and rofi-wayland as the launcher. Overall the system is pretty usable now, and I just love hyprland&#x27;s animations.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Chapter Two: Sophomore</title>
+        <published>2023-04-30T00:00:00+00:00</published>
+        <updated>2023-04-30T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-04-30/"/>
+        <id>https://scientiac.space/syndications/posse-2023-04-30/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-04-30/">&lt;p&gt;Yes! The freshman year is over now. And I already feel like I have more responsibilities than usual. It feels good for some time until the feeling that you&#x27;re getting old hits you. This year passed with a blink of an eye, I remember getting inside the college and feeling exited about what I was going to be. Let&#x27;s see how the life as a middle child in the college goes. Wow! Three more binks and I&#x27;ll be a graduate, it&#x27;s scary.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Exponential Fluctuations</title>
+        <published>2023-04-29T00:00:00+00:00</published>
+        <updated>2023-04-29T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-04-29-second/"/>
+        <id>https://scientiac.space/syndications/posse-2023-04-29-second/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-04-29-second/">&lt;center&gt;
+&lt;p&gt;Sometimes It&#x27;s the end of the world,&lt;br &#x2F;&gt;
+sometimes MEH! It is what it is.&lt;br &#x2F;&gt;
+The same thing kills you sometimes,&lt;br &#x2F;&gt;
+and sometimes it makes you fly.&lt;br &#x2F;&gt;
+It&#x27;s never neutral, never stable,&lt;br &#x2F;&gt;
+never in an equilibrium.&lt;br &#x2F;&gt;
+6 hours worth of contemplation,&lt;br &#x2F;&gt;
+a minute will change it all.&lt;&#x2F;p&gt;
+&lt;&#x2F;center&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Experimenting with Feelings</title>
+        <published>2023-04-29T00:00:00+00:00</published>
+        <updated>2023-04-29T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-04-29/"/>
+        <id>https://scientiac.space/syndications/posse-2023-04-29/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-04-29/">&lt;p&gt;Yeah! Yeah! Yeah! This is one of those hot takes on &quot;Love&quot; ooOooh!!&lt;&#x2F;p&gt;
+&lt;p&gt;Human nature is weird. Like, how someone would behave when they feel like they&#x27;re loved and how the behavior would change when they feel like they are indifferent to them. It&#x27;s quite fascinating that the behavioral and psychological pattern change, how cute turns into offensive and feelings turn into conscious infatuation. Apparently hope plays quite a big role in it. One could argue that &quot;love&quot; is nothing but just hopefulness. And when one gets hopeless, everybody knows how that goes.&lt;&#x2F;p&gt;
+&lt;p&gt;This is neither a paper nor a thesis, it&#x27;s just my take on love today. So, I suppose it&#x27;s better incomplete and a hot take than a &quot;WHAT I SAY IS ALWAYS TRUE&quot; of a vibe. Bye!&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Some Fleabag</title>
+        <published>2023-04-28T00:00:00+00:00</published>
+        <updated>2023-04-28T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-04-28/"/>
+        <id>https://scientiac.space/syndications/posse-2023-04-28/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-04-28/">&lt;p&gt;I kinda binged fleabag and it was quite awesome. It&#x27;s more of a six-hour movie than a show, I&#x27;d say. I had watched season 1 and season 2 wasn&#x27;t difficult to finish. This is one of those series which I hated the first season, and it made my mind with the second. It&#x27;s a masterpiece as it ended with an actual ending and wasn&#x27;t extended due to public demand or just money.&lt;&#x2F;p&gt;
+&lt;p&gt;Yeah! The fact that it ended is my second favorite thing about the show.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Continuing the Redesign</title>
+        <published>2023-04-27T00:00:00+00:00</published>
+        <updated>2023-04-27T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-04-27/"/>
+        <id>https://scientiac.space/syndications/posse-2023-04-27/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-04-27/">&lt;p&gt;I made link previews, made logo dynamic with color changes, stylized POSSE views and little improvements like: isolating readable.css and improving the paginator layout.&lt;&#x2F;p&gt;
+&lt;p&gt;And talking about my achievement today, I unlocked a pimple on my face due to sleeplessness. Yayyyy!&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Second Day</title>
+        <published>2023-04-26T00:00:00+00:00</published>
+        <updated>2023-04-26T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-04-26/"/>
+        <id>https://scientiac.space/syndications/posse-2023-04-26/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-04-26/">&lt;p&gt;This is day two of redesigning the site, it is going fine, I added designs, and it&#x27;s cool now. Some new fonts and SVG backgrounds, and we have a completely different design. I&#x27;m loving it. My favorite theme if you ask is everforest-dark every time.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>POSSE</title>
+        <published>2023-04-25T00:00:00+00:00</published>
+        <updated>2023-04-25T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-04-25/"/>
+        <id>https://scientiac.space/syndications/posse-2023-04-25/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-04-25/">&lt;p&gt;So, this is the mini-blog thingy that I was planning to make for some time now. And maybe I&#x27;ll share my thoughts following POSSE (Publish on your Own Site, Syndicate Elsewhere) and share the link to this to everywhere else. I have an RSS feed for this, which I&#x27;ll try to use for fetching and scripting if needed and anybody can just use it normally as intended as well.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>
