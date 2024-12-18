@@ -19,7 +19,7 @@
       <div id="operator_info">
         <div class="left">
           <h3>Error ID:</h3>
-          <span class="error">5c905a0c</span>
+          <span class="error">1c410a59</span>
           <h3>Details:</h3>
           <p>Web application could not be started by the Phusion Passenger application server.</p>
           <p class="bold">Please read <a href="https://www.phusionpassenger.com/library/admin/log_file/" class="plain">the Passenger log file</a> (search for the Error ID) to find the details of the error.</p>
