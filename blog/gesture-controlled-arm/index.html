@@ -1,0 +1,923 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><title>scientiac::syntropy</title><link href=/assets/css/themes.css rel=stylesheet><link href=/assets/css/readable.css rel=stylesheet><link href=/assets/css/global.css rel=stylesheet><link href=/assets/css/fonts.css rel=stylesheet><link href=/assets/css/logo.css rel=stylesheet><link href=/assets/css/genre/Reports.css rel=stylesheet><link href=https://scientiac.space/atom.xml rel=alternate title=RSS type=application/atom+xml><meta content=Reports property=og:type><meta content=scientiac.space property=og:site_name><meta content=https://scientiac.space/res/thumbnail-light.png property=og:image><title>Project Pieyes</title><meta content="Project Pieyes" name=og:title><meta content="
+Introduction
+The purpose of this report is to document the process of building a CV robotic arm prototype using Arduino. The arm is designed to be controlled with natural hand gestures removing the need to look at the buttons on a screen or a controller to control it.
+Materials Used:
+
+Arduino Uno
+16 Channel Servo driver
+Buck Converter
+Jumper Cables
+3D Printed MK2 Chassis
+4 Servos
+A Portable Computer with Camera
+
+Software Used:
+
+Arduino IDE V2
+Python 3
+
+Design:
+The first step in building the CV controlled arm is to make a schematic of it. The arm is based on the MK2 Model, which is pretty easy to 3D-print and assemble. 4 servos are used for the base, the lower arm, the upper arm and the gripper. The servos are connected to the Servo Driver and the Servo Driver is connected to 5 volts DC power. The Arduino is used to control the Servo Driver to send PWM signals to servo.
+The decisions for what signals to send for recognized gestures handled by a Python script which sends serial to Arduino via the USB. The Arduino receives the signal which is now converted to mechanical output.
+Construction:
+The assembly of the base is a bit tricky with gears and servos to be attached to it, but the upper part is easily attached. The four servos are placed on the right place according to MK2 schematics and are connected to 16 Channel Servo Driver. (I connected 0,2,4 and 7 as base, lower arm, upper arm and gripper respectively on the Servo Driver.) While connecting the Servo Driver to Arduino; the VCC is connected to 5 volts and Grounds of Arduino and Servo Driver are connected. From Arduino the analogue 5 pin is connected to SCL and analogue 4 pin is connected to SDA respectively.(This connects the Servo Driver to the Arduino.)
+The servo diver is connected to 5 volts DC converted from 12 volts power supply using a buck converter. USB connected to the Arduino supplies power to Arduino as well as the Servo Driver but not the Servos connected to the Driver. The USB also doubles as a data transmission device to send serial input to the Arduino from the laptop running the python script.
+Programming
+In Arduino:
+
+#include &amplt;Wire.h&ampgt;
+#include &amplt;Adafruit_PWMServoDriver.h&ampgt;
+
+// called this way, it uses the default address 0x40
+Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x40);
+
+#define SERVOMIN 100   // This is the &amp#39;minimum&amp#39; pulse length count (out of 4096)
+#define SERVOMAX 450   // This is the &amp#39;maximum&amp#39; pulse length count (out of 4096)
+#define SERVO_FREQ 50  // Analog servos run at ~50 Hz updates
+
+// our servo # counter
+uint8_t servonum = 0;
+char prevSerial = &amp#39;\0&amp#39;;
+char data;
+
+// Setting the default state of the arm.
+int val1 = 312, val2 = 350, val3 = 174, val4 = 0;
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println(&ampquot;Running...&ampquot;);
+
+  pwm.begin();
+  pwm.setOscillatorFrequency(27000000);
+  pwm.setPWMFreq(SERVO_FREQ);
+
+  delay(10);
+}
+
+void loop() {
+
+  // checking if serial is available or not and setting values to &ampquot;data&ampquot; as soon as the serial changes
+  if (Serial.available() &ampgt; 0) {
+    data = Serial.read();
+
+    if (data == &amp#39;W&amp#39;) {
+      if (val4 &amplt; SERVOMAX) {
+        Serial.print(&ampquot;Gripper IN&ampquot;);
+        Serial.println(val4);
+        pwm.setPWM(7, 0, val4);
+        val4 += 4;
+      }
+    }
+
+    if (data == &amp#39;A&amp#39;) {
+      if (val4 &ampgt; SERVOMIN) {
+        Serial.print(&ampquot;Gripper OUT&ampquot;);
+        Serial.println(val4);
+        pwm.setPWM(7, 0, val4);
+        val4 -= 4;
+      }
+    }
+
+    if (data == &amp#39;Y&amp#39;) {
+      if (val2 &amplt; SERVOMAX) {
+        Serial.print(&ampquot;Arm Base IN&ampquot;);
+        Serial.println(val2);
+        pwm.setPWM(2, 0, val2);
+        val2 += 4;
+      }
+    }
+
+    if (data == &amp#39;C&amp#39;) {
+      if (val2 &ampgt; SERVOMIN) {
+        Serial.print(&ampquot;Arm Base OUT&ampquot;);
+        Serial.println(val2);
+        pwm.setPWM(2, 0, val2);
+        val2 -= 4;
+      }
+    }
+
+    if (data == &amp#39;B&amp#39;) {
+      if (val3 &amplt; SERVOMAX) {
+        Serial.print(&ampquot;Arm Top IN&ampquot;);
+        Serial.println(val3);
+        pwm.setPWM(4, 0, val3);
+        val3 += 4;
+      }
+    }
+
+    if (data == &amp#39;X&amp#39;) {
+      if (val3 &ampgt; SERVOMIN) {
+        Serial.print(&ampquot;Arm Top OUT&ampquot;);
+        Serial.println(val3);
+        pwm.setPWM(4, 0, val3);
+        val3 -= 4;
+      }
+    }
+
+    if (data == &amp#39;D&amp#39;) {
+      if (val1 &amplt; SERVOMAX) {
+        Serial.print(&ampquot;Base IN&ampquot;);
+        Serial.println(val1);
+        pwm.setPWM(0, 0, val1);
+        val1 += 4;
+      }
+    }
+
+    if (data == &amp#39;Z&amp#39;) {
+      if (val1 &ampgt; SERVOMIN) {
+        Serial.print(&ampquot;Base IN&ampquot;);
+        Serial.println(val1);
+        pwm.setPWM(0, 0, val1);
+        val1 -= 4;
+      }
+    }
+
+    if (data == &amp#39;S&amp#39;) {
+      Serial.println(&ampquot;stop&ampquot;);
+    }
+  }
+}
+
+
+In Laptop:
+
+#!/bin/python
+
+import cv2
+import mediapipe as mp
+import math
+from serial import Serial
+
+mp_drawing = mp.solutions.drawing_utils
+mp_hands = mp.solutions.hands
+
+def calculate_distance(x1, y1, x2, y2):
+    return math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+
+def is_fist(landmarks):
+    # Check if all finger tips are below their corresponding middle joints
+    return (
+        landmarks[mp_hands.HandLandmark.THUMB_TIP].y &amplt; landmarks[mp_hands.HandLandmark.THUMB_IP].y and
+        landmarks[mp_hands.HandLandmark.INDEX_FINGER_TIP].y &amplt; landmarks[mp_hands.HandLandmark.INDEX_FINGER_PIP].y and
+        landmarks[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].y &amplt; landmarks[mp_hands.HandLandmark.MIDDLE_FINGER_PIP].y and
+        landmarks[mp_hands.HandLandmark.RING_FINGER_TIP].y &amplt; landmarks[mp_hands.HandLandmark.RING_FINGER_PIP].y and
+        landmarks[mp_hands.HandLandmark.PINKY_TIP].y &amplt; landmarks[mp_hands.HandLandmark.PINKY_PIP].y
+    )
+
+def get_hand_side(landmarks):
+    # Check if the wrist is to the left or right of the index finger tip
+    if landmarks[mp_hands.HandLandmark.WRIST].x &amplt; landmarks[mp_hands.HandLandmark.INDEX_FINGER_TIP].x:
+        return &ampquot;Left&ampquot;
+    else:
+        return &ampquot;Right&ampquot;
+
+def main():
+    cap = cv2.VideoCapture(0)
+
+    with mp_hands.Hands(max_num_hands=1) as hands:
+        while cap.isOpened():
+            ret, frame = cap.read()
+
+            if not ret:
+                print(&ampquot;Unable to capture frame.&ampquot;)
+                break
+
+            # Flip the frame horizontally to mirror the image
+            frame = cv2.flip(frame, 1)
+
+            # Convert the image from BGR to RGB
+            image_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+            # Process the image with MediaPipe Hands
+            results = hands.process(image_rgb)
+
+            # Check for hand landmarks
+            if results.multi_hand_landmarks:
+                for hand_landmarks in results.multi_hand_landmarks:
+                    # Draw hand landmarks on the image
+                    mp_drawing.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+
+                    # Get the coordinates of the index finger and thumb landmarks
+                    index_finger = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
+                    thumb = hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_TIP]
+                    wrist = hand_landmarks.landmark[mp_hands.HandLandmark.WRIST]
+
+                    # Convert landmark coordinates to pixel values
+                    height, width, _ = frame.shape
+                    x1, y1 = int(index_finger.x * width), int(index_finger.y * height)
+                    x2, y2 = int(thumb.x * width), int(thumb.y * height)
+
+                    # Calculate the distance between the index finger and thumb
+                    distance = calculate_distance(x1, y1, x2, y2)
+
+                    # Count the number of fingers that are up
+                    fingers_up = 0
+                    landmarks = hand_landmarks.landmark
+                    if landmarks[mp_hands.HandLandmark.THUMB_TIP].y &amplt; landmarks[mp_hands.HandLandmark.THUMB_IP].y:
+                        fingers_up += 1
+                    if landmarks[mp_hands.HandLandmark.INDEX_FINGER_TIP].y &amplt; landmarks[mp_hands.HandLandmark.INDEX_FINGER_PIP].y:
+                        fingers_up += 1
+                    if landmarks[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].y &amplt; landmarks[mp_hands.HandLandmark.MIDDLE_FINGER_PIP].y:
+                        fingers_up += 1
+                    if landmarks[mp_hands.HandLandmark.RING_FINGER_TIP].y &amplt; landmarks[mp_hands.HandLandmark.RING_FINGER_PIP].y:
+                        fingers_up += 1
+                    if landmarks[mp_hands.HandLandmark.PINKY_TIP].y &amplt; landmarks[mp_hands.HandLandmark.PINKY_PIP].y:
+                        fingers_up += 1
+
+                    # Determine if the hand is right or left
+                    hand_side = get_hand_side(hand_landmarks.landmark)
+
+                    # Determine if there is a fist or not
+                    is_hand_fist = is_fist(hand_landmarks.landmark)
+
+                    # Display the number of fingers, distance, hand side, and fist status on the image
+                    cv2.putText(frame, str(fingers_up), (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                    cv2.putText(frame, str(int(distance)), (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                    cv2.putText(frame, hand_side, (10, 110), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                    cv2.putText(frame, str(is_hand_fist), (10, 150), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+
+                    # Combine the values
+                    combined_values = [fingers_up, int(distance), hand_side, str(is_hand_fist)]
+
+                    # Print the combined values
+                    print(combined_values)
+
+                    # Print the corresponding letter based on the conditions
+                    if fingers_up == 2 and distance &amplt; 60:
+                        print(&ampquot;Gripper IN&ampquot;)                    
+                        input_value = &amp#39;A&amp#39;
+                        ardu = Serial(&amp#39;/dev/ttyUSB0&amp#39;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    elif fingers_up == 2 and distance &ampgt; 60:
+                        print(&ampquot;Gripper OUT&ampquot;)
+                        input_value = &amp#39;W&amp#39;
+                        ardu = Serial(&amp#39;/dev/ttyUSB0&amp#39;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    elif fingers_up == 4 and hand_side == &ampquot;Right&ampquot; and not is_hand_fist:
+                        print(&ampquot;Arm Base IN&ampquot;)
+                        input_value = &amp#39;C&amp#39;
+                        ardu = Serial(&amp#39;/dev/ttyUSB0&amp#39;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    elif fingers_up == 4 and hand_side == &ampquot;Left&ampquot; and not is_hand_fist:
+                        print(&ampquot;Arm Base OUT&ampquot;)
+                        input_value = &amp#39;Y&amp#39;
+                        ardu = Serial(&amp#39;/dev/ttyUSB0&amp#39;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    elif not is_hand_fist and hand_side == &ampquot;Right&ampquot;:
+                        print(&ampquot;Arm Top IN&ampquot;)
+                        input_value = &amp#39;B&amp#39;
+                        ardu = Serial(&amp#39;/dev/ttyUSB0&amp#39;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    elif not is_hand_fist and hand_side == &ampquot;Left&ampquot;:
+                        print(&ampquot;Arm Top OUT&ampquot;)
+                        input_value = &amp#39;X&amp#39;
+                        ardu = Serial(&amp#39;/dev/ttyUSB0&amp#39;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    elif fingers_up == 5 and hand_side == &ampquot;Right&ampquot;:
+                        print(&ampquot;Base IN&ampquot;)
+                        input_value = &amp#39;D&amp#39;
+                        ardu = Serial(&amp#39;/dev/ttyUSB0&amp#39;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    elif fingers_up == 5 and hand_side == &ampquot;Left&ampquot;:
+                        print(&ampquot;Base OUT&ampquot;)
+                        input_value = &amp#39;Z&amp#39;
+                        ardu = Serial(&amp#39;/dev/ttyUSB0&amp#39;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    else:
+                        print(&ampquot;STOP&ampquot;)
+                        input_value = &amp#39;S&amp#39;
+                        ardu = Serial(&amp#39;/dev/ttyUSB0&amp#39;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+            # Display the mirrored image with landmarks
+            cv2.imshow(&amp#39;Finger Tracking&amp#39;, frame)
+
+            # Exit loop when &amp#39;q&amp#39; is pressed
+            if cv2.waitKey(1) &ampamp; 0xFF == ord(&amp#39;q&amp#39;):
+                break
+
+    cap.release()
+    cv2.destroyAllWindows()
+
+if __name__ == &amp#39;__main__&amp#39;:
+    main()
+
+
+Testing:
+The arm was completed, and it was time to test it. The servos were connected to power supply and the USB was connected to the Arduino. With the necessary code uploaded to the Arduino, the python script was run, and hand gestures were read from the computer which then converted to Serial signals and the code in Arduino interprets those Serial signals as per the uploaded code. Here, in the first trial reading the Front and Back side of the hand gave same results, I replaced the code for Left and Right aligned hand, which showed Right when I showed my right-hand palm to the Camera, and left when I showed my right-hand back to the camera, and vice-versa for the left hand. Which fixed the issue.
+Challenges and Solutions:
+There were not many challenges to make a working prototype which my arm is at the moment. But further improvement on the gestures are going to be challenging like; to read and interpret natural human arm movements in digital form and to match the movement of robot arm with an actual human arm.
+Conclusion:
+In conclusion, the CV robotic arm is a working prototype for better control of devices requiring less time to adapt. It helps people to be familiar with using complex devices like robotic arm in a very short period of time.
+" name=description><meta content="
+Introduction
+The purpose of this report is to document the process of building a CV robotic arm prototype using Arduino. The arm is designed to be controlled with natural hand gestures removing the need to look at the buttons on a screen or a controller to control it.
+Materials Used:
+
+Arduino Uno
+16 Channel Servo driver
+Buck Converter
+Jumper Cables
+3D Printed MK2 Chassis
+4 Servos
+A Portable Computer with Camera
+
+Software Used:
+
+Arduino IDE V2
+Python 3
+
+Design:
+The first step in building the CV controlled arm is to make a schematic of it. The arm is based on the MK2 Model, which is pretty easy to 3D-print and assemble. 4 servos are used for the base, the lower arm, the upper arm and the gripper. The servos are connected to the Servo Driver and the Servo Driver is connected to 5 volts DC power. The Arduino is used to control the Servo Driver to send PWM signals to servo.
+The decisions for what signals to send for recognized gestures handled by a Python script which sends serial to Arduino via the USB. The Arduino receives the signal which is now converted to mechanical output.
+Construction:
+The assembly of the base is a bit tricky with gears and servos to be attached to it, but the upper part is easily attached. The four servos are placed on the right place according to MK2 schematics and are connected to 16 Channel Servo Driver. (I connected 0,2,4 and 7 as base, lower arm, upper arm and gripper respectively on the Servo Driver.) While connecting the Servo Driver to Arduino; the VCC is connected to 5 volts and Grounds of Arduino and Servo Driver are connected. From Arduino the analogue 5 pin is connected to SCL and analogue 4 pin is connected to SDA respectively.(This connects the Servo Driver to the Arduino.)
+The servo diver is connected to 5 volts DC converted from 12 volts power supply using a buck converter. USB connected to the Arduino supplies power to Arduino as well as the Servo Driver but not the Servos connected to the Driver. The USB also doubles as a data transmission device to send serial input to the Arduino from the laptop running the python script.
+Programming
+In Arduino:
+
+#include &amplt;Wire.h&ampgt;
+#include &amplt;Adafruit_PWMServoDriver.h&ampgt;
+
+// called this way, it uses the default address 0x40
+Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x40);
+
+#define SERVOMIN 100   // This is the &amp#39;minimum&amp#39; pulse length count (out of 4096)
+#define SERVOMAX 450   // This is the &amp#39;maximum&amp#39; pulse length count (out of 4096)
+#define SERVO_FREQ 50  // Analog servos run at ~50 Hz updates
+
+// our servo # counter
+uint8_t servonum = 0;
+char prevSerial = &amp#39;\0&amp#39;;
+char data;
+
+// Setting the default state of the arm.
+int val1 = 312, val2 = 350, val3 = 174, val4 = 0;
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println(&ampquot;Running...&ampquot;);
+
+  pwm.begin();
+  pwm.setOscillatorFrequency(27000000);
+  pwm.setPWMFreq(SERVO_FREQ);
+
+  delay(10);
+}
+
+void loop() {
+
+  // checking if serial is available or not and setting values to &ampquot;data&ampquot; as soon as the serial changes
+  if (Serial.available() &ampgt; 0) {
+    data = Serial.read();
+
+    if (data == &amp#39;W&amp#39;) {
+      if (val4 &amplt; SERVOMAX) {
+        Serial.print(&ampquot;Gripper IN&ampquot;);
+        Serial.println(val4);
+        pwm.setPWM(7, 0, val4);
+        val4 += 4;
+      }
+    }
+
+    if (data == &amp#39;A&amp#39;) {
+      if (val4 &ampgt; SERVOMIN) {
+        Serial.print(&ampquot;Gripper OUT&ampquot;);
+        Serial.println(val4);
+        pwm.setPWM(7, 0, val4);
+        val4 -= 4;
+      }
+    }
+
+    if (data == &amp#39;Y&amp#39;) {
+      if (val2 &amplt; SERVOMAX) {
+        Serial.print(&ampquot;Arm Base IN&ampquot;);
+        Serial.println(val2);
+        pwm.setPWM(2, 0, val2);
+        val2 += 4;
+      }
+    }
+
+    if (data == &amp#39;C&amp#39;) {
+      if (val2 &ampgt; SERVOMIN) {
+        Serial.print(&ampquot;Arm Base OUT&ampquot;);
+        Serial.println(val2);
+        pwm.setPWM(2, 0, val2);
+        val2 -= 4;
+      }
+    }
+
+    if (data == &amp#39;B&amp#39;) {
+      if (val3 &amplt; SERVOMAX) {
+        Serial.print(&ampquot;Arm Top IN&ampquot;);
+        Serial.println(val3);
+        pwm.setPWM(4, 0, val3);
+        val3 += 4;
+      }
+    }
+
+    if (data == &amp#39;X&amp#39;) {
+      if (val3 &ampgt; SERVOMIN) {
+        Serial.print(&ampquot;Arm Top OUT&ampquot;);
+        Serial.println(val3);
+        pwm.setPWM(4, 0, val3);
+        val3 -= 4;
+      }
+    }
+
+    if (data == &amp#39;D&amp#39;) {
+      if (val1 &amplt; SERVOMAX) {
+        Serial.print(&ampquot;Base IN&ampquot;);
+        Serial.println(val1);
+        pwm.setPWM(0, 0, val1);
+        val1 += 4;
+      }
+    }
+
+    if (data == &amp#39;Z&amp#39;) {
+      if (val1 &ampgt; SERVOMIN) {
+        Serial.print(&ampquot;Base IN&ampquot;);
+        Serial.println(val1);
+        pwm.setPWM(0, 0, val1);
+        val1 -= 4;
+      }
+    }
+
+    if (data == &amp#39;S&amp#39;) {
+      Serial.println(&ampquot;stop&ampquot;);
+    }
+  }
+}
+
+
+In Laptop:
+
+#!/bin/python
+
+import cv2
+import mediapipe as mp
+import math
+from serial import Serial
+
+mp_drawing = mp.solutions.drawing_utils
+mp_hands = mp.solutions.hands
+
+def calculate_distance(x1, y1, x2, y2):
+    return math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+
+def is_fist(landmarks):
+    # Check if all finger tips are below their corresponding middle joints
+    return (
+        landmarks[mp_hands.HandLandmark.THUMB_TIP].y &amplt; landmarks[mp_hands.HandLandmark.THUMB_IP].y and
+        landmarks[mp_hands.HandLandmark.INDEX_FINGER_TIP].y &amplt; landmarks[mp_hands.HandLandmark.INDEX_FINGER_PIP].y and
+        landmarks[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].y &amplt; landmarks[mp_hands.HandLandmark.MIDDLE_FINGER_PIP].y and
+        landmarks[mp_hands.HandLandmark.RING_FINGER_TIP].y &amplt; landmarks[mp_hands.HandLandmark.RING_FINGER_PIP].y and
+        landmarks[mp_hands.HandLandmark.PINKY_TIP].y &amplt; landmarks[mp_hands.HandLandmark.PINKY_PIP].y
+    )
+
+def get_hand_side(landmarks):
+    # Check if the wrist is to the left or right of the index finger tip
+    if landmarks[mp_hands.HandLandmark.WRIST].x &amplt; landmarks[mp_hands.HandLandmark.INDEX_FINGER_TIP].x:
+        return &ampquot;Left&ampquot;
+    else:
+        return &ampquot;Right&ampquot;
+
+def main():
+    cap = cv2.VideoCapture(0)
+
+    with mp_hands.Hands(max_num_hands=1) as hands:
+        while cap.isOpened():
+            ret, frame = cap.read()
+
+            if not ret:
+                print(&ampquot;Unable to capture frame.&ampquot;)
+                break
+
+            # Flip the frame horizontally to mirror the image
+            frame = cv2.flip(frame, 1)
+
+            # Convert the image from BGR to RGB
+            image_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+            # Process the image with MediaPipe Hands
+            results = hands.process(image_rgb)
+
+            # Check for hand landmarks
+            if results.multi_hand_landmarks:
+                for hand_landmarks in results.multi_hand_landmarks:
+                    # Draw hand landmarks on the image
+                    mp_drawing.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+
+                    # Get the coordinates of the index finger and thumb landmarks
+                    index_finger = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
+                    thumb = hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_TIP]
+                    wrist = hand_landmarks.landmark[mp_hands.HandLandmark.WRIST]
+
+                    # Convert landmark coordinates to pixel values
+                    height, width, _ = frame.shape
+                    x1, y1 = int(index_finger.x * width), int(index_finger.y * height)
+                    x2, y2 = int(thumb.x * width), int(thumb.y * height)
+
+                    # Calculate the distance between the index finger and thumb
+                    distance = calculate_distance(x1, y1, x2, y2)
+
+                    # Count the number of fingers that are up
+                    fingers_up = 0
+                    landmarks = hand_landmarks.landmark
+                    if landmarks[mp_hands.HandLandmark.THUMB_TIP].y &amplt; landmarks[mp_hands.HandLandmark.THUMB_IP].y:
+                        fingers_up += 1
+                    if landmarks[mp_hands.HandLandmark.INDEX_FINGER_TIP].y &amplt; landmarks[mp_hands.HandLandmark.INDEX_FINGER_PIP].y:
+                        fingers_up += 1
+                    if landmarks[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].y &amplt; landmarks[mp_hands.HandLandmark.MIDDLE_FINGER_PIP].y:
+                        fingers_up += 1
+                    if landmarks[mp_hands.HandLandmark.RING_FINGER_TIP].y &amplt; landmarks[mp_hands.HandLandmark.RING_FINGER_PIP].y:
+                        fingers_up += 1
+                    if landmarks[mp_hands.HandLandmark.PINKY_TIP].y &amplt; landmarks[mp_hands.HandLandmark.PINKY_PIP].y:
+                        fingers_up += 1
+
+                    # Determine if the hand is right or left
+                    hand_side = get_hand_side(hand_landmarks.landmark)
+
+                    # Determine if there is a fist or not
+                    is_hand_fist = is_fist(hand_landmarks.landmark)
+
+                    # Display the number of fingers, distance, hand side, and fist status on the image
+                    cv2.putText(frame, str(fingers_up), (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                    cv2.putText(frame, str(int(distance)), (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                    cv2.putText(frame, hand_side, (10, 110), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                    cv2.putText(frame, str(is_hand_fist), (10, 150), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+
+                    # Combine the values
+                    combined_values = [fingers_up, int(distance), hand_side, str(is_hand_fist)]
+
+                    # Print the combined values
+                    print(combined_values)
+
+                    # Print the corresponding letter based on the conditions
+                    if fingers_up == 2 and distance &amplt; 60:
+                        print(&ampquot;Gripper IN&ampquot;)                    
+                        input_value = &amp#39;A&amp#39;
+                        ardu = Serial(&amp#39;/dev/ttyUSB0&amp#39;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    elif fingers_up == 2 and distance &ampgt; 60:
+                        print(&ampquot;Gripper OUT&ampquot;)
+                        input_value = &amp#39;W&amp#39;
+                        ardu = Serial(&amp#39;/dev/ttyUSB0&amp#39;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    elif fingers_up == 4 and hand_side == &ampquot;Right&ampquot; and not is_hand_fist:
+                        print(&ampquot;Arm Base IN&ampquot;)
+                        input_value = &amp#39;C&amp#39;
+                        ardu = Serial(&amp#39;/dev/ttyUSB0&amp#39;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    elif fingers_up == 4 and hand_side == &ampquot;Left&ampquot; and not is_hand_fist:
+                        print(&ampquot;Arm Base OUT&ampquot;)
+                        input_value = &amp#39;Y&amp#39;
+                        ardu = Serial(&amp#39;/dev/ttyUSB0&amp#39;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    elif not is_hand_fist and hand_side == &ampquot;Right&ampquot;:
+                        print(&ampquot;Arm Top IN&ampquot;)
+                        input_value = &amp#39;B&amp#39;
+                        ardu = Serial(&amp#39;/dev/ttyUSB0&amp#39;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    elif not is_hand_fist and hand_side == &ampquot;Left&ampquot;:
+                        print(&ampquot;Arm Top OUT&ampquot;)
+                        input_value = &amp#39;X&amp#39;
+                        ardu = Serial(&amp#39;/dev/ttyUSB0&amp#39;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    elif fingers_up == 5 and hand_side == &ampquot;Right&ampquot;:
+                        print(&ampquot;Base IN&ampquot;)
+                        input_value = &amp#39;D&amp#39;
+                        ardu = Serial(&amp#39;/dev/ttyUSB0&amp#39;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    elif fingers_up == 5 and hand_side == &ampquot;Left&ampquot;:
+                        print(&ampquot;Base OUT&ampquot;)
+                        input_value = &amp#39;Z&amp#39;
+                        ardu = Serial(&amp#39;/dev/ttyUSB0&amp#39;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+                    else:
+                        print(&ampquot;STOP&ampquot;)
+                        input_value = &amp#39;S&amp#39;
+                        ardu = Serial(&amp#39;/dev/ttyUSB0&amp#39;, 9600, timeout=0.01)
+                        ardu.write(input_value.encode())
+
+            # Display the mirrored image with landmarks
+            cv2.imshow(&amp#39;Finger Tracking&amp#39;, frame)
+
+            # Exit loop when &amp#39;q&amp#39; is pressed
+            if cv2.waitKey(1) &ampamp; 0xFF == ord(&amp#39;q&amp#39;):
+                break
+
+    cap.release()
+    cv2.destroyAllWindows()
+
+if __name__ == &amp#39;__main__&amp#39;:
+    main()
+
+
+Testing:
+The arm was completed, and it was time to test it. The servos were connected to power supply and the USB was connected to the Arduino. With the necessary code uploaded to the Arduino, the python script was run, and hand gestures were read from the computer which then converted to Serial signals and the code in Arduino interprets those Serial signals as per the uploaded code. Here, in the first trial reading the Front and Back side of the hand gave same results, I replaced the code for Left and Right aligned hand, which showed Right when I showed my right-hand palm to the Camera, and left when I showed my right-hand back to the camera, and vice-versa for the left hand. Which fixed the issue.
+Challenges and Solutions:
+There were not many challenges to make a working prototype which my arm is at the moment. But further improvement on the gestures are going to be challenging like; to read and interpret natural human arm movements in digital form and to match the movement of robot arm with an actual human arm.
+Conclusion:
+In conclusion, the CV robotic arm is a working prototype for better control of devices requiring less time to adapt. It helps people to be familiar with using complex devices like robotic arm in a very short period of time.
+" name=og:description><link rel="shortcut icon" href=/res/logo.svg type=image/x-icon><meta content="width=device-width,initial-scale=1" name=viewport><meta content="rgb(253, 246, 227)" name=theme-color><script defer src=/assets/js/copy-button.js></script><link href=https://github.com/scientiac rel=me><link href=mailto:spandan@scientiac.space rel=me><link href=https://webmention.io/scientiac.space/webmention rel=webmention><meta content=@scientiac@fosstodon.org name=fediverse:creator><body onload=updateThemeSelector();><div class=logo-container><a href=/> <div class=inner-logo-container></div> </a></div><nav data-style=classy><span class=main-li><a href=/>Main</a></span><span><a href=/blog>Blog</a></span><span><a href=/writings>Writings</a></span><span><a href=/syndications>POSSE</a></span><span><a href=/more>More</a></span></nav><section class=section-body><div class=container><div class=h-entry><div class=pagedate><time class="dt-published dateandtag hidden" datetime=2023-06-01T00:00:00Z> 2023-06-01 </time><code class=dateandtag>2023-06-01</code><code class="u-category dateandtag">Genre: Reports</code></div><a class="u-url hidden" href=https://scientiac.space/blog/gesture-controlled-arm/>https://scientiac.space/blog/gesture-controlled-arm/</a><div class=section><h1 class="p-name title">Project Pieyes</h1><div class="hidden p-author h-card"><a class=u-url href=https://scientiac.space rel=me> <img alt="Profile photo of scientiac" class=u-photo src=/res/thumbnail.png> <span class=p-name>scientiac</span> </a></div><div class=e-content><p><img alt=Pieyes src=/images/pieyes.gif><h2 id=introduction>Introduction</h2><p>The purpose of this report is to document the process of building a CV robotic arm prototype using Arduino. The arm is designed to be controlled with natural hand gestures removing the need to look at the buttons on a screen or a controller to control it.<h3 id=materials-used>Materials Used:</h3><ol><li>Arduino Uno<li>16 Channel Servo driver<li>Buck Converter<li>Jumper Cables<li>3D Printed MK2 Chassis<li>4 Servos<li>A Portable Computer with Camera</ol><h3 id=software-used>Software Used:</h3><ol><li>Arduino IDE V2<li>Python 3</ol><h3 id=design>Design:</h3><p>The first step in building the CV controlled arm is to make a schematic of it. The arm is based on the MK2 Model, which is pretty easy to 3D-print and assemble. 4 servos are used for the base, the lower arm, the upper arm and the gripper. The servos are connected to the Servo Driver and the Servo Driver is connected to 5 volts DC power. The Arduino is used to control the Servo Driver to send PWM signals to servo.<p>The decisions for what signals to send for recognized gestures handled by a Python script which sends serial to Arduino via the USB. The Arduino receives the signal which is now converted to mechanical output.<h3 id=construction>Construction:</h3><p>The assembly of the base is a bit tricky with gears and servos to be attached to it, but the upper part is easily attached. The four servos are placed on the right place according to MK2 schematics and are connected to 16 Channel Servo Driver. (I connected 0,2,4 and 7 as base, lower arm, upper arm and gripper respectively on the Servo Driver.) While connecting the Servo Driver to Arduino; the VCC is connected to 5 volts and Grounds of Arduino and Servo Driver are connected. From Arduino the analogue 5 pin is connected to SCL and analogue 4 pin is connected to SDA respectively.(This connects the Servo Driver to the Arduino.)<p>The servo diver is connected to 5 volts DC converted from 12 volts power supply using a buck converter. USB connected to the Arduino supplies power to Arduino as well as the Servo Driver but not the Servos connected to the Driver. The USB also doubles as a data transmission device to send serial input to the Arduino from the laptop running the python script.<h3 id=programming>Programming</h3><h4 id=in-arduino>In Arduino:</h4><pre class=language-cpp data-lang=cpp style=color:#fdf4c1aa;background-color:#282828><code class=language-cpp data-lang=cpp><span>
+</span><span style=color:#fa5c4b>#include </span><span style=color:#b8bb26>&LTWire.h>
+</span><span style=color:#fa5c4b>#include </span><span style=color:#b8bb26>&LTAdafruit_PWMServoDriver.h>
+</span><span>
+</span><span style=color:#928374;font-style:italic>// called this way, it uses the default address 0x40
+</span><span>Adafruit_PWMServoDriver pwm </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>Adafruit_PWMServoDriver(</span><span style=color:#d3869b>0x40</span><span style=color:#fdf4c1>)</span><span>;
+</span><span>
+</span><span style=color:#fa5c4b>#define </span><span style=color:#8ec07c>SERVOMIN </span><span style=color:#d3869b>100   </span><span style=color:#928374;font-style:italic>// This is the 'minimum' pulse length count (out of 4096)
+</span><span style=color:#fa5c4b>#define </span><span style=color:#8ec07c>SERVOMAX </span><span style=color:#d3869b>450   </span><span style=color:#928374;font-style:italic>// This is the 'maximum' pulse length count (out of 4096)
+</span><span style=color:#fa5c4b>#define </span><span style=color:#8ec07c>SERVO_FREQ </span><span style=color:#d3869b>50  </span><span style=color:#928374;font-style:italic>// Analog servos run at ~50 Hz updates
+</span><span>
+</span><span style=color:#928374;font-style:italic>// our servo # counter
+</span><span style=color:#fabd2f>uint8_t</span><span> servonum </span><span style=color:#fe8019>= </span><span style=color:#d3869b>0</span><span>;
+</span><span style=color:#fa5c4b>char</span><span> prevSerial </span><span style=color:#fe8019>= </span><span style=color:#b8bb26>'\0'</span><span>;
+</span><span style=color:#fa5c4b>char</span><span> data;
+</span><span>
+</span><span style=color:#928374;font-style:italic>// Setting the default state of the arm.
+</span><span style=color:#fa5c4b>int</span><span> val1 </span><span style=color:#fe8019>= </span><span style=color:#d3869b>312</span><span>, val2 </span><span style=color:#fe8019>= </span><span style=color:#d3869b>350</span><span>, val3 </span><span style=color:#fe8019>= </span><span style=color:#d3869b>174</span><span>, val4 </span><span style=color:#fe8019>= </span><span style=color:#d3869b>0</span><span>;
+</span><span>
+</span><span style=color:#fa5c4b>void </span><span style=color:#8ec07c>setup</span><span>() {
+</span><span>  Serial.</span><span style=color:#fdf4c1>begin</span><span>(</span><span style=color:#d3869b>9600</span><span>);
+</span><span>  Serial.</span><span style=color:#fdf4c1>println</span><span>(</span><span style=color:#b8bb26>"Running..."</span><span>);
+</span><span>
+</span><span>  pwm.</span><span style=color:#fdf4c1>begin</span><span>();
+</span><span>  pwm.</span><span style=color:#fdf4c1>setOscillatorFrequency</span><span>(</span><span style=color:#d3869b>27000000</span><span>);
+</span><span>  pwm.</span><span style=color:#fdf4c1>setPWMFreq</span><span>(SERVO_FREQ);
+</span><span>
+</span><span>  </span><span style=color:#fdf4c1>delay(</span><span style=color:#d3869b>10</span><span style=color:#fdf4c1>)</span><span>;
+</span><span>}
+</span><span>
+</span><span style=color:#fa5c4b>void </span><span style=color:#8ec07c>loop</span><span>() {
+</span><span>
+</span><span>  </span><span style=color:#928374;font-style:italic>// checking if serial is available or not and setting values to "data" as soon as the serial changes
+</span><span>  </span><span style=color:#fa5c4b>if </span><span>(Serial.</span><span style=color:#fdf4c1>available</span><span>() </span><span style=color:#fe8019>> </span><span style=color:#d3869b>0</span><span>) {
+</span><span>    data </span><span style=color:#fe8019>=</span><span> Serial.</span><span style=color:#fdf4c1>read</span><span>();
+</span><span>
+</span><span>    </span><span style=color:#fa5c4b>if </span><span>(data </span><span style=color:#fe8019>== </span><span style=color:#b8bb26>'W'</span><span>) {
+</span><span>      </span><span style=color:#fa5c4b>if </span><span>(val4 </span><span style=color:#fe8019><</span><span> SERVOMAX) {
+</span><span>        Serial.</span><span style=color:#fdf4c1>print</span><span>(</span><span style=color:#b8bb26>"Gripper IN"</span><span>);
+</span><span>        Serial.</span><span style=color:#fdf4c1>println</span><span>(val4);
+</span><span>        pwm.</span><span style=color:#fdf4c1>setPWM</span><span>(</span><span style=color:#d3869b>7</span><span>, </span><span style=color:#d3869b>0</span><span>, val4);
+</span><span>        val4 </span><span style=color:#fe8019>+= </span><span style=color:#d3869b>4</span><span>;
+</span><span>      }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style=color:#fa5c4b>if </span><span>(data </span><span style=color:#fe8019>== </span><span style=color:#b8bb26>'A'</span><span>) {
+</span><span>      </span><span style=color:#fa5c4b>if </span><span>(val4 </span><span style=color:#fe8019>></span><span> SERVOMIN) {
+</span><span>        Serial.</span><span style=color:#fdf4c1>print</span><span>(</span><span style=color:#b8bb26>"Gripper OUT"</span><span>);
+</span><span>        Serial.</span><span style=color:#fdf4c1>println</span><span>(val4);
+</span><span>        pwm.</span><span style=color:#fdf4c1>setPWM</span><span>(</span><span style=color:#d3869b>7</span><span>, </span><span style=color:#d3869b>0</span><span>, val4);
+</span><span>        val4 </span><span style=color:#fe8019>-= </span><span style=color:#d3869b>4</span><span>;
+</span><span>      }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style=color:#fa5c4b>if </span><span>(data </span><span style=color:#fe8019>== </span><span style=color:#b8bb26>'Y'</span><span>) {
+</span><span>      </span><span style=color:#fa5c4b>if </span><span>(val2 </span><span style=color:#fe8019><</span><span> SERVOMAX) {
+</span><span>        Serial.</span><span style=color:#fdf4c1>print</span><span>(</span><span style=color:#b8bb26>"Arm Base IN"</span><span>);
+</span><span>        Serial.</span><span style=color:#fdf4c1>println</span><span>(val2);
+</span><span>        pwm.</span><span style=color:#fdf4c1>setPWM</span><span>(</span><span style=color:#d3869b>2</span><span>, </span><span style=color:#d3869b>0</span><span>, val2);
+</span><span>        val2 </span><span style=color:#fe8019>+= </span><span style=color:#d3869b>4</span><span>;
+</span><span>      }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style=color:#fa5c4b>if </span><span>(data </span><span style=color:#fe8019>== </span><span style=color:#b8bb26>'C'</span><span>) {
+</span><span>      </span><span style=color:#fa5c4b>if </span><span>(val2 </span><span style=color:#fe8019>></span><span> SERVOMIN) {
+</span><span>        Serial.</span><span style=color:#fdf4c1>print</span><span>(</span><span style=color:#b8bb26>"Arm Base OUT"</span><span>);
+</span><span>        Serial.</span><span style=color:#fdf4c1>println</span><span>(val2);
+</span><span>        pwm.</span><span style=color:#fdf4c1>setPWM</span><span>(</span><span style=color:#d3869b>2</span><span>, </span><span style=color:#d3869b>0</span><span>, val2);
+</span><span>        val2 </span><span style=color:#fe8019>-= </span><span style=color:#d3869b>4</span><span>;
+</span><span>      }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style=color:#fa5c4b>if </span><span>(data </span><span style=color:#fe8019>== </span><span style=color:#b8bb26>'B'</span><span>) {
+</span><span>      </span><span style=color:#fa5c4b>if </span><span>(val3 </span><span style=color:#fe8019><</span><span> SERVOMAX) {
+</span><span>        Serial.</span><span style=color:#fdf4c1>print</span><span>(</span><span style=color:#b8bb26>"Arm Top IN"</span><span>);
+</span><span>        Serial.</span><span style=color:#fdf4c1>println</span><span>(val3);
+</span><span>        pwm.</span><span style=color:#fdf4c1>setPWM</span><span>(</span><span style=color:#d3869b>4</span><span>, </span><span style=color:#d3869b>0</span><span>, val3);
+</span><span>        val3 </span><span style=color:#fe8019>+= </span><span style=color:#d3869b>4</span><span>;
+</span><span>      }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style=color:#fa5c4b>if </span><span>(data </span><span style=color:#fe8019>== </span><span style=color:#b8bb26>'X'</span><span>) {
+</span><span>      </span><span style=color:#fa5c4b>if </span><span>(val3 </span><span style=color:#fe8019>></span><span> SERVOMIN) {
+</span><span>        Serial.</span><span style=color:#fdf4c1>print</span><span>(</span><span style=color:#b8bb26>"Arm Top OUT"</span><span>);
+</span><span>        Serial.</span><span style=color:#fdf4c1>println</span><span>(val3);
+</span><span>        pwm.</span><span style=color:#fdf4c1>setPWM</span><span>(</span><span style=color:#d3869b>4</span><span>, </span><span style=color:#d3869b>0</span><span>, val3);
+</span><span>        val3 </span><span style=color:#fe8019>-= </span><span style=color:#d3869b>4</span><span>;
+</span><span>      }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style=color:#fa5c4b>if </span><span>(data </span><span style=color:#fe8019>== </span><span style=color:#b8bb26>'D'</span><span>) {
+</span><span>      </span><span style=color:#fa5c4b>if </span><span>(val1 </span><span style=color:#fe8019><</span><span> SERVOMAX) {
+</span><span>        Serial.</span><span style=color:#fdf4c1>print</span><span>(</span><span style=color:#b8bb26>"Base IN"</span><span>);
+</span><span>        Serial.</span><span style=color:#fdf4c1>println</span><span>(val1);
+</span><span>        pwm.</span><span style=color:#fdf4c1>setPWM</span><span>(</span><span style=color:#d3869b>0</span><span>, </span><span style=color:#d3869b>0</span><span>, val1);
+</span><span>        val1 </span><span style=color:#fe8019>+= </span><span style=color:#d3869b>4</span><span>;
+</span><span>      }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style=color:#fa5c4b>if </span><span>(data </span><span style=color:#fe8019>== </span><span style=color:#b8bb26>'Z'</span><span>) {
+</span><span>      </span><span style=color:#fa5c4b>if </span><span>(val1 </span><span style=color:#fe8019>></span><span> SERVOMIN) {
+</span><span>        Serial.</span><span style=color:#fdf4c1>print</span><span>(</span><span style=color:#b8bb26>"Base IN"</span><span>);
+</span><span>        Serial.</span><span style=color:#fdf4c1>println</span><span>(val1);
+</span><span>        pwm.</span><span style=color:#fdf4c1>setPWM</span><span>(</span><span style=color:#d3869b>0</span><span>, </span><span style=color:#d3869b>0</span><span>, val1);
+</span><span>        val1 </span><span style=color:#fe8019>-= </span><span style=color:#d3869b>4</span><span>;
+</span><span>      }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style=color:#fa5c4b>if </span><span>(data </span><span style=color:#fe8019>== </span><span style=color:#b8bb26>'S'</span><span>) {
+</span><span>      Serial.</span><span style=color:#fdf4c1>println</span><span>(</span><span style=color:#b8bb26>"stop"</span><span>);
+</span><span>    }
+</span><span>  }
+</span><span>}
+</span><span>
+</span></code></pre><h4 id=in-laptop>In Laptop:</h4><pre class=language-py data-lang=py style=color:#fdf4c1aa;background-color:#282828><code class=language-py data-lang=py><span>
+</span><span style=color:#928374;font-style:italic>#!/bin/python
+</span><span>
+</span><span style=color:#fa5c4b>import </span><span>cv2
+</span><span style=color:#fa5c4b>import </span><span>mediapipe </span><span style=color:#fa5c4b>as </span><span>mp
+</span><span style=color:#fa5c4b>import </span><span>math
+</span><span style=color:#fa5c4b>from </span><span>serial </span><span style=color:#fa5c4b>import </span><span>Serial
+</span><span>
+</span><span>mp_drawing </span><span style=color:#fe8019>= </span><span>mp.solutions.drawing_utils
+</span><span>mp_hands </span><span style=color:#fe8019>= </span><span>mp.solutions.hands
+</span><span>
+</span><span style=color:#fa5c4b>def </span><span style=color:#8ec07c>calculate_distance</span><span>(</span><span style=color:#fdf4c1>x1</span><span>, </span><span style=color:#fdf4c1>y1</span><span>, </span><span style=color:#fdf4c1>x2</span><span>, </span><span style=color:#fdf4c1>y2</span><span>):
+</span><span>    </span><span style=color:#fa5c4b>return </span><span style=color:#fdf4c1>math.sqrt((x2 </span><span style=color:#fe8019>- </span><span style=color:#fdf4c1>x1)</span><span style=color:#fe8019>**</span><span style=color:#d3869b>2 </span><span style=color:#fe8019>+ </span><span style=color:#fdf4c1>(y2 </span><span style=color:#fe8019>- </span><span style=color:#fdf4c1>y1)</span><span style=color:#fe8019>**</span><span style=color:#d3869b>2</span><span style=color:#fdf4c1>)
+</span><span>
+</span><span style=color:#fa5c4b>def </span><span style=color:#8ec07c>is_fist</span><span>(</span><span style=color:#fdf4c1>landmarks</span><span>):
+</span><span>    </span><span style=color:#928374;font-style:italic># Check if all finger tips are below their corresponding middle joints
+</span><span>    </span><span style=color:#fa5c4b>return </span><span>(
+</span><span>        landmarks[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>THUMB_TIP</span><span>].y </span><span style=color:#fe8019>< </span><span>landmarks[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>THUMB_IP</span><span>].y </span><span style=color:#fe8019>and
+</span><span>        landmarks[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>INDEX_FINGER_TIP</span><span>].y </span><span style=color:#fe8019>< </span><span>landmarks[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>INDEX_FINGER_PIP</span><span>].y </span><span style=color:#fe8019>and
+</span><span>        landmarks[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>MIDDLE_FINGER_TIP</span><span>].y </span><span style=color:#fe8019>< </span><span>landmarks[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>MIDDLE_FINGER_PIP</span><span>].y </span><span style=color:#fe8019>and
+</span><span>        landmarks[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>RING_FINGER_TIP</span><span>].y </span><span style=color:#fe8019>< </span><span>landmarks[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>RING_FINGER_PIP</span><span>].y </span><span style=color:#fe8019>and
+</span><span>        landmarks[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>PINKY_TIP</span><span>].y </span><span style=color:#fe8019>< </span><span>landmarks[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>PINKY_PIP</span><span>].y
+</span><span>    )
+</span><span>
+</span><span style=color:#fa5c4b>def </span><span style=color:#8ec07c>get_hand_side</span><span>(</span><span style=color:#fdf4c1>landmarks</span><span>):
+</span><span>    </span><span style=color:#928374;font-style:italic># Check if the wrist is to the left or right of the index finger tip
+</span><span>    </span><span style=color:#fa5c4b>if </span><span>landmarks[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>WRIST</span><span>].x </span><span style=color:#fe8019>< </span><span>landmarks[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>INDEX_FINGER_TIP</span><span>].x:
+</span><span>        </span><span style=color:#fa5c4b>return </span><span style=color:#b8bb26>"Left"
+</span><span>    </span><span style=color:#fa5c4b>else</span><span>:
+</span><span>        </span><span style=color:#fa5c4b>return </span><span style=color:#b8bb26>"Right"
+</span><span>
+</span><span style=color:#fa5c4b>def </span><span style=color:#8ec07c>main</span><span>():
+</span><span>    cap </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>cv2.VideoCapture(</span><span style=color:#d3869b>0</span><span style=color:#fdf4c1>)
+</span><span>
+</span><span>    </span><span style=color:#fa5c4b>with </span><span style=color:#fdf4c1>mp_hands.Hands(max_num_hands</span><span style=color:#fe8019>=</span><span style=color:#d3869b>1</span><span style=color:#fdf4c1>) </span><span style=color:#fa5c4b>as </span><span>hands:
+</span><span>        </span><span style=color:#fa5c4b>while </span><span style=color:#fdf4c1>cap.isOpened()</span><span>:
+</span><span>            ret, frame </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>cap.read()
+</span><span>
+</span><span>            </span><span style=color:#fa5c4b>if </span><span style=color:#fe8019>not </span><span>ret:
+</span><span>                </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>"Unable to capture frame."</span><span style=color:#fdf4c1>)
+</span><span>                </span><span style=color:#fa5c4b>break
+</span><span>
+</span><span>            </span><span style=color:#928374;font-style:italic># Flip the frame horizontally to mirror the image
+</span><span>            frame </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>cv2.flip(frame, </span><span style=color:#d3869b>1</span><span style=color:#fdf4c1>)
+</span><span>
+</span><span>            </span><span style=color:#928374;font-style:italic># Convert the image from BGR to RGB
+</span><span>            image_rgb </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+</span><span>
+</span><span>            </span><span style=color:#928374;font-style:italic># Process the image with MediaPipe Hands
+</span><span>            results </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>hands.process(image_rgb)
+</span><span>
+</span><span>            </span><span style=color:#928374;font-style:italic># Check for hand landmarks
+</span><span>            </span><span style=color:#fa5c4b>if </span><span>results.multi_hand_landmarks:
+</span><span>                </span><span style=color:#fa5c4b>for </span><span>hand_landmarks </span><span style=color:#fa5c4b>in </span><span>results.multi_hand_landmarks:
+</span><span>                    </span><span style=color:#928374;font-style:italic># Draw hand landmarks on the image
+</span><span>                    </span><span style=color:#fdf4c1>mp_drawing.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+</span><span>
+</span><span>                    </span><span style=color:#928374;font-style:italic># Get the coordinates of the index finger and thumb landmarks
+</span><span>                    index_finger </span><span style=color:#fe8019>= </span><span>hand_landmarks.landmark[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>INDEX_FINGER_TIP</span><span>]
+</span><span>                    thumb </span><span style=color:#fe8019>= </span><span>hand_landmarks.landmark[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>THUMB_TIP</span><span>]
+</span><span>                    wrist </span><span style=color:#fe8019>= </span><span>hand_landmarks.landmark[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>WRIST</span><span>]
+</span><span>
+</span><span>                    </span><span style=color:#928374;font-style:italic># Convert landmark coordinates to pixel values
+</span><span>                    height, width, </span><span style=color:#fdf4c1>_ </span><span style=color:#fe8019>= </span><span>frame.shape
+</span><span>                    x1, y1 </span><span style=color:#fe8019>= </span><span style=color:#fabd2f>int</span><span style=color:#fdf4c1>(index_finger.x </span><span style=color:#fe8019>* </span><span style=color:#fdf4c1>width)</span><span>, </span><span style=color:#fabd2f>int</span><span style=color:#fdf4c1>(index_finger.y </span><span style=color:#fe8019>* </span><span style=color:#fdf4c1>height)
+</span><span>                    x2, y2 </span><span style=color:#fe8019>= </span><span style=color:#fabd2f>int</span><span style=color:#fdf4c1>(thumb.x </span><span style=color:#fe8019>* </span><span style=color:#fdf4c1>width)</span><span>, </span><span style=color:#fabd2f>int</span><span style=color:#fdf4c1>(thumb.y </span><span style=color:#fe8019>* </span><span style=color:#fdf4c1>height)
+</span><span>
+</span><span>                    </span><span style=color:#928374;font-style:italic># Calculate the distance between the index finger and thumb
+</span><span>                    distance </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>calculate_distance(x1, y1, x2, y2)
+</span><span>
+</span><span>                    </span><span style=color:#928374;font-style:italic># Count the number of fingers that are up
+</span><span>                    fingers_up </span><span style=color:#fe8019>= </span><span style=color:#d3869b>0
+</span><span>                    landmarks </span><span style=color:#fe8019>= </span><span>hand_landmarks.landmark
+</span><span>                    </span><span style=color:#fa5c4b>if </span><span>landmarks[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>THUMB_TIP</span><span>].y </span><span style=color:#fe8019>< </span><span>landmarks[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>THUMB_IP</span><span>].y:
+</span><span>                        fingers_up </span><span style=color:#fe8019>+= </span><span style=color:#d3869b>1
+</span><span>                    </span><span style=color:#fa5c4b>if </span><span>landmarks[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>INDEX_FINGER_TIP</span><span>].y </span><span style=color:#fe8019>< </span><span>landmarks[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>INDEX_FINGER_PIP</span><span>].y:
+</span><span>                        fingers_up </span><span style=color:#fe8019>+= </span><span style=color:#d3869b>1
+</span><span>                    </span><span style=color:#fa5c4b>if </span><span>landmarks[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>MIDDLE_FINGER_TIP</span><span>].y </span><span style=color:#fe8019>< </span><span>landmarks[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>MIDDLE_FINGER_PIP</span><span>].y:
+</span><span>                        fingers_up </span><span style=color:#fe8019>+= </span><span style=color:#d3869b>1
+</span><span>                    </span><span style=color:#fa5c4b>if </span><span>landmarks[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>RING_FINGER_TIP</span><span>].y </span><span style=color:#fe8019>< </span><span>landmarks[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>RING_FINGER_PIP</span><span>].y:
+</span><span>                        fingers_up </span><span style=color:#fe8019>+= </span><span style=color:#d3869b>1
+</span><span>                    </span><span style=color:#fa5c4b>if </span><span>landmarks[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>PINKY_TIP</span><span>].y </span><span style=color:#fe8019>< </span><span>landmarks[mp_hands.HandLandmark.</span><span style=color:#fdf4c1>PINKY_PIP</span><span>].y:
+</span><span>                        fingers_up </span><span style=color:#fe8019>+= </span><span style=color:#d3869b>1
+</span><span>
+</span><span>                    </span><span style=color:#928374;font-style:italic># Determine if the hand is right or left
+</span><span>                    hand_side </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>get_hand_side(hand_landmarks.landmark)
+</span><span>
+</span><span>                    </span><span style=color:#928374;font-style:italic># Determine if there is a fist or not
+</span><span>                    is_hand_fist </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>is_fist(hand_landmarks.landmark)
+</span><span>
+</span><span>                    </span><span style=color:#928374;font-style:italic># Display the number of fingers, distance, hand side, and fist status on the image
+</span><span>                    </span><span style=color:#fdf4c1>cv2.putText(frame, </span><span style=color:#fabd2f>str</span><span style=color:#fdf4c1>(fingers_up), (</span><span style=color:#d3869b>10</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>30</span><span style=color:#fdf4c1>), cv2.FONT_HERSHEY_SIMPLEX, </span><span style=color:#d3869b>1</span><span style=color:#fdf4c1>, (</span><span style=color:#d3869b>0</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>255</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>0</span><span style=color:#fdf4c1>), </span><span style=color:#d3869b>2</span><span style=color:#fdf4c1>)
+</span><span>                    </span><span style=color:#fdf4c1>cv2.putText(frame, </span><span style=color:#fabd2f>str</span><span style=color:#fdf4c1>(</span><span style=color:#fabd2f>int</span><span style=color:#fdf4c1>(distance)), (</span><span style=color:#d3869b>10</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>70</span><span style=color:#fdf4c1>), cv2.FONT_HERSHEY_SIMPLEX, </span><span style=color:#d3869b>1</span><span style=color:#fdf4c1>, (</span><span style=color:#d3869b>0</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>255</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>0</span><span style=color:#fdf4c1>), </span><span style=color:#d3869b>2</span><span style=color:#fdf4c1>)
+</span><span>                    </span><span style=color:#fdf4c1>cv2.putText(frame, hand_side, (</span><span style=color:#d3869b>10</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>110</span><span style=color:#fdf4c1>), cv2.FONT_HERSHEY_SIMPLEX, </span><span style=color:#d3869b>1</span><span style=color:#fdf4c1>, (</span><span style=color:#d3869b>0</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>255</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>0</span><span style=color:#fdf4c1>), </span><span style=color:#d3869b>2</span><span style=color:#fdf4c1>)
+</span><span>                    </span><span style=color:#fdf4c1>cv2.putText(frame, </span><span style=color:#fabd2f>str</span><span style=color:#fdf4c1>(is_hand_fist), (</span><span style=color:#d3869b>10</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>150</span><span style=color:#fdf4c1>), cv2.FONT_HERSHEY_SIMPLEX, </span><span style=color:#d3869b>1</span><span style=color:#fdf4c1>, (</span><span style=color:#d3869b>0</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>255</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>0</span><span style=color:#fdf4c1>), </span><span style=color:#d3869b>2</span><span style=color:#fdf4c1>)
+</span><span>
+</span><span>                    </span><span style=color:#928374;font-style:italic># Combine the values
+</span><span>                    combined_values </span><span style=color:#fe8019>= </span><span>[fingers_up, </span><span style=color:#fabd2f>int</span><span style=color:#fdf4c1>(distance)</span><span>, hand_side, </span><span style=color:#fabd2f>str</span><span style=color:#fdf4c1>(is_hand_fist)</span><span>]
+</span><span>
+</span><span>                    </span><span style=color:#928374;font-style:italic># Print the combined values
+</span><span>                    </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(combined_values)
+</span><span>
+</span><span>                    </span><span style=color:#928374;font-style:italic># Print the corresponding letter based on the conditions
+</span><span>                    </span><span style=color:#fa5c4b>if </span><span>fingers_up </span><span style=color:#fe8019>== </span><span style=color:#d3869b>2 </span><span style=color:#fe8019>and </span><span>distance </span><span style=color:#fe8019>< </span><span style=color:#d3869b>60</span><span>:
+</span><span>                        </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>"Gripper IN"</span><span style=color:#fdf4c1>)                    
+</span><span>                        input_value </span><span style=color:#fe8019>= </span><span style=color:#b8bb26>'A'
+</span><span>                        ardu </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>Serial(</span><span style=color:#b8bb26>'/dev/ttyUSB0'</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>9600</span><span style=color:#fdf4c1>, timeout</span><span style=color:#fe8019>=</span><span style=color:#d3869b>0.01</span><span style=color:#fdf4c1>)
+</span><span>                        </span><span style=color:#fdf4c1>ardu.write(input_value.encode())
+</span><span>
+</span><span>                    </span><span style=color:#fa5c4b>elif </span><span>fingers_up </span><span style=color:#fe8019>== </span><span style=color:#d3869b>2 </span><span style=color:#fe8019>and </span><span>distance </span><span style=color:#fe8019>> </span><span style=color:#d3869b>60</span><span>:
+</span><span>                        </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>"Gripper OUT"</span><span style=color:#fdf4c1>)
+</span><span>                        input_value </span><span style=color:#fe8019>= </span><span style=color:#b8bb26>'W'
+</span><span>                        ardu </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>Serial(</span><span style=color:#b8bb26>'/dev/ttyUSB0'</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>9600</span><span style=color:#fdf4c1>, timeout</span><span style=color:#fe8019>=</span><span style=color:#d3869b>0.01</span><span style=color:#fdf4c1>)
+</span><span>                        </span><span style=color:#fdf4c1>ardu.write(input_value.encode())
+</span><span>
+</span><span>                    </span><span style=color:#fa5c4b>elif </span><span>fingers_up </span><span style=color:#fe8019>== </span><span style=color:#d3869b>4 </span><span style=color:#fe8019>and </span><span>hand_side </span><span style=color:#fe8019>== </span><span style=color:#b8bb26>"Right" </span><span style=color:#fe8019>and not </span><span>is_hand_fist:
+</span><span>                        </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>"Arm Base IN"</span><span style=color:#fdf4c1>)
+</span><span>                        input_value </span><span style=color:#fe8019>= </span><span style=color:#b8bb26>'C'
+</span><span>                        ardu </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>Serial(</span><span style=color:#b8bb26>'/dev/ttyUSB0'</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>9600</span><span style=color:#fdf4c1>, timeout</span><span style=color:#fe8019>=</span><span style=color:#d3869b>0.01</span><span style=color:#fdf4c1>)
+</span><span>                        </span><span style=color:#fdf4c1>ardu.write(input_value.encode())
+</span><span>
+</span><span>                    </span><span style=color:#fa5c4b>elif </span><span>fingers_up </span><span style=color:#fe8019>== </span><span style=color:#d3869b>4 </span><span style=color:#fe8019>and </span><span>hand_side </span><span style=color:#fe8019>== </span><span style=color:#b8bb26>"Left" </span><span style=color:#fe8019>and not </span><span>is_hand_fist:
+</span><span>                        </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>"Arm Base OUT"</span><span style=color:#fdf4c1>)
+</span><span>                        input_value </span><span style=color:#fe8019>= </span><span style=color:#b8bb26>'Y'
+</span><span>                        ardu </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>Serial(</span><span style=color:#b8bb26>'/dev/ttyUSB0'</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>9600</span><span style=color:#fdf4c1>, timeout</span><span style=color:#fe8019>=</span><span style=color:#d3869b>0.01</span><span style=color:#fdf4c1>)
+</span><span>                        </span><span style=color:#fdf4c1>ardu.write(input_value.encode())
+</span><span>
+</span><span>                    </span><span style=color:#fa5c4b>elif </span><span style=color:#fe8019>not </span><span>is_hand_fist </span><span style=color:#fe8019>and </span><span>hand_side </span><span style=color:#fe8019>== </span><span style=color:#b8bb26>"Right"</span><span>:
+</span><span>                        </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>"Arm Top IN"</span><span style=color:#fdf4c1>)
+</span><span>                        input_value </span><span style=color:#fe8019>= </span><span style=color:#b8bb26>'B'
+</span><span>                        ardu </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>Serial(</span><span style=color:#b8bb26>'/dev/ttyUSB0'</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>9600</span><span style=color:#fdf4c1>, timeout</span><span style=color:#fe8019>=</span><span style=color:#d3869b>0.01</span><span style=color:#fdf4c1>)
+</span><span>                        </span><span style=color:#fdf4c1>ardu.write(input_value.encode())
+</span><span>
+</span><span>                    </span><span style=color:#fa5c4b>elif </span><span style=color:#fe8019>not </span><span>is_hand_fist </span><span style=color:#fe8019>and </span><span>hand_side </span><span style=color:#fe8019>== </span><span style=color:#b8bb26>"Left"</span><span>:
+</span><span>                        </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>"Arm Top OUT"</span><span style=color:#fdf4c1>)
+</span><span>                        input_value </span><span style=color:#fe8019>= </span><span style=color:#b8bb26>'X'
+</span><span>                        ardu </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>Serial(</span><span style=color:#b8bb26>'/dev/ttyUSB0'</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>9600</span><span style=color:#fdf4c1>, timeout</span><span style=color:#fe8019>=</span><span style=color:#d3869b>0.01</span><span style=color:#fdf4c1>)
+</span><span>                        </span><span style=color:#fdf4c1>ardu.write(input_value.encode())
+</span><span>
+</span><span>                    </span><span style=color:#fa5c4b>elif </span><span>fingers_up </span><span style=color:#fe8019>== </span><span style=color:#d3869b>5 </span><span style=color:#fe8019>and </span><span>hand_side </span><span style=color:#fe8019>== </span><span style=color:#b8bb26>"Right"</span><span>:
+</span><span>                        </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>"Base IN"</span><span style=color:#fdf4c1>)
+</span><span>                        input_value </span><span style=color:#fe8019>= </span><span style=color:#b8bb26>'D'
+</span><span>                        ardu </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>Serial(</span><span style=color:#b8bb26>'/dev/ttyUSB0'</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>9600</span><span style=color:#fdf4c1>, timeout</span><span style=color:#fe8019>=</span><span style=color:#d3869b>0.01</span><span style=color:#fdf4c1>)
+</span><span>                        </span><span style=color:#fdf4c1>ardu.write(input_value.encode())
+</span><span>
+</span><span>                    </span><span style=color:#fa5c4b>elif </span><span>fingers_up </span><span style=color:#fe8019>== </span><span style=color:#d3869b>5 </span><span style=color:#fe8019>and </span><span>hand_side </span><span style=color:#fe8019>== </span><span style=color:#b8bb26>"Left"</span><span>:
+</span><span>                        </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>"Base OUT"</span><span style=color:#fdf4c1>)
+</span><span>                        input_value </span><span style=color:#fe8019>= </span><span style=color:#b8bb26>'Z'
+</span><span>                        ardu </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>Serial(</span><span style=color:#b8bb26>'/dev/ttyUSB0'</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>9600</span><span style=color:#fdf4c1>, timeout</span><span style=color:#fe8019>=</span><span style=color:#d3869b>0.01</span><span style=color:#fdf4c1>)
+</span><span>                        </span><span style=color:#fdf4c1>ardu.write(input_value.encode())
+</span><span>
+</span><span>                    </span><span style=color:#fa5c4b>else</span><span>:
+</span><span>                        </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>"STOP"</span><span style=color:#fdf4c1>)
+</span><span>                        input_value </span><span style=color:#fe8019>= </span><span style=color:#b8bb26>'S'
+</span><span>                        ardu </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>Serial(</span><span style=color:#b8bb26>'/dev/ttyUSB0'</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>9600</span><span style=color:#fdf4c1>, timeout</span><span style=color:#fe8019>=</span><span style=color:#d3869b>0.01</span><span style=color:#fdf4c1>)
+</span><span>                        </span><span style=color:#fdf4c1>ardu.write(input_value.encode())
+</span><span>
+</span><span>            </span><span style=color:#928374;font-style:italic># Display the mirrored image with landmarks
+</span><span>            </span><span style=color:#fdf4c1>cv2.imshow(</span><span style=color:#b8bb26>'Finger Tracking'</span><span style=color:#fdf4c1>, frame)
+</span><span>
+</span><span>            </span><span style=color:#928374;font-style:italic># Exit loop when 'q' is pressed
+</span><span>            </span><span style=color:#fa5c4b>if </span><span style=color:#fdf4c1>cv2.waitKey(</span><span style=color:#d3869b>1</span><span style=color:#fdf4c1>) </span><span style=color:#fe8019>& </span><span style=color:#d3869b>0xFF </span><span style=color:#fe8019>== </span><span style=color:#fabd2f>ord</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>'q'</span><span style=color:#fdf4c1>)</span><span>:
+</span><span>                </span><span style=color:#fa5c4b>break
+</span><span>
+</span><span>    </span><span style=color:#fdf4c1>cap.release()
+</span><span>    </span><span style=color:#fdf4c1>cv2.destroyAllWindows()
+</span><span>
+</span><span style=color:#fa5c4b>if </span><span style=color:#fabd2f>__name__ </span><span style=color:#fe8019>== </span><span style=color:#b8bb26>'__main__'</span><span>:
+</span><span>    </span><span style=color:#fdf4c1>main()
+</span><span>
+</span></code></pre><h3 id=testing>Testing:</h3><p>The arm was completed, and it was time to test it. The servos were connected to power supply and the USB was connected to the Arduino. With the necessary code uploaded to the Arduino, the python script was run, and hand gestures were read from the computer which then converted to Serial signals and the code in Arduino interprets those Serial signals as per the uploaded code. Here, in the first trial reading the Front and Back side of the hand gave same results, I replaced the code for Left and Right aligned hand, which showed Right when I showed my right-hand palm to the Camera, and left when I showed my right-hand back to the camera, and vice-versa for the left hand. Which fixed the issue.<h3 id=challenges-and-solutions>Challenges and Solutions:</h3><p>There were not many challenges to make a working prototype which my arm is at the moment. But further improvement on the gestures are going to be challenging like; to read and interpret natural human arm movements in digital form and to match the movement of robot arm with an actual human arm.<h3 id=conclusion>Conclusion:</h3><p>In conclusion, the CV robotic arm is a working prototype for better control of devices requiring less time to adapt. It helps people to be familiar with using complex devices like robotic arm in a very short period of time.</div></div></div><div><hr><h2>Webmentions</h2><form action=https://webmention.io/scientiac.space/webmention class=webmention-form method=post><div id=email-comment><p>Have you written a <a href=https://indieweb.org/responses>response</a> to this? Let me know the URL, Or, you can send your response via <a href="mailto:iac@scientiac.space?subject=Reply%3A%20Project%20Pieyes">mail:</a><code>iac@scientiac.space</code></div><div class=send-webmention><input name=source type=url><button>Send Webmention</button></div><div><div class="ui message"></div></div><input name=target type=hidden value=https://scientiac.space/blog/gesture-controlled-arm/></form></div></div><script defer src=/assets/js/themeSelector.js></script></section><div class=hidden><a href=https://fosstodon.org/@scientiac rel=me>Mastodon</a></div><div class="hidden h-card"><img class="u-photo icon" alt=scientiac src=/res/thumbnail.png><a class="p-name u-url" href=https://scientiac.space rel=me>scientiac</a><p class=p-note>A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does.</div><footer><p class=codewithlove>I can't think of things to write on a footer. So, just <span class=main-background>imagine</span> something yourself.<p><a href=/atom.xml>RSS</a> | <a href=https://map.scientiac.space>research::map</a> | <a href=https://github.com/scientiac/scientiac.github.io target=_blank>Source Code</a><p>All articles are usable under <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank>CC BY-SA 4.0</a>.</footer><ol id=themeSelector reversed></ol>

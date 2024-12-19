@@ -1,0 +1,309 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><title>scientiac::syntropy</title><link href=/assets/css/themes.css rel=stylesheet><link href=/assets/css/readable.css rel=stylesheet><link href=/assets/css/global.css rel=stylesheet><link href=/assets/css/fonts.css rel=stylesheet><link href=/assets/css/logo.css rel=stylesheet><link href=/assets/css/genre/Articles.css rel=stylesheet><link href=https://scientiac.space/atom.xml rel=alternate title=RSS type=application/atom+xml><meta content=Articles property=og:type><meta content=scientiac.space property=og:site_name><meta content=https://scientiac.space/res/thumbnail-light.png property=og:image><title>Droidian: Linux Smartphone Experience</title><meta content="Droidian: Linux Smartphone Experience" name=og:title><meta content="My Device
+
+            #####           scientiac@mobius
+           #######          ---------------
+           ##O#O##          OS: Droidian trixie aarch64
+           #######          Host: wcd937x Audio Codec AB IDP EXCALIBUR
+         ###########        Kernel: 4.14-288-xiaomi-miatoll
+        #############       Uptime: 1 hour, 40 mins
+       ###############      Packages: 1945 (dpkg), 390 (nix-user), 47 (nix-default), 28 (flatpak)
+       ################     Shell: bash 5.2.15
+      #################     Resolution: 1080x2400x60x164823
+    #####################   DE: GNOME (actually &amp#39;phosh&amp#39;)
+    #####################   WM: weston (actually &amp#39;phoc&amp#39;)
+      #################     Theme: adw-gtk3 [GTK2/3]
+                            Icons: Papirus [GTK2/3]
+                            Terminal: kgx
+                            CPU: Qualcomm SM7125 (8) @ 1.804GHz
+                            Memory: 2370MiB / 5587MiB
+
+    * neofetch gathered some false data so i have manually edited this text blob.
+
+
+Firstly...
+I have been playing around and testing Droidian on my Xaomi Redmi Note 9 Pro Max (miatoll - excalibur) as a daily driver since November 17th. Before this I had tried Droidian about a year ago on this very device.
+
+Note: The screenshots attached here are of my customized version of phosh and GTK colors, the default UI will look different.
+
+
+  
+  
+
+A quick THEN v/s NOW
+Then, the UI was not tailored for the device I was using, it was vanilla phosh with clock in the center of the bar which was covered by the punch-hole of my device and the notification panel was also not aligned correctly to the device. Now, it's fine and the UI is just how it should be for the device.
+
+  
+  
+
+Then, The Camera was not working at all. Now, the droidian-camera does work but it's laggy. Though it technically can capture videos the frame rate drops very randomly and the video comes out to be choppy. The file size of the choppy video is also very high.
+Then, Apps like telegram and messenger from Firefox did not connect to calls at all. Now, microphone is generally supported by all apps and voice calling via other apps work fine.
+Then, Waydroid used to work without much problems. Now, upon launching Waydroid and trying to video-call the entire shell crashes and the only way to bring back the UI is by a forced restart.
+Experience
+Gnome Asia 2023 is starting Tomorrow, I travelled from Dharan to Kathmandu with Droidian on my phone and it feels like I am handicapped using this device coming from android.
+Voice Calls
+Since it is a phone it should be able to make calls and it does. Though my device supports two SIMs, droidian on my device only detects and uses one so, I had to let go of my secondary SIM.
+
+Notifications
+Apps should be running in the background to be able to make notifications, and the other thing is I am not notified with sound or vibration of any of my texts messages be it from apps like fractal, nheko, telegram-desktop or even gnome-messages even if the app is running in the background when the screen is off.
+The gnome-calls app is the only app I know which can make &#34noisy notifications&#34 when my phone is locked and the screen is off. So, I only know if anyone is calling me on my number but nothing if they use any other platform.
+
+Maps
+Yes, Gnome Maps works on this device but it does not show my real time location. And coming from using Google Maps, it isn't a very pleasant of an experience.
+
+Waydroid
+The waydroid experience was buggy when used in the default condition but it worked fine under a nested weston session. But, weston comes with a drawback. The resolution when used in the default phoc is great everything looks crisp but when used in a nested weston session the resolution is low and it's only usable. At least waydroid doesn't crash the whole phoc session when used inside the nested weston session.
+The first image below is with 400dpi (in default phoc session) whereas the second one is on 1700dpi (in weston session) set from android developer settings.
+
+  
+  
+
+Though gnome-maps do not show real time location, google maps from waydroid is able to do it. But, it requires some time to load everything.
+Web Browsing
+Web browsing is fine in droidian. Firefox with a mobile focused custom layout is the default browser. There are some glitches here and there on firefox caused by the inability to adapt to a mobile form but normal day to day browsing can be done nicely. Various websites, Facebook, Instagram, YouTube, everything works fine but not as smooth as using on desktop or android and it is expected because I am technically running a whole desktop application on a smartphone.
+
+The desktop extensions work fine, but the UI to edit them from their window glitches on my device. So, the extensions which work by default work the best.
+Social Media and Messaging
+Well, mastodon is my favourite social media ever and Tuba is a dedicated app from flathub which works more than fine for it. YouTube, Facebook and Instagram can be used from the Firefox browser. For communication, telegram-desktop works fine, so does Nheko for matrix supporting voice calls as well, other matrix clients like Fractal work too. And there always are web based clients that work in responsive mode.
+
+  
+  
+
+It's not always gtk apps, qt apps are convergent too; telegram-desktop and nheko are two examples. They are the only &#34apps&#34 which support voice calls natively and even video calls if it detects a camera (it doesn't in mine).
+
+  
+  
+
+File Sharing
+Sharing files is surprisingly important in our day-to-day life. Since it is a whole Linux system ssh can be used to transfer and receive files as well as modify it remotely. For a more GUI approach the best way to share files from any kind of device is the magic-wormhole protocol. And warp being the GTK convergent app for Droidian, it has made my life a lot easier.
+
+  
+  
+
+I am writing this blog on my laptop while taking screenshots from my phone and sending them to my laptop using warp.
+Customization
+The thing that introduced Linux to me and made it interesting was the customizability of it. I encountered Linux when YouTube recommended a video of KDE while I was searching for ways to customize windows. So, you can pretty much assume that I don't use things without giving some of my touch to it.
+Colors and Textures
+As I have mentioned before, the screenshots attached here are of my customized version of phosh and GTK colors. So, since it is basically a GTK environment, gradience works like a charm for changing the color palette of the apps. And for the phosh shell, some custom gtk.css on ~/.config/gtk-3.0/ will do the trick.
+Here, I am using the gruvbox theme to customize my shell.
+
+  
+  
+
+
+    phosh-home, .phosh-overview, phosh-app-grid {
+        background-color: #282828; /* gruvbox primary color */
+    }
+
+    phosh-top-panel, phosh-lockscreen, .phosh-lockshield {
+        background-image: url(&amp#39;file:///home/droidian/Desktop/image.png&amp#39;); /* a blurred version of wallpaper or any preferred image */
+        background-size: cover;
+        background-position: center;
+    {
+
+
+Shell Tweaks
+Changing icons, showing battery percentage in the bar, setting themes enabling Application filter, everything was done with an app called postmarketos-tweaks which I compiled from the source.
+
+    https://gitlab.com/postmarketOS/postmarketos-tweaks
+
+
+
+  
+  
+
+Scaling
+The default scale is good for the eyes but for me it was a bit too big. I wanted more stuff on this small screen of my phone. For that I went to /etc/phosh/phoc.ini and set the following:
+
+    [output:HWCOMPOSER-1]
+    scale = 2.5
+
+
+Finally...
+The whole Linux ecosystem isn't convergent yet, and many apps go beyond the screen resulting in hidden buttons and texts. To tackle that problem, Droidian comes with Mobile Settings that helps to scale down particular apps so that they fit on the screen.
+
+  
+  
+
+It would have been much better if it had...
+Some features like, the semi-automatic screen rotation that android has nowadays which would show a small prompt to rotate the screen upon rotating the device but without automatically rotating it. Also, gestures in apps like video players to scroll and double taps to skip, which would make the droidian experience much better. And, maybe a qr-code scanner to connect to wifi networks.
+Lastly, Some Mentions
+Waydroid has been a life saver for using essential video calling apps and surprisingly banking apps. But, the default waydroid experience is very buggy. It is not the fault of droidian devs though, waydroid is a completely different project.
+Gnome Online Accounts made it very easy to sync my contacts saved on google contacts, calender events, emails on droidian. It also connected my google drive with nautilus [Gnome Files] making it easy to upload and access files from my drive.
+So,
+My experience with Linux on Mobile was interesting, though it has a lot to improve, I didn't expect it to be &#34functional enough&#34 that I could use it for days without diving back to android. I will use this for some more days, maybe until the Gnome Asia 2023 event ends.
+There is lot more to try but, I want to end this experiment for now.
+Goodnight!
+" name=description><meta content="My Device
+
+            #####           scientiac@mobius
+           #######          ---------------
+           ##O#O##          OS: Droidian trixie aarch64
+           #######          Host: wcd937x Audio Codec AB IDP EXCALIBUR
+         ###########        Kernel: 4.14-288-xiaomi-miatoll
+        #############       Uptime: 1 hour, 40 mins
+       ###############      Packages: 1945 (dpkg), 390 (nix-user), 47 (nix-default), 28 (flatpak)
+       ################     Shell: bash 5.2.15
+      #################     Resolution: 1080x2400x60x164823
+    #####################   DE: GNOME (actually &amp#39;phosh&amp#39;)
+    #####################   WM: weston (actually &amp#39;phoc&amp#39;)
+      #################     Theme: adw-gtk3 [GTK2/3]
+                            Icons: Papirus [GTK2/3]
+                            Terminal: kgx
+                            CPU: Qualcomm SM7125 (8) @ 1.804GHz
+                            Memory: 2370MiB / 5587MiB
+
+    * neofetch gathered some false data so i have manually edited this text blob.
+
+
+Firstly...
+I have been playing around and testing Droidian on my Xaomi Redmi Note 9 Pro Max (miatoll - excalibur) as a daily driver since November 17th. Before this I had tried Droidian about a year ago on this very device.
+
+Note: The screenshots attached here are of my customized version of phosh and GTK colors, the default UI will look different.
+
+
+  
+  
+
+A quick THEN v/s NOW
+Then, the UI was not tailored for the device I was using, it was vanilla phosh with clock in the center of the bar which was covered by the punch-hole of my device and the notification panel was also not aligned correctly to the device. Now, it's fine and the UI is just how it should be for the device.
+
+  
+  
+
+Then, The Camera was not working at all. Now, the droidian-camera does work but it's laggy. Though it technically can capture videos the frame rate drops very randomly and the video comes out to be choppy. The file size of the choppy video is also very high.
+Then, Apps like telegram and messenger from Firefox did not connect to calls at all. Now, microphone is generally supported by all apps and voice calling via other apps work fine.
+Then, Waydroid used to work without much problems. Now, upon launching Waydroid and trying to video-call the entire shell crashes and the only way to bring back the UI is by a forced restart.
+Experience
+Gnome Asia 2023 is starting Tomorrow, I travelled from Dharan to Kathmandu with Droidian on my phone and it feels like I am handicapped using this device coming from android.
+Voice Calls
+Since it is a phone it should be able to make calls and it does. Though my device supports two SIMs, droidian on my device only detects and uses one so, I had to let go of my secondary SIM.
+
+Notifications
+Apps should be running in the background to be able to make notifications, and the other thing is I am not notified with sound or vibration of any of my texts messages be it from apps like fractal, nheko, telegram-desktop or even gnome-messages even if the app is running in the background when the screen is off.
+The gnome-calls app is the only app I know which can make &#34noisy notifications&#34 when my phone is locked and the screen is off. So, I only know if anyone is calling me on my number but nothing if they use any other platform.
+
+Maps
+Yes, Gnome Maps works on this device but it does not show my real time location. And coming from using Google Maps, it isn't a very pleasant of an experience.
+
+Waydroid
+The waydroid experience was buggy when used in the default condition but it worked fine under a nested weston session. But, weston comes with a drawback. The resolution when used in the default phoc is great everything looks crisp but when used in a nested weston session the resolution is low and it's only usable. At least waydroid doesn't crash the whole phoc session when used inside the nested weston session.
+The first image below is with 400dpi (in default phoc session) whereas the second one is on 1700dpi (in weston session) set from android developer settings.
+
+  
+  
+
+Though gnome-maps do not show real time location, google maps from waydroid is able to do it. But, it requires some time to load everything.
+Web Browsing
+Web browsing is fine in droidian. Firefox with a mobile focused custom layout is the default browser. There are some glitches here and there on firefox caused by the inability to adapt to a mobile form but normal day to day browsing can be done nicely. Various websites, Facebook, Instagram, YouTube, everything works fine but not as smooth as using on desktop or android and it is expected because I am technically running a whole desktop application on a smartphone.
+
+The desktop extensions work fine, but the UI to edit them from their window glitches on my device. So, the extensions which work by default work the best.
+Social Media and Messaging
+Well, mastodon is my favourite social media ever and Tuba is a dedicated app from flathub which works more than fine for it. YouTube, Facebook and Instagram can be used from the Firefox browser. For communication, telegram-desktop works fine, so does Nheko for matrix supporting voice calls as well, other matrix clients like Fractal work too. And there always are web based clients that work in responsive mode.
+
+  
+  
+
+It's not always gtk apps, qt apps are convergent too; telegram-desktop and nheko are two examples. They are the only &#34apps&#34 which support voice calls natively and even video calls if it detects a camera (it doesn't in mine).
+
+  
+  
+
+File Sharing
+Sharing files is surprisingly important in our day-to-day life. Since it is a whole Linux system ssh can be used to transfer and receive files as well as modify it remotely. For a more GUI approach the best way to share files from any kind of device is the magic-wormhole protocol. And warp being the GTK convergent app for Droidian, it has made my life a lot easier.
+
+  
+  
+
+I am writing this blog on my laptop while taking screenshots from my phone and sending them to my laptop using warp.
+Customization
+The thing that introduced Linux to me and made it interesting was the customizability of it. I encountered Linux when YouTube recommended a video of KDE while I was searching for ways to customize windows. So, you can pretty much assume that I don't use things without giving some of my touch to it.
+Colors and Textures
+As I have mentioned before, the screenshots attached here are of my customized version of phosh and GTK colors. So, since it is basically a GTK environment, gradience works like a charm for changing the color palette of the apps. And for the phosh shell, some custom gtk.css on ~/.config/gtk-3.0/ will do the trick.
+Here, I am using the gruvbox theme to customize my shell.
+
+  
+  
+
+
+    phosh-home, .phosh-overview, phosh-app-grid {
+        background-color: #282828; /* gruvbox primary color */
+    }
+
+    phosh-top-panel, phosh-lockscreen, .phosh-lockshield {
+        background-image: url(&amp#39;file:///home/droidian/Desktop/image.png&amp#39;); /* a blurred version of wallpaper or any preferred image */
+        background-size: cover;
+        background-position: center;
+    {
+
+
+Shell Tweaks
+Changing icons, showing battery percentage in the bar, setting themes enabling Application filter, everything was done with an app called postmarketos-tweaks which I compiled from the source.
+
+    https://gitlab.com/postmarketOS/postmarketos-tweaks
+
+
+
+  
+  
+
+Scaling
+The default scale is good for the eyes but for me it was a bit too big. I wanted more stuff on this small screen of my phone. For that I went to /etc/phosh/phoc.ini and set the following:
+
+    [output:HWCOMPOSER-1]
+    scale = 2.5
+
+
+Finally...
+The whole Linux ecosystem isn't convergent yet, and many apps go beyond the screen resulting in hidden buttons and texts. To tackle that problem, Droidian comes with Mobile Settings that helps to scale down particular apps so that they fit on the screen.
+
+  
+  
+
+It would have been much better if it had...
+Some features like, the semi-automatic screen rotation that android has nowadays which would show a small prompt to rotate the screen upon rotating the device but without automatically rotating it. Also, gestures in apps like video players to scroll and double taps to skip, which would make the droidian experience much better. And, maybe a qr-code scanner to connect to wifi networks.
+Lastly, Some Mentions
+Waydroid has been a life saver for using essential video calling apps and surprisingly banking apps. But, the default waydroid experience is very buggy. It is not the fault of droidian devs though, waydroid is a completely different project.
+Gnome Online Accounts made it very easy to sync my contacts saved on google contacts, calender events, emails on droidian. It also connected my google drive with nautilus [Gnome Files] making it easy to upload and access files from my drive.
+So,
+My experience with Linux on Mobile was interesting, though it has a lot to improve, I didn't expect it to be &#34functional enough&#34 that I could use it for days without diving back to android. I will use this for some more days, maybe until the Gnome Asia 2023 event ends.
+There is lot more to try but, I want to end this experiment for now.
+Goodnight!
+" name=og:description><link rel="shortcut icon" href=/res/logo.svg type=image/x-icon><meta content="width=device-width,initial-scale=1" name=viewport><meta content="rgb(253, 246, 227)" name=theme-color><script defer src=/assets/js/copy-button.js></script><link href=https://github.com/scientiac rel=me><link href=mailto:spandan@scientiac.space rel=me><link href=https://webmention.io/scientiac.space/webmention rel=webmention><meta content=@scientiac@fosstodon.org name=fediverse:creator><body onload=updateThemeSelector();><div class=logo-container><a href=/> <div class=inner-logo-container></div> </a></div><nav data-style=classy><span class=main-li><a href=/>Main</a></span><span><a href=/blog>Blog</a></span><span><a href=/writings>Writings</a></span><span><a href=/syndications>POSSE</a></span><span><a href=/more>More</a></span></nav><section class=section-body><div class=container><div class=h-entry><div class=pagedate><time class="dt-published dateandtag hidden" datetime=2023-11-30T00:00:00Z> 2023-11-30 </time><code class=dateandtag>2023-11-30</code><code class="u-category dateandtag">Genre: Articles</code></div><a class="u-url hidden" href=https://scientiac.space/blog/droidian/>https://scientiac.space/blog/droidian/</a><div class=section><h1 class="p-name title">Droidian: Linux Smartphone Experience</h1><div class="hidden p-author h-card"><a class=u-url href=https://scientiac.space rel=me> <img alt="Profile photo of scientiac" class=u-photo src=/res/thumbnail.png> <span class=p-name>scientiac</span> </a></div><div class=e-content><h2 id=my-device>My Device</h2><pre style=color:#fdf4c1aa;background-color:#282828><code><span>
+</span><span>            #####           scientiac@mobius
+</span><span>           #######          ---------------
+</span><span>           ##O#O##          OS: Droidian trixie aarch64
+</span><span>           #######          Host: wcd937x Audio Codec AB IDP EXCALIBUR
+</span><span>         ###########        Kernel: 4.14-288-xiaomi-miatoll
+</span><span>        #############       Uptime: 1 hour, 40 mins
+</span><span>       ###############      Packages: 1945 (dpkg), 390 (nix-user), 47 (nix-default), 28 (flatpak)
+</span><span>       ################     Shell: bash 5.2.15
+</span><span>      #################     Resolution: 1080x2400x60x164823
+</span><span>    #####################   DE: GNOME (actually 'phosh')
+</span><span>    #####################   WM: weston (actually 'phoc')
+</span><span>      #################     Theme: adw-gtk3 [GTK2/3]
+</span><span>                            Icons: Papirus [GTK2/3]
+</span><span>                            Terminal: kgx
+</span><span>                            CPU: Qualcomm SM7125 (8) @ 1.804GHz
+</span><span>                            Memory: 2370MiB / 5587MiB
+</span><span>
+</span><span>    * neofetch gathered some false data so i have manually edited this text blob.
+</span><span>
+</span></code></pre><h2 id=firstly>Firstly...</h2><p>I have been playing around and testing Droidian on my <em>Xaomi Redmi Note 9 Pro Max (miatoll - excalibur)</em> as a daily driver since November 17th. Before this I had tried Droidian about a year ago on this very device.<blockquote><p>Note: The screenshots attached here are of my customized version of phosh and GTK colors, the default UI will look different.</blockquote><div class=gallery style=flex-wrap:wrap;display:flex><img src=/images/droidian/lockscreen.png style=border-radius:1.75rem;width:15rem;padding:1rem><img src=/images/droidian/overview.png style=border-radius:1.75rem;width:15rem;padding:1rem></div><h3 id=a-quick-then-v-s-now>A quick THEN v/s NOW</h3><p>Then, the UI was not tailored for the device I was using, it was vanilla phosh with clock in the center of the bar which was covered by the punch-hole of my device and the notification panel was also not aligned correctly to the device. Now, it's fine and the UI is just how it should be for the device.<div class=gallery style=flex-wrap:wrap;display:flex><img src=/images/droidian/old_tele.png style=border-radius:1.75rem;width:15rem;padding:1rem><img src=/images/droidian/new_tele.png style=border-radius:1.75rem;width:15rem;padding:1rem></div><p>Then, The Camera was not working at all. Now, the <code>droidian-camera</code> does work but it's laggy. Though it technically can capture videos the frame rate drops very randomly and the video comes out to be choppy. The file size of the choppy video is also very high.<p>Then, Apps like telegram and messenger from Firefox did not connect to calls at all. Now, microphone is generally supported by all apps and voice calling via other apps work fine.<p>Then, Waydroid used to work without much problems. Now, upon launching Waydroid and trying to video-call the entire shell crashes and the only way to bring back the UI is by a forced restart.<h2 id=experience>Experience</h2><p>Gnome Asia 2023 is starting Tomorrow, I travelled from Dharan to Kathmandu with Droidian on my phone and it feels like I am handicapped using this device coming from android.<h3 id=voice-calls>Voice Calls</h3><p>Since it is a phone it should be able to make calls and it does. Though my device supports two SIMs, droidian on my device only detects and uses one so, I had to let go of my secondary SIM.</p><img alt="Gnome Calls" src=/images/droidian/call_dialing.png style=width:15rem><h3 id=notifications>Notifications</h3><p>Apps should be running in the background to be able to make notifications, and the other thing is I am not notified with sound or vibration of any of my texts messages be it from apps like <code>fractal</code>, <code>nheko</code>, <code>telegram-desktop</code> or even <code>gnome-messages</code> even if the app is running in the background when the screen is off.<p>The <code>gnome-calls</code> app is the only app I know which can make "noisy notifications" when my phone is locked and the screen is off. So, I only know if anyone is calling me on my number but nothing if they use any other platform.</p><img alt="Notification/ Quick Settings Panel" src=/images/droidian/notif_panel.png style=width:15rem><h3 id=maps>Maps</h3><p>Yes, Gnome Maps works on this device but it does not show my real time location. And coming from using Google Maps, it isn't a very pleasant of an experience.</p><img alt="Gnome Maps" src=/images/droidian/gnome_maps.png style=width:15rem><h3 id=waydroid>Waydroid</h3><p>The waydroid experience was buggy when used in the default condition but it worked fine under a nested <code>weston</code> session. But, <code>weston</code> comes with a drawback. The resolution when used in the default <code>phoc</code> is great everything looks crisp but when used in a nested <code>weston</code> session the resolution is low and it's only usable. At least waydroid doesn't crash the whole phoc session when used inside the nested <code>weston</code> session.<p>The first image below is with 400dpi (in default <code>phoc</code> session) whereas the second one is on 1700dpi (in <code>weston</code> session) set from android developer settings.<div class=gallery style=flex-wrap:wrap;display:flex><img src=/images/droidian/waydroid_phoc.png style=border-radius:1.75rem;width:15rem;padding:1rem><img src=/images/droidian/waydroid_weston.png style=border-radius:1.75rem;width:15rem;padding:1rem></div><p>Though <code>gnome-maps</code> do not show real time location, google maps from waydroid is able to do it. But, it requires some time to load everything.<h3 id=web-browsing>Web Browsing</h3><p>Web browsing is fine in droidian. Firefox with a mobile focused custom layout is the default browser. There are some glitches here and there on firefox caused by the inability to adapt to a mobile form but normal day to day browsing can be done nicely. Various websites, Facebook, Instagram, YouTube, everything works fine but not as smooth as using on desktop or android and it is expected because I am technically running a whole desktop application on a smartphone.</p><img alt="Youtube on Firefox" src=/images/droidian/firefox_yt.png style=width:15rem><p>The desktop extensions work fine, but the UI to edit them from their window glitches on my device. So, the extensions which work by default work the best.<h3 id=social-media-and-messaging>Social Media and Messaging</h3><p>Well, mastodon is my favourite social media ever and <code>Tuba</code> is a dedicated app from flathub which works more than fine for it. YouTube, Facebook and Instagram can be used from the Firefox browser. For communication, <code>telegram-desktop</code> works fine, so does <code>Nheko</code> for matrix supporting voice calls as well, other matrix clients like <code>Fractal</code> work too. And there always are web based clients that work in responsive mode.<div class=gallery style=flex-wrap:wrap;display:flex><img src=/images/droidian/masto_pan.png style=border-radius:1.75rem;width:15rem;padding:1rem><img src=/images/droidian/masto_home.png style=border-radius:1.75rem;width:15rem;padding:1rem></div><p>It's not always gtk apps, qt apps are convergent too; <code>telegram-desktop</code> and <code>nheko</code> are two examples. They are the only "apps" which support voice calls natively and even video calls if it detects a camera (it doesn't in mine).<div class=gallery style=flex-wrap:wrap;display:flex><img src=/images/droidian/nheko.png style=border-radius:1.75rem;width:15rem;padding:1rem><img src=/images/droidian/fractal.png style=border-radius:1.75rem;width:15rem;padding:1rem></div><h3 id=file-sharing>File Sharing</h3><p>Sharing files is surprisingly important in our day-to-day life. Since it is a whole Linux system <code>ssh</code> can be used to transfer and receive files as well as modify it remotely. For a more GUI approach the best way to share files from any kind of device is the <code>magic-wormhole</code> protocol. And <code>warp</code> being the GTK convergent app for Droidian, it has made my life a lot easier.<div class=gallery style=flex-wrap:wrap;display:flex><img src=/images/droidian/warp_home.png style=border-radius:1.75rem;width:15rem;padding:1rem><img src=/images/droidian/warp_send.png style=border-radius:1.75rem;width:15rem;padding:1rem></div><p>I am writing this blog on my laptop while taking screenshots from my phone and sending them to my laptop using warp.<h2 id=customization>Customization</h2><p>The thing that introduced Linux to me and made it interesting was the customizability of it. I encountered Linux when YouTube recommended a video of KDE while I was searching for ways to customize windows. So, you can pretty much assume that I don't use things without giving some of my touch to it.<h3 id=colors-and-textures>Colors and Textures</h3><p>As I have mentioned before, the screenshots attached here are of my customized version of phosh and GTK colors. So, since it is basically a GTK environment, <code>gradience</code> works like a charm for changing the color palette of the apps. And for the phosh shell, some custom <code>gtk.css</code> on <code>~/.config/gtk-3.0/</code> will do the trick.<p>Here, I am using the <code>gruvbox</code> theme to customize my shell.<div class=gallery style=flex-wrap:wrap;display:flex><img src=/images/droidian/gradience.png style=border-radius:1.75rem;width:15rem;padding:1rem><img src=/images/droidian/gradience_css.png style=border-radius:1.75rem;width:15rem;padding:1rem></div><pre class=language-css data-lang=css style=color:#fdf4c1aa;background-color:#282828><code class=language-css data-lang=css><span>
+</span><span>    </span><span style=color:#fa5c4b;font-weight:700>phosh-home</span><span style=color:#b8bb26>, .phosh-overview, </span><span style=color:#fa5c4b;font-weight:700>phosh-app-grid </span><span>{
+</span><span>        </span><span style=color:#8ec07c>background-color</span><span>: </span><span style=color:#83a598>#282828</span><span>; </span><span style=color:#928374;font-style:italic>/* gruvbox primary color */
+</span><span>    }
+</span><span>
+</span><span>    </span><span style=color:#fa5c4b;font-weight:700>phosh-top-panel</span><span style=color:#b8bb26>, </span><span style=color:#fa5c4b;font-weight:700>phosh-lockscreen</span><span style=color:#b8bb26>, .phosh-lockshield </span><span>{
+</span><span>        </span><span style=color:#8ec07c>background-image</span><span>: </span><span style=color:#fabd2f>url</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>'file:///home/droidian/Desktop/image.png'</span><span style=color:#fdf4c1>)</span><span>; </span><span style=color:#928374;font-style:italic>/* a blurred version of wallpaper or any preferred image */
+</span><span>        </span><span style=color:#8ec07c>background-size</span><span>: </span><span style=color:#fabd2f>cover</span><span>;
+</span><span>        </span><span style=color:#8ec07c>background-position</span><span>: </span><span style=color:#fabd2f>center</span><span>;
+</span><span>    {
+</span><span>
+</span></code></pre><h3 id=shell-tweaks>Shell Tweaks</h3><p>Changing icons, showing battery percentage in the bar, setting themes enabling Application filter, everything was done with an app called <code>postmarketos-tweaks</code> which I compiled from the source.<pre style=color:#fdf4c1aa;background-color:#282828><code><span>
+</span><span>    https://gitlab.com/postmarketOS/postmarketos-tweaks
+</span><span>
+</span></code></pre><div class=gallery style=flex-wrap:wrap;display:flex><img src=/images/droidian/pmos.png style=border-radius:1.75rem;width:15rem;padding:1rem><img src=/images/droidian/pmos_phosh.png style=border-radius:1.75rem;width:15rem;padding:1rem></div><h3 id=scaling>Scaling</h3><p>The default scale is good for the eyes but for me it was a bit too big. I wanted more stuff on this small screen of my phone. For that I went to <code>/etc/phosh/phoc.ini</code> and set the following:<pre style=color:#fdf4c1aa;background-color:#282828><code><span>
+</span><span>    [output:HWCOMPOSER-1]
+</span><span>    scale = 2.5
+</span><span>
+</span></code></pre><h2 id=finally>Finally...</h2><p>The whole Linux ecosystem isn't convergent yet, and many apps go beyond the screen resulting in hidden buttons and texts. To tackle that problem, Droidian comes with <code>Mobile Settings</code> that helps to scale down particular apps so that they fit on the screen.<div class=gallery style=flex-wrap:wrap;display:flex><img src=/images/droidian/mobile_settings.png style=border-radius:1.75rem;width:15rem;padding:1rem><img src=/images/droidian/mobile_settings_comp.png style=border-radius:1.75rem;width:15rem;padding:1rem></div><h3 id=it-would-have-been-much-better-if-it-had>It would have been much better if it had...</h3><p>Some features like, the semi-automatic screen rotation that android has nowadays which would show a small prompt to rotate the screen upon rotating the device but without automatically rotating it. Also, gestures in apps like video players to scroll and double taps to skip, which would make the droidian experience much better. And, maybe a qr-code scanner to connect to wifi networks.<h3 id=lastly-some-mentions>Lastly, Some Mentions</h3><p>Waydroid has been a life saver for using essential video calling apps and surprisingly banking apps. But, the default waydroid experience is very buggy. It is not the fault of droidian devs though, waydroid is a completely different project.<p>Gnome Online Accounts made it very easy to sync my contacts saved on google contacts, calender events, emails on droidian. It also connected my google drive with <code>nautilus [Gnome Files]</code> making it easy to upload and access files from my drive.<h3 id=so>So,</h3><p>My experience with Linux on Mobile was interesting, though it has a lot to improve, I didn't expect it to be "functional enough" that I could use it for days without diving back to android. I will use this for some more days, maybe until the Gnome Asia 2023 event ends.<p>There is lot more to try but, I want to end this experiment for now.<p>Goodnight!</div></div></div><div><hr><h2>Webmentions</h2><form action=https://webmention.io/scientiac.space/webmention class=webmention-form method=post><div id=email-comment><p>Have you written a <a href=https://indieweb.org/responses>response</a> to this? Let me know the URL, Or, you can send your response via <a href="mailto:iac@scientiac.space?subject=Reply%3A%20Droidian%3A%20Linux%20Smartphone%20Experience">mail:</a><code>iac@scientiac.space</code></div><div class=send-webmention><input name=source type=url><button>Send Webmention</button></div><div><div class="ui message"></div></div><input name=target type=hidden value=https://scientiac.space/blog/droidian/></form></div></div><script defer src=/assets/js/themeSelector.js></script></section><div class=hidden><a href=https://fosstodon.org/@scientiac rel=me>Mastodon</a></div><div class="hidden h-card"><img class="u-photo icon" alt=scientiac src=/res/thumbnail.png><a class="p-name u-url" href=https://scientiac.space rel=me>scientiac</a><p class=p-note>A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does.</div><footer><p class=codewithlove>I can't think of things to write on a footer. So, just <span class=main-background>imagine</span> something yourself.<p><a href=/atom.xml>RSS</a> | <a href=https://map.scientiac.space>research::map</a> | <a href=https://github.com/scientiac/scientiac.github.io target=_blank>Source Code</a><p>All articles are usable under <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank>CC BY-SA 4.0</a>.</footer><ol id=themeSelector reversed></ol>
