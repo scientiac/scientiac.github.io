@@ -1,0 +1,619 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><title>scientiac::syntropy</title><link href=/assets/css/themes.css rel=stylesheet><link href=/assets/css/readable.css rel=stylesheet><link href=/assets/css/global.css rel=stylesheet><link href=/assets/css/fonts.css rel=stylesheet><link href=/assets/css/logo.css rel=stylesheet><link href=/assets/css/genre/Reports.css rel=stylesheet><link href=https://scientiac.space/atom.xml rel=alternate title=RSS type=application/atom+xml><meta content=Reports property=og:type><meta content=scientiac.space property=og:site_name><meta content=https://scientiac.space/res/thumbnail-light.png property=og:image><title>Manoid: A Waste Management Robot</title><meta content="Manoid: A Waste Management Robot" name=og:title><meta content="A Smart Waste Management Robot using Python and OpenCV that can detect the nearest waste(Determined by an no 8 ArUco Marker in the video), navigate to it using the shortest path on the map, pick it(Denoted by a 5 second stop in the video) and reach the destination(Determined By no 5 Aruco Marker in the video) to dump it and again repeat the process if more waste is detected; with only sensor being an overhead camera tracking the ArUco Markers.
+
+
+In the video, I am picking the robot up sometimes to keep it on a new position to show that it can track it's last position and go directly there instead of trying to calculate the route again.
+
+In today's world, efficient waste management is becoming increasingly crucial due to rapid urbanization and population growth. Traditional methods of waste collection and dumping are labor-intensive and often inefficient. By integrating robotics and advanced algorithms, we can streamline these processes, reduce human effort, and ensure a cleaner environment. This project, 'manoid', aims to demonstrate how a robot can autonomously detect, navigate, and manage waste using only a single overhead camera and advanced computer vision techniques.
+
+I have written another blog post related to this: Manoid: Communication
+
+Let's see how it was made.
+Requirements:
+CategoryComponent
+HardwareESP32 Microcontroller
+HardwareL298N Motor Driver
+HardwareDC Motor and Wheels
+HardwareA 12V Battery
+HardwareA camera (I used my phone with an IP Camera app for video streaming)
+SoftwarePython (for publishing)
+SoftwareArduino IDE (for ESP32 firmware)
+Softwaremosquitto (for serving)
+
+Basic Setup
+Setting Up Arduino IDE
+To install the ESP32 board in your Arduino IDE, follow these instructions:
+
+In your Arduino IDE, go to File &ampgt; Preferences.
+Enter the following into the “Additional Board Manager URLs” field:
+
+
+  https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+
+
+
+Click the “OK” button.
+Open the Boards Manager. Go to Tools &ampgt; Board &ampgt; Boards Manager.
+Search for ESP32 and press the install button for the “ESP32 by Espressif Systems”.
+Once installed, select your ESP32 board in Tools &ampgt; Board menu.
+Select the appropriate Port in Tools &ampgt; Port menu (in my case it was the DOIT ESP32 DEVKIT V1).
+
+Now your Arduino IDE is set up to work with ESP32.
+Setting Up The Environment
+I've got my environment all sorted out with Nix and Nix Flake, and I've made it even easier with direnv activation. Mosquitto's up and running smoothly on its default port 1883. python and it's dependencies opencv,numpy,paho-mqtt and flask in a virtual environment are set up via nix flakes as well. You can look at the nix documentation to know more about how it works.
+To set it up:
+
+I assume that nix is installed with flakes enabled on your computer.
+Clone the repo and enter the environment by running nix develop or allowing direnv to do it for you if you have it installed.
+
+
+  git clone https://github.com/scientiac/manoid
+
+
+
+A MQTT server will be running as soon as you enter the environment on the default port of 1883 and you can check the logs using the screen command.
+Change parameters to match your device and make sure everything in on point.
+Run the main.py script and admire the magic.
+
+Changing Parameters
+When adjusting parameters due to dynamic changes in Wi-Fi or IP addresses, several key locations in the code need to be updated to ensure MQTT and IP camera is properly connected. Here's a breakdown of where to make these adjustments:
+In the esp32.ino file:
+
+  const char* ssid = &ampquot;Your_WIFI_SSID&ampquot;;
+  const char* password = &ampquot;Your_WIFI_Password&ampquot;;
+  const char* mqtt_server = &ampquot;Your_MQTT_Server_IP&ampquot;;
+
+
+In the main.py file:
+
+  MQTT_BROKER = &ampquot;Your_MQTT_Server_IP&ampquot; # this is at the top of the document
+  args=(&ampquot;http://Your_IP_Camera_feed_Address&ampquot;,) # this is almost at the end of the document
+  
+  # to use a usb camera 
+  args=(0,), # this can be used and the camera may have ID other than `0` so make sure to check that
+
+
+Tuning the motors is essential because it directly impacts the robot's movement, responsiveness, and overall efficiency. Factors such as the size, power, and weight distribution of the robot, as well as the surface it operates on, can all influence how the motors should be configured.
+In the esp32.py file:
+
+  # Tuning the motors
+  int left_min_pwm_forward = 110;
+  int left_min_pwm_backward = 115;
+  int right_min_pwm_forward = 110;
+  int right_min_pwm_backward = 115;
+
+
+In the main.py file (tuning PID settings):
+
+  robot_settings = {
+      6: {  
+          # Robot ID 6
+          &ampquot;P_left&ampquot;: 0.8,
+          &ampquot;P_right&ampquot;: 0.8,
+          &ampquot;P_center&ampquot;: 0.4,
+          &ampquot;I_left&ampquot;: 0.01,
+          &ampquot;I_right&ampquot;: 0.01,
+          &ampquot;I_center&ampquot;: 0.01,
+          &ampquot;D_left&ampquot;: 0.001,
+          &ampquot;D_right&ampquot;: 0.001,
+          &ampquot;D_center&ampquot;: 0.001,
+          &ampquot;backward_speed_left&ampquot;: 10,
+          &ampquot;backward_speed_right&ampquot;: 10,
+          &ampquot;left_prev_error&ampquot;: 0,
+          &ampquot;right_prev_error&ampquot;: 0,
+          &ampquot;center_prev_error&ampquot;: 0,
+          &ampquot;dt&ampquot;: 0.3,
+      }
+  }
+
+
+Making the bot:
+
+Assemble the bot following the diagram below:
+
+
+
+Then open the file inside the project directory on etc/esp32/esp32.ino on your Arduino IDE set up to work with esp32 and change the parameters to fit your environment.
+And finally flash it!
+
+
+
+You can test the bot manually by connecting to the mqtt server using an application (like MyMQTT on android) and sending values from 0 to 255 to the topics :
+/robot6_left_forward
+/robot6_left_backward
+/robot6_right_forward
+/robot6_right_backard
+where 0 being the wheels at no speed and 255 being the max speed
+
+What is in the code?
+The Functions, duh!
+
+Click to expand: The Functions
+This list contains the functions involved in the robot, with each function's purpose:
+1. get_warped_frame(input_frame, marker_ids, PAD)
+
+Detects ArUco markers in the input frame.
+Extracts the corners of specified markers.
+Warps the frame to correct perspective if all specified markers are detected.
+Returns the warped frame and marker corners.
+
+2. calculate_scale(corners, marker_physical_size_cm)
+
+Calculates the scale of the marker in pixels per centimeter.
+Uses the distance between two corners of the marker.
+
+3. adjust_marker_corners(corners, offset_x_cm, offset_y_cm, adjust_width_cm, adjust_height_cm, marker_physical_size_cm)
+
+Adjusts the marker corners based on given offsets and size adjustments in centimeters.
+
+4. detect_aruco_markers(frame, aruco_dict_type)
+
+Detects ArUco markers in the frame.
+Processes the detected markers and adjusts corners if necessary.
+Returns the detected markers with their centers and corners.
+
+5. heuristic(a, b)
+
+Calculates the Manhattan distance between two points.
+Used in pathfinding algorithms.
+
+6. astar(start, goal, obstacles, grid_size)
+
+Implements the A* algorithm to find the shortest path from start to goal.
+Considers obstacles and returns the path if found.
+
+7. connect_mqtt()
+
+Connects to the MQTT broker to enable robot communication.
+
+8. send_mqtt_command(topic, command)
+
+Sends a command to the robot via MQTT.
+
+9. get_bot_position(bot_id, markers)
+
+Retrieves the current position of a robot based on its marker ID.
+
+10. calculate_distances(robot_corners, next_position)
+
+Calculates the distances from the robot's center and corners to the next position.
+
+11. move_towards_goal(robot_id, path, threshold)
+
+Moves the robot towards the goal following the given path using PID control.
+
+12. draw_lines_to_goal(frame, robot_corners, goal_position, color, thickness)
+
+Draws lines from the robot's corners and center to the goal position on the frame.
+
+13. draw_path(frame, path, color, thickness, grid_size)
+
+Draws the planned path on the frame.
+
+14. get_head_position(robot_id, markers)
+
+Returns the head position and corners of the robot based on its marker ID.
+
+15. get_waste_positions(markers, waste_id)
+
+Filters and returns the positions of a specific type of waste.
+
+16. fill_grid_cells_from_corners(corners, grid_size)
+
+Returns all grid cells covered by a rectangle defined by its corners.
+
+17. update_obstacles(markers, target_waste_ids, robot_head_pos)
+
+Updates the list of obstacles and finds the nearest waste position.
+
+18. convert_to_grid_coordinates(position, cell_size)
+
+Converts a position to grid coordinates based on the cell size.
+
+19. convert_obstacles_to_grid(obstacles, cell_size)
+
+Converts a set of positions to grid coordinates.
+
+20. convert_grid_to_actual(path, cell_size)
+
+Converts a path of grid coordinates back to actual coordinates.
+
+21. plan_path(start, goal, obstacles)
+
+Plans a path using the A* algorithm and returns it in actual coordinates.
+
+22. find_nearest_edge_midpoint_to_robot(robot_pos, marker_id, markers)
+
+Finds the nearest edge midpoint of a marker relative to the robot's position.
+
+23. pickup_waste(robot_id)
+
+Sends a command to the robot to pick up the waste.
+
+24. drop_off_waste(robot_id, waste_id)
+
+Sends a command to the robot to drop off the waste and marks it as processed.
+
+25. robot_control_loop(robot_id)
+
+Main control loop for the robot:
+
+Connects to MQTT.
+Detects waste, navigates to it, picks it up, and drops it off.
+Repeats the process continuously.
+
+
+
+26. capture_and_update_shared_resources(url)
+
+Continuously captures video frames.
+Detects markers and updates shared resources with the frame and markers.
+
+27. visualize_robot_behavior()
+
+Visualizes the robot's current behavior on the frame.
+Draws the robot's position, planned path, obstacles, and goal on the frame.
+
+
+
+Finally
+Testing
+To test only the main.py file for it's pathfinding capabilities, you can run the ./pngstream.py file in the etc directory and put http://127.0.0.1:5000/video_feed on the following placeholder in main.py:
+
+    args=(&ampquot;http://Your_IP_Camera_feed_Address&ampquot;,) # this is almost at the end of the document
+
+
+and then run main.py. This will open up a window with the png showing the detected path in the screen along with detecting all the ArUco markers. If only the markers are detected and the path doesn't show up, it can be assumed that the code isn't working corrctly.
+
+I suggest testing this way as soon as nix finishes setting the environment and keep testing the code like this to minimize the need to test it physically.
+
+Troubleshooting Common Issues
+
+Connection Problems: If the robot fails to connect to the MQTT broker, double-check your Wi-Fi credentials and ensure the broker's IP address is correct in both the ESP32 firmware and main.py. (The main.py script will print errors if something isn't properly connected.)
+Movement Issues: If the robot's movements are erratic or it doesn't move as expected, recheck the motor connections and ensure the PWM values are correctly tuned in main.py and esp32.ino.
+Marker Detection Failures: If the robot cannot detect ArUco markers, ensure the camera feed is clear and unobstructed. Adjust the camera's focus and lighting conditions to improve detection accuracy.&#34
+
+Possible Improvements
+
+In my pathfinding algorithm, I don't search for the diagonal paths which lengthens the &#34short path&#34 as I wanted the robot to face the waste or the destination from either sides of the square and not the corners.
+Making swarm robots instead of using only one.
+Making the code object-oriented.
+Adding grippers to grab the waste instead of the 5-second delay and drop the waste on its destination.
+
+
+We had added the functionalities of gripping and swarm navigation when using this bot on a Robotics Competition in Nepal called Yantra Swarmanoid but decided to remove it on this showcase, though the code to grab and drop the waste is still in there in 'main.py'.
+
+" name=description><meta content="A Smart Waste Management Robot using Python and OpenCV that can detect the nearest waste(Determined by an no 8 ArUco Marker in the video), navigate to it using the shortest path on the map, pick it(Denoted by a 5 second stop in the video) and reach the destination(Determined By no 5 Aruco Marker in the video) to dump it and again repeat the process if more waste is detected; with only sensor being an overhead camera tracking the ArUco Markers.
+
+
+In the video, I am picking the robot up sometimes to keep it on a new position to show that it can track it's last position and go directly there instead of trying to calculate the route again.
+
+In today's world, efficient waste management is becoming increasingly crucial due to rapid urbanization and population growth. Traditional methods of waste collection and dumping are labor-intensive and often inefficient. By integrating robotics and advanced algorithms, we can streamline these processes, reduce human effort, and ensure a cleaner environment. This project, 'manoid', aims to demonstrate how a robot can autonomously detect, navigate, and manage waste using only a single overhead camera and advanced computer vision techniques.
+
+I have written another blog post related to this: Manoid: Communication
+
+Let's see how it was made.
+Requirements:
+CategoryComponent
+HardwareESP32 Microcontroller
+HardwareL298N Motor Driver
+HardwareDC Motor and Wheels
+HardwareA 12V Battery
+HardwareA camera (I used my phone with an IP Camera app for video streaming)
+SoftwarePython (for publishing)
+SoftwareArduino IDE (for ESP32 firmware)
+Softwaremosquitto (for serving)
+
+Basic Setup
+Setting Up Arduino IDE
+To install the ESP32 board in your Arduino IDE, follow these instructions:
+
+In your Arduino IDE, go to File &ampgt; Preferences.
+Enter the following into the “Additional Board Manager URLs” field:
+
+
+  https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+
+
+
+Click the “OK” button.
+Open the Boards Manager. Go to Tools &ampgt; Board &ampgt; Boards Manager.
+Search for ESP32 and press the install button for the “ESP32 by Espressif Systems”.
+Once installed, select your ESP32 board in Tools &ampgt; Board menu.
+Select the appropriate Port in Tools &ampgt; Port menu (in my case it was the DOIT ESP32 DEVKIT V1).
+
+Now your Arduino IDE is set up to work with ESP32.
+Setting Up The Environment
+I've got my environment all sorted out with Nix and Nix Flake, and I've made it even easier with direnv activation. Mosquitto's up and running smoothly on its default port 1883. python and it's dependencies opencv,numpy,paho-mqtt and flask in a virtual environment are set up via nix flakes as well. You can look at the nix documentation to know more about how it works.
+To set it up:
+
+I assume that nix is installed with flakes enabled on your computer.
+Clone the repo and enter the environment by running nix develop or allowing direnv to do it for you if you have it installed.
+
+
+  git clone https://github.com/scientiac/manoid
+
+
+
+A MQTT server will be running as soon as you enter the environment on the default port of 1883 and you can check the logs using the screen command.
+Change parameters to match your device and make sure everything in on point.
+Run the main.py script and admire the magic.
+
+Changing Parameters
+When adjusting parameters due to dynamic changes in Wi-Fi or IP addresses, several key locations in the code need to be updated to ensure MQTT and IP camera is properly connected. Here's a breakdown of where to make these adjustments:
+In the esp32.ino file:
+
+  const char* ssid = &ampquot;Your_WIFI_SSID&ampquot;;
+  const char* password = &ampquot;Your_WIFI_Password&ampquot;;
+  const char* mqtt_server = &ampquot;Your_MQTT_Server_IP&ampquot;;
+
+
+In the main.py file:
+
+  MQTT_BROKER = &ampquot;Your_MQTT_Server_IP&ampquot; # this is at the top of the document
+  args=(&ampquot;http://Your_IP_Camera_feed_Address&ampquot;,) # this is almost at the end of the document
+  
+  # to use a usb camera 
+  args=(0,), # this can be used and the camera may have ID other than `0` so make sure to check that
+
+
+Tuning the motors is essential because it directly impacts the robot's movement, responsiveness, and overall efficiency. Factors such as the size, power, and weight distribution of the robot, as well as the surface it operates on, can all influence how the motors should be configured.
+In the esp32.py file:
+
+  # Tuning the motors
+  int left_min_pwm_forward = 110;
+  int left_min_pwm_backward = 115;
+  int right_min_pwm_forward = 110;
+  int right_min_pwm_backward = 115;
+
+
+In the main.py file (tuning PID settings):
+
+  robot_settings = {
+      6: {  
+          # Robot ID 6
+          &ampquot;P_left&ampquot;: 0.8,
+          &ampquot;P_right&ampquot;: 0.8,
+          &ampquot;P_center&ampquot;: 0.4,
+          &ampquot;I_left&ampquot;: 0.01,
+          &ampquot;I_right&ampquot;: 0.01,
+          &ampquot;I_center&ampquot;: 0.01,
+          &ampquot;D_left&ampquot;: 0.001,
+          &ampquot;D_right&ampquot;: 0.001,
+          &ampquot;D_center&ampquot;: 0.001,
+          &ampquot;backward_speed_left&ampquot;: 10,
+          &ampquot;backward_speed_right&ampquot;: 10,
+          &ampquot;left_prev_error&ampquot;: 0,
+          &ampquot;right_prev_error&ampquot;: 0,
+          &ampquot;center_prev_error&ampquot;: 0,
+          &ampquot;dt&ampquot;: 0.3,
+      }
+  }
+
+
+Making the bot:
+
+Assemble the bot following the diagram below:
+
+
+
+Then open the file inside the project directory on etc/esp32/esp32.ino on your Arduino IDE set up to work with esp32 and change the parameters to fit your environment.
+And finally flash it!
+
+
+
+You can test the bot manually by connecting to the mqtt server using an application (like MyMQTT on android) and sending values from 0 to 255 to the topics :
+/robot6_left_forward
+/robot6_left_backward
+/robot6_right_forward
+/robot6_right_backard
+where 0 being the wheels at no speed and 255 being the max speed
+
+What is in the code?
+The Functions, duh!
+
+Click to expand: The Functions
+This list contains the functions involved in the robot, with each function's purpose:
+1. get_warped_frame(input_frame, marker_ids, PAD)
+
+Detects ArUco markers in the input frame.
+Extracts the corners of specified markers.
+Warps the frame to correct perspective if all specified markers are detected.
+Returns the warped frame and marker corners.
+
+2. calculate_scale(corners, marker_physical_size_cm)
+
+Calculates the scale of the marker in pixels per centimeter.
+Uses the distance between two corners of the marker.
+
+3. adjust_marker_corners(corners, offset_x_cm, offset_y_cm, adjust_width_cm, adjust_height_cm, marker_physical_size_cm)
+
+Adjusts the marker corners based on given offsets and size adjustments in centimeters.
+
+4. detect_aruco_markers(frame, aruco_dict_type)
+
+Detects ArUco markers in the frame.
+Processes the detected markers and adjusts corners if necessary.
+Returns the detected markers with their centers and corners.
+
+5. heuristic(a, b)
+
+Calculates the Manhattan distance between two points.
+Used in pathfinding algorithms.
+
+6. astar(start, goal, obstacles, grid_size)
+
+Implements the A* algorithm to find the shortest path from start to goal.
+Considers obstacles and returns the path if found.
+
+7. connect_mqtt()
+
+Connects to the MQTT broker to enable robot communication.
+
+8. send_mqtt_command(topic, command)
+
+Sends a command to the robot via MQTT.
+
+9. get_bot_position(bot_id, markers)
+
+Retrieves the current position of a robot based on its marker ID.
+
+10. calculate_distances(robot_corners, next_position)
+
+Calculates the distances from the robot's center and corners to the next position.
+
+11. move_towards_goal(robot_id, path, threshold)
+
+Moves the robot towards the goal following the given path using PID control.
+
+12. draw_lines_to_goal(frame, robot_corners, goal_position, color, thickness)
+
+Draws lines from the robot's corners and center to the goal position on the frame.
+
+13. draw_path(frame, path, color, thickness, grid_size)
+
+Draws the planned path on the frame.
+
+14. get_head_position(robot_id, markers)
+
+Returns the head position and corners of the robot based on its marker ID.
+
+15. get_waste_positions(markers, waste_id)
+
+Filters and returns the positions of a specific type of waste.
+
+16. fill_grid_cells_from_corners(corners, grid_size)
+
+Returns all grid cells covered by a rectangle defined by its corners.
+
+17. update_obstacles(markers, target_waste_ids, robot_head_pos)
+
+Updates the list of obstacles and finds the nearest waste position.
+
+18. convert_to_grid_coordinates(position, cell_size)
+
+Converts a position to grid coordinates based on the cell size.
+
+19. convert_obstacles_to_grid(obstacles, cell_size)
+
+Converts a set of positions to grid coordinates.
+
+20. convert_grid_to_actual(path, cell_size)
+
+Converts a path of grid coordinates back to actual coordinates.
+
+21. plan_path(start, goal, obstacles)
+
+Plans a path using the A* algorithm and returns it in actual coordinates.
+
+22. find_nearest_edge_midpoint_to_robot(robot_pos, marker_id, markers)
+
+Finds the nearest edge midpoint of a marker relative to the robot's position.
+
+23. pickup_waste(robot_id)
+
+Sends a command to the robot to pick up the waste.
+
+24. drop_off_waste(robot_id, waste_id)
+
+Sends a command to the robot to drop off the waste and marks it as processed.
+
+25. robot_control_loop(robot_id)
+
+Main control loop for the robot:
+
+Connects to MQTT.
+Detects waste, navigates to it, picks it up, and drops it off.
+Repeats the process continuously.
+
+
+
+26. capture_and_update_shared_resources(url)
+
+Continuously captures video frames.
+Detects markers and updates shared resources with the frame and markers.
+
+27. visualize_robot_behavior()
+
+Visualizes the robot's current behavior on the frame.
+Draws the robot's position, planned path, obstacles, and goal on the frame.
+
+
+
+Finally
+Testing
+To test only the main.py file for it's pathfinding capabilities, you can run the ./pngstream.py file in the etc directory and put http://127.0.0.1:5000/video_feed on the following placeholder in main.py:
+
+    args=(&ampquot;http://Your_IP_Camera_feed_Address&ampquot;,) # this is almost at the end of the document
+
+
+and then run main.py. This will open up a window with the png showing the detected path in the screen along with detecting all the ArUco markers. If only the markers are detected and the path doesn't show up, it can be assumed that the code isn't working corrctly.
+
+I suggest testing this way as soon as nix finishes setting the environment and keep testing the code like this to minimize the need to test it physically.
+
+Troubleshooting Common Issues
+
+Connection Problems: If the robot fails to connect to the MQTT broker, double-check your Wi-Fi credentials and ensure the broker's IP address is correct in both the ESP32 firmware and main.py. (The main.py script will print errors if something isn't properly connected.)
+Movement Issues: If the robot's movements are erratic or it doesn't move as expected, recheck the motor connections and ensure the PWM values are correctly tuned in main.py and esp32.ino.
+Marker Detection Failures: If the robot cannot detect ArUco markers, ensure the camera feed is clear and unobstructed. Adjust the camera's focus and lighting conditions to improve detection accuracy.&#34
+
+Possible Improvements
+
+In my pathfinding algorithm, I don't search for the diagonal paths which lengthens the &#34short path&#34 as I wanted the robot to face the waste or the destination from either sides of the square and not the corners.
+Making swarm robots instead of using only one.
+Making the code object-oriented.
+Adding grippers to grab the waste instead of the 5-second delay and drop the waste on its destination.
+
+
+We had added the functionalities of gripping and swarm navigation when using this bot on a Robotics Competition in Nepal called Yantra Swarmanoid but decided to remove it on this showcase, though the code to grab and drop the waste is still in there in 'main.py'.
+
+" name=og:description><link rel="shortcut icon" href=/res/logo.svg type=image/x-icon><meta content="width=device-width,initial-scale=1" name=viewport><meta content="rgb(253, 246, 227)" name=theme-color><script defer src=/assets/js/copy-button.js></script><link href=https://github.com/scientiac rel=me><link href=mailto:spandan@scientiac.space rel=me><link href=https://webmention.io/scientiac.space/webmention rel=webmention><meta content=@scientiac@fosstodon.org name=fediverse:creator><body onload=updateThemeSelector();><div class=logo-container><a href=/> <div class=inner-logo-container></div> </a></div><nav data-style=classy><span class=main-li><a href=/>Main</a></span><span><a href=/blog>Blog</a></span><span><a href=/writings>Writings</a></span><span><a href=/syndications>POSSE</a></span><span><a href=/more>More</a></span></nav><section class=section-body><div class=container><div class=h-entry><div class=pagedate><time class="dt-published dateandtag hidden" datetime=2024-06-12T00:00:00Z> 2024-06-12 </time><code class=dateandtag>2024-06-12</code><code class="u-category dateandtag">Genre: Reports</code></div><a class="u-url hidden" href=https://scientiac.space/blog/yantra-bot/>https://scientiac.space/blog/yantra-bot/</a><div class=section><h1 class="p-name title">Manoid: A Waste Management Robot</h1><div class="hidden p-author h-card"><a class=u-url href=https://scientiac.space rel=me> <img alt="Profile photo of scientiac" class=u-photo src=/res/thumbnail.png> <span class=p-name>scientiac</span> </a></div><div class=e-content><p><strong>A Smart Waste Management Robot using Python and OpenCV</strong> that can detect the nearest waste(Determined by an <code>no 8</code> ArUco Marker in the video), navigate to it using the shortest path on the map, pick it(Denoted by a <code>5 second</code> stop in the video) and reach the destination(Determined By <code>no 5</code> Aruco Marker in the video) to dump it and again repeat the process if more waste is detected; with only sensor being an overhead camera tracking the ArUco Markers.<p><video controls src=/images/manoid/manoid.mp4></video><blockquote><p><em>In the video, I am picking the robot up sometimes to keep it on a new position to show that it can track it's last position and go directly there instead of trying to calculate the route again.</em></blockquote><p>In today's world, efficient waste management is becoming increasingly crucial due to rapid urbanization and population growth. Traditional methods of waste collection and dumping are labor-intensive and often inefficient. By integrating robotics and advanced algorithms, we can streamline these processes, reduce human effort, and ensure a cleaner environment. This project, 'manoid', aims to demonstrate how a robot can autonomously detect, navigate, and manage waste using only a single overhead camera and advanced computer vision techniques.<blockquote><p>I have written another blog post related to this: <a href=https://scientiac.space/blog/esp-mosquitto/>Manoid: Communication</a></blockquote><p><strong>Let's see how it was made.</strong><h3 id=requirements>Requirements:</h3><table><thead><tr><th><strong>Category</strong><th><strong>Component</strong><tbody><tr><td>Hardware<td>ESP32 Microcontroller<tr><td>Hardware<td>L298N Motor Driver<tr><td>Hardware<td>DC Motor and Wheels<tr><td>Hardware<td>A 12V Battery<tr><td>Hardware<td>A camera (I used my phone with an IP Camera app for video streaming)<tr><td>Software<td>Python (for publishing)<tr><td>Software<td>Arduino IDE (for ESP32 firmware)<tr><td>Software<td>mosquitto (for serving)</table><h2 id=basic-setup>Basic Setup</h2><h3 id=setting-up-arduino-ide>Setting Up Arduino IDE</h3><p><strong>To install the ESP32 board in your Arduino IDE, follow these instructions:</strong><ol><li>In your Arduino IDE, go to File > Preferences.<li>Enter the following into the “Additional Board Manager URLs” field:</ol><pre class=language-bash data-lang=bash style=color:#fdf4c1aa;background-color:#282828><code class=language-bash data-lang=bash><span>
+</span><span>  </span><span style=color:#fdf4c1>https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+</span><span>
+</span></code></pre><ol start=3><li>Click the “OK” button.<li>Open the Boards Manager. Go to Tools > Board > Boards Manager.<li>Search for ESP32 and press the install button for the “ESP32 by Espressif Systems”.<li>Once installed, select your ESP32 board in Tools > Board menu.<li>Select the appropriate Port in Tools > Port menu (in my case it was the <code>DOIT ESP32 DEVKIT V1</code>).</ol><p>Now your Arduino IDE is set up to work with ESP32.<h3 id=setting-up-the-environment>Setting Up The Environment</h3><p>I've got my environment all sorted out with Nix and Nix Flake, and I've made it even easier with direnv activation. Mosquitto's up and running smoothly on its default port 1883. <code>python</code> and it's dependencies <code>opencv</code>,<code>numpy</code>,<code>paho-mqtt</code> and <code>flask</code> in a virtual environment are set up via nix flakes as well. You can look at the <a href=https://nix.dev/>nix documentation</a> to know more about how it works.<p><strong>To set it up:</strong><ol><li>I assume that nix is installed with flakes enabled on your computer.<li>Clone the repo and enter the environment by running <code>nix develop</code> or allowing <code>direnv</code> to do it for you if you have it installed.</ol><pre class=language-bash data-lang=bash style=color:#fdf4c1aa;background-color:#282828><code class=language-bash data-lang=bash><span>
+</span><span>  </span><span style=color:#fdf4c1>git clone https://github.com/scientiac/manoid
+</span><span>
+</span></code></pre><ol start=3><li>A MQTT server will be running as soon as you enter the environment on the default port of <code>1883</code> and you can check the logs using the <code>screen</code> command.<li>Change parameters to match your device and make sure everything in on point.<li>Run the <code>main.py</code> script and admire the magic.</ol><h3 id=changing-parameters>Changing Parameters</h3><p>When adjusting parameters due to dynamic changes in Wi-Fi or IP addresses, several key locations in the code need to be updated to ensure MQTT and IP camera is properly connected. Here's a breakdown of where to make these adjustments:<p>In the <code>esp32.ino</code> file:<pre class=language-cpp data-lang=cpp style=color:#fdf4c1aa;background-color:#282828><code class=language-cpp data-lang=cpp><span>
+</span><span>  </span><span style=color:#fa5c4b>const char</span><span style=color:#fe8019>*</span><span> ssid </span><span style=color:#fe8019>= </span><span style=color:#b8bb26>"Your_WIFI_SSID"</span><span>;
+</span><span>  </span><span style=color:#fa5c4b>const char</span><span style=color:#fe8019>*</span><span> password </span><span style=color:#fe8019>= </span><span style=color:#b8bb26>"Your_WIFI_Password"</span><span>;
+</span><span>  </span><span style=color:#fa5c4b>const char</span><span style=color:#fe8019>*</span><span> mqtt_server </span><span style=color:#fe8019>= </span><span style=color:#b8bb26>"Your_MQTT_Server_IP"</span><span>;
+</span><span>
+</span></code></pre><p>In the <code>main.py</code> file:<pre class=language-python data-lang=python style=color:#fdf4c1aa;background-color:#282828><code class=language-python data-lang=python><span>
+</span><span>  </span><span style=color:#fdf4c1>MQTT_BROKER </span><span style=color:#fe8019>= </span><span style=color:#b8bb26>"Your_MQTT_Server_IP" </span><span style=color:#928374;font-style:italic># this is at the top of the document
+</span><span>  args</span><span style=color:#fe8019>=</span><span>(</span><span style=color:#b8bb26>"http://Your_IP_Camera_feed_Address"</span><span>,) </span><span style=color:#928374;font-style:italic># this is almost at the end of the document
+</span><span>  
+</span><span>  </span><span style=color:#928374;font-style:italic># to use a usb camera 
+</span><span>  args</span><span style=color:#fe8019>=</span><span>(</span><span style=color:#d3869b>0</span><span>,), </span><span style=color:#928374;font-style:italic># this can be used and the camera may have ID other than `0` so make sure to check that
+</span><span>
+</span></code></pre><p>Tuning the motors is essential because it directly impacts the robot's movement, responsiveness, and overall efficiency. Factors such as the size, power, and weight distribution of the robot, as well as the surface it operates on, can all influence how the motors should be configured.<p>In the <code>esp32.py</code> file:<pre class=language-python data-lang=python style=color:#fdf4c1aa;background-color:#282828><code class=language-python data-lang=python><span>
+</span><span>  </span><span style=color:#928374;font-style:italic># Tuning the motors
+</span><span>  </span><span style=color:#fabd2f>int </span><span>left_min_pwm_forward </span><span style=color:#fe8019>= </span><span style=color:#d3869b>110</span><span>;
+</span><span>  </span><span style=color:#fabd2f>int </span><span>left_min_pwm_backward </span><span style=color:#fe8019>= </span><span style=color:#d3869b>115</span><span>;
+</span><span>  </span><span style=color:#fabd2f>int </span><span>right_min_pwm_forward </span><span style=color:#fe8019>= </span><span style=color:#d3869b>110</span><span>;
+</span><span>  </span><span style=color:#fabd2f>int </span><span>right_min_pwm_backward </span><span style=color:#fe8019>= </span><span style=color:#d3869b>115</span><span>;
+</span><span>
+</span></code></pre><p>In the <code>main.py</code> file (tuning PID settings):<pre class=language-python data-lang=python style=color:#fdf4c1aa;background-color:#282828><code class=language-python data-lang=python><span>
+</span><span>  robot_settings </span><span style=color:#fe8019>= </span><span>{
+</span><span>      </span><span style=color:#d3869b>6</span><span>: {  
+</span><span>          </span><span style=color:#928374;font-style:italic># Robot ID 6
+</span><span>          </span><span style=color:#b8bb26>"P_left"</span><span>: </span><span style=color:#d3869b>0.8</span><span>,
+</span><span>          </span><span style=color:#b8bb26>"P_right"</span><span>: </span><span style=color:#d3869b>0.8</span><span>,
+</span><span>          </span><span style=color:#b8bb26>"P_center"</span><span>: </span><span style=color:#d3869b>0.4</span><span>,
+</span><span>          </span><span style=color:#b8bb26>"I_left"</span><span>: </span><span style=color:#d3869b>0.01</span><span>,
+</span><span>          </span><span style=color:#b8bb26>"I_right"</span><span>: </span><span style=color:#d3869b>0.01</span><span>,
+</span><span>          </span><span style=color:#b8bb26>"I_center"</span><span>: </span><span style=color:#d3869b>0.01</span><span>,
+</span><span>          </span><span style=color:#b8bb26>"D_left"</span><span>: </span><span style=color:#d3869b>0.001</span><span>,
+</span><span>          </span><span style=color:#b8bb26>"D_right"</span><span>: </span><span style=color:#d3869b>0.001</span><span>,
+</span><span>          </span><span style=color:#b8bb26>"D_center"</span><span>: </span><span style=color:#d3869b>0.001</span><span>,
+</span><span>          </span><span style=color:#b8bb26>"backward_speed_left"</span><span>: </span><span style=color:#d3869b>10</span><span>,
+</span><span>          </span><span style=color:#b8bb26>"backward_speed_right"</span><span>: </span><span style=color:#d3869b>10</span><span>,
+</span><span>          </span><span style=color:#b8bb26>"left_prev_error"</span><span>: </span><span style=color:#d3869b>0</span><span>,
+</span><span>          </span><span style=color:#b8bb26>"right_prev_error"</span><span>: </span><span style=color:#d3869b>0</span><span>,
+</span><span>          </span><span style=color:#b8bb26>"center_prev_error"</span><span>: </span><span style=color:#d3869b>0</span><span>,
+</span><span>          </span><span style=color:#b8bb26>"dt"</span><span>: </span><span style=color:#d3869b>0.3</span><span>,
+</span><span>      }
+</span><span>  }
+</span><span>
+</span></code></pre><h3 id=making-the-bot>Making the bot:</h3><ol><li>Assemble the bot following the diagram below:</ol><p><img alt="PIN Diagram" src=/images/manoid/diagram.png><ol start=2><li>Then open the file inside the project directory on <code>etc/esp32/esp32.ino</code> on your Arduino IDE set up to work with esp32 and change the parameters to fit your environment.<li>And finally flash it!</ol><p><img alt=Bot src=/images/manoid/bot.png><blockquote><p><em>You can test the bot manually by connecting to the mqtt server using an application (<em>like MyMQTT on android</em>) and sending values from <code>0</code> to <code>255</code> to the topics :<br> <code>/robot6_left_forward</code><br> <code>/robot6_left_backward</code><br> <code>/robot6_right_forward</code><br> <code>/robot6_right_backard</code><br> where <code>0</code> being the wheels at no speed and <code>255</code> being the max speed</em></blockquote><h2 id=what-is-in-the-code>What is in the code?</h2><h3 id=the-functions-duh>The Functions, duh!</h3><details><summary>Click to expand: The Functions</summary> <p>This list contains the functions involved in the robot, with each function's purpose:</p> <p><strong>1. <code>get_warped_frame(input_frame, marker_ids, PAD)</code></strong></p> <ul><li>Detects ArUco markers in the input frame.<li>Extracts the corners of specified markers.<li>Warps the frame to correct perspective if all specified markers are detected.<li>Returns the warped frame and marker corners.</ul> <p><strong>2. <code>calculate_scale(corners, marker_physical_size_cm)</code></strong></p> <ul><li>Calculates the scale of the marker in pixels per centimeter.<li>Uses the distance between two corners of the marker.</ul> <p><strong>3. <code>adjust_marker_corners(corners, offset_x_cm, offset_y_cm, adjust_width_cm, adjust_height_cm, marker_physical_size_cm)</code></strong></p> <ul><li>Adjusts the marker corners based on given offsets and size adjustments in centimeters.</ul> <p><strong>4. <code>detect_aruco_markers(frame, aruco_dict_type)</code></strong></p> <ul><li>Detects ArUco markers in the frame.<li>Processes the detected markers and adjusts corners if necessary.<li>Returns the detected markers with their centers and corners.</ul> <p><strong>5. <code>heuristic(a, b)</code></strong></p> <ul><li>Calculates the Manhattan distance between two points.<li>Used in pathfinding algorithms.</ul> <p><strong>6. <code>astar(start, goal, obstacles, grid_size)</code></strong></p> <ul><li>Implements the A* algorithm to find the shortest path from start to goal.<li>Considers obstacles and returns the path if found.</ul> <p><strong>7. <code>connect_mqtt()</code></strong></p> <ul><li>Connects to the MQTT broker to enable robot communication.</ul> <p><strong>8. <code>send_mqtt_command(topic, command)</code></strong></p> <ul><li>Sends a command to the robot via MQTT.</ul> <p><strong>9. <code>get_bot_position(bot_id, markers)</code></strong></p> <ul><li>Retrieves the current position of a robot based on its marker ID.</ul> <p><strong>10. <code>calculate_distances(robot_corners, next_position)</code></strong></p> <ul><li>Calculates the distances from the robot's center and corners to the next position.</ul> <p><strong>11. <code>move_towards_goal(robot_id, path, threshold)</code></strong></p> <ul><li>Moves the robot towards the goal following the given path using PID control.</ul> <p><strong>12. <code>draw_lines_to_goal(frame, robot_corners, goal_position, color, thickness)</code></strong></p> <ul><li>Draws lines from the robot's corners and center to the goal position on the frame.</ul> <p><strong>13. <code>draw_path(frame, path, color, thickness, grid_size)</code></strong></p> <ul><li>Draws the planned path on the frame.</ul> <p><strong>14. <code>get_head_position(robot_id, markers)</code></strong></p> <ul><li>Returns the head position and corners of the robot based on its marker ID.</ul> <p><strong>15. <code>get_waste_positions(markers, waste_id)</code></strong></p> <ul><li>Filters and returns the positions of a specific type of waste.</ul> <p><strong>16. <code>fill_grid_cells_from_corners(corners, grid_size)</code></strong></p> <ul><li>Returns all grid cells covered by a rectangle defined by its corners.</ul> <p><strong>17. <code>update_obstacles(markers, target_waste_ids, robot_head_pos)</code></strong></p> <ul><li>Updates the list of obstacles and finds the nearest waste position.</ul> <p><strong>18. <code>convert_to_grid_coordinates(position, cell_size)</code></strong></p> <ul><li>Converts a position to grid coordinates based on the cell size.</ul> <p><strong>19. <code>convert_obstacles_to_grid(obstacles, cell_size)</code></strong></p> <ul><li>Converts a set of positions to grid coordinates.</ul> <p><strong>20. <code>convert_grid_to_actual(path, cell_size)</code></strong></p> <ul><li>Converts a path of grid coordinates back to actual coordinates.</ul> <p><strong>21. <code>plan_path(start, goal, obstacles)</code></strong></p> <ul><li>Plans a path using the A* algorithm and returns it in actual coordinates.</ul> <p><strong>22. <code>find_nearest_edge_midpoint_to_robot(robot_pos, marker_id, markers)</code></strong></p> <ul><li>Finds the nearest edge midpoint of a marker relative to the robot's position.</ul> <p><strong>23. <code>pickup_waste(robot_id)</code></strong></p> <ul><li>Sends a command to the robot to pick up the waste.</ul> <p><strong>24. <code>drop_off_waste(robot_id, waste_id)</code></strong></p> <ul><li>Sends a command to the robot to drop off the waste and marks it as processed.</ul> <p><strong>25. <code>robot_control_loop(robot_id)</code></strong></p> <ul><li>Main control loop for the robot: <ul><li>Connects to MQTT.<li>Detects waste, navigates to it, picks it up, and drops it off.<li>Repeats the process continuously.</ul></ul> <p><strong>26. <code>capture_and_update_shared_resources(url)</code></strong></p> <ul><li>Continuously captures video frames.<li>Detects markers and updates shared resources with the frame and markers.</ul> <p><strong>27. <code>visualize_robot_behavior()</code></strong></p> <ul><li>Visualizes the robot's current behavior on the frame.<li>Draws the robot's position, planned path, obstacles, and goal on the frame.</ul></details><p><img alt=functions src=/images/manoid/functions.svg><h2 id=finally>Finally</h2><h3 id=testing>Testing</h3><p>To test only the <code>main.py</code> file for it's pathfinding capabilities, you can run the <code>./pngstream.py</code> file in the <code>etc</code> directory and put <code>http://127.0.0.1:5000/video_feed</code> on the following placeholder in <code>main.py</code>:<pre class=language-python data-lang=python style=color:#fdf4c1aa;background-color:#282828><code class=language-python data-lang=python><span>
+</span><span>    args</span><span style=color:#fe8019>=</span><span>(</span><span style=color:#b8bb26>"http://Your_IP_Camera_feed_Address"</span><span>,) </span><span style=color:#928374;font-style:italic># this is almost at the end of the document
+</span><span>
+</span></code></pre><p>and then run <code>main.py</code>. This will open up a window with the png showing the detected path in the screen along with detecting all the ArUco markers. If only the markers are detected and the path doesn't show up, it can be assumed that the code isn't working corrctly.<blockquote><p><em>I suggest testing this way as soon as nix finishes setting the environment and keep testing the code like this to minimize the need to test it physically.</em></blockquote><h3 id=troubleshooting-common-issues>Troubleshooting Common Issues</h3><ul><li>Connection Problems: If the robot fails to connect to the MQTT broker, double-check your Wi-Fi credentials and ensure the broker's IP address is correct in both the ESP32 firmware and main.py. (The main.py script will print errors if something isn't properly connected.)<li>Movement Issues: If the robot's movements are erratic or it doesn't move as expected, recheck the motor connections and ensure the PWM values are correctly tuned in <code>main.py</code> and <code>esp32.ino</code>.<li>Marker Detection Failures: If the robot cannot detect ArUco markers, ensure the camera feed is clear and unobstructed. Adjust the camera's focus and lighting conditions to improve detection accuracy."</ul><h3 id=possible-improvements>Possible Improvements</h3><ol><li>In my pathfinding algorithm, I don't search for the diagonal paths which lengthens the "short path" as I wanted the robot to face <code>the waste</code> or <code>the destination</code> from either sides of the square and not the corners.<li>Making swarm robots instead of using only one.<li>Making the code object-oriented.<li>Adding grippers to grab the waste instead of the 5-second delay and drop the waste on its destination.</ol><blockquote><p><em>We had added the functionalities of gripping and swarm navigation when using this bot on a Robotics Competition in Nepal called <code>Yantra Swarmanoid</code> but decided to remove it on this showcase, though the code to grab and drop the waste is still in there in 'main.py'.</em></blockquote></div></div></div><div><hr><h2>Webmentions</h2><form action=https://webmention.io/scientiac.space/webmention class=webmention-form method=post><div id=email-comment><p>Have you written a <a href=https://indieweb.org/responses>response</a> to this? Let me know the URL, Or, you can send your response via <a href="mailto:iac@scientiac.space?subject=Reply%3A%20Manoid%3A%20A%20Waste%20Management%20Robot">mail:</a><code>iac@scientiac.space</code></div><div class=send-webmention><input name=source type=url><button>Send Webmention</button></div><div><div class="ui message"></div></div><input name=target type=hidden value=https://scientiac.space/blog/yantra-bot/></form></div></div><script defer src=/assets/js/themeSelector.js></script></section><div class=hidden><a href=https://fosstodon.org/@scientiac rel=me>Mastodon</a></div><div class="hidden h-card"><img class="u-photo icon" alt=scientiac src=/res/thumbnail.png><a class="p-name u-url" href=https://scientiac.space rel=me>scientiac</a><p class=p-note>A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does.</div><footer><p class=codewithlove>I can't think of things to write on a footer. So, just <span class=main-background>imagine</span> something yourself.<p><a href=/atom.xml>RSS</a> | <a href=https://map.scientiac.space>research::map</a> | <a href=https://github.com/scientiac/scientiac.github.io target=_blank>Source Code</a><p>All articles are usable under <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank>CC BY-SA 4.0</a>.</footer><ol id=themeSelector reversed></ol>

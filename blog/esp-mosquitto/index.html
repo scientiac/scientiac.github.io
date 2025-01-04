@@ -1,0 +1,639 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><title>scientiac::syntropy</title><link href=/assets/css/themes.css rel=stylesheet><link href=/assets/css/readable.css rel=stylesheet><link href=/assets/css/global.css rel=stylesheet><link href=/assets/css/fonts.css rel=stylesheet><link href=/assets/css/logo.css rel=stylesheet><link href=/assets/css/genre/Reports.css rel=stylesheet><link href=https://scientiac.space/atom.xml rel=alternate title=RSS type=application/atom+xml><meta content=Reports property=og:type><meta content=scientiac.space property=og:site_name><meta content=https://scientiac.space/res/thumbnail-light.png property=og:image><title>Manoid: Communication</title><meta content="Manoid: Communication" name=og:title><meta content="
+Introduction
+Building a clueless robot isn't an easy task and I am only in the beginning of it. This report will discuss on how to setup the microcontroller boards and how the communication will work for project manoid (A waste management robot). Also, the much difficult image processing and mapping is on the way, which I should be working on instead of writing this but I'll leave that for next year. Communication seems like a simple topic to work on for now.
+
+Note : I wrote the code for the bot manoid in arduino's '.ino' instead of using micropython's '.py' but micropython can be used to do the same as well.
+
+Requirements:
+CategoryComponent
+HardwareESP8266 Microcontroller
+FirmwareMicroPython (for receiving)
+SoftwarePython (for publishing)
+Softwareesptool
+Softwaremosquitto (for serving)
+Softwareadafruit-ampy
+
+Basic Setup
+Flashing Firmware
+Micropython is an implementation of Python 3 that includes a small subset of the Python standard library and is optimised to run on microcontrollers and in constrained environments. The microcontroller I am using is the ESP8266 (NodeMCU). Flashing it with micropython was easy (for me), I've been flashing things since years. It goes like this:
+
+Install esptool and erase flash your ESP8266 first.
+
+
+You should first confirm that /dev/ttyUSB0 is your device which you want to flash micropython on.
+
+
+    esptool.py --port /dev/ttyUSB0 erase_flash
+
+
+
+Then flash the latest firmware of ESP8266.
+
+
+    esptool.py --port /dev/ttyUSB0 --baud 460800 write_flash --flash_size=detect 0 &amplt;path to the .bin file (firmware)&ampgt;
+
+
+The default flashing mode worked on my first ESP8266 but when I tried to flash it to another ESP8266 it flashes successfully but didn't let me access the repl. So, I had to set the flashing mode to dout.
+
+    esptool.py --port /dev/ttyUSB0 --baud 460800 write_flash --flash_size=detect --flash_mode dout 0 &amplt;path to the .bin file (firmware)&ampgt;
+
+
+
+Check if everything is working by connecting to the micropython repl. You can use screen or tmux or your own solution to connect to the repl. Here is how you can use screen:
+
+
+    screen /dev/ttyUSB0 115200
+
+
+The above command gives you a blank screen, when you hit enter you'll get the prompt, type help and hit enter. This should show up:
+
+MQTT
+I am sure you played with the repl and now it's time to push some scripts to run in it. For now we will focus on using MQTT protocol to transfer data from one machine to another.
+An overview of how MQTT works
+
+A MQTT client establishes a connection with the MQTT broker.
+Once connected, the client can either publish messages, subscribe to specific messages, or do both.
+When the MQTT broker receives a message, it forwards it to subscribers who are interested.
+
+
+Here, server will be mosquitto running on the computer publisher will be the python script on the computer and subscriber will be the ESP8266 running micropython. [Message will be sent from python script through mosquitto server to ESP8266]
+
+Mosquitto
+To set the mosquitto server first we should allow port 1883 on your firewall. I am using a custom configuration file for now. So, make a file named mosquitto.conf and put the following lines to allow all connections:
+
+    listener 1883
+    allow_anonymous true
+
+
+then run the server by the following command:
+
+    mosquitto -c ./mosquitto.conf
+
+
+This is how it'll look when a client named tesseraclient connects to the server:
+
+Pushing Scripts to the Microcontroller
+There are two important files that MicroPython looks for in the root of its filesystem.  These files contain MicroPython code that will be executed whenever the board is powered up or reset (i.e. it 'boots').  These files are:
+boot.py
+This file is run first on power up/reset and should contain low-level code that sets up the board to finish booting.
+main.py
+If this file exists it's run after boot.py and should contain any main script that you want to run when the board is powered up or reset.
+To push the scripts I am using adafruit-ampy but the official way to push files is using their webrepl.
+Using ampy you can push scripts with the following command:
+
+    ampy -p /dev/ttyUSB0 put &amplt;filename.py&ampgt;
+
+
+Programming
+Publisher
+Firstly a python script on the computer to send messages, it sends on and off in the interval of 500ms with topic led to the mosquitto server:
+
+    import time
+    import paho.mqtt.client as mqtt
+    BROKER_ADDRESS: 000.000.00.00 # IP address of the device running the mosquitto server
+
+
+    def on_connect(client, userdata, flags, rc):
+        if rc == 0:
+            print(&ampquot;Connected to broker&ampquot;)
+        else:
+            print(&ampquot;Connection failed with code&ampquot;, rc)
+
+
+    def on_disconnect(client, userdata, rc):
+        print(&ampquot;Disconnected from broker&ampquot;)
+
+
+    def establish_connection():
+        client_id = &ampquot;tesserver&ampquot;
+        client = mqtt.Client(client_id=client_id)
+
+        client.on_connect = on_connect
+        client.on_disconnect = on_disconnect
+
+        client.connect(BROKER_ADDRESS, 1883, 60)
+
+        return client
+
+    led_topic = &ampquot;led&ampquot;
+    client = establish_connection()
+
+    client.publish(led_topic, &ampquot;off&ampquot;)
+    time.sleep(500)
+    client.publish(led_topic, &ampquot;off&ampquot;)
+    time.sleep(500)
+
+
+Subscriber
+boot.py
+This will start when I plug the esp to the power supply. No need to connect via webrepl and start manually. Generally it's not recommended to touch the boot.py file. main.py should be used instead but this is I who programming the microcontroller so boot.py it is.
+
+    import esp
+    import os, machine
+    import gc
+    import webrepl
+
+    webrepl.start()
+    gc.collect()
+
+    import network
+    import time
+    import machine
+
+    # Wi-Fi configuration
+    ssid =  abcdef #WIFI_SSID
+    password = 12345678 #WIFI_PASSWORD
+
+
+    # Function to connect to Wi-Fi
+    def connect_wifi():
+        wlan = network.WLAN(network.STA_IF)
+        wlan.active(True)
+
+        if not wlan.isconnected():
+            print(&ampquot;Connecting to WiFi...&ampquot;)
+            wlan.connect(ssid, password)
+            # wlan.connect(ssid)
+
+            while not wlan.isconnected():
+                time.sleep(1)
+
+        print(&ampquot;Connected to WiFi&ampquot;)
+
+
+    # Connect to Wi-Fi
+    connect_wifi()
+
+    # Check if Wi-Fi connection is successful before executing mqtt.py
+    if network.WLAN(network.STA_IF).isconnected():
+        # Execute mqtt.py
+        try:
+            import mqtt  # Replace &amp#39;mqtt&amp#39; with the actual name of your Python script
+        except Exception as e:
+            print(&ampquot;Error executing mqtt.py:&ampquot;, e)
+
+
+mqtt.py
+Upon connecting to the WIFI successfully the above script will import this file and things magically happen.
+
+    import machine
+    from umqtt.simple import MQTTClient
+    import time
+    from secrets import BROKER_ADDRESS
+
+    # MQTT configuration
+    client_id = &ampquot;teserraclient&ampquot;
+    broker_address = 000.000.00.00 # IP address of the device running the mosquitto server
+    led_topic = b&ampquot;led&ampquot;
+
+    # LED Pin
+    led_pin = machine.Pin(15, machine.Pin.OUT)
+
+
+    def connect_mqtt():
+        c = MQTTClient(client_id, broker_address)
+        c.set_callback(callback)
+
+        while True:
+            try:
+                c.connect(clean_session=False)
+                print(&ampquot;Connected to MQTT broker.&ampquot;)
+                c.subscribe(led_topic)
+                return c
+            except OSError as e:
+                print(f&ampquot;Connection error: {e}&ampquot;)
+                print(&ampquot;Retrying in 5 seconds...&ampquot;)
+                time.sleep(5)
+
+
+    def callback(topic, msg):
+        print(f&ampquot;Received message on topic {topic.decode(&amp#39;utf-8&amp#39;)}: {msg.decode(&amp#39;utf-8&amp#39;)}&ampquot;)
+
+        if topic == led_topic:
+            if msg == b&ampquot;on&ampquot;:
+                print(&ampquot;Turning on the LED&ampquot;)
+                led_pin.on()
+            elif msg == b&ampquot;off&ampquot;:
+                print(&ampquot;Turning off the LED&ampquot;)
+                led_pin.off()
+
+
+    mqtt_client = connect_mqtt()
+
+    if mqtt_client:
+        print(&ampquot;Waiting for messages...&ampquot;)
+        while True:
+            try:
+                mqtt_client.wait_msg()
+            except OSError as e:
+                print(f&ampquot;Error: {e}&ampquot;)
+                print(&ampquot;Reconnecting...&ampquot;)
+                mqtt_client = connect_mqtt()
+                if not mqtt_client:
+                    break
+
+
+Finally
+If everything works after installing all the python dependencies you will see this if you are supplying power to your microcontroller using a computer that can accept serial in upon doing a soft reboot and running your python (publisher) script from your computer.
+
+This indicates that the publisher i.e. python script has connected to the server i.e. mosquitto and is now sending on and off messages to the server with topic led which then is sent to the subscriber i.e. ESP8266 which is interpreted by the microcontroller as a command to enable and disable the set GPIO pin i.e. pin 15 if you look closely at the code.
+" name=description><meta content="
+Introduction
+Building a clueless robot isn't an easy task and I am only in the beginning of it. This report will discuss on how to setup the microcontroller boards and how the communication will work for project manoid (A waste management robot). Also, the much difficult image processing and mapping is on the way, which I should be working on instead of writing this but I'll leave that for next year. Communication seems like a simple topic to work on for now.
+
+Note : I wrote the code for the bot manoid in arduino's '.ino' instead of using micropython's '.py' but micropython can be used to do the same as well.
+
+Requirements:
+CategoryComponent
+HardwareESP8266 Microcontroller
+FirmwareMicroPython (for receiving)
+SoftwarePython (for publishing)
+Softwareesptool
+Softwaremosquitto (for serving)
+Softwareadafruit-ampy
+
+Basic Setup
+Flashing Firmware
+Micropython is an implementation of Python 3 that includes a small subset of the Python standard library and is optimised to run on microcontrollers and in constrained environments. The microcontroller I am using is the ESP8266 (NodeMCU). Flashing it with micropython was easy (for me), I've been flashing things since years. It goes like this:
+
+Install esptool and erase flash your ESP8266 first.
+
+
+You should first confirm that /dev/ttyUSB0 is your device which you want to flash micropython on.
+
+
+    esptool.py --port /dev/ttyUSB0 erase_flash
+
+
+
+Then flash the latest firmware of ESP8266.
+
+
+    esptool.py --port /dev/ttyUSB0 --baud 460800 write_flash --flash_size=detect 0 &amplt;path to the .bin file (firmware)&ampgt;
+
+
+The default flashing mode worked on my first ESP8266 but when I tried to flash it to another ESP8266 it flashes successfully but didn't let me access the repl. So, I had to set the flashing mode to dout.
+
+    esptool.py --port /dev/ttyUSB0 --baud 460800 write_flash --flash_size=detect --flash_mode dout 0 &amplt;path to the .bin file (firmware)&ampgt;
+
+
+
+Check if everything is working by connecting to the micropython repl. You can use screen or tmux or your own solution to connect to the repl. Here is how you can use screen:
+
+
+    screen /dev/ttyUSB0 115200
+
+
+The above command gives you a blank screen, when you hit enter you'll get the prompt, type help and hit enter. This should show up:
+
+MQTT
+I am sure you played with the repl and now it's time to push some scripts to run in it. For now we will focus on using MQTT protocol to transfer data from one machine to another.
+An overview of how MQTT works
+
+A MQTT client establishes a connection with the MQTT broker.
+Once connected, the client can either publish messages, subscribe to specific messages, or do both.
+When the MQTT broker receives a message, it forwards it to subscribers who are interested.
+
+
+Here, server will be mosquitto running on the computer publisher will be the python script on the computer and subscriber will be the ESP8266 running micropython. [Message will be sent from python script through mosquitto server to ESP8266]
+
+Mosquitto
+To set the mosquitto server first we should allow port 1883 on your firewall. I am using a custom configuration file for now. So, make a file named mosquitto.conf and put the following lines to allow all connections:
+
+    listener 1883
+    allow_anonymous true
+
+
+then run the server by the following command:
+
+    mosquitto -c ./mosquitto.conf
+
+
+This is how it'll look when a client named tesseraclient connects to the server:
+
+Pushing Scripts to the Microcontroller
+There are two important files that MicroPython looks for in the root of its filesystem.  These files contain MicroPython code that will be executed whenever the board is powered up or reset (i.e. it 'boots').  These files are:
+boot.py
+This file is run first on power up/reset and should contain low-level code that sets up the board to finish booting.
+main.py
+If this file exists it's run after boot.py and should contain any main script that you want to run when the board is powered up or reset.
+To push the scripts I am using adafruit-ampy but the official way to push files is using their webrepl.
+Using ampy you can push scripts with the following command:
+
+    ampy -p /dev/ttyUSB0 put &amplt;filename.py&ampgt;
+
+
+Programming
+Publisher
+Firstly a python script on the computer to send messages, it sends on and off in the interval of 500ms with topic led to the mosquitto server:
+
+    import time
+    import paho.mqtt.client as mqtt
+    BROKER_ADDRESS: 000.000.00.00 # IP address of the device running the mosquitto server
+
+
+    def on_connect(client, userdata, flags, rc):
+        if rc == 0:
+            print(&ampquot;Connected to broker&ampquot;)
+        else:
+            print(&ampquot;Connection failed with code&ampquot;, rc)
+
+
+    def on_disconnect(client, userdata, rc):
+        print(&ampquot;Disconnected from broker&ampquot;)
+
+
+    def establish_connection():
+        client_id = &ampquot;tesserver&ampquot;
+        client = mqtt.Client(client_id=client_id)
+
+        client.on_connect = on_connect
+        client.on_disconnect = on_disconnect
+
+        client.connect(BROKER_ADDRESS, 1883, 60)
+
+        return client
+
+    led_topic = &ampquot;led&ampquot;
+    client = establish_connection()
+
+    client.publish(led_topic, &ampquot;off&ampquot;)
+    time.sleep(500)
+    client.publish(led_topic, &ampquot;off&ampquot;)
+    time.sleep(500)
+
+
+Subscriber
+boot.py
+This will start when I plug the esp to the power supply. No need to connect via webrepl and start manually. Generally it's not recommended to touch the boot.py file. main.py should be used instead but this is I who programming the microcontroller so boot.py it is.
+
+    import esp
+    import os, machine
+    import gc
+    import webrepl
+
+    webrepl.start()
+    gc.collect()
+
+    import network
+    import time
+    import machine
+
+    # Wi-Fi configuration
+    ssid =  abcdef #WIFI_SSID
+    password = 12345678 #WIFI_PASSWORD
+
+
+    # Function to connect to Wi-Fi
+    def connect_wifi():
+        wlan = network.WLAN(network.STA_IF)
+        wlan.active(True)
+
+        if not wlan.isconnected():
+            print(&ampquot;Connecting to WiFi...&ampquot;)
+            wlan.connect(ssid, password)
+            # wlan.connect(ssid)
+
+            while not wlan.isconnected():
+                time.sleep(1)
+
+        print(&ampquot;Connected to WiFi&ampquot;)
+
+
+    # Connect to Wi-Fi
+    connect_wifi()
+
+    # Check if Wi-Fi connection is successful before executing mqtt.py
+    if network.WLAN(network.STA_IF).isconnected():
+        # Execute mqtt.py
+        try:
+            import mqtt  # Replace &amp#39;mqtt&amp#39; with the actual name of your Python script
+        except Exception as e:
+            print(&ampquot;Error executing mqtt.py:&ampquot;, e)
+
+
+mqtt.py
+Upon connecting to the WIFI successfully the above script will import this file and things magically happen.
+
+    import machine
+    from umqtt.simple import MQTTClient
+    import time
+    from secrets import BROKER_ADDRESS
+
+    # MQTT configuration
+    client_id = &ampquot;teserraclient&ampquot;
+    broker_address = 000.000.00.00 # IP address of the device running the mosquitto server
+    led_topic = b&ampquot;led&ampquot;
+
+    # LED Pin
+    led_pin = machine.Pin(15, machine.Pin.OUT)
+
+
+    def connect_mqtt():
+        c = MQTTClient(client_id, broker_address)
+        c.set_callback(callback)
+
+        while True:
+            try:
+                c.connect(clean_session=False)
+                print(&ampquot;Connected to MQTT broker.&ampquot;)
+                c.subscribe(led_topic)
+                return c
+            except OSError as e:
+                print(f&ampquot;Connection error: {e}&ampquot;)
+                print(&ampquot;Retrying in 5 seconds...&ampquot;)
+                time.sleep(5)
+
+
+    def callback(topic, msg):
+        print(f&ampquot;Received message on topic {topic.decode(&amp#39;utf-8&amp#39;)}: {msg.decode(&amp#39;utf-8&amp#39;)}&ampquot;)
+
+        if topic == led_topic:
+            if msg == b&ampquot;on&ampquot;:
+                print(&ampquot;Turning on the LED&ampquot;)
+                led_pin.on()
+            elif msg == b&ampquot;off&ampquot;:
+                print(&ampquot;Turning off the LED&ampquot;)
+                led_pin.off()
+
+
+    mqtt_client = connect_mqtt()
+
+    if mqtt_client:
+        print(&ampquot;Waiting for messages...&ampquot;)
+        while True:
+            try:
+                mqtt_client.wait_msg()
+            except OSError as e:
+                print(f&ampquot;Error: {e}&ampquot;)
+                print(&ampquot;Reconnecting...&ampquot;)
+                mqtt_client = connect_mqtt()
+                if not mqtt_client:
+                    break
+
+
+Finally
+If everything works after installing all the python dependencies you will see this if you are supplying power to your microcontroller using a computer that can accept serial in upon doing a soft reboot and running your python (publisher) script from your computer.
+
+This indicates that the publisher i.e. python script has connected to the server i.e. mosquitto and is now sending on and off messages to the server with topic led which then is sent to the subscriber i.e. ESP8266 which is interpreted by the microcontroller as a command to enable and disable the set GPIO pin i.e. pin 15 if you look closely at the code.
+" name=og:description><link rel="shortcut icon" href=/res/logo.svg type=image/x-icon><meta content="width=device-width,initial-scale=1" name=viewport><meta content="rgb(253, 246, 227)" name=theme-color><script defer src=/assets/js/copy-button.js></script><link href=https://github.com/scientiac rel=me><link href=mailto:spandan@scientiac.space rel=me><link href=https://webmention.io/scientiac.space/webmention rel=webmention><meta content=@scientiac@fosstodon.org name=fediverse:creator><body onload=updateThemeSelector();><div class=logo-container><a href=/> <div class=inner-logo-container></div> </a></div><nav data-style=classy><span class=main-li><a href=/>Main</a></span><span><a href=/blog>Blog</a></span><span><a href=/writings>Writings</a></span><span><a href=/syndications>POSSE</a></span><span><a href=/more>More</a></span></nav><section class=section-body><div class=container><div class=h-entry><div class=pagedate><time class="dt-published dateandtag hidden" datetime=2023-12-31T00:00:00Z> 2023-12-31 </time><code class=dateandtag>2023-12-31</code><code class="u-category dateandtag">Genre: Reports</code></div><a class="u-url hidden" href=https://scientiac.space/blog/esp-mosquitto/>https://scientiac.space/blog/esp-mosquitto/</a><div class=section><h1 class="p-name title">Manoid: Communication</h1><div class="hidden p-author h-card"><a class=u-url href=https://scientiac.space rel=me> <img alt="Profile photo of scientiac" class=u-photo src=/res/thumbnail.png> <span class=p-name>scientiac</span> </a></div><div class=e-content><p><img alt="Esp with Led" src=/images/manoid/led_esp.jpg><h2 id=introduction>Introduction</h2><p>Building a clueless robot isn't an easy task and I am only in the beginning of it. This report will discuss on how to setup the microcontroller boards and how the communication will work for project <code>manoid</code> (A waste management robot). Also, the much difficult image processing and mapping is on the way, which I should be working on instead of writing this but I'll leave that for next year. Communication seems like a simple topic to work on for now.<blockquote><p><strong>Note :</strong> <em>I wrote the code for the bot <a href=/blog/yantra-bot/>manoid</a> in arduino's '.ino' instead of using micropython's '.py' but micropython can be used to do the same as well.</em></blockquote><h3 id=requirements>Requirements:</h3><table><thead><tr><th><strong>Category</strong><th><strong>Component</strong><tbody><tr><td>Hardware<td>ESP8266 Microcontroller<tr><td>Firmware<td>MicroPython (for receiving)<tr><td>Software<td>Python (for publishing)<tr><td>Software<td>esptool<tr><td>Software<td>mosquitto (for serving)<tr><td>Software<td>adafruit-ampy</table><h2 id=basic-setup>Basic Setup</h2><h3 id=flashing-firmware>Flashing Firmware</h3><p>Micropython is an implementation of Python 3 that includes a small subset of the Python standard library and is optimised to run on microcontrollers and in constrained environments. The microcontroller I am using is the ESP8266 (NodeMCU). Flashing it with micropython was easy (for me), I've been flashing things since years. It goes like this:<ol><li>Install <code>esptool</code> and erase flash your ESP8266 first.</ol><blockquote><p>You should first confirm that /dev/ttyUSB0 is your device which you want to flash <code>micropython</code> on.</blockquote><pre class=language-bash data-lang=bash style=color:#fdf4c1aa;background-color:#282828><code class=language-bash data-lang=bash><span>
+</span><span>    </span><span style=color:#fdf4c1>esptool.py --port /dev/ttyUSB0 erase_flash
+</span><span>
+</span></code></pre><ol start=2><li>Then flash the <a href=https://micropython.org/download/ESP8266_GENERIC/>latest firmware</a> of ESP8266.</ol><pre class=language-bash data-lang=bash style=color:#fdf4c1aa;background-color:#282828><code class=language-bash data-lang=bash><span>
+</span><span>    </span><span style=color:#fdf4c1>esptool.py --port /dev/ttyUSB0 --baud 460800 write_flash --flash_size</span><span style=color:#fe8019>=</span><span style=color:#fdf4c1>detect 0 </span><span style=color:#fe8019><</span><span style=color:#fdf4c1>path to the .bin file (firmware</span><span>)</span><span style=color:#fe8019>>
+</span><span>
+</span></code></pre><p>The default flashing mode worked on my first <code>ESP8266</code> but when I tried to flash it to another <code>ESP8266</code> it flashes successfully but didn't let me access the repl. So, I had to set the flashing mode to <code>dout</code>.<pre class=language-bash data-lang=bash style=color:#fdf4c1aa;background-color:#282828><code class=language-bash data-lang=bash><span>
+</span><span>    </span><span style=color:#fdf4c1>esptool.py --port /dev/ttyUSB0 --baud 460800 write_flash --flash_size</span><span style=color:#fe8019>=</span><span style=color:#fdf4c1>detect --flash_mode dout 0 </span><span style=color:#fe8019><</span><span style=color:#fdf4c1>path to the .bin file (firmware</span><span>)</span><span style=color:#fe8019>>
+</span><span>
+</span></code></pre><ol start=3><li>Check if everything is working by connecting to the <code>micropython repl</code>. You can use <code>screen</code> or <code>tmux</code> or your own solution to connect to the <code>repl</code>. Here is how you can use screen:</ol><pre class=language-bash data-lang=bash style=color:#fdf4c1aa;background-color:#282828><code class=language-bash data-lang=bash><span>
+</span><span>    </span><span style=color:#fdf4c1>screen /dev/ttyUSB0 115200
+</span><span>
+</span></code></pre><p>The above command gives you a blank screen, when you hit enter you'll get the prompt, type <code>help</code> and hit enter. This should show up:<p><img alt=repl src=/images/manoid/repl.png><h3 id=mqtt>MQTT</h3><p>I am sure you played with the <code>repl</code> and now it's time to push some scripts to run in it. For now we will focus on using <code>MQTT</code> protocol to transfer data from one machine to another.<h4 id=an-overview-of-how-mqtt-works>An overview of how MQTT works</h4><ol><li>A MQTT client establishes a connection with the MQTT broker.<li>Once connected, the client can either publish messages, subscribe to specific messages, or do both.<li>When the MQTT broker receives a message, it forwards it to subscribers who are interested.</ol><blockquote><p>Here, <strong>server</strong> will be <code>mosquitto</code> running on the computer <strong>publisher</strong> will be the <code>python script</code> on the computer and <strong>subscriber</strong> will be the <code>ESP8266</code> running micropython. [Message will be sent from python script through mosquitto server to ESP8266]</blockquote><h4 id=mosquitto>Mosquitto</h4><p>To set the mosquitto server first we should allow port <code>1883</code> on your firewall. I am using a custom configuration file for now. So, make a file named <code>mosquitto.conf</code> and put the following lines to allow all connections:<pre style=color:#fdf4c1aa;background-color:#282828><code><span>
+</span><span>    listener 1883
+</span><span>    allow_anonymous true
+</span><span>
+</span></code></pre><p>then run the server by the following command:<pre class=language-bash data-lang=bash style=color:#fdf4c1aa;background-color:#282828><code class=language-bash data-lang=bash><span>
+</span><span>    </span><span style=color:#fdf4c1>mosquitto -c ./mosquitto.conf
+</span><span>
+</span></code></pre><p>This is how it'll look when a client named <code>tesseraclient</code> connects to the server:<p><img alt=mosquitto src=/images/manoid/mosquitto.png><h3 id=pushing-scripts-to-the-microcontroller>Pushing Scripts to the Microcontroller</h3><p>There are two important files that MicroPython looks for in the root of its filesystem. These files contain MicroPython code that will be executed whenever the board is powered up or reset (i.e. it 'boots'). These files are:<h4 id=boot-py>boot.py</h4><p>This file is run first on power up/reset and should contain low-level code that sets up the board to finish booting.<h4 id=main-py>main.py</h4><p>If this file exists it's run after boot.py and should contain any main script that you want to run when the board is powered up or reset.<p>To push the scripts I am using <code>adafruit-ampy</code> but the official way to push files is using their <a href=https://learn.adafruit.com/micropython-basics-esp8266-webrepl/access-webrepl>webrepl</a>.<p>Using ampy you can push scripts with the following command:<pre class=language-bash data-lang=bash style=color:#fdf4c1aa;background-color:#282828><code class=language-bash data-lang=bash><span>
+</span><span>    </span><span style=color:#fdf4c1>ampy -p /dev/ttyUSB0 put </span><span style=color:#fe8019><</span><span style=color:#fdf4c1>filename.py</span><span style=color:#fe8019>>
+</span><span>
+</span></code></pre><h2 id=programming>Programming</h2><h3 id=publisher>Publisher</h3><p>Firstly a python script on the computer to send messages, it sends <code>on</code> and <code>off</code> in the interval of 500ms with topic <code>led</code> to the mosquitto server:<pre class=language-py data-lang=py style=color:#fdf4c1aa;background-color:#282828><code class=language-py data-lang=py><span>
+</span><span>    </span><span style=color:#fa5c4b>import </span><span>time
+</span><span>    </span><span style=color:#fa5c4b>import </span><span>paho.mqtt.client </span><span style=color:#fa5c4b>as </span><span>mqtt
+</span><span>    </span><span style=color:#fdf4c1>BROKER_ADDRESS</span><span>: </span><span style=color:#d3869b>000.000.00.00 </span><span style=color:#928374;font-style:italic># IP address of the device running the mosquitto server
+</span><span>
+</span><span>
+</span><span>    </span><span style=color:#fa5c4b>def </span><span style=color:#8ec07c>on_connect</span><span>(</span><span style=color:#fdf4c1>client</span><span>, </span><span style=color:#fdf4c1>userdata</span><span>, </span><span style=color:#fdf4c1>flags</span><span>, </span><span style=color:#fdf4c1>rc</span><span>):
+</span><span>        </span><span style=color:#fa5c4b>if </span><span>rc </span><span style=color:#fe8019>== </span><span style=color:#d3869b>0</span><span>:
+</span><span>            </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>"Connected to broker"</span><span style=color:#fdf4c1>)
+</span><span>        </span><span style=color:#fa5c4b>else</span><span>:
+</span><span>            </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>"Connection failed with code"</span><span style=color:#fdf4c1>, rc)
+</span><span>
+</span><span>
+</span><span>    </span><span style=color:#fa5c4b>def </span><span style=color:#8ec07c>on_disconnect</span><span>(</span><span style=color:#fdf4c1>client</span><span>, </span><span style=color:#fdf4c1>userdata</span><span>, </span><span style=color:#fdf4c1>rc</span><span>):
+</span><span>        </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>"Disconnected from broker"</span><span style=color:#fdf4c1>)
+</span><span>
+</span><span>
+</span><span>    </span><span style=color:#fa5c4b>def </span><span style=color:#8ec07c>establish_connection</span><span>():
+</span><span>        client_id </span><span style=color:#fe8019>= </span><span style=color:#b8bb26>"tesserver"
+</span><span>        client </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>mqtt.Client(client_id</span><span style=color:#fe8019>=</span><span style=color:#fdf4c1>client_id)
+</span><span>
+</span><span>        client.on_connect </span><span style=color:#fe8019>= </span><span>on_connect
+</span><span>        client.on_disconnect </span><span style=color:#fe8019>= </span><span>on_disconnect
+</span><span>
+</span><span>        </span><span style=color:#fdf4c1>client.connect(BROKER_ADDRESS, </span><span style=color:#d3869b>1883</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>60</span><span style=color:#fdf4c1>)
+</span><span>
+</span><span>        </span><span style=color:#fa5c4b>return </span><span>client
+</span><span>
+</span><span>    led_topic </span><span style=color:#fe8019>= </span><span style=color:#b8bb26>"led"
+</span><span>    client </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>establish_connection()
+</span><span>
+</span><span>    </span><span style=color:#fdf4c1>client.publish(led_topic, </span><span style=color:#b8bb26>"off"</span><span style=color:#fdf4c1>)
+</span><span>    </span><span style=color:#fdf4c1>time.sleep(</span><span style=color:#d3869b>500</span><span style=color:#fdf4c1>)
+</span><span>    </span><span style=color:#fdf4c1>client.publish(led_topic, </span><span style=color:#b8bb26>"off"</span><span style=color:#fdf4c1>)
+</span><span>    </span><span style=color:#fdf4c1>time.sleep(</span><span style=color:#d3869b>500</span><span style=color:#fdf4c1>)
+</span><span>
+</span></code></pre><h3 id=subscriber>Subscriber</h3><h4 id=boot-py-1>boot.py</h4><p>This will start when I plug the esp to the power supply. No need to connect via <code>webrepl</code> and start manually. Generally it's not recommended to touch the <code>boot.py</code> file. <code>main.py</code> should be used instead but this is I who programming the microcontroller so <code>boot.py</code> it is.<pre class=language-py data-lang=py style=color:#fdf4c1aa;background-color:#282828><code class=language-py data-lang=py><span>
+</span><span>    </span><span style=color:#fa5c4b>import </span><span>esp
+</span><span>    </span><span style=color:#fa5c4b>import </span><span>os, machine
+</span><span>    </span><span style=color:#fa5c4b>import </span><span>gc
+</span><span>    </span><span style=color:#fa5c4b>import </span><span>webrepl
+</span><span>
+</span><span>    </span><span style=color:#fdf4c1>webrepl.start()
+</span><span>    </span><span style=color:#fdf4c1>gc.collect()
+</span><span>
+</span><span>    </span><span style=color:#fa5c4b>import </span><span>network
+</span><span>    </span><span style=color:#fa5c4b>import </span><span>time
+</span><span>    </span><span style=color:#fa5c4b>import </span><span>machine
+</span><span>
+</span><span>    </span><span style=color:#928374;font-style:italic># Wi-Fi configuration
+</span><span>    ssid </span><span style=color:#fe8019>=  </span><span>abcdef </span><span style=color:#928374;font-style:italic>#WIFI_SSID
+</span><span>    password </span><span style=color:#fe8019>= </span><span style=color:#d3869b>12345678 </span><span style=color:#928374;font-style:italic>#WIFI_PASSWORD
+</span><span>
+</span><span>
+</span><span>    </span><span style=color:#928374;font-style:italic># Function to connect to Wi-Fi
+</span><span>    </span><span style=color:#fa5c4b>def </span><span style=color:#8ec07c>connect_wifi</span><span>():
+</span><span>        wlan </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>network.WLAN(network.STA_IF)
+</span><span>        </span><span style=color:#fdf4c1>wlan.active(</span><span style=color:#d3869b>True</span><span style=color:#fdf4c1>)
+</span><span>
+</span><span>        </span><span style=color:#fa5c4b>if </span><span style=color:#fe8019>not </span><span style=color:#fdf4c1>wlan.isconnected()</span><span>:
+</span><span>            </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>"Connecting to WiFi..."</span><span style=color:#fdf4c1>)
+</span><span>            </span><span style=color:#fdf4c1>wlan.connect(ssid, password)
+</span><span>            </span><span style=color:#928374;font-style:italic># wlan.connect(ssid)
+</span><span>
+</span><span>            </span><span style=color:#fa5c4b>while </span><span style=color:#fe8019>not </span><span style=color:#fdf4c1>wlan.isconnected()</span><span>:
+</span><span>                </span><span style=color:#fdf4c1>time.sleep(</span><span style=color:#d3869b>1</span><span style=color:#fdf4c1>)
+</span><span>
+</span><span>        </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>"Connected to WiFi"</span><span style=color:#fdf4c1>)
+</span><span>
+</span><span>
+</span><span>    </span><span style=color:#928374;font-style:italic># Connect to Wi-Fi
+</span><span>    </span><span style=color:#fdf4c1>connect_wifi()
+</span><span>
+</span><span>    </span><span style=color:#928374;font-style:italic># Check if Wi-Fi connection is successful before executing mqtt.py
+</span><span>    </span><span style=color:#fa5c4b>if </span><span style=color:#fdf4c1>network.WLAN(network.STA_IF).isconnected()</span><span>:
+</span><span>        </span><span style=color:#928374;font-style:italic># Execute mqtt.py
+</span><span>        </span><span style=color:#fa5c4b>try</span><span>:
+</span><span>            </span><span style=color:#fa5c4b>import </span><span>mqtt  </span><span style=color:#928374;font-style:italic># Replace 'mqtt' with the actual name of your Python script
+</span><span>        </span><span style=color:#fa5c4b>except </span><span style=color:#fabd2f>Exception </span><span style=color:#fa5c4b>as </span><span>e:
+</span><span>            </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>"Error executing mqtt.py:"</span><span style=color:#fdf4c1>, e)
+</span><span>
+</span></code></pre><h4 id=mqtt-py>mqtt.py</h4><p>Upon connecting to the WIFI successfully the above script will import this file and things magically happen.<pre class=language-py data-lang=py style=color:#fdf4c1aa;background-color:#282828><code class=language-py data-lang=py><span>
+</span><span>    </span><span style=color:#fa5c4b>import </span><span>machine
+</span><span>    </span><span style=color:#fa5c4b>from </span><span>umqtt.simple </span><span style=color:#fa5c4b>import </span><span>MQTTClient
+</span><span>    </span><span style=color:#fa5c4b>import </span><span>time
+</span><span>    </span><span style=color:#fa5c4b>from </span><span>secrets </span><span style=color:#fa5c4b>import </span><span style=color:#fdf4c1>BROKER_ADDRESS
+</span><span>
+</span><span>    </span><span style=color:#928374;font-style:italic># MQTT configuration
+</span><span>    client_id </span><span style=color:#fe8019>= </span><span style=color:#b8bb26>"teserraclient"
+</span><span>    broker_address </span><span style=color:#fe8019>= </span><span style=color:#d3869b>000.000.00.00 </span><span style=color:#928374;font-style:italic># IP address of the device running the mosquitto server
+</span><span>    led_topic </span><span style=color:#fe8019>= </span><span style=color:#fa5c4b>b</span><span style=color:#b8bb26>"led"
+</span><span>
+</span><span>    </span><span style=color:#928374;font-style:italic># LED Pin
+</span><span>    led_pin </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>machine.Pin(</span><span style=color:#d3869b>15</span><span style=color:#fdf4c1>, machine.Pin.OUT)
+</span><span>
+</span><span>
+</span><span>    </span><span style=color:#fa5c4b>def </span><span style=color:#8ec07c>connect_mqtt</span><span>():
+</span><span>        c </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>MQTTClient(client_id, broker_address)
+</span><span>        </span><span style=color:#fdf4c1>c.set_callback(callback)
+</span><span>
+</span><span>        </span><span style=color:#fa5c4b>while </span><span style=color:#d3869b>True</span><span>:
+</span><span>            </span><span style=color:#fa5c4b>try</span><span>:
+</span><span>                </span><span style=color:#fdf4c1>c.connect(clean_session</span><span style=color:#fe8019>=</span><span style=color:#d3869b>False</span><span style=color:#fdf4c1>)
+</span><span>                </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>"Connected to MQTT broker."</span><span style=color:#fdf4c1>)
+</span><span>                </span><span style=color:#fdf4c1>c.subscribe(led_topic)
+</span><span>                </span><span style=color:#fa5c4b>return </span><span>c
+</span><span>            </span><span style=color:#fa5c4b>except </span><span style=color:#fabd2f>OSError </span><span style=color:#fa5c4b>as </span><span>e:
+</span><span>                </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#fa5c4b>f</span><span style=color:#b8bb26>"Connection error: </span><span style=color:#fdf4c1>{e}</span><span style=color:#b8bb26>"</span><span style=color:#fdf4c1>)
+</span><span>                </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>"Retrying in 5 seconds..."</span><span style=color:#fdf4c1>)
+</span><span>                </span><span style=color:#fdf4c1>time.sleep(</span><span style=color:#d3869b>5</span><span style=color:#fdf4c1>)
+</span><span>
+</span><span>
+</span><span>    </span><span style=color:#fa5c4b>def </span><span style=color:#8ec07c>callback</span><span>(</span><span style=color:#fdf4c1>topic</span><span>, </span><span style=color:#fdf4c1>msg</span><span>):
+</span><span>        </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#fa5c4b>f</span><span style=color:#b8bb26>"Received message on topic </span><span style=color:#fdf4c1>{topic.decode(</span><span style=color:#b8bb26>'utf-8'</span><span style=color:#fdf4c1>)}</span><span style=color:#b8bb26>: </span><span style=color:#fdf4c1>{msg.decode(</span><span style=color:#b8bb26>'utf-8'</span><span style=color:#fdf4c1>)}</span><span style=color:#b8bb26>"</span><span style=color:#fdf4c1>)
+</span><span>
+</span><span>        </span><span style=color:#fa5c4b>if </span><span>topic </span><span style=color:#fe8019>== </span><span>led_topic:
+</span><span>            </span><span style=color:#fa5c4b>if </span><span>msg </span><span style=color:#fe8019>== </span><span style=color:#fa5c4b>b</span><span style=color:#b8bb26>"on"</span><span>:
+</span><span>                </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>"Turning on the LED"</span><span style=color:#fdf4c1>)
+</span><span>                </span><span style=color:#fdf4c1>led_pin.on()
+</span><span>            </span><span style=color:#fa5c4b>elif </span><span>msg </span><span style=color:#fe8019>== </span><span style=color:#fa5c4b>b</span><span style=color:#b8bb26>"off"</span><span>:
+</span><span>                </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>"Turning off the LED"</span><span style=color:#fdf4c1>)
+</span><span>                </span><span style=color:#fdf4c1>led_pin.off()
+</span><span>
+</span><span>
+</span><span>    mqtt_client </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>connect_mqtt()
+</span><span>
+</span><span>    </span><span style=color:#fa5c4b>if </span><span>mqtt_client:
+</span><span>        </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>"Waiting for messages..."</span><span style=color:#fdf4c1>)
+</span><span>        </span><span style=color:#fa5c4b>while </span><span style=color:#d3869b>True</span><span>:
+</span><span>            </span><span style=color:#fa5c4b>try</span><span>:
+</span><span>                </span><span style=color:#fdf4c1>mqtt_client.wait_msg()
+</span><span>            </span><span style=color:#fa5c4b>except </span><span style=color:#fabd2f>OSError </span><span style=color:#fa5c4b>as </span><span>e:
+</span><span>                </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#fa5c4b>f</span><span style=color:#b8bb26>"Error: </span><span style=color:#fdf4c1>{e}</span><span style=color:#b8bb26>"</span><span style=color:#fdf4c1>)
+</span><span>                </span><span style=color:#fabd2f>print</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>"Reconnecting..."</span><span style=color:#fdf4c1>)
+</span><span>                mqtt_client </span><span style=color:#fe8019>= </span><span style=color:#fdf4c1>connect_mqtt()
+</span><span>                </span><span style=color:#fa5c4b>if </span><span style=color:#fe8019>not </span><span>mqtt_client:
+</span><span>                    </span><span style=color:#fa5c4b>break
+</span><span>
+</span></code></pre><h3 id=finally>Finally</h3><p>If everything works after installing all the python dependencies you will see this if you are supplying power to your microcontroller using a computer that can accept serial in upon doing a soft reboot and running your python (publisher) script from your computer.<p><img alt=final src=/images/manoid/working.png><p>This indicates that the publisher i.e. <code>python script</code> has connected to the server i.e. <code>mosquitto</code> and is now sending <code>on</code> and <code>off</code> messages to the server with topic <code>led</code> which then is sent to the subscriber i.e. <code>ESP8266</code> which is interpreted by the microcontroller as a command to enable and disable the set GPIO pin i.e. pin <code>15</code> if you look closely at the code.</div></div></div><div><hr><h2>Webmentions</h2><form action=https://webmention.io/scientiac.space/webmention class=webmention-form method=post><div id=email-comment><p>Have you written a <a href=https://indieweb.org/responses>response</a> to this? Let me know the URL, Or, you can send your response via <a href="mailto:iac@scientiac.space?subject=Reply%3A%20Manoid%3A%20Communication">mail:</a><code>iac@scientiac.space</code></div><div class=send-webmention><input name=source type=url><button>Send Webmention</button></div><div><div class="ui message"></div></div><input name=target type=hidden value=https://scientiac.space/blog/esp-mosquitto/></form><div class=webmention><div class=mention-profile><img src=https://webmention.io/avatar/scientiac.space/c0230defbab3e3d3bc93e2dd1e9b71a6208edde48b170add2ff9ef6fbe1c35ec.png><code><a href=https://scientiac.space>@scientiac</a></code></div><div><a class=external href=https://scientiac.space/blog/yantra-bot/>Manoid: A Waste Management Robot</a></div><div class=activity-type><code><a href=https://scientiac.space/blog/yantra-bot/>Type: link</a></code></div></div></div></div><script defer src=/assets/js/themeSelector.js></script></section><div class=hidden><a href=https://fosstodon.org/@scientiac rel=me>Mastodon</a></div><div class="hidden h-card"><img class="u-photo icon" alt=scientiac src=/res/thumbnail.png><a class="p-name u-url" href=https://scientiac.space rel=me>scientiac</a><p class=p-note>A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does.</div><footer><p class=codewithlove>I can't think of things to write on a footer. So, just <span class=main-background>imagine</span> something yourself.<p><a href=/atom.xml>RSS</a> | <a href=https://map.scientiac.space>research::map</a> | <a href=https://github.com/scientiac/scientiac.github.io target=_blank>Source Code</a><p>All articles are usable under <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank>CC BY-SA 4.0</a>.</footer><ol id=themeSelector reversed></ol>
