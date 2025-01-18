@@ -7,7 +7,7 @@ writings=["Stories"]
 
 The roses that aren't being picked, are making my path more beautiful today. Yet the so called (relation, situation, partner, companion)ship which once was a thing, is now a _parasocial_ one for me. I never in my life thought that I would give up on some(thing, one), but here I am with a knife in my hand, which I might have used for picking roses before is now being used to plant them.
 
-Perception, a view of the world, _their world_, from their eyes. But all eyes have their weakness, their truth, their belief, their arrogance for what the world is. But sometimes the tears wash them away, new worlds are born, new views, new ideas, a completely new picture forming right behind(before?) their eyes. Thought what it is remained unchanged, what there is, is something different from what there was.
+Perception, a view of the world, _their world_, from their eyes. But all eyes have their weakness, their truth, their belief, their arrogance for what the world is. But sometimes the tears wash them away, new worlds are born, new views, new ideas, a completely new picture forming right behind(before?) their eyes. Though what it is remained unchanged, what there is, is something different from what there was.
 
 There was a time when I justified that the flowers were meant to be picked, and they were meant for me to be picked. The ones without life in them were more precious, more meaningful. Values change, dead flowers are nothing but litter, nothing more than a wrapper to a well thought present(as in time), made to be torn(thrown) away.
 
