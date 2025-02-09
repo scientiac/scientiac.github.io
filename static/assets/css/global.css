@@ -710,6 +710,9 @@ pre {
 	border-radius: var(--half-line);	
 	padding: var(--half-line);
 	img {
+		border-style: solid;
+		border-width: 1px;
+		border-color: var(--text-highlight-2);
 		width: 1.5rem;
 		border-radius: 50%;
 		position: relative; /* Keeps the image in the normal flow */
@@ -740,15 +743,6 @@ pre {
 
 .mention-profile.reply::after {
     content: "↩️";
-}
-
-.activity-box code {
-	padding: 2rem;
-}
-
-.activity-box .mention-profile:after {
-	  top: 15px;
-    right: 20px;
 }
 
 .target-link {
