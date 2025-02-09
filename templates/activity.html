@@ -10,7 +10,7 @@
 {% set data = load_data(path="webmention/webmentions.json", format="json") %}
 
 
-<div class="interaction-box">
+<div class="activity-box">
 {% for links in data.links %}
     {% if links.target != "https://scientiac.space/" %}
         {% if links.activity.type == "like" %}
@@ -32,7 +32,7 @@
         {% endif %}
 
         {% if links.activity.type == "reply" %}
-            <div class="mention-profile link">
+            <div class="mention-profile reply">
                 <code><a href="{{ links.source }}">{{ links.data.author.name }} replied to</a> <a href="{{ links.target }}">{{ links.target }}</a></code>
             </div>
         {% endif %}

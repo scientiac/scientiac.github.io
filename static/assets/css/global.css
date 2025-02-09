@@ -727,7 +727,7 @@ pre {
 
 /* Different icons for likes and reposts */
 .mention-profile.like::after {
-    content: "❤️";
+    content: "💙";
 }
 
 .mention-profile.repost::after {
@@ -737,6 +737,20 @@ pre {
 .mention-profile.link::after {
     content: "🌐";
 }
+
+.mention-profile.reply::after {
+    content: "↩️";
+}
+
+.activity-box code {
+	padding: 2rem;
+}
+
+.activity-box .mention-profile:after {
+	  top: 15px;
+    right: 20px;
+}
+
 .target-link {
 		background-color: var(--background-color-1);
 		border-radius: var(--half-line) var(--half-line) 0 0;
