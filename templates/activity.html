@@ -9,35 +9,37 @@
 
 {% set data = load_data(path="webmention/webmentions.json", format="json") %}
 
+
+<div class="interaction-box">
 {% for links in data.links %}
     {% if links.target != "https://scientiac.space/" %}
-        <div class="target-link">
-          <code><a href="{{ links.target }}">{{ links.target }}</a></code>
-        </div>
-        <div class="webmention webmention-activity">
+        {% if links.activity.type == "like" %}
+            <div class="mention-profile like">
+                <code><a href="{{ links.source }}">{{ links.data.author.name }} liked</a> <a href="{{ links.target }}">{{ links.target }}</a></code>
+            </div>
+        {% endif %}
 
-          <div class="mention-profile">
-            {% if links.data.author.photo %}
-            <img src="{{ links.data.author.photo }}">
-            {% endif %}
-            <code><a href="{{ links.data.author.url }}">@{{ links.data.author.name }}</a></code>
-          </div>
+        {% if links.activity.type == "repost" %}
+            <div class="mention-profile repost">
+                <code><a href="{{ links.source }}">{{ links.data.author.name }} reposted</a> <a href="{{ links.target }}">{{ links.target }}</a></code>
+            </div>
+        {% endif %}
 
-          {% if links.data.name %}
-            <div><a class="external" href="{{ links.source }}">{{ links.data.name }}</a></div>
-          {% else %}
-            {% if links.activity.type == "reply" %}
-              <div>{{ links.data.content | safe }}</div>
-            {% else %}
-              <div><a class="external" href="{{ links.source }}">The Internet</a></div>
-            {% endif %}
-          {% endif %}
+        {% if links.activity.type == "link" %}
+            <div class="mention-profile link">
+                <code><a href="{{ links.source }}">{{ links.data.author.name }} linked to</a> <a href="{{ links.target }}">{{ links.target }}</a></code>
+            </div>
+        {% endif %}
 
-          <div class="activity-type">
-            <code><a href="{{ links.source }}">Type: {{ links.activity.type }}</a></code>
-          </div>
-        </div>
+        {% if links.activity.type == "reply" %}
+            <div class="mention-profile link">
+                <code><a href="{{ links.source }}">{{ links.data.author.name }} replied to</a> <a href="{{ links.target }}">{{ links.target }}</a></code>
+            </div>
+        {% endif %}
     {% endif %}
 {% endfor %}
+</div>
+
+</div>
 
 {% endblock content %}

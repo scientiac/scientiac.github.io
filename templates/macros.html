@@ -1,60 +1,95 @@
-{% macro webmention(type,item) %}
-{% if type == 'like-of' or type == "repost-of" or type == "bookmark-of" or type == "follow-of" %}
-<li class="list-none">
-  <a
-        class="reaction"
-        rel="nofollow ugc"
-        title="{{item.author.name}} {% if item.published %}at {{ item.published }}{% endif %}"
-        href="{{item.author.url}}"
-      >
-        {% if item.author.photo %}
-        <img alt="{{item.author.name}}" class="icon rounded-full" src="{{item.author.photo}}">
-        {% endif%}
-      </a>
-</li>
-{% elif item.content.html %}
-<li class="card mb-lg rounded-lg list-none px py h-cite p-comment h-entry" id="{{item['wm-id']}}">
-  <div class="flex items-center flex-wrap p-author h-card">
-    {% if item.author.photo %}
-      <a
-      rel="nofollow ugc"
-      title="{{item.author.name}}"
-      href="{{item.author.url}}"
-      class="mr-sm p-name u-url"
-    >
-      <img alt="{{item.author.name}}" class="u-photo rounded-full icon" src="{{item.author.photo}}">
-    </a>
-  {% endif%}
-{% if item.author and item.author.name %}
-  <a
-  rel="nofollow ugc"
-  class="mr-sm p-name u-url"
-  title="{{item.author.name}}"
-  href="{{item.author.url}}"
->
-{{ item.author.name }}
-</a>
-{% else %}
-<span class="mr-sm">Unknown</span>
-{% endif %}
-{% if item.published %}
-{% set key = "label_action_"~type %}
-<a id="{{item['wm-id']}}" class="mr-sm" href="#{{item['wm-id']}}">{{config.extra[key]}}</a>
-<span class="mr-sm"> on</span>
-<a
-  rel="nofollow ugc"
-  class="u-url"
-  title="{{ item.published }}"
-  href="{{item.url}}"
-><time class="dt-published published" datetime="{{item.published}}">{{ item.published | date() }}</time></a>
-{% endif %}
-<span>:</span>
-  </div>
-  
-<div class="p-content p-name">
-  {{ item.content.html | safe }}   
-</div>
-</li>
-{% endif %}
+{% macro webmention() %}
+<div>
+<hr>
 
+<h2>Webmentions</h2>
+
+<form class="webmention-form" action="https://webmention.io/scientiac.space/webmention" method="post">
+
+  <div id="email-comment">
+     <p>Have you written a <a href="https://indieweb.org/responses">response</a> to this? Let me know the URL,
+       Or, you can send your response via <a href="mailto:iac@scientiac.space?subject={{ "Reply: " ~ page.title | urlencode }}">mail:</a><code>iac@scientiac.space</code>
+     </p>
+  </div>
+
+  <div class="send-webmention">
+    <input type="url" name="source">
+    <button type="submit">Send Webmention</button>
+  </div>
+
+  <div>
+    <div class="ui message"></div>
+  </div>
+
+  <input type="hidden" name="target" value="{{current_url}}">
+</form>
+
+
+{% set data = load_data(path="webmention/webmentions.json", format="json") %}
+
+{% set like_count = 0 %}
+{% set repost_count = 0 %}
+
+<div class="interaction-box">
+{% for links in data.links %}
+    {% if links.target == page.permalink %}
+        {% if links.activity.type == "like" %}
+            {% set_global like_count = like_count + 1 %}
+            <div class="mention-profile like">
+                {% if links.data.author.photo %}
+                <a  href="{{ links.source }}">
+                  <img src="{{ links.data.author.photo }}">
+                </a>
+                {% endif %}
+            </div>
+        {% endif %}
+        
+        {% if links.activity.type == "repost" %}
+            {% set_global repost_count = repost_count + 1 %}
+            <div class="mention-profile repost">
+                {% if links.data.author.photo %}
+                <a  href="{{ links.source }}">
+                  <img src="{{ links.data.author.photo }}">
+                </a>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% if links.activity.type == "link" %}
+            {% set_global repost_count = repost_count + 1 %}
+            <div class="mention-profile link">
+                {% if links.data.author.photo %}
+                <a  href="{{ links.source }}">
+                  <img src="{{ links.data.author.photo }}">
+                </a>
+                {% endif %}
+            </div>
+        {% endif %}
+    {% endif %}
+{% endfor %}
+</div>
+
+{% for links in data.links %}
+    {% if links.target == page.permalink and links.activity.type == "reply" %}
+        <div class="webmention">
+            <div class="mention-profile">
+                {% if links.data.author.photo %}
+                <img src="{{ links.data.author.photo }}">
+                {% endif %}
+                <code><a href="{{ links.data.author.url }}">@{{ links.data.author.name }}</a></code>
+            </div>
+
+            {% if links.data.name %}
+                <div><a class="external" href="{{ links.source }}">{{ links.data.name }}</a></div>
+            {% else %}
+                <div>{{ links.data.content | safe }}</div>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endfor %}
+
+</div>
 {% endmacro webmention %}
+
+
+ 

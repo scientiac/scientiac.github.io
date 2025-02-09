@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import "macros.html" as macros %}
 
 {% block content %}
 
@@ -42,66 +43,6 @@
 
 </div>
 
-<!-- Webmention -->
-
-<div>
-<hr>
-
-<h2>Webmentions</h2>
-
-<form class="webmention-form" action="https://webmention.io/scientiac.space/webmention" method="post">
-
-  <div id="email-comment">
-     <p>Have you written a <a href="https://indieweb.org/responses">response</a> to this? Let me know the URL,
-       Or, you can send your response via <a href="mailto:iac@scientiac.space?subject={{ "Reply: " ~ page.title | urlencode }}">mail:</a><code>iac@scientiac.space</code>
-     </p>
-  </div>
-
-  <div class="send-webmention">
-    <input type="url" name="source">
-    <button type="submit">Send Webmention</button>
-  </div>
-
-  <div>
-    <div class="ui message"></div>
-  </div>
-
-  <input type="hidden" name="target" value="{{current_url}}">
-</form>
-
-{% set data = load_data(path="webmention/webmentions.json", format="json") %}
-
-{% for links in data.links %}
-    {% if links.target == page.permalink %}
-        <div class="webmention">
-
-          <div class="mention-profile">
-            {% if links.data.author.photo %}
-            <img src="{{ links.data.author.photo }}">
-            {% endif %}
-            <code><a href="{{ links.data.author.url }}">@{{ links.data.author.name }}</a></code>
-          </div>
-
-          {% if links.data.name %}
-            <div><a class="external" href="{{ links.source }}">{{ links.data.name }}</a></div>
-          {% else %}
-            {% if links.activity.type == "reply" %}
-              <div>{{ links.data.content | safe }}</div>
-            {% else %}
-              <div><a class="external" href="{{ links.source }}">The Internet</a></div>
-            {% endif %}
-          {% endif %}
-
-          <div class="activity-type">
-            <code><a href="{{ links.source }}">Type: {{ links.activity.type }}</a></code>
-          </div>
-        </div>
-    {% endif %}
-{% endfor %}
-
-</div>
-
-<!-- Webmention -->
-
+{{ macros::webmention() }}
 
 {% endblock content %}

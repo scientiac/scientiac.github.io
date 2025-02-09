@@ -671,7 +671,6 @@ pre {
 	border-radius: var(--half-line);
 	background-color: var(--background-color-1);
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: calc(0.2 * var(--one-line)); 
 	margin-bottom: var(--half-line);
@@ -682,6 +681,10 @@ pre {
 	}
 }
 
+.webmention > div:nth-child(2) {
+	padding: 0 var(--half-line) 0 0 ;
+}
+
 .webmention-activity {
 		border-radius: 0 0 var(--half-line) var(--half-line);
 	.mention-profile {
@@ -689,33 +692,51 @@ pre {
 	}
 }
 
+.interaction-box {
+    display: flex;
+    flex-wrap: wrap;
+	  justify-content: center;
+    gap: 0.25rem;
+    padding: var(--half-line) 0;
+	  .mention-profile {
+			padding: 0;
+	  }
+}
+
 .mention-profile {
 	display: grid;
-	background-color: var(--background-color-0);
-	border-radius: var(--half-line);
-  padding: var(--half-line); 
-	
+  position: relative;
+  border-radius: var(--half-line);
+	border-radius: var(--half-line);	
+	padding: var(--half-line);
 	img {
 		width: 1.5rem;
 		border-radius: 50%;
+		position: relative; /* Keeps the image in the normal flow */
 	}
 }
 
-.webmention > div:nth-child(2) {
-	padding: 0 var(--half-line);
+.mention-profile::after {
+    position: absolute;
+    top: -15px;
+    right: -5px;
+    font-size: 1rem;
+    border-radius: 50%;
+    padding: 0.1rem;
 }
 
-.activity-type {
-  display: grid;
-	background-color: var(--background-color-0);
-  padding: var(--half-line); 
-	border-radius: var(--half-line);
-	align-items: center;
-	code {
-		text-align: center;
-	}
+/* Different icons for likes and reposts */
+.mention-profile.like::after {
+    content: "❤️";
 }
 
+.mention-profile.repost::after {
+    content: "🔁";
+}
+
+.mention-profile.link::after {
+    content: "🌐";
+}
 .target-link {
 		background-color: var(--background-color-1);
 		border-radius: var(--half-line) var(--half-line) 0 0;
