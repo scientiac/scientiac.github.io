@@ -2,7 +2,7 @@
 title = "Beautifying Firefox with \"chrome\""
 date = 2024-08-20
 [taxonomies]
-writings=["Articles"]
+writings=["Reports"]
 +++
 
 My mind goes hyperactive whenever exams are near, this semester is no different. I always find something very interesting to do every time an exam is around. This semester, I went into a rabbit hole of customizing Firefox to make it minimal (or immersive), I'd say.

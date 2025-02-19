@@ -2,7 +2,7 @@
 title = "Droidian: Linux Smartphone Experience"
 date = 2023-11-30
 [taxonomies]
-writings=["Articles"]
+writings=["Reports"]
 +++
 
 ## My Device
