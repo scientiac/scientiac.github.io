@@ -1,5 +1,5 @@
 +++
-title = "3o14.com: Init"
+title = "3o14 social"
 date = 2025-02-28
 [taxonomies]
 writings=["Reports"]
