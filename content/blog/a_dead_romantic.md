@@ -15,13 +15,13 @@ a helping hand, when one lends me.
 I still hear my heart pounding,
 when someone's smile, enchants me._
 
-_I can still taste the petal's sweet,
+_I still can taste the petal's sweet,
 imagining her, lips kiss me.  
 I still feel the touch of care,
 reading someone, they miss me._  
 
 When you find out that I am dead,
-with all the promices I had made.  
+with all the promises I had made.  
 And all these senses were dead with me,
 leaving behind only memories.  
 Memories of love, for love in return,
@@ -32,11 +32,11 @@ only respect for you, will lie above.
 With screams of love, from my coffin,
 where I won't get to see you again.  
 I'll be hoping that you'll move on,
-what I couldn't they'll improve on.  
+what I couldn't, they'll improve on.  
 Of all the pain that came from me,
 a small void for love there will be.  
 My love would want for you to kill,
-the moments of me that you stll feel.  
+the moments of me that you still feel.  
 
 Don't keep me alive, it traps me in pain,
 when memories die, I'll die again.  
