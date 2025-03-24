@@ -8,7 +8,7 @@ writings=["Poems"]
 _I still smell the roses bloom,
 the scent in the air, still draws me.  
 I still see those butterflies fly,
-the wind still, gently wispers me._  
+the wind still, gently whispers me._  
 
 _I still sense a breath of life,
 a helping hand, when one lends me.  
