@@ -5,27 +5,28 @@
 
 <div class="h-entry">
     
-    {% if page.date %}
-    <div class="pagedate">
-        <time class="dt-published dateandtag hidden" datetime="{{ page.date }}T00:00:00Z">
-            {{ page.date | date(format="%Y-%m-%d") }}
-        </time>
-        <code class="dateandtag">{{ page.date }}</code>
-        {% if page.taxonomies.writings %}
-            {% for tag in page.taxonomies.writings %}
-                <code class="u-category dateandtag">Genre: {{ tag }}</code>
-                {% set genre = tag %}
-            {% endfor %}
-        {% endif %}
-    </div>
-    {% endif %}
-
     <!-- URL of the page -->
     <a class="u-url hidden" href="{{ page.permalink }}">{{ page.permalink }}</a>
 
     <div class="section">
 
         <h1 class="p-name title">{{ page.title }}</h1>
+
+        {% if page.date %}
+        <div class="pagedate">
+            <time class="dt-published dateandtag hidden" datetime="{{ page.date }}T00:00:00Z">
+                {{ page.date | date(format="%Y-%m-%d") }}
+            </time>
+            <code class="dateandtag">{{ page.date }}</code>
+            {% if page.taxonomies.writings %}
+                {% for tag in page.taxonomies.writings %}
+                    <code class="u-category dateandtag">Genre: {{ tag }}</code>
+                    {% set genre = tag %}
+                {% endfor %}
+            {% endif %}
+        </div>
+            <p></p>
+        {% endif %}
 
         <!-- h-card for the author, useful if you display author information -->
         <div class="hidden p-author h-card">

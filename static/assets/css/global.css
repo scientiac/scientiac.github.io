@@ -791,5 +791,13 @@ pre {
     display: none !important;
     position: absolute;	
   }
-
+	
+	#webmention {
+    display: none !important;
+    position: absolute;
+	}
+	.u-category {
+    display: none !important;
+    position: absolute;
+	}
 }
