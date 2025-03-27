@@ -11,7 +11,7 @@ I still see those butterflies fly,
 the wind still, gently whispers me._ 
 
 _I still sense a breath of life,  
-a helping hand, when one lends me.  
+a caring hand, when one lends me.  
 I still hear my heart pounding,  
 when someone's smile, enchants me._
 
@@ -19,6 +19,12 @@ _I still taste rose petal's sweet,
 imagining her, lips kiss me.  
 I still feel the touch of care,  
 reading someone, they miss me._  
+
+<center>
+
+*
+
+</center>
 
 When you find out, that I am dead,  
 with all the promises, I had made.    
