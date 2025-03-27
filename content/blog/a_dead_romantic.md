@@ -20,10 +20,8 @@ imagining her, lips kiss me.
 I still feel the touch of care,  
 reading someone, they miss me._  
 
-<center>
-
+<center>  
 *
-
 </center>
 
 When you find out, that I am dead,  
