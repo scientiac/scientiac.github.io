@@ -92,7 +92,7 @@ think they are worthy to be called friends._
 _Well, if you put it that way... I guess. But, maybe they need a chance to get
 to know you better if you want them to treat you in a special way than others.
 Like, I wouldn't have shared my story with you if we never talked more than
-buisness affairs. So, you don't consider me a friend, do you?_
+buisness affair today. So, you don't consider me a friend, do you?_
 
 _Well, are you on my side? I don't know._
 
