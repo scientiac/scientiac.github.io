@@ -96,7 +96,8 @@ buisness affair today. So, you don't consider me a friend, do you?_
 
 _Well, are you on my side? I don't know._
 
-_Haha, am I on your side? You betcha I am. But I am also on everyone else's sidebecause I know them all, and they seem like good people. Look, that guy too, he
+_Haha, am I on your side? You betcha I am. But I am also on everyone else's side
+because I know them all, and they seem like good people. Look, that guy too, he
 once hit me with a plastic bottle. We had a fight. I took the last drop from the
 water filter when he was waiting behind me to fill his bottle. I don't think it
 was a good thing to hit me like that, but that doesn't determine that he always
