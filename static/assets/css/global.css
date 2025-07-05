@@ -515,6 +515,10 @@ button:hover {
 		text-decoration: underline;
 		font-weight: bold;
 	}
+	
+	code {
+		color: var(--color)
+	}
 }
 
 /* For Alerts */
