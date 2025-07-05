@@ -180,7 +180,7 @@ blacklist sp5100_tco
 **5.** *Blacklist your watchdog so you don't get watchdog messages when rebooting and powering off by editing `/etc/modprobe.d/blacklist.conf`.*
 {% end %}
 
-### I dont like having nice things
+### I don't like having nice things
 What I did above is enough to get flicker free boot/smooth boot or whatever you call it, but I wanted more, I want `plymouth` to work without flicker. Spoiler: I couldn't.
 
 Anyway, I switched to `systemd` instead of `udev` so my `/etc/mkinitcpio.conf` has the following hooks now:
