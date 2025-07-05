@@ -179,3 +179,55 @@ blacklist sp5100_tco
 {% alert(note=true) %}
 **5.** *Blacklist your watchdog so you don't get watchdog messages when rebooting and powering off by editing `/etc/modprobe.d/blacklist.conf`.*
 {% end %}
+
+### I dont like having nice things
+What I did above is enough to get flicker free boot/smooth boot or whatever you call it, but I wanted more, I want `plymouth` to work without flicker. Spoiler: I couldn't.
+
+Anyway, I switched to `systemd` instead of `udev` so my `/etc/mkinitcpio.conf` has the following hooks now:
+```txt
+
+HOOKS=(base systemd modconf autodetect kms keyboard sd-vconsole block filesystems fsck plymouth)
+
+```
+
+I reinstalled plymouth, and I like it when it smoothly transitions to GDM instead of flashing me to GDM. It was a tradeoff between GDM flash or just flicker when loading spalash screen.
+
+I added more kernel parameters to mitigate the flashing but I couldn't do it.
+
+```txt
+
+root=PARTUUID=4638cd24-77e4-4ed3-bb8a-9478d9c2d2db zswap.enabled=0 rw rootfstype=btrfs amdgpu.modeset=1 amdgpu.dc=1 video=efifb:keep plymouth.use-simpledrm quiet vt.global_cursor_default=0 loglevel=3 rd.udev.log_level=3 systemd.show_status=auto splash
+
+```
+
+`plymouth.use-simpledrm` does start plymouth immediately but when the `amdgpu` driver is ready it mode-switches to it and the black screen appears. I can technically use `nomodeset` and achieve true flicker free boot with plymouth and everything but then I lose out on my graphics driver setting dpi scaling and brightness and more for me on boot.
+
+I even tried setting `/etc/plymouth/plymouthd.conf` to delay it's starting but it still doesn't stop flickering. It either flickers or it skips and I get the UKI splash screen until the login manager.
+
+```ini
+
+[Daemon]
+ShowDelay=0
+DeviceTimeout=30
+
+```
+
+I think I will just remove the plymouth configuration since it isn't helping anything. Or maybe I'll just leave it there because it is not doing anything.
+
+### Removing Arch Linux Logo
+To remove the logo from GDM I quickly installed `gdm-settings` and there was a toggle which I turned off.
+
+I didn't like the logo shown by plymouth during boot either, so I just removed the image `watermark.png` from the spinner theme in `/usr/share/plymouth/themes/spinner/`. I also removed all animation and throbber images just to make everything clean.
+
+### Conclusion
+I did eventually come back to "not so smooth boot" but I am one `sudo pacman -R plymouth` away from it. Furthermore, I can boast about having 3 splash screens that look the same transitioning seamlessly*, even 4 if you count the UEFI animation.
+
+It goes as follows:
+1. `UEFI` animation starts and ends.
+2. `UKI Splash Screen` starts and ends.
+3. `simpledrm` backed `plymouth` bgrt theme starts and screen goes blank.  
+4. `amdgpu` backed plymouth screen gradually appears and transitions to GDM.
+
+But, if I remove plymouth:
+1. `UEFI` animation starts and ends.
+2. `UKI Splash Screen` starts and drops me to GDM.
