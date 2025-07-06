@@ -46,7 +46,7 @@ So, I tried.
 ### How did you start?
 
 The only thing I didn't really want to do was reinstall my OS again. But, I had to.
-I had not been the Unified Kernel Image (UKI) and I was using `systemd-boot` as my bootloader.
+I had never used the Unified Kernel Image (UKI) and I was using `systemd-boot` as my bootloader.
 So, the bootloader had to go and UKI had to be installed.
 
 {% alert(note=true) %}
