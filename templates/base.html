@@ -3,7 +3,6 @@
 
 <head>
   <meta charset="utf-8">
-  <title>scientiac::syntropy</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/themes.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/readable.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/global.css">
@@ -34,14 +33,13 @@
 
     <meta property="og:site_name" content="scientiac.space" />
     <meta property="og:image" content="https://scientiac.space/res/thumbnail-light.png" />
-    {%if section.title%}
-    <title>{{ section.title }}</title>
-    <meta name="og:title" content="{{ section.title }}" />
-    {%endif%}
-    {%if page.title%}
+    {% if page.title %}
     <title>{{ page.title }}</title>
     <meta name="og:title" content="{{ page.title }}" />
-    {%endif%}
+    {% elif section.title %}
+    <title>{{ section.title }}</title>
+    <meta name="og:title" content="{{ section.title }}" />
+    {% endif %}
     {%if section.description %}
     <meta name="description" content="{{ section.description }}" />
     <meta name="og:description" content="{{ section.description }}" />
