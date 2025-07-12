@@ -41,7 +41,7 @@ Let me tell you what all these means too:
 4. **Simple Syntax:** If you can do the basic formatting without needing to know complex syntax for it. For e.g.
 ```
 
-"\list{begin} \item{<Text>} \list{end}" makes a bullet list in LaTeX
+"\begin{itemize} \item <text> \end{itemize}" makes a bullet list in LaTeX
 "- <Text>" Makes a bullet list in Typst
 "* <Text>" Makes a bullet list in Markdown
 "- <Text>" Makes a bullet list in Org
