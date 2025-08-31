@@ -1,5 +1,5 @@
 +++
-title = "Rusting"
+title = "like test"
 date = 2025-08-31
 [taxonomies]
 syndicate=["POSSE"]
