@@ -102,7 +102,7 @@ This is located at `templates/activity.html` and used at `content/activity/_inid
 {% endblock content %}
 ```
 
-`content/activity/_inidex.md`
+`content/activity/_index.md`
 ```md
 +++
 template = "activity.html"
@@ -260,8 +260,12 @@ One can reply to a post by formatting the link and the text as follows:
 I feel the same about my bed. Nice writing flux!
 ```
 
+### Bridges
+
+  Though I have connected this site to the fediverse with Bridgy Fed, it is opt in using a zola shortcode. Because, I want the articles to have a "blog interaction" from other peoples blog but not from the social media. But, I do use bridgy on my short posts sometimes. [Webmentions](/syndications/posse-2024-11-05/) and [Linux is/not Difficult](/syndications/posse-2025-02-04/) are some posts I have used bridgy with and they also work as example posts to see how different webmention activities look like in my website.
+
 ## Lastly
-I had forgotten about webmentions and interactions on my site, but I recently read a post from Joel titled [Webmentions but manual (for Jekyll)](https://joelchrono.xyz/blog/webmentions-but-manual/) and people giving names to the interactions really caught my attention. I hadn't really found many people utilizing this protocol until Joel's post.
+I had forgotten about webmentions and interactions on my site, but I recently read a post from Joel titled [Webmentions but manual (for Jekyll)](https://joelchrono.xyz/blog/webmentions-but-manual/) and people giving names to the interactions really caught my attention. I haven't given it a name because mine are just Webmentions but I feel like Webmentions are still a good option to have _(with much less spam)_ for interaction if it isn't connected to an actual social media.
 Some other posts I read were:
 [_At least for the sake of just pinging them._]
 
