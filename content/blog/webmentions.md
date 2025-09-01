@@ -58,7 +58,7 @@ I made and activity page in zola where all the webmention activities are listed.
 <details>
 <summary>Zola Template HTML</summary>
 
-This is located at `templates/activity.html` and used at `content/activity/_inidex.md`
+This is located at `templates/activity.html` and used at `content/activity/_index.md`
 
 `templates/activity.html`
 ```html
