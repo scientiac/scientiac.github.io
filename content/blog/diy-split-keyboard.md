@@ -12,7 +12,7 @@ I mapped my <kbd>escape</kbd> key to <kbd>`</kbd> and <kbd>caps-lock</kbd> key t
 It was because I had to use some weird function keybind just to type a <kbd>~</kbd>. Then I realised my laptop key got remapped too, but I
 just went ahead with it. That is when I used this software called [keyd](https://github.com/rvaiya/keyd).
 
-Fast forward to toady and rewind to a month back, I was bored out of my mind and was fidgeting with my keyboard when I popped one of the keys
+Fast forward to today and rewind to a month back, I was bored out of my mind and was fidgeting with my keyboard when I popped one of the keys
 out of it. And right then I looked at the keys and wondered if I could make a minimal split keyboard out of it using `keyd`. 
 
 I had watched many videos about split keyboards, and one was even in my [wish](https://boardsource.xyz/products/unicorne-lp-aluminum-corne-case)list for a long time. So, I wondered if I was gonna invest in a keyboard that is going to shape my typing muscle memory, I should at least give it a try beforehand.
