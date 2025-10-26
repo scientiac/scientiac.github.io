@@ -10,7 +10,7 @@ I worry at times. What if now's the end?
 To not have a purpose is a scary feeling.  
 What is to die? If not to stop believing.  
 
-Excited for the future, but no too far.  
+Excited for the future, but not too far.  
 Believing why you are, the way you are.  
 Scared to accept, that beyond doesn't exist.  
 Living ideal stories, while verities missed.  
