@@ -20,7 +20,7 @@ Questioning each step, yet following same path.
 Why are we bound to the norms man has made.  
 While there are infinite paths, one can take.  
 
-If Acceptance more valued, and ambitions low,  
+If acceptance more valued, and ambitions low,  
 desires become a curse for who wants to grow.  
 Living matters more, than what's after you die.  
 It doesn't even matter, if you die living a lie.  
