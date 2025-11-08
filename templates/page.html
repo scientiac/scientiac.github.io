@@ -20,7 +20,7 @@
             <code class="dateandtag">{{ page.date }}</code>
             {% if page.taxonomies.writings %}
                 {% for tag in page.taxonomies.writings %}
-                    <code class="u-category dateandtag">Genre: {{ tag }}</code>
+                    <code class="u-category dateandtag">{{ tag }}</code>
                     {% set genre = tag %}
                 {% endfor %}
             {% endif %}
