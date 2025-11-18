@@ -26,9 +26,9 @@ But, my stubbornness, or maybe my addiction is so bad that I need to have what I
 
 Then I thought, I cannot convert something dumb to something advanced by itself but the reverse is possible.
 I remembered a device called [BOOX Palma](https://shop.boox.com/products/palma) and since it is an android device I thought I could recreate it with my own phone that I already have.
-From the [kindle modding video](https://www.youtube.com/watch?v=Qtk7ERwlIAk) I also realised that `KoReader` is not just an old, weirdly made e-book reader app.
+From the [kindle modding video](https://www.youtube.com/watch?v=Qtk7ERwlIAk) I also realised that `KOReader` is not just an old, weirdly made e-book reader app.
 
-_So, I decided to base the entire personality of my phone to the `KoReader` app._
+_So, I decided to base the entire personality of my phone to the `KOReader` app._
 
 ### Preparing Android
 
@@ -48,7 +48,7 @@ Since I use a `custom ROM` it is much easier for me to customize my device to a 
 1. I decided to install [InkOS](https://github.com/gezimos/inkOS/) as my launcher because it adds on to the e-reader aesthetic.
 1. I removed all the shortcuts of the home screen and set `Books` as the only shortcut there.
 1. From the app drawer I changed the name of the apps to their generic names and hid most of the unused apps.
-1. Configured `swipe left` gesture to `KoReader` and `swipe right` to `App Drawer`.
+1. Configured `swipe left` gesture to `KOReader` and `swipe right` to `App Drawer`.
 1. Finally I set `InkOs` as my default launcher.
 
 <div class="gallery" style="display:flex; flex-wrap: wrap;">
@@ -62,9 +62,9 @@ _`Home Screen` with a single books shortcut and `Lock Screen` with a big digital
 
 </div>
 
-### Setting Up `KoReader`
+### Setting Up `KOReader`
 
-1. Installed `KoReader` [from GitHub](https://github.com/koreader/koreader) and set it to `Start with: last file`.
+1. Installed `KOReader` [from GitHub](https://github.com/koreader/koreader) and set it to `Start with: last file`.
 1. Disabled `Cover Browser Plugin` and installed [Project: Title](https://github.com/joshuacant/ProjectTitle).
 
 <div class="gallery" style="display:flex; flex-wrap: wrap;">
@@ -74,11 +74,11 @@ _`Home Screen` with a single books shortcut and `Lock Screen` with a big digital
 
 <div style="text-align: center">
 
-_`KoReader` with `The Shape of Design` (Swiping Left) and the `App Drawer` (Swiping Right)._
+_`KOReader` with `The Shape of Design` (Swiping Left) and the `App Drawer` (Swiping Right)._
 
 </div>
 
-_In `KoReader` individual books have their individual settings but once everything is set up, scaled and aligned properly for the book that you want to read, only reading it will be the remaining task._
+_In `KOReader` individual books have their individual settings but once everything is set up, scaled and aligned properly for the book that you want to read, only reading it will be the remaining task._
 
 
 ### Final Touches
