@@ -7,7 +7,7 @@ writings=["Eerie"]
 
 <em>
 
-I slowly open my eyes, but, all I can see is a hole just above my head from where a bright light was coming inside.
+I slowly open my eyes, but, all I can see is a hole just above my head from where a bright light is entering the room.
 Slowly, I turn my head and look around, there's a table, or something that resembles a table.
 The colour is brown and has patches of lichens all around and on it there is a grey mug with greenish liquid.
 
