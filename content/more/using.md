@@ -4,15 +4,14 @@ title = "Currently Using"
 
 ## PC
 
-* OS - NixOS
-* DE - Gnome
+* OS - CachyOS
+* DE - KDE
 * Browser - Firefox
-* Terminal - Alacritty
+* Terminal - Ghostty
 * Text Editor/IDE - Neovim
 * Vector Graphics - Inkscape 
 * Static Site Generator - Zola
-* Shell - Bash
-* Prompt - Starship
+* Shell - zsh
 
 ## Cross Platform
 
@@ -23,16 +22,16 @@ title = "Currently Using"
 
 ## Smartphone
 
-* ROM(OS) - Blaze
+* ROM(OS) - Project InfinityX
 * RSS Reader - Read You
 * Browser - Firefox
 * App Store - Obtainium
 * Email Client - Thunderbird Android
 * Torrent Client - Libre Torrent
-* Youtube - Revanced
 * Terminal Emulator - Termux
-* Video Player - mpvkt
+* Video Player - VLC Android
 * Podcast Aggregator - Antennapod
+* E-book Reader - Readest
 
 ## TV?
 

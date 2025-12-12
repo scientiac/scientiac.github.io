@@ -11,6 +11,6 @@ title = "Contact"
 ## Socials :
 
 * Matrix: @thescientiac:matrix[dot]org
-* Mastodon : @scientiac@fosstodon.org
+* Mastodon : @iac@polymaths.social
 * Email : scientiac@tilde.team
 * Signal / Telegram : if you have my number
