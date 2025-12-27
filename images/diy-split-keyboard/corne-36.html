@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Split Custom Keyboard Layout (responsive)</title>
+  <style>
+    :root{
+      --bg:#1a1a1a;
+      --panel:#333;
+      --accent:#4CAF50;
+      --key-size:clamp(44px,6vmin,72px);
+      --key-gap:clamp(6px,1vmin,12px);
+      --thumb-size:calc(var(--key-size) + 2px);
+      --font-main:system-ui,Segoe UI,Roboto,Arial,sans-serif;
+      --min-key:36;
+      --max-key:120;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      padding:0;
+      font-family:var(--font-main);
+      background:var(--bg);
+      color:#fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;
+      flex-direction:column;
+    }
+    .keyboard-container{
+      width:100vw;
+      flex:1;
+      display:flex;
+      align-items:center;
+      justify-content:space-around;
+      padding:20px;
+    }
+    .keyboard-half{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+      border-radius:14px;
+      padding:20px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.6);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      width:45%;
+      max-width:500px;
+    }
+    .keyboard-half#left-half{
+      align-items:flex-end;
+    }
+    .keyboard-half#right-half{
+      align-items:flex-start;
+    }
+    .row{display:flex;gap:var(--key-gap);margin-bottom:10px;align-items:center}
+    .left-row{justify-content:flex-end}
+    .right-row{justify-content:flex-start}
+    .key,.thumb-key{
+      position:relative;
+      width:var(--key-size);
+      height:var(--key-size);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(145deg,#4a4a4a,#3a3a3a);
+      border-radius:8px;
+      border:2px solid #555;
+      font-weight:700;
+      cursor:pointer;
+      transition:all .18s ease;
+      box-shadow:2px 2px 6px rgba(0,0,0,0.35);
+      user-select:none;
+      -webkit-user-select:none;
+    }
+    .key:hover,.thumb-key:hover{transform:translateY(-3px);box-shadow:2px 6px 12px rgba(0,0,0,0.45)}
+    .key-main{font-size:clamp(12px,2vmin,16px);color:#fff}
+    .key-symbol{position:absolute;right:6px;top:6px;font-size:clamp(9px,1.2vmin,12px);color:#FF9800;background:rgba(255,152,0,0.12);padding:1px 4px;border-radius:4px}
+    .key-hold{position:absolute;left:6px;bottom:6px;font-size:10px;color:#2196F3;background:rgba(33,150,243,0.08);padding:1px 3px;border-radius:3px}
+    .key-nav{position:absolute;right:6px;bottom:6px;font-size:10px;color:#00E676;background:rgba(0,230,118,0.06);padding:1px 3px;border-radius:3px}
+    .key-shift{position:absolute;left:6px;top:6px;font-size:10px;color:#fff;background:rgba(255,255,255,0.06);padding:1px 3px;border-radius:3px}
+    .thumb-cluster{display:flex;gap:var(--key-gap);margin-top:12px}
+    .thumb-key{border:2px solid #E91E63}
+    .overload-key{border-color:#E91E63;background:linear-gradient(145deg,#4a3a4a,#3a2a3a)}
+    .text-input-container{
+      width:100%;
+      padding:20px;
+      display:flex;
+      justify-content:center;
+    }
+    #text-input{
+      width:60%;
+      max-width:600px;
+      padding:15px 20px;
+      font-size:16px;
+      border:2px solid #555;
+      border-radius:8px;
+      background:rgba(255,255,255,0.05);
+      color:#fff;
+      outline:none;
+      transition:border-color 0.3s ease;
+    }
+    #text-input:focus{
+      border-color:var(--accent);
+    }
+    #text-input::placeholder{
+      color:#888;
+    }
+    @media (max-width:768px){
+      .keyboard-container{
+        flex-direction:column;
+        justify-content:center;
+        gap:20px;
+        padding:10px;
+      }
+      .keyboard-half{
+        width:90%;
+        max-width:none;
+      }
+      .keyboard-half#left-half{
+        align-items:center;
+      }
+      .keyboard-half#right-half{
+        align-items:center;
+      }
+      #text-input{
+        width:90%;
+      }
+    }
+    @media (max-width:480px){
+      .keyboard-container{padding:5px;gap:10px}
+      .keyboard-half{padding:14px;width:95%}
+    }
+    .glow-normal{background:rgba(255,255,255,0.15) !important;border-color:#fff !important;box-shadow:0 6px 22px rgba(255,255,255,0.15),0 0 28px rgba(255,255,255,0.08) !important;transform:translateY(-4px) scale(1.02)}
+    .glow-symbol{background:rgba(255,152,0,0.25) !important;box-shadow:0 6px 28px rgba(255,152,0,0.25),0 0 40px rgba(255,152,0,0.15) !important;border-color:#fff !important}
+    .glow-nav{background:rgba(0,230,118,0.25) !important;box-shadow:0 6px 28px rgba(0,230,118,0.25),0 0 36px rgba(0,230,118,0.12) !important;border-color:#fff !important}
+    .glow-hold{background:rgba(33,150,243,0.25) !important;box-shadow:0 6px 26px rgba(33,150,243,0.25),0 0 34px rgba(33,150,243,0.12) !important;border-color:#fff !important}
+    .glow-shift{background:rgba(255,255,255,0.25) !important;box-shadow:0 6px 26px rgba(255,255,255,0.25),0 0 34px rgba(255,255,255,0.12) !important;border-color:#fff !important}
+    .char-glow{animation:charPulse .95s ease both}
+    @keyframes charPulse{0%{transform:scale(1);opacity:1}50%{transform:scale(1.12);opacity:1}100%{transform:scale(1);opacity:1}}
+  </style>
+</head>
+<body>
+  <div class="keyboard-container">
+    <div class="keyboard-half" id="left-half">
+      <div class="row left-row">
+        <div class="key"><span class="key-main">q</span><span class="key-symbol">!</span><span class="key-shift">Q</span><span class="key-nav">F1</span></div>
+        <div class="key"><span class="key-main">w</span><span class="key-symbol">@</span><span class="key-shift">W</span><span class="key-nav">F2</span></div>
+        <div class="key"><span class="key-main">e</span><span class="key-symbol">#</span><span class="key-shift">E</span><span class="key-nav">F3</span></div>
+        <div class="key"><span class="key-main">r</span><span class="key-symbol">$</span><span class="key-shift">R</span><span class="key-nav">F4</span></div>
+        <div class="key"><span class="key-main">t</span><span class="key-symbol">%</span><span class="key-shift">T</span><span class="key-nav">F5</span></div>
+      </div>
+      <div class="row left-row">
+        <div class="key"><span class="key-main">a</span><span class="key-symbol">1</span><span class="key-shift">A</span><span class="key-nav">F6</span></div>
+        <div class="key"><span class="key-main">s</span><span class="key-symbol">2</span><span class="key-shift">S</span><span class="key-nav">F7</span></div>
+        <div class="key"><span class="key-main">d</span><span class="key-symbol">3</span><span class="key-shift">D</span><span class="key-nav">F8</span></div>
+        <div class="key"><span class="key-main">f</span><span class="key-symbol">4</span><span class="key-shift">F</span><span class="key-nav">F9</span></div>
+        <div class="key"><span class="key-main">g</span><span class="key-symbol">5</span><span class="key-shift">G</span><span class="key-nav">F10</span></div>
+      </div>
+      <div class="row left-row">
+        <div class="key"><span class="key-main">z</span><span class="key-symbol">6</span><span class="key-shift">Z</span><span class="key-nav">F11</span></div>
+        <div class="key"><span class="key-main">x</span><span class="key-symbol">7</span><span class="key-shift">X</span><span class="key-nav">F12</span></div>
+        <div class="key"><span class="key-main">c</span><span class="key-symbol">8</span><span class="key-shift">C</span></div>
+        <div class="key"><span class="key-main">v</span><span class="key-symbol">9</span><span class="key-shift">V</span></div>
+        <div class="key"><span class="key-main">b</span><span class="key-symbol">0</span><span class="key-shift">B</span></div>
+      </div>
+      <div class="thumb-cluster">
+        <div class="thumb-key"><span class="key-main">meta</span><span class="key-hold">meta</span><span class="key-symbol">⌘</span></div>
+        <div class="thumb-key"><span class="key-main">space</span><span class="key-hold" style="border:1px solid #00E676">nav</span><span class="key-symbol">\</span><span class="key-shift">|</span></div>
+        <div class="thumb-key"><span class="key-main">esc</span><span class="key-hold">ctrl</span><span class="key-symbol">'</span><span class="key-shift">"</span></div>
+      </div>
+    </div>
+    
+    <div class="keyboard-half" id="right-half">
+      <div class="row right-row">
+        <div class="key"><span class="key-main">y</span><span class="key-symbol">^</span><span class="key-shift">Y</span></div>
+        <div class="key"><span class="key-main">u</span><span class="key-symbol">&amp;</span><span class="key-nav">tab</span><span class="key-shift">U</span></div>
+        <div class="key"><span class="key-main">i</span><span class="key-symbol">*</span><span class="key-nav">pgup</span><span class="key-shift">I</span></div>
+        <div class="key"><span class="key-main">o</span><span class="key-symbol">(</span><span class="key-nav">pgdn</span><span class="key-shift">O</span></div>
+        <div class="key"><span class="key-main">p</span><span class="key-symbol">)</span><span class="key-nav">prt</span><span class="key-shift">P</span></div>
+      </div>
+      <div class="row right-row">
+        <div class="key"><span class="key-main">h</span><span class="key-symbol">-</span><span class="key-nav">←</span><span class="key-shift">H</span></div>
+        <div class="key"><span class="key-main">j</span><span class="key-symbol">=</span><span class="key-nav">↓</span><span class="key-shift">J</span></div>
+        <div class="key"><span class="key-main">k</span><span class="key-symbol">`</span><span class="key-nav">↑</span><span class="key-shift">K</span></div>
+        <div class="key"><span class="key-main">l</span><span class="key-symbol">[</span><span class="key-nav">→</span><span class="key-shift">L</span></div>
+        <div class="key"><span class="key-main">;</span><span class="key-symbol">]</span><span class="key-shift">:</span></div>
+      </div>
+      <div class="row right-row">
+        <div class="key"><span class="key-main">n</span><span class="key-symbol">_</span><span class="key-nav">home</span><span class="key-shift">N</span></div>
+        <div class="key"><span class="key-main">m</span><span class="key-symbol">+</span><span class="key-nav">end</span><span class="key-shift">M</span></div>
+        <div class="key"><span class="key-main">,</span><span class="key-symbol">~</span><span class="key-shift">&lt;</span></div>
+        <div class="key"><span class="key-main">.</span><span class="key-symbol">{</span><span class="key-shift">&gt;</span></div>
+        <div class="key"><span class="key-main">/</span><span class="key-symbol">}</span><span class="key-shift">?</span></div>
+      </div>
+      <div class="thumb-cluster">
+        <div class="thumb-key"><span class="key-symbol">bkspc</span><span class="key-main">enter</span><span class="key-hold">alt</span></div>
+        <div class="thumb-key"><span class="key-main">bksp</span><span class="key-hold" style="border:1px solid #FF9800">sym</span><span class="key-nav">del</span></div>
+        <div class="thumb-key"><span class="key-main">tab</span><span class="key-hold" style="border:1px solid #ffffff">shift</span><span class="key-symbol">⇧</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="text-input-container">
+    <input type="text" id="text-input" placeholder="Type here to see keyboard visualization..." />
+  </div>
+  <script>
+    (function(){
+      const root = document.documentElement;
+      const keys = Array.from(document.querySelectorAll('.key, .thumb-key'));
+      keys.forEach(k=>k._texts=Array.from(k.querySelectorAll('span')).map(s=>s.textContent.trim()));
+      const rawGap = getComputedStyle(root).getPropertyValue('--key-gap') || '8px';
+      function px(n){return typeof n==='number'?n:parseFloat(n)||0}
+      function adjustSizes(){
+        const halves = document.querySelectorAll('.keyboard-half');
+        let best=48;
+        halves.forEach(half=>{
+          const rows = half.querySelectorAll('.row');
+          const maxCols = Math.max(1,...Array.from(rows).map(r=>r.children.length));
+          const halfStyle = getComputedStyle(half);
+          const pad = px(halfStyle.paddingLeft)+px(halfStyle.paddingRight);
+          const gap = px(root.style.getPropertyValue('--key-gap'))||px(getComputedStyle(root).getPropertyValue('--key-gap'))||8;
+          const halfWidth = half.clientWidth - pad - 10;
+          const candidate = Math.floor((halfWidth - (maxCols-1)*gap)/maxCols);
+          best = Math.max(Math.min(candidate, parseFloat(getComputedStyle(root).getPropertyValue('--max-key'))||120), parseFloat(getComputedStyle(root).getPropertyValue('--min-key'))||36, best);
+        });
+        best = Math.max(32,Math.min(best,160));
+        root.style.setProperty('--key-size', best + 'px');
+        root.style.setProperty('--thumb-size', Math.max(best+2, best) + 'px');
+      }
+      window.addEventListener('resize', adjustSizes);
+      window.addEventListener('orientationchange', adjustSizes);
+      adjustSizes();
+      const map = {arrowleft:'←',arrowright:'→',arrowup:'↑',arrowdown:'↓',pageup:'pgup',pagedown:'pgdn',printscreen:'prt',backspace:'bksp',escape:'esc',' ':'space',spacebar:'space'};
+      function normalizedCandidates(evt){
+        const k = (evt.key||'').toString();
+        const lower = k.toLowerCase();
+        const cands = new Set([k,lower]);
+        if(map[lower])cands.add(map[lower]);
+        if(evt.code)cands.add(evt.code.toLowerCase());
+        if(lower.startsWith('arrow')&&map[lower])cands.add(map[lower]);
+        if(k.length===1)cands.add(k);
+        return Array.from(cands).map(x=>x.toString().trim());
+      }
+      function findMatch(evt){
+        const candidates = normalizedCandidates(evt);
+        for(const el of keys){
+          const spans = Array.from(el.querySelectorAll('span'));
+          for(const sp of spans){
+            const text = sp.textContent.trim();
+            for(const cand of candidates){
+              if(!cand)continue;
+              if(text.toLowerCase()===cand.toLowerCase()||text===cand){
+                return {el,matchedSpan:sp};
+              }
+            }
+          }
+        }
+        return null;
+      }
+      function glow(el,span){
+        if(!el)return;
+        let className='glow-normal';
+        if(span.classList.contains('key-symbol'))className='glow-symbol';
+        else if(span.classList.contains('key-nav'))className='glow-nav';
+        else if(span.classList.contains('key-hold'))className='glow-hold';
+        else if(span.classList.contains('key-shift'))className='glow-shift';
+        el.classList.add(className);
+        span.classList.add('char-glow');
+        setTimeout(()=>{el.classList.remove(className);span.classList.remove('char-glow')},800);
+      }
+      
+      const textInput = document.getElementById('text-input');
+      textInput.addEventListener('input', e => {
+        const lastChar = e.target.value.slice(-1);
+        if (lastChar && e.inputType !== 'deleteContentBackward') {
+          const syntheticEvent = { key: lastChar, code: '', ctrlKey: false, altKey: false, shiftKey: false };
+          const match = findMatch(syntheticEvent);
+          if (match) {
+            glow(match.el, match.matchedSpan);
+          }
+        }
+      });
+      window.addEventListener('keydown',e=>{
+        const match=findMatch(e);
+        if(match){
+          glow(match.el,match.matchedSpan);
+        }
+      });
+      keys.forEach(k=>k.addEventListener('pointerdown',ev=>{
+        ev.preventDefault();
+        const span=k.querySelector('.key-main')||k.querySelector('span');
+        glow(k,span);
+      }));
+    })();
+  </script>
+</body>
+</html>
