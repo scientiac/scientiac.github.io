@@ -35,7 +35,7 @@ const themes = {
 
 const defaultThemes = {
   light: "gruvbox-light",
-  dark: "night-spaceduck"
+  dark: "night-solis"
 }
 
 const prefersDark = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
