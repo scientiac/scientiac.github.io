@@ -280,7 +280,6 @@ nav a[rel="next"] {
 kbd, code {
 	font-weight: bold;
 	border-radius: 0.25rem;
-	background-color: var(--background-color-1);
 	padding: 0.10rem 0.25rem;
 }
 
