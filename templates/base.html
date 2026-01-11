@@ -3,6 +3,21 @@
 
 <head>
   <meta charset="utf-8">
+  <script>
+  (function () {
+    try {
+      const defaultThemes = {
+        light: "gruvbox-light",
+        dark: "night-solis"
+      };
+
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = localStorage.theme || (prefersDark ? defaultThemes.dark : defaultThemes.light);
+
+      document.documentElement.dataset.theme = theme;
+    } catch (e) {}
+  })();
+  </script>
     <link rel="stylesheet" type="text/css" href="/assets/css/themes.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/readable.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/global.css">
