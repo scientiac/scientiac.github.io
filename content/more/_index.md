@@ -7,9 +7,6 @@ page_template = "page.html"
 ### [Activity](activity)
 Activity on this site including webmentions and interactions.
 
-### [research::map](https://map.scientiac.space)
-A map of things I am working on.
-
 ## Information
 
 ### [Contact](contact)

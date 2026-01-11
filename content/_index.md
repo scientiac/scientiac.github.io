@@ -3,14 +3,46 @@ title="scientiac::syntropy"
 description="A place where I freely share my thoughts."
 +++
 
-Hello! I am Scientiac. I welcome you in my fun little corner of the internet where I share my thoughts and write about things I like.
 
-## My hobbies and interests
+_**I welcome you to one of my successful experiments: blogging regularly**; that I started near the end of 2020.
+My writings have shifted and fluctuated over the years, but this started as a way to share my poems. These days
+I mostly write about the things I try and have fun with (and also poems)._
+```
+  .              +   .                .   . .     .  .              +   .                .   . .     .  .
+                   .                    .       .                     .                    .       .     
+  .       *                        . . . .  .   .  + .       *                        .     .    .   .  + .
+            "You Are Here"            .   .  +  . . .                .   .  +  . . .
+.                 |             .  .   .    .    . .                              .  .   .    .    . .
+                  |           .     .     . +.    +                             .     .     . +     +  .
+                  |             .       .   . .                                   .        .   .   .
+        . .       V          .    * . . .  .  +   .        . .                 .    * .    .   .  +   .
+           +      .           .   .      +                    +      .           .   .       +
+                            .       . +  .+. .                                 .       .    +   +. .
+  .                      .     . + .  . .     .      .                      .     .   +   .     .      .
+           .      .    .     . .   . . .        ! /           .      .    .     .     .      .     . .    
+      *             .    . .  +    .  .       - O -      *             .    .   +    .  .       - O -
+          .     .    .  +   . .  *  .       . / |            .     .    .  +    .  .  *     .       . 
+               . + .  .  .  .. +  .                               . + .        .     +  .
+.      .  .  .  *   .  *  . +..  .            *           .  .  .  *   .  *  .     .              *
+ .      .   . .   .   .   . .  +   .    .                  .   . .   .   .   . .  +   .    .            +
+```
 
-As a student, currently studying computer engineering I love computers obviously, but beyond that I like gazing at the stars and writing literature. More on computers and software, I use Linux and I do feel like I cannot live without it. I have come to learn about privacy on the internet, so I love using [FOSS](https://en.wikipedia.org/wiki/Free_and_open-source_software) whenever possible.
+_My name's `σπανδαν`, I go by `scιεnτιαc` or `iac` on the internet. I am studying _Computer Engineering_ with the aim
+of understanding computers and how they actually function (which is almost an impossible task if you look at it from a high level)._
 
-## About this site...
+## Colophon
 
-This site is built with the [Zola](https://www.getzola.org/) static site generator. Taking inspirations from my fellow friends from the [fediverse](https://fediverse.party/en/fediverse/); [Kev Quirk](https://kevquirk.com/), [Benjamin Hollon](https://benjaminhollon.com/), [Joel Chrono](https://joelchrono12.xyz/) and reading their thoughts on what a blogging website should feel like, I have created this beautiful website focused on the reading experience than design. 
+I built this site to be readable and customizable while being minimal. It has become more and more complex (relatively)
+over the years under the hood though. I use the [LaTeX Fonts](https://latex.vercel.app/) as the preferred Fonts
+and use [Readable CSS](https://readable-css.freedomtowrite.org/) as the base to my styles.
+I have used [zola](https://www.getzola.org/) as the static site generator and `github` actions do the heavy lifting of
+building the site, then [Sending](https://webmention.app/), and [Receiving](https://webmention.io/) webmentions.
+This site also complies with the [IndieWeb](https://indieweb.org/) guidelines.
 
-[Readable CSS](https://readable-css.freedomtowrite.org/) is the base CSS of my site and [LaTeX Fonts](https://latex.vercel.app/) are the preferred fonts. 
+### A little More
+
+_Most of the things I build that still work are the things
+I regularly use in my daily life. I am a chronic Linux user and a FOSS advocate and I like to learn new skills but mostly 
+end up giving up very early in the process. If you don't already know, I love computers. But apart from that I love art, science, stars, and humans(also animals and also birds, and words)._  
+
+_That's almost everything I'll tell you here ( not really <kbd>;)</kbd>), I'll definitely like you if you meet me in person. See you around!_
