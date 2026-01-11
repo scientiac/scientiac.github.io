@@ -1,15 +1,43 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+{% set writings = get_taxonomy(kind="writings") %}
+
+
 <div class="logs">
+
+<p class="subtitle --center">
+{% for term in writings.items %}
+  <code class="dateandtag"><a href="{{ term.permalink }}">{{ term.name }}</a><sup>{{ term.pages | length }}</sup></code>
+{% endfor %}
+</p>
+
 <h1 class="title">
   {{ section.title }}
 </h1>
+
+<div class="search-container">
+  <input id="search" type="search" placeholder="Search">
+
+  <div class="search-results">
+  <div class="search-results__items"></div>
+  </div>
+</div>
+
+<script defer type="text/javascript" src="{{ get_url(path="elasticlunr.min.js") }}"></script>
+<script defer type="text/javascript" src="{{ get_url(path="search_index.en.js") }}"></script>
+<script defer type="text/javascript" src="{{ get_url(path="search.js") }}"></script>
   
   {% for page in paginator.pages %}
 		<article class="listing">
 			<h2><a href="{{ page.permalink | safe }}">{{ page.title }}</a></h2>
-			<p class="subtitle --center"><code class="dateandtag">{{ page.date }}</code></p>
+			<p class="subtitle --center"><code class="dateandtag">{{ page.date }}</code>
+          {% for tag in page.taxonomies.writings %}
+              <code class="u-category dateandtag">{{ tag }}</code>
+              {% set genre = tag %}
+          {% endfor %}
+      <p>
 		</article>
 	{% endfor %}
 

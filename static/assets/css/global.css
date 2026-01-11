@@ -424,7 +424,7 @@ button:hover {
 	background-color: var(--background-color-1);
   color: var(--color);
 	padding: 1rem 1rem;
-  margin: 1rem auto 1rem auto;
+  margin: 0rem auto 1rem auto;
   border-radius: 0.8rem;
   border: none;
   box-sizing: border-box;
@@ -628,14 +628,6 @@ details {
 
 @media all and (max-width: 45rem)
 {
-  
-.main-li
-  {
-     display: none !important;
-     position: absolute;
-  }
-}
-
 .language {
   display: flex;
   justify-content: space-between;

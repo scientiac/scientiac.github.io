@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<p class="subtitle --center"><code class="dateandtag"><a href="/syndicate/posse/atom.xml">RSS</a></code> <code class="dateandtag"><a href="/syndicate/">Syndicate</a></code></p>
+
 <div class="logs">
 <h1 class="title-writings">
   {{ section.title }}
 </h1>
-  <p class="subtitle --center"><code class="dateandtag"><a href="/syndicate/posse/atom.xml">RSS</a></code> <code class="dateandtag"><a href="/syndicate/">Syndicate</a></code></p>
-
   {% for page in paginator.pages %}
   <article class="syndicate">
   <h2><a href="{{ page.permalink | safe }}">{{ page.title }}</a></h2>
