@@ -626,8 +626,6 @@ details {
 	padding: var(--half-line);
 }
 
-@media all and (max-width: 45rem)
-{
 .language {
   display: flex;
   justify-content: space-between;
