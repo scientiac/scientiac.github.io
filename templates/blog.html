@@ -2,11 +2,9 @@
 
 {% block content %}
 
-{% set writings = get_taxonomy(kind="writings") %}
-
-
 <div class="logs">
 
+{% set writings = get_taxonomy(kind="writings") %}
 <p class="subtitle --center">
 {% for term in writings.items %}
   <code class="dateandtag"><a href="{{ term.permalink }}">{{ term.name }}</a><sup>{{ term.pages | length }}</sup></code>

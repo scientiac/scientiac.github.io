@@ -471,6 +471,7 @@ button:hover {
 .search-results__item div
 {
   padding: 1rem;
+  text-align: justify;
 }
 
 .section pre code
