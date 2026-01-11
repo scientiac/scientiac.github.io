@@ -42,8 +42,6 @@ const prefersDark = (window.matchMedia && window.matchMedia('(prefers-color-sche
 
 let theme = localStorage.theme || (prefersDark ? defaultThemes.dark : defaultThemes.light);
 
-document.documentElement.dataset.theme = theme;
-
 const q = document.querySelector.bind(document);
 
 function updateThemeSelector() {
