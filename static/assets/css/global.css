@@ -97,12 +97,15 @@ nav:not(.exclude:not([data-style]), [data-style="none"]) > * {
 .listing {
   background-color: var(--background-color-1);
 	border-radius: var(--half-line);
-	padding: calc(0.2 * var(--one-line));
+	padding: calc(0.1 * var(--one-line));
 	margin: calc(0.5 * var(--one-line)) 0;
 }
 
 .listing h2 {
-	margin: 0;
+	margin: 0 0 12px 0;
+	padding: calc(0.1 * var(--one-line));
+	background-color: var(--background-color-0);
+	border-radius: var(--half-line) var(--half-line) 0 0;
 }
 
 .listing code {
@@ -497,7 +500,7 @@ button:hover {
    text-decoration: none;
 	 text-transform: uppercase;
    border-radius: 0.8rem;
-   margin: 0.5rem 0.8rem;
+   margin: 0.16rem 0.16rem;
    padding: 0.5rem;
 }
 
@@ -762,6 +765,10 @@ pre {
 
 .activity-box code {
 	padding: 1rem;
+}
+
+footer:not(.exclude) {
+  border-color: var(--background-color-1);
 }
 
 @media print {
