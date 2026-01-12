@@ -23,6 +23,7 @@ generate_feeds = true
 taxonomies = [
     {name = "writings", feed = true, paginate_by = 12},
     {name = "syndicate", feed = true, paginate_by = 12},
+    {name = "series", feed = true, paginate_by = 12},
 ]
 
 [search]
