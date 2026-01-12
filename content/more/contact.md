@@ -12,5 +12,5 @@ title = "Contact"
 
 * Matrix: @thescientiac:matrix[dot]org
 * Fediverse : @iac@polymaths.social
-* Email : scientiac@tilde.team
+* Email : iac@scientiac.space
 * Signal : if you have my number
