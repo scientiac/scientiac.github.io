@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Series</h1>
+
+<p>I have formed {{ terms | length }} series till date.</p>
+
+<ul>
+{% for tag in terms %}
+<h3><li>
+    <a href="{{ get_taxonomy_url(kind='series', name=tag.name) }}">
+      <strong>{{ tag.name }}</strong>
+    </a>
+    — {{ tag.pages | length }}
+  </li></h3>
+{% endfor %}
+</ul>
+
+{% endblock content %}
