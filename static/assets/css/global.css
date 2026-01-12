@@ -484,7 +484,7 @@ button:hover {
 .pagination {
   background-color: var(--background-color-1);
   border-radius: var(--half-line);
-  margin: 1rem 0;
+  margin: 1.5rem 0 0 0;
 
   padding: 0.16rem;
   display: flex;
@@ -683,6 +683,11 @@ pre {
 	  background-color: var(--background-color-1);
 	  border-radius: var(--half-line);
 	  height: 2.6rem;
+}
+
+#webmention form:not(.exclude) :is(input:not([type="checkbox"])):focus
+{
+ outline: solid 2px var(--text-highlight-2);
 }
 
 #webmention h2 {
