@@ -30,7 +30,7 @@ Writings that belong to the same topic.
 
 ### Everything
 **[All content](/atom.xml)**  
-  Articles, reports, POSSEs — everything in one feed.
+  Articles, reports, pings — everything in one feed.
 
 ### Writing
 **[Articles](/writings/articles/atom.xml)**  
