@@ -1,36 +1,55 @@
 +++
-title="More Links"
+title = "More Links"
 template = "standalone.html"
 page_template = "page.html"
 +++
 
-### [Activity](activity)
-Activity on this site including webmentions and interactions.
+<center>
+A small index of pages, feeds, and places related to this site.
+</center>
+
+**[Activity](activity)**  
+Webmentions, replies, and interactions happening around this site.
+
+**[Series](/series)**  
+Writings that belong to the same topic.
+
+---
 
 ## Information
 
-### [Contact](contact)
-Places and links to contact me.
+**[Contact](contact)**  
+  Ways to reach me across the web.
 
-### [Currently Using](using) 
-A list of software that I am currently using.
+**[Currently Using](using)**  
+  Software, tools, and things I use day-to-day.
 
-## RSS
+---
 
-### [Everything](/atom.xml) 
-RSS to everything from Articles to POSSEs.
+## RSS Feeds
 
-### [Articles](/writings/articles/atom.xml) 
-RSS to just the articles I write.
+### Everything
+**[All content](/atom.xml)**  
+  Articles, reports, POSSEs — everything in one feed.
 
-### [Reports](/writings/reports/atom.xml) 
-RSS to just the project reports I make.
+### Writing
+**[Articles](/writings/articles/atom.xml)**  
+  Essays and longer-form writing.
 
-### [Poems](/writings/poems/atom.xml) 
-RSS to the POEMS I create.
+**[Reports](/writings/reports/atom.xml)**  
+  Project updates and technical reports.
 
-### [Stories](/writings/stories/atom.xml) 
-RSS to some rare stories I write.
+**[Poems](/writings/poems/atom.xml)**  
+  Poetry.
 
-### [POSSE](/syndicate/posse/atom.xml) 
-RSS to my day-to-day updates.
+**[Stories](/writings/stories/atom.xml)**  
+  Occasional short stories.
+
+### Daily
+**[POSSE](/syndicate/posse/atom.xml)**  
+  Day-to-day notes and syndicated posts.
+
+
+<small>
+All feeds are standard Atom feeds and work with any RSS reader.
+</small>

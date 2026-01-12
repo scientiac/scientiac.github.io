@@ -3,6 +3,7 @@ title = "Eerie: Floating"
 date = 2025-12-08
 [taxonomies]
 writings=["Stories"]
+series=["Eerie"]
 +++
 
 <em>
