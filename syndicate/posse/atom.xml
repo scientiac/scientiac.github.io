@@ -1,0 +1,1232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>scientiac::syntropy - POSSE</title>
+    <subtitle>A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://scientiac.space/syndicate/posse/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://scientiac.space"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-01-05T00:00:00+00:00</updated>
+    <id>https://scientiac.space/syndicate/posse/atom.xml</id>
+    <entry xml:lang="en">
+        <title>KL-OS: File System</title>
+        <published>2026-01-05T00:00:00+00:00</published>
+        <updated>2026-01-05T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/kl-os-2026-01-05/"/>
+        <id>https://scientiac.space/syndications/kl-os-2026-01-05/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/kl-os-2026-01-05/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;codeberg.org&#x2F;scientiac&#x2F;KL-OS&#x2F;src&#x2F;branch&#x2F;main&#x2F;progress&#x2F;day-15.md&quot;&gt;Day 15&lt;&#x2F;a&gt; was about File System.&lt;&#x2F;p&gt;
+&lt;p&gt;The &lt;a href=&quot;https:&#x2F;&#x2F;operating-system-in-1000-lines.vercel.app&#x2F;en&#x2F;&quot;&gt;book&lt;&#x2F;a&gt; that I am following has come to an end with &lt;strong&gt;File System&lt;&#x2F;strong&gt; as the final chapter where it teaches to implement &lt;code&gt;tar&lt;&#x2F;code&gt; file as a filesystem.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;code&gt;tar&lt;&#x2F;code&gt; is an archive format (like zip) that can contain multiple files. It contains file contents, filenames, creation dates, and other information necessary for a filesystem. Compared to common filesystem formats like FAT or ext2, tar has a much simpler data structure.&lt;&#x2F;p&gt;
+&lt;p&gt;First a simple directory with two files is made as an example which is then archived&#x2F;compressed into the &lt;code&gt;tar&lt;&#x2F;code&gt; format using the command line &lt;code&gt;tar&lt;&#x2F;code&gt; tool. Which, also is added to the &lt;code&gt;buildscript&lt;&#x2F;code&gt; before launching the &lt;code&gt;qemu&lt;&#x2F;code&gt; VM.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fabd2f;&quot;&gt;cd&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt; disk &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;&amp;amp;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;tar cf ..&#x2F;disk.tar --format&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;ustar &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;.txt&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#928374;&quot;&gt;# The following flag is also added to qemu.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;-drive id=drive0,file=disk.tar,format=raw,if=none \
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;To read the filesystem, first, the data structures related to the tar filesystem is defined in &lt;code&gt;kernel.h&lt;&#x2F;code&gt;. This implementation has all files read from the disk at boot.&lt;&#x2F;p&gt;
+&lt;p&gt;To write to the disk, the contents of the &lt;code&gt;files&lt;&#x2F;code&gt; variable is written back to the disk in the tar file format. The &lt;code&gt;files&lt;&#x2F;code&gt; variable contains the copy of the &lt;code&gt;disk&lt;&#x2F;code&gt; variable declared as a static variable (It is a temporary buffer and, since the stack has a limited size it is preferred to use static variable instead of local &lt;code&gt;stack&lt;&#x2F;code&gt; variable.) which contains the disk image.&lt;&#x2F;p&gt;
+&lt;p&gt;File read&#x2F;write system calls are then designed in the &lt;code&gt;user.c&lt;&#x2F;code&gt; and &lt;code&gt;user.h&lt;&#x2F;code&gt; files and then the system calls are implemented on the kernel files and then the system calls are implemented in the kernel. We also add the read and write commands to the shell.&lt;&#x2F;p&gt;
+&lt;p&gt;But, we still have to address the user pointers.&lt;&#x2F;p&gt;
+&lt;p&gt;In RISC-V, the behaviour of &lt;code&gt;S-Mode&lt;&#x2F;code&gt; (kernel) can be configured through &lt;code&gt;sstatus&lt;&#x2F;code&gt; &lt;code&gt;CSR&lt;&#x2F;code&gt;, including SUM (permit Supervisor User Memory access) bit. When SUM is not set, &lt;code&gt;S-Mode&lt;&#x2F;code&gt; programs (i.e. kernel) cannot access U-Mode (user) pages.&lt;&#x2F;p&gt;
+&lt;p&gt;All we need to do is to set the SUM bit when entering user space and voila! Our OS with a filesystem implementation is now ready.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>KL-OS: Disk I&#x2F;O</title>
+        <published>2026-01-04T00:00:00+00:00</published>
+        <updated>2026-01-04T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/kl-os-2026-01-04/"/>
+        <id>https://scientiac.space/syndications/kl-os-2026-01-04/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/kl-os-2026-01-04/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;codeberg.org&#x2F;scientiac&#x2F;KL-OS&#x2F;src&#x2F;branch&#x2F;main&#x2F;progress&#x2F;day-14.md&quot;&gt;Day 14&lt;&#x2F;a&gt; was about Disk &lt;code&gt;I&#x2F;O&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;A device driver for the &lt;code&gt;virtio-blk&lt;&#x2F;code&gt;, a virtual disk device was implemented.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;code&gt;Virtio&lt;&#x2F;code&gt; is one of the APIs for device drivers to control devices. It is widely used in virtualization environments such as QEMU.
+The &lt;code&gt;virtio&lt;&#x2F;code&gt; devices have a structure called &lt;code&gt;virtqueue&lt;&#x2F;code&gt; and it is a queue shared between the driver and the device.
+It consists of &lt;code&gt;Discriptor Table&lt;&#x2F;code&gt;, &lt;code&gt;Available Ring&lt;&#x2F;code&gt; and &lt;code&gt;Used Ring&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;First we enable &lt;code&gt;virtio&lt;&#x2F;code&gt; drivers in our &lt;code&gt;buildscript&lt;&#x2F;code&gt; which is &lt;code&gt;run.sh&lt;&#x2F;code&gt;. We use the following flags for &lt;code&gt;qemu&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;-drive id=drive0,file=lorem.txt,format=raw,if=none
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;-device virtio-blk-device,drive=drive0,bus=virtio-mmio-bus.0
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Here, &lt;code&gt;lorem.txt&lt;&#x2F;code&gt; is a file made for testing purposes beforehand.&lt;&#x2F;p&gt;
+&lt;p&gt;Then, the definition of &lt;code&gt;c&lt;&#x2F;code&gt; structs and macros is done in &lt;code&gt;kernel.h&lt;&#x2F;code&gt;. To access the &lt;code&gt;MMIO&lt;&#x2F;code&gt; registers we add that functionality in &lt;code&gt;kernel.c&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;The &lt;code&gt;create_process&lt;&#x2F;code&gt; function is modified to map the &lt;code&gt;virtio-blk&lt;&#x2F;code&gt; &lt;code&gt;MMIO&lt;&#x2F;code&gt; region to the page table so the kernel can access the &lt;code&gt;MMIO&lt;&#x2F;code&gt; registers. &lt;code&gt;MMIO&lt;&#x2F;code&gt; region to the page table so the kernel can access the &lt;code&gt;MMIO&lt;&#x2F;code&gt; registers.&lt;&#x2F;p&gt;
+&lt;p&gt;Then the &lt;code&gt;Virtio Device Initialization&lt;&#x2F;code&gt; and &lt;code&gt;Virtqueue Initialization&lt;&#x2F;code&gt; is done with the process described in the &lt;a href=&quot;https:&#x2F;&#x2F;ozlabs.org&#x2F;~rusty&#x2F;virtio-spec&#x2F;virtio-0.9.5.pdf&quot;&gt;spec&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;code&gt;I&#x2F;O&lt;&#x2F;code&gt; requests to the disk is implemented by &quot;adding processing requests to the &lt;code&gt;virtqueue&lt;&#x2F;code&gt;&quot;.&lt;&#x2F;p&gt;
+&lt;p&gt;A request is sent in the following steps:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Construct a request in &lt;code&gt;blk_req&lt;&#x2F;code&gt;. Specify the sector number you want to access and the type of read&#x2F;write.&lt;&#x2F;li&gt;
+&lt;li&gt;Construct a descriptor chain pointing to each area of &lt;code&gt;blk_req&lt;&#x2F;code&gt; (see below).&lt;&#x2F;li&gt;
+&lt;li&gt;Add the index of the head descriptor of the descriptor chain to the Available Ring.&lt;&#x2F;li&gt;
+&lt;li&gt;Notify the device that there is a new pending request.&lt;&#x2F;li&gt;
+&lt;li&gt;Wait until the device finishes processing (aka busy-waiting or polling).&lt;&#x2F;li&gt;
+&lt;li&gt;Check the response from the device.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;To test, we initialize the &lt;code&gt;virtio&lt;&#x2F;code&gt; device in the kernel main and try reading and writing to the disk with the implemented functions.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Device drivers are just &quot;glue&quot; between the OS and devices. Drivers don&#x27;t control the hardware directly; drivers communicate with other software running on the device (e.g., firmware). Devices and their software, not the OS driver, will do the rest of the heavy lifting, like moving disk read&#x2F;write heads.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>KL-OS: System Call</title>
+        <published>2026-01-03T00:00:00+00:00</published>
+        <updated>2026-01-03T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/kl-os-2026-01-03/"/>
+        <id>https://scientiac.space/syndications/kl-os-2026-01-03/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/kl-os-2026-01-03/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;codeberg.org&#x2F;scientiac&#x2F;KL-OS&#x2F;src&#x2F;branch&#x2F;main&#x2F;progress&#x2F;day-13.md&quot;&gt;Day 13&lt;&#x2F;a&gt; was about system call.&lt;&#x2F;p&gt;
+&lt;p&gt;Similar to &lt;code&gt;SBI Call&lt;&#x2F;code&gt; implementation, the system calls are invoked in a similar way.&lt;&#x2F;p&gt;
+&lt;p&gt;The &lt;code&gt;syscall&lt;&#x2F;code&gt; function sets the system call number in the &lt;code&gt;a3&lt;&#x2F;code&gt; register and the system call arguments in the &lt;code&gt;a0&lt;&#x2F;code&gt; to &lt;code&gt;a2&lt;&#x2F;code&gt; registers, then executes the &lt;code&gt;ecall&lt;&#x2F;code&gt; instruction. The &lt;code&gt;ecall&lt;&#x2F;code&gt; instruction is a special instruction used to delegate processing to the kernel. When the &lt;code&gt;ecall&lt;&#x2F;code&gt; instruction is executed, an exception handler is called, and control is transferred to the kernel. The return value from the kernel is set in the &lt;code&gt;a0&lt;&#x2F;code&gt; register.&lt;&#x2F;p&gt;
+&lt;p&gt;The first &lt;code&gt;systemcall&lt;&#x2F;code&gt; implemented is &lt;code&gt;putchar&lt;&#x2F;code&gt;. It takes a character as the first argument and the second and subsequent unused arguments are set to 0.&lt;&#x2F;p&gt;
+&lt;p&gt;Then the &lt;code&gt;ecall&lt;&#x2F;code&gt; instruction is handled in the kernel. The calling of &lt;code&gt;ecall&lt;&#x2F;code&gt; can by determined by checking the value of &lt;code&gt;scause&lt;&#x2F;code&gt;. Before calling the &lt;code&gt;handle_syscall&lt;&#x2F;code&gt; function we also add the size of &lt;code&gt;ecall&lt;&#x2F;code&gt; instruction (4) to the value of &lt;code&gt;sepc&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;This is because &lt;code&gt;sepc&lt;&#x2F;code&gt; points to the program counter that caused the exception, which points to the &lt;code&gt;ecall&lt;&#x2F;code&gt; instruction. If we don&#x27;t change it, the kernel goes back to the same place, and the &lt;code&gt;ecall&lt;&#x2F;code&gt; instruction is executed repeatedly.&lt;&#x2F;p&gt;
+&lt;p&gt;Then a &lt;code&gt;system call&lt;&#x2F;code&gt;  handler is made and is called from trap handler. It receives a
+structure of registers at the time of exception that was saved in the trap handler. It determined the type of system call by checking the value of &lt;code&gt;a3&lt;&#x2F;code&gt; register.&lt;&#x2F;p&gt;
+&lt;p&gt;The system call was then tested with a main print function in &lt;code&gt;shell.c&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;An &lt;code&gt;exit&lt;&#x2F;code&gt; system call is also implemented where it takes the first argument as &lt;code&gt;3&lt;&#x2F;code&gt; which is defined as &lt;code&gt;SYS_EXIT&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;The system call changes the process state to &lt;code&gt;PROC_EXITED&lt;&#x2F;code&gt;, and calls yield to give up the CPU to other processes. The scheduler will only execute processes in &lt;code&gt;PROC_RUNNABLE&lt;&#x2F;code&gt; state, so it will never return to this process. However, &lt;code&gt;PANIC&lt;&#x2F;code&gt; macro is added to cause a panic in case it does return.&lt;&#x2F;p&gt;
+&lt;p&gt;A bare-bones shell was then implemented to use the syscalls to perform actions from the user mode.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>KL-OS: User Mode</title>
+        <published>2026-01-02T00:00:00+00:00</published>
+        <updated>2026-01-02T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/kl-os-2026-01-02/"/>
+        <id>https://scientiac.space/syndications/kl-os-2026-01-02/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/kl-os-2026-01-02/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;codeberg.org&#x2F;scientiac&#x2F;KL-OS&#x2F;src&#x2F;branch&#x2F;main&#x2F;progress&#x2F;day-12.md&quot;&gt;Day 12&lt;&#x2F;a&gt; was about user mode.&lt;&#x2F;p&gt;
+&lt;p&gt;The application that we had made had to be run on the user mode. And since, the execution
+image is a raw binary, it needs to be prepared with a fixed binary.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;USER_BASE &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;0x1000000
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;After defining the symbols to use in the embedded raw binary, the create process function is updated to start the application from the &lt;code&gt;user_entry&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;The &lt;code&gt;create_process&lt;&#x2F;code&gt; is modified to take the pointer to the execution image and image size as arguments. It copies the execution image page by page for the specified size and maps it to the process page table.&lt;&#x2F;p&gt;
+&lt;p&gt;Finally, the &lt;code&gt;create_process&lt;&#x2F;code&gt; function is modified to create a user process.&lt;&#x2F;p&gt;
+&lt;p&gt;After checking if the execution image is mapped as expected, to run applications we must transition the CPU to the user mode. Or, in RISC-V, the U-Mode.&lt;&#x2F;p&gt;
+&lt;p&gt;This switch from &lt;code&gt;S-Mode&lt;&#x2F;code&gt; to &lt;code&gt;U-mode&lt;&#x2F;code&gt; is done with the &lt;code&gt;sret&lt;&#x2F;code&gt; instruction. It does two writes to CSRs while switching:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;PC&lt;&#x2F;code&gt; is set for when transitioning in U-Mode in the &lt;code&gt;sepc&lt;&#x2F;code&gt; register where &lt;code&gt;sret&lt;&#x2F;code&gt; jumps to.&lt;&#x2F;li&gt;
+&lt;li&gt;Then, setting &lt;code&gt;SPIE&lt;&#x2F;code&gt; bit in the &lt;code&gt;sstatus&lt;&#x2F;code&gt; register enables hardware interrupts and the handler set in the &lt;code&gt;stvec&lt;&#x2F;code&gt; register will be called while entering the &lt;code&gt;U-Mode&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>KL-OS: Application</title>
+        <published>2026-01-01T00:00:00+00:00</published>
+        <updated>2026-01-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/kl-os-2026-01-01/"/>
+        <id>https://scientiac.space/syndications/kl-os-2026-01-01/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/kl-os-2026-01-01/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;codeberg.org&#x2F;scientiac&#x2F;KL-OS&#x2F;src&#x2F;branch&#x2F;main&#x2F;progress&#x2F;day-11.md&quot;&gt;Day 11&lt;&#x2F;a&gt; was about application.&lt;&#x2F;p&gt;
+&lt;p&gt;First, a linker script named &lt;code&gt;user.ln&lt;&#x2F;code&gt; was made this time starting at address &lt;code&gt;1000000&lt;&#x2F;code&gt; so that the application doesn&#x27;t overlap with the kernel space.&lt;&#x2F;p&gt;
+&lt;p&gt;Then a simple &lt;code&gt;userland&lt;&#x2F;code&gt; library is created with minimal features just enough to indicate the existence of a userland application.
+A header file for the userland library is also made.&lt;&#x2F;p&gt;
+&lt;p&gt;Then an application is made, very &lt;code&gt;barebones&lt;&#x2F;code&gt;, it is just an infinite loop for now since there is no way to print characters at the moment.&lt;&#x2F;p&gt;
+&lt;p&gt;To build the application, we first compile it with cc to get an executable in a &lt;code&gt;ELF&lt;&#x2F;code&gt; format. The executable is then converted to raw binary format with the &lt;code&gt;objcopy&lt;&#x2F;code&gt; tool.
+Then the raw binary executable format is then again converted to a format that can be embedded in the C language.&lt;&#x2F;p&gt;
+&lt;p&gt;Lastly, the &lt;code&gt;shell.bin.o&lt;&#x2F;code&gt; output is then passed to &lt;code&gt;clang&lt;&#x2F;code&gt; (kernel build section of the script) which gets embedded into the kernel image.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>KL-OS: Examining Pages</title>
+        <published>2025-12-31T00:00:00+00:00</published>
+        <updated>2025-12-31T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/kl-os-2025-12-31/"/>
+        <id>https://scientiac.space/syndications/kl-os-2025-12-31/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/kl-os-2025-12-31/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;codeberg.org&#x2F;scientiac&#x2F;KL-OS&#x2F;src&#x2F;branch&#x2F;main&#x2F;progress&#x2F;day-10.md&quot;&gt;Day 10&lt;&#x2F;a&gt; was about testing and debugging paging and page table contents.&lt;&#x2F;p&gt;
+&lt;p&gt;Running the &lt;code&gt;buildscript&lt;&#x2F;code&gt; should give us the exact same output of repeating letters similar to how it was before paging was implemented.&lt;&#x2F;p&gt;
+&lt;p&gt;Then the page table contents were examined. To check about the registers, following command was run on the &lt;code&gt;qemu&lt;&#x2F;code&gt; console.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;sh&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-sh &quot;&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;qemu&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt; info registers
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Then the value of &lt;code&gt;satp&lt;&#x2F;code&gt; register is read and then interpreted by doing the following hexadecimal math:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;py&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-py &quot;&gt;&lt;code class=&quot;language-py&quot; data-lang=&quot;py&quot;&gt;&lt;span style=&quot;color:#fabd2f;&quot;&gt;hex&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;((0x&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;val of satp&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;&amp;gt; &amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;0x3fffff&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;* &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;4096&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Then the &lt;code&gt;VPN[1]&lt;&#x2F;code&gt; and &lt;code&gt;VPN[0]&lt;&#x2F;code&gt; physical addressed were also examined.&lt;&#x2F;p&gt;
+&lt;p&gt;The consequences of forgetting to set the paging mode, specifying physical address instead of physical page number was also seen. &lt;code&gt;qemu&lt;&#x2F;code&gt; logs were also enabled.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>KL-OS: Page Table</title>
+        <published>2025-12-30T00:00:00+00:00</published>
+        <updated>2025-12-30T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/kl-os-2025-12-30/"/>
+        <id>https://scientiac.space/syndications/kl-os-2025-12-30/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/kl-os-2025-12-30/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;codeberg.org&#x2F;scientiac&#x2F;KL-OS&#x2F;src&#x2F;branch&#x2F;main&#x2F;progress&#x2F;day-9.md&quot;&gt;Day 9&lt;&#x2F;a&gt; was about memory management and virtual addressing.&lt;&#x2F;p&gt;
+&lt;p&gt;The structure of the virtual address is defined by the RISC-V paging mechanism called &lt;code&gt;Sv32&lt;&#x2F;code&gt;.
+It uses a two level page table where the 32 bit virtual address  is divided into a first-level page table index, a second level and a page offset. The tables are named &lt;code&gt;VPN[1]&lt;&#x2F;code&gt; and &lt;code&gt;VPN[0]&lt;&#x2F;code&gt; respectively.&lt;&#x2F;p&gt;
+&lt;p&gt;First the macros for the construction of the page table are defined. Then the function to map pages &lt;code&gt;map_page&lt;&#x2F;code&gt; is made which is utilized in process creation. For that we also add an element called &lt;code&gt;page_table&lt;&#x2F;code&gt; on the &lt;code&gt;struct&lt;&#x2F;code&gt; of process. And to make everything work we define the starting address of the kernel space &lt;code&gt;__kernel__base&lt;&#x2F;code&gt; in the linker script just after boot.&lt;&#x2F;p&gt;
+&lt;p&gt;To utilize the above setup of page tables and switch them, we specify the first-level page table in &lt;code&gt;satp&lt;&#x2F;code&gt; (Supervisor Address Translation and Protection) register.&lt;&#x2F;p&gt;
+&lt;p&gt;I still need to understand more about this. I am not satisfied with the explanation from the resource.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>KL-OS: Process</title>
+        <published>2025-12-29T00:00:00+00:00</published>
+        <updated>2025-12-29T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/kl-os-2025-12-29/"/>
+        <id>https://scientiac.space/syndications/kl-os-2025-12-29/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/kl-os-2025-12-29/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;codeberg.org&#x2F;scientiac&#x2F;KL-OS&#x2F;src&#x2F;branch&#x2F;main&#x2F;progress&#x2F;day-8.md&quot;&gt;Day 8&lt;&#x2F;a&gt; was about Process. Though, modern operating systems use the concept of threads to provide execution context. We treat processes like individual threads being run for our implementation.&lt;&#x2F;p&gt;
+&lt;p&gt;First we define a structure for PCB (Process Control Block). We first define &lt;code&gt;PROC_UNUSED&lt;&#x2F;code&gt; and &lt;code&gt;0&lt;&#x2F;code&gt; and &lt;code&gt;PROC_RUNNABLE&lt;&#x2F;code&gt; as &lt;code&gt;1&lt;&#x2F;code&gt;. Then we create a structure for a unit process with the following slots:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Process ID as an Integer.&lt;&#x2F;li&gt;
+&lt;li&gt;State (&lt;em&gt;&lt;code&gt;PROC_UNUSED &lt;&#x2F;code&gt;or &lt;code&gt;PROC_RUNNABLE&lt;&#x2F;code&gt;&lt;&#x2F;em&gt;) as an Integer as defined before.&lt;&#x2F;li&gt;
+&lt;li&gt;Stack Pointer as a &lt;code&gt;vaddr_t&lt;&#x2F;code&gt; (Virtual Address Type).&lt;&#x2F;li&gt;
+&lt;li&gt;Kernel Stack as a list of unsigned &lt;code&gt;8bit&lt;&#x2F;code&gt; Integers.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;The Kernel Stack is essential for saving the registers while context switching.&lt;&#x2F;p&gt;
+&lt;p&gt;Then, we defined the &lt;code&gt;switch_context&lt;&#x2F;code&gt; function that does the context switching. It takes
+the previous and next stack pointer as arguments and then switches them during execution.
+It saves the callee-saved registers into the stack, switches the stack pointer then restores the callee-saved registers from the stack. &lt;em&gt;The execution context is saved as a temporary local variable on the stack.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Then, we work on process creation. The process creation function &lt;code&gt;create_process&lt;&#x2F;code&gt; takes
+in the entry point of the process as a parameter and then returns the process struct.&lt;&#x2F;p&gt;
+&lt;p&gt;The &lt;code&gt;delay&lt;&#x2F;code&gt; function is also created to act as a sleep style function which just does &lt;code&gt;nop&lt;&#x2F;code&gt; (Nothing) for 30000000 clock pulses.&lt;&#x2F;p&gt;
+&lt;p&gt;Then a &lt;strong&gt;scheduler&lt;&#x2F;strong&gt; is made to make the context switching more autonomous.
+A scheduler is basically a Kernel program which decides the next process.&lt;&#x2F;p&gt;
+&lt;p&gt;Then, in the exception handler, we make it so that each process has it&#x27;s own independent kernel stack. While switching, the contents of &lt;code&gt;sscratch&lt;&#x2F;code&gt; are switched too to resume the execution of process from where it was interrupted as if nothing had happened.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>KL-OS: Memory Allocation</title>
+        <published>2025-12-28T00:00:00+00:00</published>
+        <updated>2025-12-28T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/kl-os-2025-12-28/"/>
+        <id>https://scientiac.space/syndications/kl-os-2025-12-28/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/kl-os-2025-12-28/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;codeberg.org&#x2F;scientiac&#x2F;KL-OS&#x2F;src&#x2F;branch&#x2F;main&#x2F;progress&#x2F;day-7.md&quot;&gt;Day 7&lt;&#x2F;a&gt; was about Memory Allocation. First the memory regions were defined in the linker script so that it can determine the position to avoid overlapping the memory to kernel&#x27;s static data.&lt;&#x2F;p&gt;
+&lt;p&gt;The size of the memory space was &lt;code&gt;64 * 1024 * 1024&lt;&#x2F;code&gt; bytes or &lt;code&gt;64MB&lt;&#x2F;code&gt; and it is aligned to a &lt;code&gt;4KB&lt;&#x2F;code&gt; boundary.&lt;&#x2F;p&gt;
+&lt;p&gt;Then a function &lt;code&gt;alloc_pages&lt;&#x2F;code&gt; was implemented which allocated &lt;code&gt;n&lt;&#x2F;code&gt; pages of memory and returned it&#x27;s starting address.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>KL-OS: Exceptions</title>
+        <published>2025-12-27T00:00:00+00:00</published>
+        <updated>2025-12-27T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/kl-os-2025-12-27/"/>
+        <id>https://scientiac.space/syndications/kl-os-2025-12-27/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/kl-os-2025-12-27/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;codeberg.org&#x2F;scientiac&#x2F;KL-OS&#x2F;src&#x2F;branch&#x2F;main&#x2F;progress&#x2F;day-6.md&quot;&gt;Day 6&lt;&#x2F;a&gt; was about Exceptions and handling those Exceptions in the kernel.&lt;&#x2F;p&gt;
+&lt;p&gt;In RISC-V the CPU first checks &lt;code&gt;medeleg&lt;&#x2F;code&gt; register to determine which operation mode should handle the exception.
+In our case &lt;code&gt;U-mode&#x2F;S-mode&lt;&#x2F;code&gt; is already handled by &lt;code&gt;OpenSBI&lt;&#x2F;code&gt;.
+Then, the CPU saves states into various &lt;code&gt;CSRs&lt;&#x2F;code&gt;.
+&lt;code&gt;stvec&lt;&#x2F;code&gt; register is set to &lt;code&gt;pc&lt;&#x2F;code&gt; then the exception is handled using the handler. Then &lt;code&gt;sret&lt;&#x2F;code&gt; is called to resume execution from the point where exception occurred.&lt;&#x2F;p&gt;
+&lt;p&gt;The &lt;code&gt;handle_trap&lt;&#x2F;code&gt; function reads why the exception occurred and triggers the kernel panic. Which was implemented yesterday.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>KL-OS: PANIC</title>
+        <published>2025-12-26T00:00:00+00:00</published>
+        <updated>2025-12-26T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/kl-os-2025-12-26/"/>
+        <id>https://scientiac.space/syndications/kl-os-2025-12-26/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/kl-os-2025-12-26/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;Perfect topic for today because early morning I was shown why It was a stupid decision to do something, then at afternoon I got into a bike accident. Though it was minor with no injuries to both parties except some scratches on the bikes. It could have caused huge consequences. Then I did another mistake and then another.&lt;&#x2F;p&gt;
+&lt;p&gt;PANIC!&lt;&#x2F;p&gt;
+&lt;p&gt;It is &lt;a href=&quot;https:&#x2F;&#x2F;codeberg.org&#x2F;scientiac&#x2F;KL-OS&#x2F;src&#x2F;branch&#x2F;main&#x2F;progress&#x2F;day-5.md&quot;&gt;day 5&lt;&#x2F;a&gt;. Implementing panic was very easy, it is implemented as a macro because if we defined it as a function it would have printed the &lt;code&gt;__LINE__&lt;&#x2F;code&gt; and &lt;code&gt;__FILE__&lt;&#x2F;code&gt; where &lt;code&gt;PANIC&lt;&#x2F;code&gt; is defined and not where it is called. And to halt the kernel it uses a &lt;code&gt;while true&lt;&#x2F;code&gt; loop which goes on infinitely.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>KL-OS: C Standard Library</title>
+        <published>2025-12-25T00:00:00+00:00</published>
+        <updated>2025-12-25T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/kl-os-2025-12-25/"/>
+        <id>https://scientiac.space/syndications/kl-os-2025-12-25/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/kl-os-2025-12-25/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;To make a useful kernel we require it to perform tasks like setting a memory chunk to zero,
+or copying the memory from a source address to destination address. It may have to understand
+what a boolean is or what NULL is. So, for that we require the &quot;C Standard Library&quot; and hence
+we need to implement it (or the functions it contains as abstractions to commonly used functions).&lt;&#x2F;p&gt;
+&lt;p&gt;For this, in &lt;a href=&quot;https:&#x2F;&#x2F;codeberg.org&#x2F;scientiac&#x2F;KL-OS&#x2F;src&#x2F;branch&#x2F;main&#x2F;progress&#x2F;day-4.md&quot;&gt;day 4&lt;&#x2F;a&gt; I utilized &lt;code&gt;clang&lt;&#x2F;code&gt;&#x27;s internal C library as well as resorted to writing the functions all by myself.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>KL-OS: Printing</title>
+        <published>2025-12-24T00:00:00+00:00</published>
+        <updated>2025-12-24T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/kl-os-2025-12-24/"/>
+        <id>https://scientiac.space/syndications/kl-os-2025-12-24/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/kl-os-2025-12-24/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;As the days progress the journey is getting more fun and interesting.
+It was the part where actual text was going to be printed.
+It was a kernel &lt;code&gt;hello-world&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;codeberg.org&#x2F;scientiac&#x2F;KL-OS&#x2F;src&#x2F;branch&#x2F;main&#x2F;progress&#x2F;day-3.md&quot;&gt;Day 3&lt;&#x2F;a&gt; focused on printing characters on the console by talking to SBI finally implementing &lt;code&gt;putchar&lt;&#x2F;code&gt; and eventually &lt;code&gt;printf&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>KL-OS: Boot</title>
+        <published>2025-12-23T00:00:00+00:00</published>
+        <updated>2025-12-23T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/kl-os-2025-12-23/"/>
+        <id>https://scientiac.space/syndications/kl-os-2025-12-23/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/kl-os-2025-12-23/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;The actual development of OS started with making the build script &lt;code&gt;run.sh&lt;&#x2F;code&gt; in bash to setup and launch a &lt;code&gt;qemu&lt;&#x2F;code&gt; RISC-V virtual machine with &lt;code&gt;OpenSBI&lt;&#x2F;code&gt; as bios for QEMU.&lt;&#x2F;p&gt;
+&lt;p&gt;Then a linker script &lt;code&gt;kernel.ld&lt;&#x2F;code&gt; was made and a basic kernel process &lt;code&gt;kernel.c&lt;&#x2F;code&gt; was written. Finally, the build script was updated to include compiler and execution commands and flags to properly boot the kernel.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;codeberg.org&#x2F;scientiac&#x2F;KL-OS&#x2F;src&#x2F;branch&#x2F;main&#x2F;progress&#x2F;day-2.md&quot;&gt;Day 2&lt;&#x2F;a&gt; focused on writing a basic starting process of a kernel and running it in a virtual machine.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>KL-OS: Setting Up</title>
+        <published>2025-12-22T00:00:00+00:00</published>
+        <updated>2025-12-22T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/kl-os-2025-12-22/"/>
+        <id>https://scientiac.space/syndications/kl-os-2025-12-22/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/kl-os-2025-12-22/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;I have set up the environment required to run RISC-V 64 toolchain using &lt;code&gt;QEMU&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Installed a &lt;code&gt;debian&lt;&#x2F;code&gt; RISC-V 64 &lt;code&gt;iso&lt;&#x2F;code&gt; and set it up to my liking with &lt;code&gt;autologin&lt;&#x2F;code&gt; and proper terminal emulation and &lt;code&gt;sudo&lt;&#x2F;code&gt;. I then installed &lt;code&gt;gcc&lt;&#x2F;code&gt;, &lt;code&gt;gdb&lt;&#x2F;code&gt; and &lt;code&gt;neovim&lt;&#x2F;code&gt; for writing and compiling programs.&lt;&#x2F;p&gt;
+&lt;p&gt;Details of what happened on &lt;a href=&quot;https:&#x2F;&#x2F;codeberg.org&#x2F;scientiac&#x2F;KL-OS&#x2F;src&#x2F;branch&#x2F;main&#x2F;progress&#x2F;day-1.md&quot;&gt;Day 1&lt;&#x2F;a&gt; is tracked using &lt;code&gt;git&lt;&#x2F;code&gt; with &lt;code&gt;codeberg&lt;&#x2F;code&gt; as a remote.&lt;&#x2F;p&gt;
+&lt;p&gt;I have decided to use &lt;a href=&quot;https:&#x2F;&#x2F;operating-system-in-1000-lines.vercel.app&#x2F;&quot;&gt;Operating System in 1000 Lines&lt;&#x2F;a&gt; as the learning material because it was featured as a beginner level learning material in &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;riscv&#x2F;learn&quot;&gt;github:riscv&#x2F;learn&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>KL-OS: Checkpoint</title>
+        <published>2025-12-21T00:00:00+00:00</published>
+        <updated>2025-12-21T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/kl-os-2025-12-21/"/>
+        <id>https://scientiac.space/syndications/kl-os-2025-12-21/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/kl-os-2025-12-21/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;I want to learn systems programming and I thought why not go with the open source one which is currency in development.
+So, I chose the RISC-V architecture.
+That way if I decide to keep pursuing it, I can grow along with the ISA slowly catching up to it.&lt;&#x2F;p&gt;
+&lt;p&gt;I want to keep a streak by posting here every day about what I learn. Let&#x27;s hope it goes well.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Rusting</title>
+        <published>2025-08-28T00:00:00+00:00</published>
+        <updated>2025-08-28T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2025-08-28/"/>
+        <id>https://scientiac.space/syndications/posse-2025-08-28/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2025-08-28/">&lt;p&gt;Trying to replace as many apps I use with the apps written in rust to see how much is possible.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a class=&quot;u-in-reply-to&quot; href=&quot;https:&#x2F;&#x2F;flux.carboxi.de&#x2F;continuous-oxidation&#x2F;&quot;&gt;Continuous: Oxidation&lt;&#x2F;a&gt; by flux was very helpful.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>A quote from &#x27;Daredevil: Born Again&#x27;</title>
+        <published>2025-03-26T00:00:00+00:00</published>
+        <updated>2025-03-26T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2025-03-26/"/>
+        <id>https://scientiac.space/syndications/posse-2025-03-26/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2025-03-26/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;center&gt;
+&lt;p&gt;&lt;em&gt;Don&#x27;t rely on anyone to do what you can do for yourself.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;code&gt;Angela Del Toro, Daredevil: Born Again, 2025&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;center&gt;
+&lt;p&gt;I don&#x27;t mean it in a dangerous sense, like how she does in the series. But think it in a more general sense. It&#x27;s a good advice.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Ingenuity</title>
+        <published>2025-03-23T00:00:00+00:00</published>
+        <updated>2025-03-23T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2025-03-23/"/>
+        <id>https://scientiac.space/syndications/posse-2025-03-23/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2025-03-23/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;I have tears in my eyes, hearing that ingenuity is dead, but not fully dead. First she just shocks everyone by living more than we anticipated her to, and now she is dead because she can no longer do what she went there to do. But, still alive that she&#x27;s doing work that she wasn&#x27;t even assigned to do, with broken wings and muddy eyes.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Mufasa: Not a very good brother</title>
+        <published>2025-02-19T00:00:00+00:00</published>
+        <updated>2025-02-19T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2025-02-19-second/"/>
+        <id>https://scientiac.space/syndications/posse-2025-02-19-second/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2025-02-19-second/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;So, Scar was suffering from depression, after all he had the pressure of becoming a king, and yet he wasn&#x27;t trained, cared, taught, loved....(As described in the story.). Why did Mufasa not understand and forgive him and let him be the part of the family (While he was once lost and alone too.)?&lt;&#x2F;p&gt;
+&lt;p&gt;Spoiler Alert: He wanted the villain to its sequel.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>What is Hate?</title>
+        <published>2025-02-06T00:00:00+00:00</published>
+        <updated>2025-02-06T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2025-02-06/"/>
+        <id>https://scientiac.space/syndications/posse-2025-02-06/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2025-02-06/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;center&gt;
+&lt;p&gt;Until next time,&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;em&gt;Hate is when you are hurt seeing them happy.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;code&gt;The Adventures of Scientiac, 2025&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;center&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Linux is&#x2F;not Difficult</title>
+        <published>2025-02-04T00:00:00+00:00</published>
+        <updated>2025-02-04T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2025-02-04/"/>
+        <id>https://scientiac.space/syndications/posse-2025-02-04/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2025-02-04/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;Using linux coming from windows is like, talking in a different language. You try to use your grammar with their words (making it an accent) and you feel difficult communicating.&lt;&#x2F;p&gt;
+&lt;p&gt;And saying linux is harder to use than windows is like speaking &lt;code&gt;&amp;lt;insert foreign language here&amp;gt;&lt;&#x2F;code&gt; is harder than speaking &lt;code&gt;&amp;lt;insert your language here&amp;gt;&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Live in the place for some time and instead of worrying about the language, you&#x27;ll think about the services, products and lifestyle the place offers.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Verification</title>
+        <published>2025-01-29T00:00:00+00:00</published>
+        <updated>2025-01-29T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2025-01-29/"/>
+        <id>https://scientiac.space/syndications/posse-2025-01-29/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2025-01-29/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;I once called myself an optimist.&lt;&#x2F;p&gt;
+&lt;p&gt;But since negativity has started seeping in, it has become very difficult to focus on the positives, not even for people who ( is, are ) would have been loved if it wasn&#x27;t for that negativity ( pride, ego, narcisicim, misogeny, misandry, .... ).&lt;&#x2F;p&gt;
+&lt;p&gt;I won&#x27;t trust me for how I describe people, and won&#x27;t trust anyone but myself to really know one. And neither should you. I suggest you create a picture of a person on your own and not from someone else&#x27;s description or bias.&lt;&#x2F;p&gt;
+&lt;p&gt;This won&#x27;t change the people who I say are are bad to not be bad, but verifying it is essential. Thank you.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>&quot;Advices from a Male&quot;</title>
+        <published>2025-01-28T00:00:00+00:00</published>
+        <updated>2025-01-28T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2025-01-28/"/>
+        <id>https://scientiac.space/syndications/posse-2025-01-28/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2025-01-28/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;How are people supposed to trust you when all you give are excuses. When are you gonna learn that your actions have consequences, consequences that affect other people.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Charlie</title>
+        <published>2025-01-14T00:00:00+00:00</published>
+        <updated>2025-01-14T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2025-01-14/"/>
+        <id>https://scientiac.space/syndications/posse-2025-01-14/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2025-01-14/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;center&gt;
+Charlie Puth remains my favourite.
+&lt;&#x2F;center&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>What is Love?</title>
+        <published>2025-01-01T00:00:00+00:00</published>
+        <updated>2025-01-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2025-01-01/"/>
+        <id>https://scientiac.space/syndications/posse-2025-01-01/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2025-01-01/">&lt;center&gt;
+&lt;p&gt;Until next time,&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;em&gt;Love is just a choice.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;code&gt;The Adventures of Scientiac, 2025&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;center&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Webmentions</title>
+        <published>2024-11-05T00:00:00+00:00</published>
+        <updated>2024-11-05T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2024-11-05/"/>
+        <id>https://scientiac.space/syndications/posse-2024-11-05/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2024-11-05/">&lt;a class=&quot;u-bridgy-fed&quot; href=&quot;https:&#x2F;&#x2F;fed.brid.gy&#x2F;&quot; hidden=&quot;from-humans&quot;&gt;&lt;&#x2F;a&gt;
+&lt;p&gt;Indieweb is such a cool place. And the fact that you have webrings and
+webmentions makes it the most open and custom social media. The possibility of interactions and replies adds beauty with convenience to this unique form of communication.&lt;&#x2F;p&gt;
+&lt;p&gt;I just love it. Thanks &lt;a href=&quot;https:&#x2F;&#x2F;aaronparecki.com&#x2F;2018&#x2F;06&#x2F;30&#x2F;11&#x2F;your-first-webmention&quot;&gt;@aaronpk&lt;&#x2F;a&gt; for the tests.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Hurt</title>
+        <published>2024-11-04T00:00:00+00:00</published>
+        <updated>2024-11-04T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2024-11-04/"/>
+        <id>https://scientiac.space/syndications/posse-2024-11-04/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2024-11-04/">&lt;p&gt;Sometimes I want to hurt (not physically) people (when I am disappointed or dissatisfied).
+To maybe let them know that I am hurt (I know I Know it&#x27;s the wrong way).&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;d do things that would hurt me, to hurt them, but it hurts me back when they don&#x27;t feel a thing when the thing would have hurt me.
+Call it a weakness, call it &quot;doesn&#x27;t make sense&quot; but at last the one who gets hurt is the one who tried to hurt people (not those who hurt people).&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>What is Love?</title>
+        <published>2024-08-25T00:00:00+00:00</published>
+        <updated>2024-08-25T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2024-08-25/"/>
+        <id>https://scientiac.space/syndications/posse-2024-08-25/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2024-08-25/">&lt;center&gt;
+&lt;p&gt;Until next time,&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;em&gt;Love is when two people agree on what love is.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;code&gt;The Adventures of Scientiac, 2024&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;center&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Windblows</title>
+        <published>2024-07-31T00:00:00+00:00</published>
+        <updated>2024-07-31T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2024-07-31/"/>
+        <id>https://scientiac.space/syndications/posse-2024-07-31/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2024-07-31/">&lt;p&gt;I bought a new laptop. It&#x27;s Zenbook 14 OLED 2024, Ryzen 7 8840HS and well it came with Windows Home preinstalled as expected. I had never really daily drived windows. I had installed linux the first day I got my first laptop. Soooo, I am giving windows a try, it&#x27;s been some days and I haven&#x27;t used that many applicaitons.&lt;&#x2F;p&gt;
+&lt;p&gt;I have installed firefox and given it a nice css makeover, then I installed NixOS-WSL and set that as the default terminal and ported my terminal home manager config with git, bash, starship, and other tools over to it. And that&#x27;s all, I guess i will use the linux terminal and the windows GUI for some days now.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Breakdown</title>
+        <published>2024-05-25T00:00:00+00:00</published>
+        <updated>2024-05-25T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2024-05-25/"/>
+        <id>https://scientiac.space/syndications/posse-2024-05-25/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2024-05-25/">&lt;pre data-lang=&quot;text&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-text &quot;&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt; Did I grow old?
+&lt;&#x2F;span&gt;&lt;span&gt; Am I weak?
+&lt;&#x2F;span&gt;&lt;span&gt; Do I have something that nobody can change in me?
+&lt;&#x2F;span&gt;&lt;span&gt; Have I changed too much?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I stop writing?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I stop being curious?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I stop making things?
+&lt;&#x2F;span&gt;&lt;span&gt; Am I taking too much pressure?
+&lt;&#x2F;span&gt;&lt;span&gt; Am I hiding too much pressure?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I give up on asking for love?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I give up using the word &amp;quot;love&amp;quot;?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I give up myself being carefree?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I start pushing back everyone?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I fail too many times?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I start saying no to all?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I give up on responsibilities?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I give up on grammar?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I give up on being attractive?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I give up on sorries?
+&lt;&#x2F;span&gt;&lt;span&gt; Did I?
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>The New Way</title>
+        <published>2024-04-23T00:00:00+00:00</published>
+        <updated>2024-04-23T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2024-04-23/"/>
+        <id>https://scientiac.space/syndications/posse-2024-04-23/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2024-04-23/">&lt;center&gt;
+&lt;p&gt;&lt;em&gt;It is only the way it is until we discover the new way it is, and then that is the way it is until we discover the new way it is, and so it goes until the world is no longer flat, electricity lights the night, and shoes are no longer tied with ribbons.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;code&gt;Poor Things, 2023&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;center&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>KDE Network Nepal</title>
+        <published>2024-02-27T00:00:00+00:00</published>
+        <updated>2024-02-27T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2024-02-27/"/>
+        <id>https://scientiac.space/syndications/posse-2024-02-27/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2024-02-27/">&lt;p&gt;The KDE Network is a group of KDE representatives in their respective cities&#x2F;countries promoting KDE, and it’s work in their local community. Additionally, they are responsible for helping to grow the community, and to act as a liaison between their local community and KDE.&lt;&#x2F;p&gt;
+&lt;p&gt;This is what I found when going through KDE wiki wondering how KDE as a community was structured. Seeing there were not many local groups listed, I wanted to contribute by forming a group here in Nepal. Hence, the introduction event with megarelease celebration.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;images&#x2F;posse&#x2F;kde_network.png&quot; alt=&quot;KDE Network&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Attending GNOME.Asia 2023</title>
+        <published>2023-12-06T00:00:00+00:00</published>
+        <updated>2023-12-06T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-12-06/"/>
+        <id>https://scientiac.space/syndications/posse-2023-12-06/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-12-06/">&lt;p&gt;I&#x27;m back home from Kathmandu. This time it was an event from GNOME; the GNOME.Asia 2023. There were poeple from Fedora, GNOME, Phosh form different parts of world ; USA, Indonesia, India in Kathmandu, Nepal for a conference about FOSS. It was quite an event. Also, got to contribute to fedora by eating the 20th anniversary cake too😉, there should really be a badge for &quot;has eaten fedora cake&quot; in fedora badges.&lt;&#x2F;p&gt;
+&lt;p&gt;It was a very fun and educational experience. I realize that the people in FOSS are generally very generous, friendly and helpful.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>My First PC Game</title>
+        <published>2023-11-02T00:00:00+00:00</published>
+        <updated>2023-11-02T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-11-02/"/>
+        <id>https://scientiac.space/syndications/posse-2023-11-02/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-11-02/">&lt;p&gt;I&#x27;m not much of a gamer and haven&#x27;t gamed in a very long time even on mobile which was the only thing I had before I got my laptop.  Also, being a tinkerer, I spent most of my time tinkering with my Linux system and android custom ROMs.&lt;&#x2F;p&gt;
+&lt;p&gt;Today I felt like I was missing out a lot and kinda wanted to game. Gave it a quick search and found &quot;Hollow Knight&quot; which seems like my type of game so I purchased it on steam. Might as well call it my first desktop game. It feels special.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>You and What&#x27;s on Your Mind</title>
+        <published>2023-10-21T00:00:00+00:00</published>
+        <updated>2023-10-21T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-10-20/"/>
+        <id>https://scientiac.space/syndications/posse-2023-10-20/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-10-20/">&lt;p&gt;I think it&#x27;s normal to assume whats going one someone&#x27;s mind (prejudge) and make decisions based on it. Like, If I assume something about you and do something based on that assumption and you feel like I understand you, It&#x27;s a different feeling, a happy feeling. But, it&#x27;s a gamble, because what if the assumption is
+incorrect, what if how I acted ruined the interaction?&lt;&#x2F;p&gt;
+&lt;p&gt;So, I believe knowing a person requires a longer time then we want it to take and it will consist of mistakes and lucks that&#x27;ll slowly form a decent representation of a person in our mind. For a tech nerd like me the best example for the process of getting to know a person is like training an AI model. Like, look at how DALL.E could generate images a few years back and how it generates images in the current state.&lt;&#x2F;p&gt;
+&lt;p&gt;So, yeah! We don&#x27;t know a person within a month or even an year or a lifetime because knowing is only predicting what the other mind would think and it&#x27;s constantly changing and evolving. And when we think we know a person it&#x27;s only a close enough representation of the actual person in our head compared to what they really are, similar to DALL.E making images out of probability and assumptions.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Holidays and Plans</title>
+        <published>2023-10-04T00:00:00+00:00</published>
+        <updated>2023-10-04T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-10-04/"/>
+        <id>https://scientiac.space/syndications/posse-2023-10-04/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-10-04/">&lt;p&gt;3rd Semester of Computer Engineering is over now, and the vacation starts. This time, like all the semester endings, I have a lot of ideas and plans in mind and I hope to complete at least some of them if not all. Last vacation I looked into the Rust book and this holidays I want to try making a project in rust.&lt;&#x2F;p&gt;
+&lt;p&gt;The other thing is that I switched from Fedora to NixOS, the Nix language and the OS&#x27;s declerativeness has gotten me interested in Haskell and functional paradigm in general. Also, lambda calculus, currying, monads and other concepts originated from functional paradigm are very interesting.&lt;&#x2F;p&gt;
+&lt;p&gt;I hope to learn something flashy✨, something technical⚙ and something unique❄️ this holiday.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>GitHub Field Day</title>
+        <published>2023-08-14T00:00:00+00:00</published>
+        <updated>2023-08-14T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-08-14/"/>
+        <id>https://scientiac.space/syndications/posse-2023-08-14/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-08-14/">&lt;p&gt;I like the initiative by GitHub to bring like-minded people of tech in a single place by organising un-conferences around the globe. On one hand, I am excited to meet people like me but on the other hand, it&#x27;s GitHub(Microsoft) whose product I will become as the saying goes &quot;If you aren&#x27;t paying for the product, you are the product&quot;.&lt;&#x2F;p&gt;
+&lt;p&gt;Anyways, meeting my people is more important and about being a product, that should be handled strategically. I&#x27;ll try to include other git hosting platforms like gitlab, codeberg and forgejo whenever I say the word GitHub, think that&#x27;s more healthy.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>research::map</title>
+        <published>2023-07-24T00:00:00+00:00</published>
+        <updated>2023-07-24T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-07-27/"/>
+        <id>https://scientiac.space/syndications/posse-2023-07-27/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-07-27/">&lt;p&gt;I created a new section called &lt;a href=&quot;https:&#x2F;&#x2F;map.scientiac.space&quot;&gt;map.scientiac.space&lt;&#x2F;a&gt; to keep track of researches and notes I create throughout my journey in the tech world. It&#x27;s integrated with my obsidian workflow so, I can easily put in and out the things I want to track which is sooo cool!&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Mental Liquidity</title>
+        <published>2023-06-13T00:00:00+00:00</published>
+        <updated>2023-06-13T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-06-13/"/>
+        <id>https://scientiac.space/syndications/posse-2023-06-13/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-06-13/">&lt;p&gt;I came across a &lt;a href=&quot;https:&#x2F;&#x2F;collabfund.com&#x2F;blog&#x2F;mental-liquidity&#x2F;&quot;&gt;blog&lt;&#x2F;a&gt; post about Mental Liquidity, and it got me into thinking how people do not want to change their mind, especially when it comes to generationally gapped individuals. One&#x27;s beliefs can be drastically different from the other and yet none would listen to the other and look at it from their perspective as well. Humans have evolved learning things and passing the technique that helped them survive to the new generation, so it isn&#x27;t a big deal to assume that they survived fine with those beliefs, and it is far optimal to pass on that belief than to gamble with new opinions.&lt;&#x2F;p&gt;
+&lt;p&gt;Anyway, I hope it doesn&#x27;t just remain as a new term in my vocabulary. I believe that one should be able to change their mind on things, change my mind!&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Officially a Space Explorer</title>
+        <published>2023-05-03T00:00:00+00:00</published>
+        <updated>2023-05-03T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-05-03/"/>
+        <id>https://scientiac.space/syndications/posse-2023-05-03/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-05-03/">&lt;center&gt;
+&lt;p&gt;&lt;strong&gt;Domain&lt;&#x2F;strong&gt;&lt;br &#x2F;&gt;
+&lt;code&gt;dō-mān′&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;center&gt;
+&lt;ol&gt;
+&lt;li&gt;A territory over which rule or control is exercised.&lt;&#x2F;li&gt;
+&lt;li&gt;A sphere of activity, influence, or knowledge: synonym: field.&lt;&#x2F;li&gt;
+&lt;li&gt;The set of all possible values of an independent variable of a function.&lt;&#x2F;li&gt;
+&lt;li&gt;An open connected set that contains at least one point.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;Yep! I have my own domain now. My own territory, my own space, &lt;a href=&quot;https:&#x2F;&#x2F;scientiac.space&quot;&gt;scientiac.space&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Eww! Yuck!</title>
+        <published>2023-05-02T00:00:00+00:00</published>
+        <updated>2023-05-02T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-05-02/"/>
+        <id>https://scientiac.space/syndications/posse-2023-05-02/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-05-02/">&lt;p&gt;Gnome is officially out of the system now. I loved it but I love hyprland better now. Anyways, the consistency with GTK apps was what I liked about it and the essence of that still remains in hyprland with EWW which is configured in yuck, hence the title.&lt;&#x2F;p&gt;
+&lt;p&gt;EWW works as almost all the things, but some standalone apps are still better to have, so I have used swaync as the notification daemon and rofi-wayland as the launcher. Overall the system is pretty usable now, and I just love hyprland&#x27;s animations.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Chapter Two: Sophomore</title>
+        <published>2023-04-30T00:00:00+00:00</published>
+        <updated>2023-04-30T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-04-30/"/>
+        <id>https://scientiac.space/syndications/posse-2023-04-30/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-04-30/">&lt;p&gt;Yes! The freshman year is over now. And I already feel like I have more responsibilities than usual. It feels good for some time until the feeling that you&#x27;re getting old hits you. This year passed with a blink of an eye, I remember getting inside the college and feeling exited about what I was going to be. Let&#x27;s see how the life as a middle child in the college goes. Wow! Three more binks and I&#x27;ll be a graduate, it&#x27;s scary.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Exponential Fluctuations</title>
+        <published>2023-04-29T00:00:00+00:00</published>
+        <updated>2023-04-29T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-04-29-second/"/>
+        <id>https://scientiac.space/syndications/posse-2023-04-29-second/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-04-29-second/">&lt;center&gt;
+&lt;p&gt;Sometimes It&#x27;s the end of the world,&lt;br &#x2F;&gt;
+sometimes MEH! It is what it is.&lt;br &#x2F;&gt;
+The same thing kills you sometimes,&lt;br &#x2F;&gt;
+and sometimes it makes you fly.&lt;br &#x2F;&gt;
+It&#x27;s never neutral, never stable,&lt;br &#x2F;&gt;
+never in an equilibrium.&lt;br &#x2F;&gt;
+6 hours worth of contemplation,&lt;br &#x2F;&gt;
+a minute will change it all.&lt;&#x2F;p&gt;
+&lt;&#x2F;center&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Experimenting with Feelings</title>
+        <published>2023-04-29T00:00:00+00:00</published>
+        <updated>2023-04-29T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-04-29/"/>
+        <id>https://scientiac.space/syndications/posse-2023-04-29/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-04-29/">&lt;p&gt;Yeah! Yeah! Yeah! This is one of those hot takes on &quot;Love&quot; ooOooh!!&lt;&#x2F;p&gt;
+&lt;p&gt;Human nature is weird. Like, how someone would behave when they feel like they&#x27;re loved and how the behavior would change when they feel like they are indifferent to them. It&#x27;s quite fascinating that the behavioral and psychological pattern change, how cute turns into offensive and feelings turn into conscious infatuation. Apparently hope plays quite a big role in it. One could argue that &quot;love&quot; is nothing but just hopefulness. And when one gets hopeless, everybody knows how that goes.&lt;&#x2F;p&gt;
+&lt;p&gt;This is neither a paper nor a thesis, it&#x27;s just my take on love today. So, I suppose it&#x27;s better incomplete and a hot take than a &quot;WHAT I SAY IS ALWAYS TRUE&quot; of a vibe. Bye!&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Some Fleabag</title>
+        <published>2023-04-28T00:00:00+00:00</published>
+        <updated>2023-04-28T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-04-28/"/>
+        <id>https://scientiac.space/syndications/posse-2023-04-28/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-04-28/">&lt;p&gt;I kinda binged fleabag and it was quite awesome. It&#x27;s more of a six-hour movie than a show, I&#x27;d say. I had watched season 1 and season 2 wasn&#x27;t difficult to finish. This is one of those series which I hated the first season, and it made my mind with the second. It&#x27;s a masterpiece as it ended with an actual ending and wasn&#x27;t extended due to public demand or just money.&lt;&#x2F;p&gt;
+&lt;p&gt;Yeah! The fact that it ended is my second favorite thing about the show.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Continuing the Redesign</title>
+        <published>2023-04-27T00:00:00+00:00</published>
+        <updated>2023-04-27T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-04-27/"/>
+        <id>https://scientiac.space/syndications/posse-2023-04-27/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-04-27/">&lt;p&gt;I made link previews, made logo dynamic with color changes, stylized POSSE views and little improvements like: isolating readable.css and improving the paginator layout.&lt;&#x2F;p&gt;
+&lt;p&gt;And talking about my achievement today, I unlocked a pimple on my face due to sleeplessness. Yayyyy!&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Second Day</title>
+        <published>2023-04-26T00:00:00+00:00</published>
+        <updated>2023-04-26T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-04-26/"/>
+        <id>https://scientiac.space/syndications/posse-2023-04-26/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-04-26/">&lt;p&gt;This is day two of redesigning the site, it is going fine, I added designs, and it&#x27;s cool now. Some new fonts and SVG backgrounds, and we have a completely different design. I&#x27;m loving it. My favorite theme if you ask is everforest-dark every time.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>POSSE</title>
+        <published>2023-04-25T00:00:00+00:00</published>
+        <updated>2023-04-25T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2023-04-25/"/>
+        <id>https://scientiac.space/syndications/posse-2023-04-25/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2023-04-25/">&lt;p&gt;So, this is the mini-blog thingy that I was planning to make for some time now. And maybe I&#x27;ll share my thoughts following POSSE (Publish on your Own Site, Syndicate Elsewhere) and share the link to this to everywhere else. I have an RSS feed for this, which I&#x27;ll try to use for fetching and scripting if needed and anybody can just use it normally as intended as well.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>
