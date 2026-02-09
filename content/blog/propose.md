@@ -19,10 +19,10 @@ I wonder if it's a want or you're just wishing.
 You had to get it out. Was it really killing?  
 I doubt that it was more than just a feeling.  
 
-With a box of chocolate and a bouquet or a rose,
-teasing your chances for a small love dose.
-No matter the story, the end had to hurt us.
-Choosing to propose someone lacking a purpose.
+With a box of chocolate and a bouquet or a rose,  
+teasing your chances for a small love dose.  
+No matter the story, the end had to hurt us.  
+Choosing to propose someone lacking a purpose.  
 
 </div>
 </em>
