@@ -25,7 +25,7 @@ There will be no regrets, when you're mine.
 Poke holes in my heart, it still is fine.  
 Be my queen of darkness, no need to shine.  
 My partner in crime, red blood in my wine.  
-Be on my mind, all the time, each word I write,  
+Be on my mind, all the time, it's weird I write,  
 all the words I rhyme, I will stop the time,  
 wipe all mankind, just give me your word,  
 that you will always be mine.  
