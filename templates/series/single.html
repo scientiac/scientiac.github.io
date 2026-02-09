@@ -10,8 +10,8 @@
 <h1 class="title-writings">
   {{ term.name }}
 </h1>
-
-  {% for page in paginator.pages %}
+  {% set pages = term.pages | sort(attribute="date") %}
+  {% for page in pages %}
   <article class="syndicate">
   <h2><a href="{{ page.permalink | safe }}">{{ page.title }}</a></h2>
     <p class="subtitle --center"><code>{{ page.date }}</code></p>
