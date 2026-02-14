@@ -42,7 +42,7 @@ When you are sad, I'll make you sleep.
 With my lullabies and rhymes.  
 
 I'll keep you awake, we'll talk all night.  
-Out future and past lives.  
+Our future and past lives.  
 
 You'll share with me, the secrets you keep.  
 Beyond mere truth and lies.  
