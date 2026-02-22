@@ -1,0 +1,1243 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><script>(()=>{try{const a={light:`gruvbox-light`,dark:`night-solis`};const b=window.matchMedia(`(prefers-color-scheme: dark)`).matches;const c=localStorage.theme||(b?a.dark:a.light);document.documentElement.dataset.theme=c}catch(a){}})()</script><link href=/assets/css/themes.css rel=stylesheet><link href=/assets/css/readable.css rel=stylesheet><link href=/assets/css/global.css rel=stylesheet><link href=/assets/css/fonts.css rel=stylesheet><link href=/assets/css/logo.css rel=stylesheet><link href=/assets/css/genre/Reports.css rel=stylesheet><link href=https://scientiac.space/atom.xml rel=alternate title=RSS type=application/atom+xml><meta content=Reports property=og:type><meta content=scientiac.space property=og:site_name><meta content=https://scientiac.space/res/thumbnail-light.png property=og:image><title>Almost splitting a Keyboard in Half</title><meta content="Almost splitting a Keyboard in Half" name=og:title><meta content="Yeah! I keep doing stupid things.
+The idea of remapping keys isn't new, be it for typing in a different language or to make the escape key more ergonomic for vim users.
+I mapped my escape key to ` and caps-lock key to escape when I bought my 65% keyboard.
+It was because I had to use some weird function keybind just to type a ~. Then I realised my laptop key got remapped too, but I
+just went ahead with it. That is when I used this software called keyd.
+Fast forward to today and rewind to a month back, I was bored out of my mind and was fidgeting with my keyboard when I popped one of the keys
+out of it. And right then I looked at the keys and wondered if I could make a minimal split keyboard out of it using keyd.
+I had watched many videos about split keyboards, and one was even in my wishlist for a long time. So, I wondered if I was gonna invest in a keyboard that is going to shape my typing muscle memory, I should at least give it a try beforehand.
+Now that I started writing about it, I don't think it was that big a deal. It only took too much of my time to configure it. First I tried the ferris sweep layout which was too much of a sacrifice, then I tried corne and finally decided on the 5 column corne.
+Before Operation:
+
+After Operation:
+
+
+Here is the keyd configuration:
+# corne-36.conf
+
+# keyboard id to enable [wired, bluetooth and 2.4ghz]
+[ids]
+5566:0008
+3151:6001
+1235:aa22
+
+[main]
+
+# LEFT HAND
+# ROW 1
+# Press &ampquot;q&ampquot; to write q
+1 = q
+# Press &ampquot;w&ampquot; to write w
+2 = w  
+# Press &ampquot;e&ampquot; to write e
+3 = e
+# Press &ampquot;r&ampquot; to write r
+4 = r
+# Press &ampquot;t&ampquot; to write t
+5 = t
+
+# ------------------------------------------ #
+
+# LEFT HAND
+# ROW 2
+# Press &ampquot;a&ampquot; to write a
+q = a
+# Press &ampquot;s&ampquot; to write s
+w = s
+# Press &ampquot;d&ampquot; to write d
+e = d
+# Press &ampquot;f&ampquot; to write f
+r = f
+# Press &ampquot;g&ampquot; to write g
+t = g
+
+# ------------------------------------------ #
+
+# LEFT HAND
+# ROW 3
+# Press &ampquot;z&ampquot; to write z
+a = z
+# Press &ampquot;x&ampquot; to write x
+s = x
+# Press &ampquot;c&ampquot; to write c
+d = c
+# Press &ampquot;v&ampquot; to write v
+f = v
+# Press &ampquot;b&ampquot; to write b
+g = b
+
+# ------------------------------------------ #
+
+# LEFT HAND
+# BOTTOM ROW - Special keys
+# Press &ampquot;down-arrow&ampquot; for leftmeta, hold &ampquot;down-arrow&ampquot; for meta
+x = overload(meta, leftmeta)
+# Press &ampquot;alt&ampquot; for space, hold &ampquot;alt&ampquot; for navigation
+c = overload(navigation, space)
+# Press &ampquot;up-arrow&ampquot; for esc, hold &ampquot;up-arrow&ampquot; for control
+v = overload(control, esc)
+
+# ------------------------------------------ #
+# ------------------------------------------ #
+# ------------------------------------------ #
+
+# RIGHT HAND
+# ROW 1
+# Press &ampquot;y&ampquot; to write y
+8 = y
+# Press &ampquot;u&ampquot; to write u
+9 = u
+# Press &ampquot;i&ampquot; to write i
+0 = i
+# Press &ampquot;o&ampquot; to write o
+minus = o
+# Press &ampquot;p&ampquot; to write p
+equal = p
+
+# ------------------------------------------ #
+
+# RIGHT HAND
+# ROW 2
+# Press &ampquot;h&ampquot; to write h
+u = h
+# Press &ampquot;j&ampquot; to write j
+i = j
+# Press &ampquot;k&ampquot; to write k
+o = k
+# Press &ampquot;l&ampquot; to write l
+p = l
+# Press &ampquot;;&ampquot; to write semicolon
+leftbrace = semicolon
+
+# ------------------------------------------ #
+
+# RIGHT HAND
+# ROW 3
+# Press &ampquot;n&ampquot; to write n
+j = n
+# Press &ampquot;m&ampquot; to write m
+k = m
+# Press &ampquot;,&ampquot; to write comma
+l = comma
+# Press &ampquot;.&ampquot; to write dot, hold &ampquot;.&ampquot; for control
+semicolon = dot
+# Press &ampquot;/&ampquot; to write slash
+apostrophe = slash
+
+# ------------------------------------------ #
+
+# RIGHT HAND
+# BOTTOM ROW - Special keys
+# Press &ampquot;-&ampgt;&ampquot; for enter, hold &ampquot;-&ampgt;&ampquot; for alt
+m = overload(alt, enter)
+# Press &ampquot;del&ampquot; for backspace, hold &ampquot;del&ampquot; for symbols
+comma = overload(symbols, backspace)
+# Press &ampquot;&amplt;-&ampquot; for tab, hold &ampquot;&amplt;-&ampquot; for shift
+dot = overload(shift, tab)
+
+
+# ------------------------------------------ #
+
+# ALL UNUSED KEYS FROM THE KEYBOARD
+tab = noop
+capslock = noop
+backspace = noop
+backslash = noop
+rightbrace = noop
+esc = noop
+enter = noop
+6 = noop
+7 = noop
+y = noop
+leftshift = noop
+z = noop
+b = noop
+h = noop
+slash = noop
+rightshift = noop
+leftcontrol = noop
+leftalt = noop
+space = noop
+rightalt = noop
+rightcontrol = noop
+leftmeta = noop
+rightmeta = noop
+grave = noop
+f1 = noop
+f2 = noop
+f3 = noop
+f4 = noop
+f5 = noop
+f6 = noop
+f7 = noop
+f8 = noop
+f9 = noop
+f10 = noop
+f11 = noop
+f12 = noop
+up = noop
+down = noop  
+left = noop
+right = noop
+home = noop
+end = noop
+pageup = noop
+pagedown = noop
+insert = noop
+delete = noop
+kp0 = noop
+kp1 = noop
+kp2 = noop
+kp3 = noop
+kp4 = noop
+kp5 = noop
+kp6 = noop
+kp7 = noop
+kp8 = noop
+kp9 = noop
+kpdot = noop
+kpenter = noop
+kpplus = noop
+kpminus = noop
+kpasterisk = noop
+kpslash = noop
+
+# ------------------------------------------ #
+# ------------------------------------------ #
+# ------------------------------------------ #
+
+#  [ 1:q ] [ 2:w ] [ 3:e ] [ 4:r ] [ 5:t ]                    [ 8:y ] [ 9:u ] [ 0:i ] [ -:o ] [ =:p ]
+#   [ q:a ] [ w:s ] [ e:d ] [ r:f ] [ t:g ]              	[ i:h ] [ o:j ] [ p:k ] [ [:l ] [ ]:; ]
+#    [ a:z ] [ s:x ] [ d:c ] [ f:v ] [ g:b ]          	     [ j:n ] [ k:m ] [ l:, ] [ ;:. ] [ &amp#39;:/ ]
+#          [ x:meta ] [ c:nav/space ] [ v:ctrl/esc ]    	[ m:alt/return ] [ ,:sym/backspace ] [ .:shift/tab ]
+
+# ------------------------------------------ #
+# ------------------------------------------ #
+# ------------------------------------------ #
+
+[symbols]
+
+# LEFT HAND
+# ROW 1
+# Hold &ampquot;del&ampquot; and press &ampquot;q&ampquot; for &ampquot;!&ampquot;
+1 = S-1
+# Hold &ampquot;del&ampquot; and press &ampquot;w&ampquot; for &ampquot;@&ampquot;
+2 = S-2
+# Hold &ampquot;del&ampquot; and press &ampquot;e&ampquot; for &ampquot;#&ampquot;
+3 = S-3
+# Hold &ampquot;del&ampquot; and press &ampquot;r&ampquot; for &ampquot;$&ampquot;
+4 = S-4
+# Hold &ampquot;del&ampquot; and press &ampquot;t&ampquot; for &ampquot;%&ampquot;
+5 = S-5
+
+# ------------------------------------------ #
+
+# LEFT HAND
+# ROW 2
+# Hold &ampquot;del&ampquot; and press &ampquot;a&ampquot; for &ampquot;1&ampquot;
+q = 1
+# Hold &ampquot;del&ampquot; and press &ampquot;s&ampquot; for &ampquot;2&ampquot;
+w = 2
+# Hold &ampquot;del&ampquot; and press &ampquot;d&ampquot; for &ampquot;3&ampquot;
+e = 3
+# Hold &ampquot;del&ampquot; and press &ampquot;f&ampquot; for &ampquot;4&ampquot;
+r = 4
+# Hold &ampquot;del&ampquot; and press &ampquot;g&ampquot; for &ampquot;5&ampquot;
+t = 5
+
+# ------------------------------------------ #
+
+# LEFT HAND
+# ROW 3
+capslock = noop
+# Hold &ampquot;del&ampquot; and press &ampquot;z&ampquot; for &ampquot;6&ampquot;
+a = 6
+# Hold &ampquot;del&ampquot; and press &ampquot;x&ampquot; for &ampquot;7&ampquot;
+s = 7
+# Hold &ampquot;del&ampquot; and press &ampquot;c&ampquot; for &ampquot;8&ampquot;
+d = 8
+# Hold &ampquot;del&ampquot; and press &ampquot;v&ampquot; for &ampquot;9&ampquot;
+f = 9
+# Hold &ampquot;del&ampquot; and press &ampquot;b&ampquot; for &ampquot;0&ampquot;
+g = 0
+
+
+# LEFT HAND
+# BOTTOM ROW - Special keys
+x = noop
+c = backslash
+v = &amp#39;
+
+# ------------------------------------------ #
+
+# RIGHT HAND
+# ROW 1
+# Hold &ampquot;del&ampquot; and press &ampquot;y&ampquot; for &ampquot;^&ampquot;
+8 = S-6
+# Hold &ampquot;del&ampquot; and press &ampquot;u&ampquot; for &ampquot;&ampamp;&ampquot;
+9 = S-7
+# Hold &ampquot;del&ampquot; and press &ampquot;i&ampquot; for &ampquot;*&ampquot;
+0 = S-8
+# Hold &ampquot;del&ampquot; and press &ampquot;o&ampquot; for &ampquot;(&ampquot;
+minus = S-9
+# Hold &ampquot;del&ampquot; and press &ampquot;p&ampquot; for &ampquot;)&ampquot;
+equal = S-0
+# ------------------------------------------ #
+
+# RIGHT HAND
+# ROW 2
+# Hold &ampquot;del&ampquot; and press &ampquot;h&ampquot; for &ampquot;_&ampquot;
+u = minus
+# Hold &ampquot;del&ampquot; and press &ampquot;j&ampquot; for &ampquot;=&ampquot;
+i = equal
+# Hold &ampquot;del&ampquot; and press &ampquot;k&ampquot; for &ampquot;`&ampquot;
+o = grave
+# Hold &ampquot;del&ampquot; and press &ampquot;l&ampquot; for &ampquot;[&ampquot;
+p = leftbrace
+# Hold &ampquot;del&ampquot; and press &ampquot;;&ampquot; for &ampquot;]&ampquot;
+leftbrace = rightbrace
+
+# ------------------------------------------ #
+
+# RIGHT HAND
+# ROW 3
+# Hold &ampquot;del&ampquot; and press &ampquot;n&ampquot; for &ampquot;_&ampquot;
+j = S-minus
+# Hold &ampquot;del&ampquot; and press &ampquot;m&ampquot; for &ampquot;+&ampquot;
+k = S-equal
+# Hold &ampquot;del&ampquot; and press &ampquot;,&ampquot; for &ampquot;~&ampquot;
+l = S-grave
+# Hold &ampquot;del&ampquot; and press &ampquot;.&ampquot; for &ampquot;{&ampquot;
+semicolon = S-leftbrace
+# Hold &ampquot;del&ampquot; and press &ampquot;/&ampquot; for &ampquot;}&ampquot;
+apostrophe = S-rightbrace
+
+# ------------------------------------------ #
+
+# RIGHT HAND
+# BOTTOM ROW - Special keys
+m = backspace
+comma = noop
+dot = rightshift
+
+# ------------------------------------------ #
+# ------------------------------------------ #
+# ------------------------------------------ #
+
+[navigation]
+
+# LEFT HAND
+# ROW 1
+# Hold &ampquot;alt&ampquot; and press &ampquot;q&ampquot; for &ampquot;f1&ampquot;
+1 = f1
+# Hold &ampquot;alt&ampquot; and press &ampquot;w&ampquot; for &ampquot;f2&ampquot;
+2 = f2
+# Hold &ampquot;alt&ampquot; and press &ampquot;e&ampquot; for &ampquot;f3&ampquot;
+3 = f3
+# Hold &ampquot;alt&ampquot; and press &ampquot;r&ampquot; for &ampquot;f4&ampquot;
+4 = f4
+# Hold &ampquot;alt&ampquot; and press &ampquot;t&ampquot; for &ampquot;f5&ampquot;
+5 = f5
+
+# ------------------------------------------ #
+
+# LEFT HAND
+# ROW 2
+# Hold &ampquot;alt&ampquot; and press &ampquot;a&ampquot; for &ampquot;f6&ampquot;
+q = f6
+# Hold &ampquot;alt&ampquot; and press &ampquot;s&ampquot; for &ampquot;f7&ampquot;
+w = f7
+# Hold &ampquot;alt&ampquot; and press &ampquot;d&ampquot; for &ampquot;f8&ampquot;
+e = f8
+# Hold &ampquot;alt&ampquot; and press &ampquot;f&ampquot; for &ampquot;f9&ampquot;
+r = f9
+# Hold &ampquot;alt&ampquot; and press &ampquot;g&ampquot; for &ampquot;f10&ampquot;
+t = f10
+
+# ------------------------------------------ #
+
+# LEFT HAND
+# ROW 3
+# Hold &ampquot;alt&ampquot; and press &ampquot;z&ampquot; for &ampquot;f11&ampquot;
+a = f11
+# Hold &ampquot;alt&ampquot; and press &ampquot;x&ampquot; for &ampquot;f12&ampquot;
+s = f12
+d = noop
+f = noop
+g = noop
+
+# ------------------------------------------ #
+
+# RIGHT HAND
+# ROW 1
+8 = noop
+# Hold &ampquot;alt&ampquot; and press &ampquot;u&ampquot; for &ampquot;tab&ampquot;
+9 = tab
+# Hold &ampquot;alt&ampquot; and press &ampquot;i&ampquot; for &ampquot;pageup&ampquot;
+0 = pageup
+# Hold &ampquot;alt&ampquot; and press &ampquot;o&ampquot; for &ampquot;pagedown&ampquot;
+minus = pagedown
+# Hold &ampquot;alt&ampquot; and press &ampquot;p&ampquot; for &ampquot;print&ampquot;
+equal = print
+
+# ------------------------------------------ #
+
+# RIGHT HAND
+# ROW 2
+# Hold &ampquot;alt&ampquot; and press &ampquot;h&ampquot; for &ampquot;left&ampquot;
+u = left
+# Hold &ampquot;alt&ampquot; and press &ampquot;j&ampquot; for &ampquot;down&ampquot;
+i = down
+# Hold &ampquot;alt&ampquot; and press &ampquot;k&ampquot; for &ampquot;up&ampquot;
+o = up
+# Hold &ampquot;alt&ampquot; and press &ampquot;l&ampquot; for &ampquot;right&ampquot;
+p = right
+leftbrace = noop
+
+# ------------------------------------------ #
+
+# RIGHT HAND
+# ROW 3
+# Hold &ampquot;alt&ampquot; and press &ampquot;n&ampquot; for &ampquot;home&ampquot;
+j = home
+# Hold &ampquot;alt&ampquot; and press &ampquot;m&ampquot; for &ampquot;end&ampquot;
+k = end
+l = noop
+semicolon = noop
+apostrophe = noop
+
+# ------------------------------------------ #
+
+# RIGHT HAND
+# BOTTOM ROW - Special keys
+m = noop
+comma = delete
+dot = noop
+
+
+I even vibe coded a layout visualiser to remember the keybinds.
+Happy Ending?
+Well, I could just lie and say that I have increased my productivity by 200% but, that is far from the reality. After I had fun changing the layout, I am just happy with the comfort of my laptop keyboard and have not used the split keyboard at all. I do use it sometimes but, I am so slow on it that I immidiately fall back to the laptop. It is obvious, it takes time to learn a split layout but, I am just not investing my time on it. Nevertheless, it was so damn fun while I configured it.
+Projects like keyd just keep the spirit of Linux alive.
+" name=description><meta content="Yeah! I keep doing stupid things.
+The idea of remapping keys isn't new, be it for typing in a different language or to make the escape key more ergonomic for vim users.
+I mapped my escape key to ` and caps-lock key to escape when I bought my 65% keyboard.
+It was because I had to use some weird function keybind just to type a ~. Then I realised my laptop key got remapped too, but I
+just went ahead with it. That is when I used this software called keyd.
+Fast forward to today and rewind to a month back, I was bored out of my mind and was fidgeting with my keyboard when I popped one of the keys
+out of it. And right then I looked at the keys and wondered if I could make a minimal split keyboard out of it using keyd.
+I had watched many videos about split keyboards, and one was even in my wishlist for a long time. So, I wondered if I was gonna invest in a keyboard that is going to shape my typing muscle memory, I should at least give it a try beforehand.
+Now that I started writing about it, I don't think it was that big a deal. It only took too much of my time to configure it. First I tried the ferris sweep layout which was too much of a sacrifice, then I tried corne and finally decided on the 5 column corne.
+Before Operation:
+
+After Operation:
+
+
+Here is the keyd configuration:
+# corne-36.conf
+
+# keyboard id to enable [wired, bluetooth and 2.4ghz]
+[ids]
+5566:0008
+3151:6001
+1235:aa22
+
+[main]
+
+# LEFT HAND
+# ROW 1
+# Press &ampquot;q&ampquot; to write q
+1 = q
+# Press &ampquot;w&ampquot; to write w
+2 = w  
+# Press &ampquot;e&ampquot; to write e
+3 = e
+# Press &ampquot;r&ampquot; to write r
+4 = r
+# Press &ampquot;t&ampquot; to write t
+5 = t
+
+# ------------------------------------------ #
+
+# LEFT HAND
+# ROW 2
+# Press &ampquot;a&ampquot; to write a
+q = a
+# Press &ampquot;s&ampquot; to write s
+w = s
+# Press &ampquot;d&ampquot; to write d
+e = d
+# Press &ampquot;f&ampquot; to write f
+r = f
+# Press &ampquot;g&ampquot; to write g
+t = g
+
+# ------------------------------------------ #
+
+# LEFT HAND
+# ROW 3
+# Press &ampquot;z&ampquot; to write z
+a = z
+# Press &ampquot;x&ampquot; to write x
+s = x
+# Press &ampquot;c&ampquot; to write c
+d = c
+# Press &ampquot;v&ampquot; to write v
+f = v
+# Press &ampquot;b&ampquot; to write b
+g = b
+
+# ------------------------------------------ #
+
+# LEFT HAND
+# BOTTOM ROW - Special keys
+# Press &ampquot;down-arrow&ampquot; for leftmeta, hold &ampquot;down-arrow&ampquot; for meta
+x = overload(meta, leftmeta)
+# Press &ampquot;alt&ampquot; for space, hold &ampquot;alt&ampquot; for navigation
+c = overload(navigation, space)
+# Press &ampquot;up-arrow&ampquot; for esc, hold &ampquot;up-arrow&ampquot; for control
+v = overload(control, esc)
+
+# ------------------------------------------ #
+# ------------------------------------------ #
+# ------------------------------------------ #
+
+# RIGHT HAND
+# ROW 1
+# Press &ampquot;y&ampquot; to write y
+8 = y
+# Press &ampquot;u&ampquot; to write u
+9 = u
+# Press &ampquot;i&ampquot; to write i
+0 = i
+# Press &ampquot;o&ampquot; to write o
+minus = o
+# Press &ampquot;p&ampquot; to write p
+equal = p
+
+# ------------------------------------------ #
+
+# RIGHT HAND
+# ROW 2
+# Press &ampquot;h&ampquot; to write h
+u = h
+# Press &ampquot;j&ampquot; to write j
+i = j
+# Press &ampquot;k&ampquot; to write k
+o = k
+# Press &ampquot;l&ampquot; to write l
+p = l
+# Press &ampquot;;&ampquot; to write semicolon
+leftbrace = semicolon
+
+# ------------------------------------------ #
+
+# RIGHT HAND
+# ROW 3
+# Press &ampquot;n&ampquot; to write n
+j = n
+# Press &ampquot;m&ampquot; to write m
+k = m
+# Press &ampquot;,&ampquot; to write comma
+l = comma
+# Press &ampquot;.&ampquot; to write dot, hold &ampquot;.&ampquot; for control
+semicolon = dot
+# Press &ampquot;/&ampquot; to write slash
+apostrophe = slash
+
+# ------------------------------------------ #
+
+# RIGHT HAND
+# BOTTOM ROW - Special keys
+# Press &ampquot;-&ampgt;&ampquot; for enter, hold &ampquot;-&ampgt;&ampquot; for alt
+m = overload(alt, enter)
+# Press &ampquot;del&ampquot; for backspace, hold &ampquot;del&ampquot; for symbols
+comma = overload(symbols, backspace)
+# Press &ampquot;&amplt;-&ampquot; for tab, hold &ampquot;&amplt;-&ampquot; for shift
+dot = overload(shift, tab)
+
+
+# ------------------------------------------ #
+
+# ALL UNUSED KEYS FROM THE KEYBOARD
+tab = noop
+capslock = noop
+backspace = noop
+backslash = noop
+rightbrace = noop
+esc = noop
+enter = noop
+6 = noop
+7 = noop
+y = noop
+leftshift = noop
+z = noop
+b = noop
+h = noop
+slash = noop
+rightshift = noop
+leftcontrol = noop
+leftalt = noop
+space = noop
+rightalt = noop
+rightcontrol = noop
+leftmeta = noop
+rightmeta = noop
+grave = noop
+f1 = noop
+f2 = noop
+f3 = noop
+f4 = noop
+f5 = noop
+f6 = noop
+f7 = noop
+f8 = noop
+f9 = noop
+f10 = noop
+f11 = noop
+f12 = noop
+up = noop
+down = noop  
+left = noop
+right = noop
+home = noop
+end = noop
+pageup = noop
+pagedown = noop
+insert = noop
+delete = noop
+kp0 = noop
+kp1 = noop
+kp2 = noop
+kp3 = noop
+kp4 = noop
+kp5 = noop
+kp6 = noop
+kp7 = noop
+kp8 = noop
+kp9 = noop
+kpdot = noop
+kpenter = noop
+kpplus = noop
+kpminus = noop
+kpasterisk = noop
+kpslash = noop
+
+# ------------------------------------------ #
+# ------------------------------------------ #
+# ------------------------------------------ #
+
+#  [ 1:q ] [ 2:w ] [ 3:e ] [ 4:r ] [ 5:t ]                    [ 8:y ] [ 9:u ] [ 0:i ] [ -:o ] [ =:p ]
+#   [ q:a ] [ w:s ] [ e:d ] [ r:f ] [ t:g ]              	[ i:h ] [ o:j ] [ p:k ] [ [:l ] [ ]:; ]
+#    [ a:z ] [ s:x ] [ d:c ] [ f:v ] [ g:b ]          	     [ j:n ] [ k:m ] [ l:, ] [ ;:. ] [ &amp#39;:/ ]
+#          [ x:meta ] [ c:nav/space ] [ v:ctrl/esc ]    	[ m:alt/return ] [ ,:sym/backspace ] [ .:shift/tab ]
+
+# ------------------------------------------ #
+# ------------------------------------------ #
+# ------------------------------------------ #
+
+[symbols]
+
+# LEFT HAND
+# ROW 1
+# Hold &ampquot;del&ampquot; and press &ampquot;q&ampquot; for &ampquot;!&ampquot;
+1 = S-1
+# Hold &ampquot;del&ampquot; and press &ampquot;w&ampquot; for &ampquot;@&ampquot;
+2 = S-2
+# Hold &ampquot;del&ampquot; and press &ampquot;e&ampquot; for &ampquot;#&ampquot;
+3 = S-3
+# Hold &ampquot;del&ampquot; and press &ampquot;r&ampquot; for &ampquot;$&ampquot;
+4 = S-4
+# Hold &ampquot;del&ampquot; and press &ampquot;t&ampquot; for &ampquot;%&ampquot;
+5 = S-5
+
+# ------------------------------------------ #
+
+# LEFT HAND
+# ROW 2
+# Hold &ampquot;del&ampquot; and press &ampquot;a&ampquot; for &ampquot;1&ampquot;
+q = 1
+# Hold &ampquot;del&ampquot; and press &ampquot;s&ampquot; for &ampquot;2&ampquot;
+w = 2
+# Hold &ampquot;del&ampquot; and press &ampquot;d&ampquot; for &ampquot;3&ampquot;
+e = 3
+# Hold &ampquot;del&ampquot; and press &ampquot;f&ampquot; for &ampquot;4&ampquot;
+r = 4
+# Hold &ampquot;del&ampquot; and press &ampquot;g&ampquot; for &ampquot;5&ampquot;
+t = 5
+
+# ------------------------------------------ #
+
+# LEFT HAND
+# ROW 3
+capslock = noop
+# Hold &ampquot;del&ampquot; and press &ampquot;z&ampquot; for &ampquot;6&ampquot;
+a = 6
+# Hold &ampquot;del&ampquot; and press &ampquot;x&ampquot; for &ampquot;7&ampquot;
+s = 7
+# Hold &ampquot;del&ampquot; and press &ampquot;c&ampquot; for &ampquot;8&ampquot;
+d = 8
+# Hold &ampquot;del&ampquot; and press &ampquot;v&ampquot; for &ampquot;9&ampquot;
+f = 9
+# Hold &ampquot;del&ampquot; and press &ampquot;b&ampquot; for &ampquot;0&ampquot;
+g = 0
+
+
+# LEFT HAND
+# BOTTOM ROW - Special keys
+x = noop
+c = backslash
+v = &amp#39;
+
+# ------------------------------------------ #
+
+# RIGHT HAND
+# ROW 1
+# Hold &ampquot;del&ampquot; and press &ampquot;y&ampquot; for &ampquot;^&ampquot;
+8 = S-6
+# Hold &ampquot;del&ampquot; and press &ampquot;u&ampquot; for &ampquot;&ampamp;&ampquot;
+9 = S-7
+# Hold &ampquot;del&ampquot; and press &ampquot;i&ampquot; for &ampquot;*&ampquot;
+0 = S-8
+# Hold &ampquot;del&ampquot; and press &ampquot;o&ampquot; for &ampquot;(&ampquot;
+minus = S-9
+# Hold &ampquot;del&ampquot; and press &ampquot;p&ampquot; for &ampquot;)&ampquot;
+equal = S-0
+# ------------------------------------------ #
+
+# RIGHT HAND
+# ROW 2
+# Hold &ampquot;del&ampquot; and press &ampquot;h&ampquot; for &ampquot;_&ampquot;
+u = minus
+# Hold &ampquot;del&ampquot; and press &ampquot;j&ampquot; for &ampquot;=&ampquot;
+i = equal
+# Hold &ampquot;del&ampquot; and press &ampquot;k&ampquot; for &ampquot;`&ampquot;
+o = grave
+# Hold &ampquot;del&ampquot; and press &ampquot;l&ampquot; for &ampquot;[&ampquot;
+p = leftbrace
+# Hold &ampquot;del&ampquot; and press &ampquot;;&ampquot; for &ampquot;]&ampquot;
+leftbrace = rightbrace
+
+# ------------------------------------------ #
+
+# RIGHT HAND
+# ROW 3
+# Hold &ampquot;del&ampquot; and press &ampquot;n&ampquot; for &ampquot;_&ampquot;
+j = S-minus
+# Hold &ampquot;del&ampquot; and press &ampquot;m&ampquot; for &ampquot;+&ampquot;
+k = S-equal
+# Hold &ampquot;del&ampquot; and press &ampquot;,&ampquot; for &ampquot;~&ampquot;
+l = S-grave
+# Hold &ampquot;del&ampquot; and press &ampquot;.&ampquot; for &ampquot;{&ampquot;
+semicolon = S-leftbrace
+# Hold &ampquot;del&ampquot; and press &ampquot;/&ampquot; for &ampquot;}&ampquot;
+apostrophe = S-rightbrace
+
+# ------------------------------------------ #
+
+# RIGHT HAND
+# BOTTOM ROW - Special keys
+m = backspace
+comma = noop
+dot = rightshift
+
+# ------------------------------------------ #
+# ------------------------------------------ #
+# ------------------------------------------ #
+
+[navigation]
+
+# LEFT HAND
+# ROW 1
+# Hold &ampquot;alt&ampquot; and press &ampquot;q&ampquot; for &ampquot;f1&ampquot;
+1 = f1
+# Hold &ampquot;alt&ampquot; and press &ampquot;w&ampquot; for &ampquot;f2&ampquot;
+2 = f2
+# Hold &ampquot;alt&ampquot; and press &ampquot;e&ampquot; for &ampquot;f3&ampquot;
+3 = f3
+# Hold &ampquot;alt&ampquot; and press &ampquot;r&ampquot; for &ampquot;f4&ampquot;
+4 = f4
+# Hold &ampquot;alt&ampquot; and press &ampquot;t&ampquot; for &ampquot;f5&ampquot;
+5 = f5
+
+# ------------------------------------------ #
+
+# LEFT HAND
+# ROW 2
+# Hold &ampquot;alt&ampquot; and press &ampquot;a&ampquot; for &ampquot;f6&ampquot;
+q = f6
+# Hold &ampquot;alt&ampquot; and press &ampquot;s&ampquot; for &ampquot;f7&ampquot;
+w = f7
+# Hold &ampquot;alt&ampquot; and press &ampquot;d&ampquot; for &ampquot;f8&ampquot;
+e = f8
+# Hold &ampquot;alt&ampquot; and press &ampquot;f&ampquot; for &ampquot;f9&ampquot;
+r = f9
+# Hold &ampquot;alt&ampquot; and press &ampquot;g&ampquot; for &ampquot;f10&ampquot;
+t = f10
+
+# ------------------------------------------ #
+
+# LEFT HAND
+# ROW 3
+# Hold &ampquot;alt&ampquot; and press &ampquot;z&ampquot; for &ampquot;f11&ampquot;
+a = f11
+# Hold &ampquot;alt&ampquot; and press &ampquot;x&ampquot; for &ampquot;f12&ampquot;
+s = f12
+d = noop
+f = noop
+g = noop
+
+# ------------------------------------------ #
+
+# RIGHT HAND
+# ROW 1
+8 = noop
+# Hold &ampquot;alt&ampquot; and press &ampquot;u&ampquot; for &ampquot;tab&ampquot;
+9 = tab
+# Hold &ampquot;alt&ampquot; and press &ampquot;i&ampquot; for &ampquot;pageup&ampquot;
+0 = pageup
+# Hold &ampquot;alt&ampquot; and press &ampquot;o&ampquot; for &ampquot;pagedown&ampquot;
+minus = pagedown
+# Hold &ampquot;alt&ampquot; and press &ampquot;p&ampquot; for &ampquot;print&ampquot;
+equal = print
+
+# ------------------------------------------ #
+
+# RIGHT HAND
+# ROW 2
+# Hold &ampquot;alt&ampquot; and press &ampquot;h&ampquot; for &ampquot;left&ampquot;
+u = left
+# Hold &ampquot;alt&ampquot; and press &ampquot;j&ampquot; for &ampquot;down&ampquot;
+i = down
+# Hold &ampquot;alt&ampquot; and press &ampquot;k&ampquot; for &ampquot;up&ampquot;
+o = up
+# Hold &ampquot;alt&ampquot; and press &ampquot;l&ampquot; for &ampquot;right&ampquot;
+p = right
+leftbrace = noop
+
+# ------------------------------------------ #
+
+# RIGHT HAND
+# ROW 3
+# Hold &ampquot;alt&ampquot; and press &ampquot;n&ampquot; for &ampquot;home&ampquot;
+j = home
+# Hold &ampquot;alt&ampquot; and press &ampquot;m&ampquot; for &ampquot;end&ampquot;
+k = end
+l = noop
+semicolon = noop
+apostrophe = noop
+
+# ------------------------------------------ #
+
+# RIGHT HAND
+# BOTTOM ROW - Special keys
+m = noop
+comma = delete
+dot = noop
+
+
+I even vibe coded a layout visualiser to remember the keybinds.
+Happy Ending?
+Well, I could just lie and say that I have increased my productivity by 200% but, that is far from the reality. After I had fun changing the layout, I am just happy with the comfort of my laptop keyboard and have not used the split keyboard at all. I do use it sometimes but, I am so slow on it that I immidiately fall back to the laptop. It is obvious, it takes time to learn a split layout but, I am just not investing my time on it. Nevertheless, it was so damn fun while I configured it.
+Projects like keyd just keep the spirit of Linux alive.
+" name=og:description><link rel="shortcut icon" href=/res/thumbnail.svg type=image/x-icon><meta content="width=device-width,initial-scale=1" name=viewport><meta content="rgb(253, 246, 227)" name=theme-color><script defer src=/assets/js/copy-button.js></script><link href=https://github.com/scientiac rel=me><link href=mailto:spandan@scientiac.space rel=me><link href=https://webmention.io/scientiac.space/webmention rel=webmention><meta content=@iac@polymaths.social name=fediverse:creator><body onload=updateThemeSelector();><div class=logo-container><a href=/> <div class=inner-logo-container></div> </a></div><nav data-style=classy><span><a href=/>Main</a></span><span><a href=/blog>Blog</a></span><span><a href=/syndications>Ping</a></span><span><a href=/more>More</a></span></nav><section class=section-body><div class=container><div class=h-entry><a class="u-url hidden" href=https://scientiac.space/blog/diy-split-keyboard/>https://scientiac.space/blog/diy-split-keyboard/</a><div class=section><h1 class="p-name title">Almost splitting a Keyboard in Half</h1><div class=pagedate><time class="dt-published dateandtag hidden" datetime=2025-09-30T00:00:00Z> 2025-09-30 </time><code class=dateandtag>2025-09-30</code><code class="u-category dateandtag">Reports</code></div><p><div class="hidden p-author h-card"><a class=u-url href=https://scientiac.space rel=me> <img alt="Profile photo of scientiac" class=u-photo src=/res/thumbnail.png> <span class=p-name>scientiac</span> </a></div><div class=e-content><p><em>Yeah! I keep doing stupid things.</em><p>The idea of remapping keys isn't new, be it for typing in a different language or to make the escape key more ergonomic for vim users. I mapped my <kbd>escape</kbd> key to <kbd>`</kbd> and <kbd>caps-lock</kbd> key to <kbd>escape</kbd> when I bought my 65% keyboard. It was because I had to use some weird function keybind just to type a <kbd>~</kbd>. Then I realised my laptop key got remapped too, but I just went ahead with it. That is when I used this software called <a href=https://github.com/rvaiya/keyd>keyd</a>.<p>Fast forward to today and rewind to a month back, I was bored out of my mind and was fidgeting with my keyboard when I popped one of the keys out of it. And right then I looked at the keys and wondered if I could make a minimal split keyboard out of it using <code>keyd</code>.<p>I had watched many videos about split keyboards, and one was even in my <a href=https://boardsource.xyz/products/unicorne-lp-aluminum-corne-case>wish</a>list for a long time. So, I wondered if I was gonna invest in a keyboard that is going to shape my typing muscle memory, I should at least give it a try beforehand.<p>Now that I started writing about it, I don't think it was that big a deal. It only took too much of my time to configure it. First I tried the <code>ferris sweep</code> layout which was too much of a sacrifice, then I tried <code>corne</code> and finally decided on the <code>5 column corne</code>.<h3 id=before-operation>Before Operation:</h3><p><img alt=keyboard-before src=/images/diy-split-keyboard/before.png><h3 id=after-operation>After Operation:</h3><p><img alt=keyboard-after src=/images/diy-split-keyboard/after.jpeg><details><summary>Here is the <code>keyd</code> configuration:</summary> <pre class=language-yaml data-lang=yaml style=color:#fdf4c1aa;background-color:#282828><code class=language-yaml data-lang=yaml><span style=color:#928374;font-style:italic># corne-36.conf
+</span><span>
+</span><span style=color:#928374;font-style:italic># keyboard id to enable [wired, bluetooth and 2.4ghz]
+</span><span>[</span><span style=color:#b8bb26>ids</span><span>]
+</span><span style=color:#b8bb26>5566:0008
+</span><span style=color:#b8bb26>3151:6001
+</span><span style=color:#b8bb26>1235:aa22
+</span><span>
+</span><span>[</span><span style=color:#b8bb26>main</span><span>]
+</span><span>
+</span><span style=color:#928374;font-style:italic># LEFT HAND
+</span><span style=color:#928374;font-style:italic># ROW 1
+</span><span style=color:#928374;font-style:italic># Press "q" to write q
+</span><span style=color:#b8bb26>1 = q
+</span><span style=color:#928374;font-style:italic># Press "w" to write w
+</span><span style=color:#b8bb26>2 = w  
+</span><span style=color:#928374;font-style:italic># Press "e" to write e
+</span><span style=color:#b8bb26>3 = e
+</span><span style=color:#928374;font-style:italic># Press "r" to write r
+</span><span style=color:#b8bb26>4 = r
+</span><span style=color:#928374;font-style:italic># Press "t" to write t
+</span><span style=color:#b8bb26>5 = t
+</span><span>
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span style=color:#928374;font-style:italic># LEFT HAND
+</span><span style=color:#928374;font-style:italic># ROW 2
+</span><span style=color:#928374;font-style:italic># Press "a" to write a
+</span><span style=color:#b8bb26>q = a
+</span><span style=color:#928374;font-style:italic># Press "s" to write s
+</span><span style=color:#b8bb26>w = s
+</span><span style=color:#928374;font-style:italic># Press "d" to write d
+</span><span style=color:#b8bb26>e = d
+</span><span style=color:#928374;font-style:italic># Press "f" to write f
+</span><span style=color:#b8bb26>r = f
+</span><span style=color:#928374;font-style:italic># Press "g" to write g
+</span><span style=color:#b8bb26>t = g
+</span><span>
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span style=color:#928374;font-style:italic># LEFT HAND
+</span><span style=color:#928374;font-style:italic># ROW 3
+</span><span style=color:#928374;font-style:italic># Press "z" to write z
+</span><span style=color:#b8bb26>a = z
+</span><span style=color:#928374;font-style:italic># Press "x" to write x
+</span><span style=color:#b8bb26>s = x
+</span><span style=color:#928374;font-style:italic># Press "c" to write c
+</span><span style=color:#b8bb26>d = c
+</span><span style=color:#928374;font-style:italic># Press "v" to write v
+</span><span style=color:#b8bb26>f = v
+</span><span style=color:#928374;font-style:italic># Press "b" to write b
+</span><span style=color:#b8bb26>g = b
+</span><span>
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span style=color:#928374;font-style:italic># LEFT HAND
+</span><span style=color:#928374;font-style:italic># BOTTOM ROW - Special keys
+</span><span style=color:#928374;font-style:italic># Press "down-arrow" for leftmeta, hold "down-arrow" for meta
+</span><span style=color:#b8bb26>x = overload(meta, leftmeta)
+</span><span style=color:#928374;font-style:italic># Press "alt" for space, hold "alt" for navigation
+</span><span style=color:#b8bb26>c = overload(navigation, space)
+</span><span style=color:#928374;font-style:italic># Press "up-arrow" for esc, hold "up-arrow" for control
+</span><span style=color:#b8bb26>v = overload(control, esc)
+</span><span>
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span style=color:#928374;font-style:italic># RIGHT HAND
+</span><span style=color:#928374;font-style:italic># ROW 1
+</span><span style=color:#928374;font-style:italic># Press "y" to write y
+</span><span style=color:#b8bb26>8 = y
+</span><span style=color:#928374;font-style:italic># Press "u" to write u
+</span><span style=color:#b8bb26>9 = u
+</span><span style=color:#928374;font-style:italic># Press "i" to write i
+</span><span style=color:#b8bb26>0 = i
+</span><span style=color:#928374;font-style:italic># Press "o" to write o
+</span><span style=color:#b8bb26>minus = o
+</span><span style=color:#928374;font-style:italic># Press "p" to write p
+</span><span style=color:#b8bb26>equal = p
+</span><span>
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span style=color:#928374;font-style:italic># RIGHT HAND
+</span><span style=color:#928374;font-style:italic># ROW 2
+</span><span style=color:#928374;font-style:italic># Press "h" to write h
+</span><span style=color:#b8bb26>u = h
+</span><span style=color:#928374;font-style:italic># Press "j" to write j
+</span><span style=color:#b8bb26>i = j
+</span><span style=color:#928374;font-style:italic># Press "k" to write k
+</span><span style=color:#b8bb26>o = k
+</span><span style=color:#928374;font-style:italic># Press "l" to write l
+</span><span style=color:#b8bb26>p = l
+</span><span style=color:#928374;font-style:italic># Press ";" to write semicolon
+</span><span style=color:#b8bb26>leftbrace = semicolon
+</span><span>
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span style=color:#928374;font-style:italic># RIGHT HAND
+</span><span style=color:#928374;font-style:italic># ROW 3
+</span><span style=color:#928374;font-style:italic># Press "n" to write n
+</span><span style=color:#b8bb26>j = n
+</span><span style=color:#928374;font-style:italic># Press "m" to write m
+</span><span style=color:#b8bb26>k = m
+</span><span style=color:#928374;font-style:italic># Press "," to write comma
+</span><span style=color:#b8bb26>l = comma
+</span><span style=color:#928374;font-style:italic># Press "." to write dot, hold "." for control
+</span><span style=color:#b8bb26>semicolon = dot
+</span><span style=color:#928374;font-style:italic># Press "/" to write slash
+</span><span style=color:#b8bb26>apostrophe = slash
+</span><span>
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span style=color:#928374;font-style:italic># RIGHT HAND
+</span><span style=color:#928374;font-style:italic># BOTTOM ROW - Special keys
+</span><span style=color:#928374;font-style:italic># Press "->" for enter, hold "->" for alt
+</span><span style=color:#b8bb26>m = overload(alt, enter)
+</span><span style=color:#928374;font-style:italic># Press "del" for backspace, hold "del" for symbols
+</span><span style=color:#b8bb26>comma = overload(symbols, backspace)
+</span><span style=color:#928374;font-style:italic># Press "&LT-" for tab, hold "&LT-" for shift
+</span><span style=color:#b8bb26>dot = overload(shift, tab)
+</span><span>
+</span><span>
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span style=color:#928374;font-style:italic># ALL UNUSED KEYS FROM THE KEYBOARD
+</span><span style=color:#b8bb26>tab = noop
+</span><span style=color:#b8bb26>capslock = noop
+</span><span style=color:#b8bb26>backspace = noop
+</span><span style=color:#b8bb26>backslash = noop
+</span><span style=color:#b8bb26>rightbrace = noop
+</span><span style=color:#b8bb26>esc = noop
+</span><span style=color:#b8bb26>enter = noop
+</span><span style=color:#b8bb26>6 = noop
+</span><span style=color:#b8bb26>7 = noop
+</span><span style=color:#b8bb26>y = noop
+</span><span style=color:#b8bb26>leftshift = noop
+</span><span style=color:#b8bb26>z = noop
+</span><span style=color:#b8bb26>b = noop
+</span><span style=color:#b8bb26>h = noop
+</span><span style=color:#b8bb26>slash = noop
+</span><span style=color:#b8bb26>rightshift = noop
+</span><span style=color:#b8bb26>leftcontrol = noop
+</span><span style=color:#b8bb26>leftalt = noop
+</span><span style=color:#b8bb26>space = noop
+</span><span style=color:#b8bb26>rightalt = noop
+</span><span style=color:#b8bb26>rightcontrol = noop
+</span><span style=color:#b8bb26>leftmeta = noop
+</span><span style=color:#b8bb26>rightmeta = noop
+</span><span style=color:#b8bb26>grave = noop
+</span><span style=color:#b8bb26>f1 = noop
+</span><span style=color:#b8bb26>f2 = noop
+</span><span style=color:#b8bb26>f3 = noop
+</span><span style=color:#b8bb26>f4 = noop
+</span><span style=color:#b8bb26>f5 = noop
+</span><span style=color:#b8bb26>f6 = noop
+</span><span style=color:#b8bb26>f7 = noop
+</span><span style=color:#b8bb26>f8 = noop
+</span><span style=color:#b8bb26>f9 = noop
+</span><span style=color:#b8bb26>f10 = noop
+</span><span style=color:#b8bb26>f11 = noop
+</span><span style=color:#b8bb26>f12 = noop
+</span><span style=color:#b8bb26>up = noop
+</span><span style=color:#b8bb26>down = noop  
+</span><span style=color:#b8bb26>left = noop
+</span><span style=color:#b8bb26>right = noop
+</span><span style=color:#b8bb26>home = noop
+</span><span style=color:#b8bb26>end = noop
+</span><span style=color:#b8bb26>pageup = noop
+</span><span style=color:#b8bb26>pagedown = noop
+</span><span style=color:#b8bb26>insert = noop
+</span><span style=color:#b8bb26>delete = noop
+</span><span style=color:#b8bb26>kp0 = noop
+</span><span style=color:#b8bb26>kp1 = noop
+</span><span style=color:#b8bb26>kp2 = noop
+</span><span style=color:#b8bb26>kp3 = noop
+</span><span style=color:#b8bb26>kp4 = noop
+</span><span style=color:#b8bb26>kp5 = noop
+</span><span style=color:#b8bb26>kp6 = noop
+</span><span style=color:#b8bb26>kp7 = noop
+</span><span style=color:#b8bb26>kp8 = noop
+</span><span style=color:#b8bb26>kp9 = noop
+</span><span style=color:#b8bb26>kpdot = noop
+</span><span style=color:#b8bb26>kpenter = noop
+</span><span style=color:#b8bb26>kpplus = noop
+</span><span style=color:#b8bb26>kpminus = noop
+</span><span style=color:#b8bb26>kpasterisk = noop
+</span><span style=color:#b8bb26>kpslash = noop
+</span><span>
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span style=color:#928374;font-style:italic>#  [ 1:q ] [ 2:w ] [ 3:e ] [ 4:r ] [ 5:t ]                    [ 8:y ] [ 9:u ] [ 0:i ] [ -:o ] [ =:p ]
+</span><span style=color:#928374;font-style:italic>#   [ q:a ] [ w:s ] [ e:d ] [ r:f ] [ t:g ]              	[ i:h ] [ o:j ] [ p:k ] [ [:l ] [ ]:; ]
+</span><span style=color:#928374;font-style:italic>#    [ a:z ] [ s:x ] [ d:c ] [ f:v ] [ g:b ]          	     [ j:n ] [ k:m ] [ l:, ] [ ;:. ] [ ':/ ]
+</span><span style=color:#928374;font-style:italic>#          [ x:meta ] [ c:nav/space ] [ v:ctrl/esc ]    	[ m:alt/return ] [ ,:sym/backspace ] [ .:shift/tab ]
+</span><span>
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span>[</span><span style=color:#b8bb26>symbols</span><span>]
+</span><span>
+</span><span style=color:#928374;font-style:italic># LEFT HAND
+</span><span style=color:#928374;font-style:italic># ROW 1
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "q" for "!"
+</span><span style=color:#b8bb26>1 = S-1
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "w" for "@"
+</span><span style=color:#b8bb26>2 = S-2
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "e" for "#"
+</span><span style=color:#b8bb26>3 = S-3
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "r" for "$"
+</span><span style=color:#b8bb26>4 = S-4
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "t" for "%"
+</span><span style=color:#b8bb26>5 = S-5
+</span><span>
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span style=color:#928374;font-style:italic># LEFT HAND
+</span><span style=color:#928374;font-style:italic># ROW 2
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "a" for "1"
+</span><span style=color:#b8bb26>q = 1
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "s" for "2"
+</span><span style=color:#b8bb26>w = 2
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "d" for "3"
+</span><span style=color:#b8bb26>e = 3
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "f" for "4"
+</span><span style=color:#b8bb26>r = 4
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "g" for "5"
+</span><span style=color:#b8bb26>t = 5
+</span><span>
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span style=color:#928374;font-style:italic># LEFT HAND
+</span><span style=color:#928374;font-style:italic># ROW 3
+</span><span style=color:#b8bb26>capslock = noop
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "z" for "6"
+</span><span style=color:#b8bb26>a = 6
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "x" for "7"
+</span><span style=color:#b8bb26>s = 7
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "c" for "8"
+</span><span style=color:#b8bb26>d = 8
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "v" for "9"
+</span><span style=color:#b8bb26>f = 9
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "b" for "0"
+</span><span style=color:#b8bb26>g = 0
+</span><span>
+</span><span>
+</span><span style=color:#928374;font-style:italic># LEFT HAND
+</span><span style=color:#928374;font-style:italic># BOTTOM ROW - Special keys
+</span><span style=color:#b8bb26>x = noop
+</span><span style=color:#b8bb26>c = backslash
+</span><span style=color:#b8bb26>v = '
+</span><span>
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span style=color:#928374;font-style:italic># RIGHT HAND
+</span><span style=color:#928374;font-style:italic># ROW 1
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "y" for "^"
+</span><span style=color:#b8bb26>8 = S-6
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "u" for "&"
+</span><span style=color:#b8bb26>9 = S-7
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "i" for "*"
+</span><span style=color:#b8bb26>0 = S-8
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "o" for "("
+</span><span style=color:#b8bb26>minus = S-9
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "p" for ")"
+</span><span style=color:#b8bb26>equal = S-0
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span style=color:#928374;font-style:italic># RIGHT HAND
+</span><span style=color:#928374;font-style:italic># ROW 2
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "h" for "_"
+</span><span style=color:#b8bb26>u = minus
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "j" for "="
+</span><span style=color:#b8bb26>i = equal
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "k" for "`"
+</span><span style=color:#b8bb26>o = grave
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "l" for "["
+</span><span style=color:#b8bb26>p = leftbrace
+</span><span style=color:#928374;font-style:italic># Hold "del" and press ";" for "]"
+</span><span style=color:#b8bb26>leftbrace = rightbrace
+</span><span>
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span style=color:#928374;font-style:italic># RIGHT HAND
+</span><span style=color:#928374;font-style:italic># ROW 3
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "n" for "_"
+</span><span style=color:#b8bb26>j = S-minus
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "m" for "+"
+</span><span style=color:#b8bb26>k = S-equal
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "," for "~"
+</span><span style=color:#b8bb26>l = S-grave
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "." for "{"
+</span><span style=color:#b8bb26>semicolon = S-leftbrace
+</span><span style=color:#928374;font-style:italic># Hold "del" and press "/" for "}"
+</span><span style=color:#b8bb26>apostrophe = S-rightbrace
+</span><span>
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span style=color:#928374;font-style:italic># RIGHT HAND
+</span><span style=color:#928374;font-style:italic># BOTTOM ROW - Special keys
+</span><span style=color:#b8bb26>m = backspace
+</span><span style=color:#b8bb26>comma = noop
+</span><span style=color:#b8bb26>dot = rightshift
+</span><span>
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span>[</span><span style=color:#b8bb26>navigation</span><span>]
+</span><span>
+</span><span style=color:#928374;font-style:italic># LEFT HAND
+</span><span style=color:#928374;font-style:italic># ROW 1
+</span><span style=color:#928374;font-style:italic># Hold "alt" and press "q" for "f1"
+</span><span style=color:#b8bb26>1 = f1
+</span><span style=color:#928374;font-style:italic># Hold "alt" and press "w" for "f2"
+</span><span style=color:#b8bb26>2 = f2
+</span><span style=color:#928374;font-style:italic># Hold "alt" and press "e" for "f3"
+</span><span style=color:#b8bb26>3 = f3
+</span><span style=color:#928374;font-style:italic># Hold "alt" and press "r" for "f4"
+</span><span style=color:#b8bb26>4 = f4
+</span><span style=color:#928374;font-style:italic># Hold "alt" and press "t" for "f5"
+</span><span style=color:#b8bb26>5 = f5
+</span><span>
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span style=color:#928374;font-style:italic># LEFT HAND
+</span><span style=color:#928374;font-style:italic># ROW 2
+</span><span style=color:#928374;font-style:italic># Hold "alt" and press "a" for "f6"
+</span><span style=color:#b8bb26>q = f6
+</span><span style=color:#928374;font-style:italic># Hold "alt" and press "s" for "f7"
+</span><span style=color:#b8bb26>w = f7
+</span><span style=color:#928374;font-style:italic># Hold "alt" and press "d" for "f8"
+</span><span style=color:#b8bb26>e = f8
+</span><span style=color:#928374;font-style:italic># Hold "alt" and press "f" for "f9"
+</span><span style=color:#b8bb26>r = f9
+</span><span style=color:#928374;font-style:italic># Hold "alt" and press "g" for "f10"
+</span><span style=color:#b8bb26>t = f10
+</span><span>
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span style=color:#928374;font-style:italic># LEFT HAND
+</span><span style=color:#928374;font-style:italic># ROW 3
+</span><span style=color:#928374;font-style:italic># Hold "alt" and press "z" for "f11"
+</span><span style=color:#b8bb26>a = f11
+</span><span style=color:#928374;font-style:italic># Hold "alt" and press "x" for "f12"
+</span><span style=color:#b8bb26>s = f12
+</span><span style=color:#b8bb26>d = noop
+</span><span style=color:#b8bb26>f = noop
+</span><span style=color:#b8bb26>g = noop
+</span><span>
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span style=color:#928374;font-style:italic># RIGHT HAND
+</span><span style=color:#928374;font-style:italic># ROW 1
+</span><span style=color:#b8bb26>8 = noop
+</span><span style=color:#928374;font-style:italic># Hold "alt" and press "u" for "tab"
+</span><span style=color:#b8bb26>9 = tab
+</span><span style=color:#928374;font-style:italic># Hold "alt" and press "i" for "pageup"
+</span><span style=color:#b8bb26>0 = pageup
+</span><span style=color:#928374;font-style:italic># Hold "alt" and press "o" for "pagedown"
+</span><span style=color:#b8bb26>minus = pagedown
+</span><span style=color:#928374;font-style:italic># Hold "alt" and press "p" for "print"
+</span><span style=color:#b8bb26>equal = print
+</span><span>
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span style=color:#928374;font-style:italic># RIGHT HAND
+</span><span style=color:#928374;font-style:italic># ROW 2
+</span><span style=color:#928374;font-style:italic># Hold "alt" and press "h" for "left"
+</span><span style=color:#b8bb26>u = left
+</span><span style=color:#928374;font-style:italic># Hold "alt" and press "j" for "down"
+</span><span style=color:#b8bb26>i = down
+</span><span style=color:#928374;font-style:italic># Hold "alt" and press "k" for "up"
+</span><span style=color:#b8bb26>o = up
+</span><span style=color:#928374;font-style:italic># Hold "alt" and press "l" for "right"
+</span><span style=color:#b8bb26>p = right
+</span><span style=color:#b8bb26>leftbrace = noop
+</span><span>
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span style=color:#928374;font-style:italic># RIGHT HAND
+</span><span style=color:#928374;font-style:italic># ROW 3
+</span><span style=color:#928374;font-style:italic># Hold "alt" and press "n" for "home"
+</span><span style=color:#b8bb26>j = home
+</span><span style=color:#928374;font-style:italic># Hold "alt" and press "m" for "end"
+</span><span style=color:#b8bb26>k = end
+</span><span style=color:#b8bb26>l = noop
+</span><span style=color:#b8bb26>semicolon = noop
+</span><span style=color:#b8bb26>apostrophe = noop
+</span><span>
+</span><span style=color:#928374;font-style:italic># ------------------------------------------ #
+</span><span>
+</span><span style=color:#928374;font-style:italic># RIGHT HAND
+</span><span style=color:#928374;font-style:italic># BOTTOM ROW - Special keys
+</span><span style=color:#b8bb26>m = noop
+</span><span style=color:#b8bb26>comma = delete
+</span><span style=color:#b8bb26>dot = noop
+</span></code></pre></details><p>I even vibe coded a <a href=/images/diy-split-keyboard/corne-36.html>layout visualiser</a> to remember the keybinds.<h3 id=happy-ending>Happy Ending?</h3><p>Well, I could just lie and say that I have increased my productivity by 200% but, that is far from the reality. After I had fun changing the layout, I am just happy with the comfort of my laptop keyboard and have not used the split keyboard at all. I do use it sometimes but, I am so slow on it that I immidiately fall back to the laptop. It is obvious, it takes time to learn a split layout but, I am just not investing my time on it. Nevertheless, <strong>it was so damn fun while I configured it</strong>.<p>Projects like <code>keyd</code> just keep the spirit of Linux alive.</div></div></div><div id=webmention><hr><h2>Webmentions</h2><form action=https://webmention.io/scientiac.space/webmention class=webmention-form method=post><div id=email-comment><p>Have you written a <a href=https://indieweb.org/responses>response</a> to this? Let me know the URL, Or, you can send your response via <a href="mailto:iac@scientiac.space?subject=Reply%3A%20Almost%20splitting%20a%20Keyboard%20in%20Half">mail:</a><code>iac@scientiac.space</code></div><div class=send-webmention><input name=source type=url><button>Send Webmention</button></div><div><div class="ui message"></div></div><input name=target type=hidden value=https://scientiac.space/blog/diy-split-keyboard/></form><div class=interaction-box></div></div></div><script defer src=/assets/js/themeSelector.js></script></section><div class=hidden><a href=https://polymaths.social/@iac rel=me>Fediverse</a></div><div class="hidden h-card"><img class="u-photo icon" alt=scientiac src=/res/thumbnail.png><a class="p-name u-url" href=https://scientiac.space rel=me>scientiac</a><p class=p-note>A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does.</div><footer><p class=codewithlove>I can't think of things to write on a footer. So, just <span class=main-background>imagine</span> something yourself.<p><a href=/series>Series</a> | <a href=/atom.xml>RSS</a> | <a href=https://github.com/scientiac/scientiac.github.io target=_blank>Source Code</a><p>All articles are usable under <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank>CC BY-SA 4.0</a>.</footer><ol id=themeSelector reversed></ol>

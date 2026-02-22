@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>scientiac::syntropy - ECHO</title>
+    <subtitle>A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://scientiac.space/syndicate/echo/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://scientiac.space"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-01-10T00:00:00+00:00</updated>
+    <id>https://scientiac.space/syndicate/echo/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Re: Static Site Webmention</title>
+        <published>2026-01-10T00:00:00+00:00</published>
+        <updated>2026-01-10T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/reply-2026-01-10/"/>
+        <id>https://scientiac.space/syndications/reply-2026-01-10/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/reply-2026-01-10/">&lt;p&gt;&lt;a class=&quot;u-in-reply-to&quot; href=&quot;https:&#x2F;&#x2F;islandinthenet.com&#x2F;sn&#x2F;142426&#x2F;&quot;&gt;Khürt&lt;&#x2F;a&gt;, think you got mistaken, I am not Joel! Was the mention supposed to be for me?&lt;&#x2F;p&gt;
+&lt;p&gt;I see that you yourself have a &lt;code&gt;URL&#x2F;Permalink&lt;&#x2F;code&gt; input field to send mentions, mine is the same. And it is only for the ones who haven&#x27;t &lt;a href=&quot;https:&#x2F;&#x2F;webmention.app&#x2F;docs#using-the-command-line&quot;&gt;automated sending&lt;&#x2F;a&gt; them in their site building pipeline.&lt;&#x2F;p&gt;
+&lt;p&gt;It is only there as an option. In case the automation fails or is not set up.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Faulty&#x27;s Site</title>
+        <published>2025-10-26T00:00:00+00:00</published>
+        <updated>2025-10-26T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              scientiac
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://scientiac.space/syndications/posse-2025-10-26/"/>
+        <id>https://scientiac.space/syndications/posse-2025-10-26/</id>
+        
+        <content type="html" xml:base="https://scientiac.space/syndications/posse-2025-10-26/">&lt;p&gt;I just love when people use webmentions. Cool site &lt;a href=&quot;https:&#x2F;&#x2F;faulty.carboxi.de&#x2F;one&#x2F;&quot;&gt;@faulty&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>
