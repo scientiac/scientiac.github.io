@@ -3,7 +3,7 @@
   "useStaticFolder": true,
   "staticDir": "static",
   "assetsDir": "images",
-  "postTemplate": "+++\ntitle = \"{{title}}\"\ndate = {{date}}\n[taxonomies]\nwritings=[\"blog\"]\nseries=[\"series\"]\n+++\n",
+  "postTemplate": "+++\ntitle = \"{{title}}\"\ndate = {{date}}\n[taxonomies]\nwritings=[\"POSSE\"]\nseries=[\"series\"]\n+++\n",
   "siteUrl": "https://scientiac.space",
   "showAdvancedFiles": false,
   "syncSettingsToGitHub": true
