@@ -1,9 +1,9 @@
 {
-  "contentDir": "content",
+  "contentDir": "content/blog",
   "useStaticFolder": true,
   "staticDir": "static",
   "assetsDir": "images",
-  "postTemplate": "+++\ntitle = \"{{title}}\"\ndate = {{date}}\n[taxonomies]\nwritings=[\"blog\"]\n+++\n",
+  "postTemplate": "+++\ntitle = \"{{title}}\"\ndate = {{date}}\n[taxonomies]\nwritings=[\"blog\"]\nseries=[\"series\"]\n+++\n",
   "siteUrl": "https://scientiac.space",
   "showAdvancedFiles": false,
   "syncSettingsToGitHub": true
