@@ -1,5 +1,5 @@
 {
-  "contentDir": "content/blog",
+  "contentDir": "content",
   "useStaticFolder": true,
   "staticDir": "static",
   "assetsDir": "images",
