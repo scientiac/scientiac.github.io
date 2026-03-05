@@ -6,7 +6,7 @@ title = "Currently Using"
 
 * OS - CachyOS
 * DE - KDE
-* Browser - Firefox
+* Browser - Firefox + [scifox](https://github.com/scientiac/scifox)
 * Terminal - Ghostty
 * Text Editor/IDE - Neovim
 * Vector Graphics - Inkscape 
@@ -16,7 +16,7 @@ title = "Currently Using"
 ## Cross Platform
 
 * Video Player - mpv
-* Communication - Matrix, Signal, Telegram
+* Communication - Matrix, Signal
 * Password Manager - Bitwarden (Keygurad)
 * Email - proton.me, tilde.team, gmail.com, cock.li
 
