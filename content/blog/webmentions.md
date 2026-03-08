@@ -237,25 +237,25 @@ One can mention a site using webmention by simply putting the link to the page b
 The site will get the webmention if it supports it.
 
 ```md
-[Void Bed](https://flux.carboxi.de/void-bed/) by flux.
+[Void Bed](https://flux.3o14.com/void-bed/) by flux.
 or
-<a href="https://flux.carboxi.de/void-bed/">Void Bed</a> by flux
+<a href="https://flux.3o14.com/void-bed/">Void Bed</a> by flux
 ```
 
 ### Like
 One can like a post using webmention by formatting the link as follows:
 
 ```md
-I like how flux talks about his bed in <a class="u-like-of" href="https://flux.carboxi.de/void-bed/">Void Bed</a>
+I like how flux talks about his bed in <a class="u-like-of" href="https://flux.3o14.com/void-bed/">Void Bed</a>
 ```
 
-I like how flux talks about his bed in <a class="u-like-of" href="https://flux.carboxi.de/void-bed/">Void Bed</a>
+I like how flux talks about his bed in <a class="u-like-of" href="https://flux.3o14.com/void-bed/">Void Bed</a>
 
 ### Reply
 One can reply to a post by formatting the link and the text as follows:
 
 ```md
-<a class="u-in-reply-to" href="https://flux.carboxi.de/void-bed/">Void Bed</a>
+<a class="u-in-reply-to" href="https://flux.3o14.com/void-bed/">Void Bed</a>
 
 I feel the same about my bed. Nice writing flux!
 ```
