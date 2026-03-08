@@ -1,0 +1,371 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><script>(()=>{try{const a={light:`gruvbox-light`,dark:`night-solis`};const b=window.matchMedia(`(prefers-color-scheme: dark)`).matches;const c=localStorage.theme||(b?a.dark:a.light);document.documentElement.dataset.theme=c}catch(a){}})()</script><link href=/assets/css/themes.css rel=stylesheet><link href=/assets/css/readable.css rel=stylesheet><link href=/assets/css/global.css rel=stylesheet><link href=/assets/css/fonts.css rel=stylesheet><link href=/assets/css/logo.css rel=stylesheet><link href=/assets/css/genre/Articles.css rel=stylesheet><link href=https://scientiac.space/atom.xml rel=alternate title=RSS type=application/atom+xml><meta content=Articles property=og:type><meta content=scientiac.space property=og:site_name><meta content=https://scientiac.space/res/thumbnail-light.png property=og:image><title>Tech Minimalism</title><meta content="Tech Minimalism" name=og:title><meta content="Firstly
+I don't really have hardware that is minimal. It could be minimal for some people, but having a working smartphone
+and a pretty good laptop isn't minimal, judging by the plethora of things I can do within these devices.
+A huge chunk of my personality is influenced by Linux and the principles/philosophies I have learned to interact with the
+Linux and Open Source ecosystem. KISS, UNIX, DRY, YAGNI, etc. These are some of the things I have been exposed to
+for too many times. I see that they all have one thing in common; Minimalism.
+What are thoseeeee?
+Let's start with KISS because I like the sound of it,
+KISS
+Keep It Simple Stupid or one of the variations below implies that simplicity should be a design goal.
+
+Variations
+
+Keep It Super Simple
+Keep It Simple, Silly
+Keep It Short and Simple
+Keep It Short and Sweet
+Keep It Simple and Straightforward
+Keep It Small and Simple
+Keep It Simple, Sweetie
+Keep It Stupidly Simple
+Keep It Sweet and Simple
+
+
+UNIX
+UNIX philosophy is a set of norms and philosophical approaches to minimalist, modular software development.
+The most emphasized concept is,&#34Write programs that do one thing and do it well.&#34
+DRY
+The Don't Repeat Yourself principle is stated as &#34Every piece of knowledge must have a single,
+unambiguous, authoritative representation within a system&#34. What I understand by it is that, redundancy
+makes a system confusing and unintuitive.
+YAGNI
+&#34You aren't gonna need it&#34 or &#34You ain't gonna need it&#34 is something that arose from Doing the simplest
+thing that could possibly work.
+etc
+&#34End of thinking capacity&#34 or I don't want to lengthen my blog yapping about acronyms and want to
+come to the actual topic.
+So, what did you do?
+I am trying to follow these principles in my daily life and in using tech in general. Partly because I
+want to live outside these devices more, and mostly because I don't like the &#34attention economy&#34 and big
+tech constantly trying to pull our attention and make us watch more ads. In general, &#34I don't want to be
+the product.&#34 I guess the reasons for partly and mostly should have been the other way around, but I'll get
+the same outcome anyway.
+For starters, I bought a watch, just so that I don't have to keep pulling out my phone and check the time only to see
+a notification and get sucked into the rabbit hole. That has made keeping the phone in my bag instead of in my pocket
+possible.
+
+That's the only thing I bought.
+
+Everything else is software minimalism now. I removed my previous ROM and installed LineageOS on my phone. And, I
+removed Windows and installed Linux. (Technically, I have been using Linux for years by now, but I did remove windows.)
+How are your devices set up?
+Let's start with my phone because it was the thing I used the most while being aware that I am using it the most, and it was
+wasting my time more than I was utilizing it.
+LineageOS (Android)
+The first thing I will see when I pick up my phone is the lock screen, and it is set up such that my screen will not light
+up when I receive a notification, but, the notifications are visible with content in the lock screen because it is easier for
+me to decide if I need to respond immediately, or it can wait.
+I have my phone almost perpetually in DND mode with the exception of my parents being in favorite and being able to ring me anytime.
+For others, if I receive two calls within a 15-second interval, I'll get the call. And all text messages and notifications are
+disabled while the DND Mode is on.
+Now, let the phone be unlocked. I have YAM Launcher installed, and I will only be able to see the time on the
+home screen. Upon a swipe up, the app list opens up with only text and edited to represent what it'll do instead of
+the app's name.
+
+
+App List
+
+Browser - Firefox Nightly
+Calculator
+Camera
+Contacts
+Devices - KDE Connect
+Email - Thunderbird Daily
+Files
+Gallery - Aves Gallery
+Messaging
+Packages - Obtainium
+Passwords - Bitwarden (Keyguard)
+Phone
+Reader - Readest
+Recorder
+Settings
+Signal - Signal FOSS
+Terminal - Termux
+Videos - VLC
+YouTube - NewPipe (Tubular)
+
+
+Inside the browser I have UBlock Origin installed, and it blocks all ads and redirects and also YouTube. YouTube links
+on my phone are automatically redirected to NewPipe which has no feeds and suggestions, only search and play.
+KDE Connect is for transferring files from my phone to my laptop and vice versa and sometimes clipboard contents, but If
+I really need it; I could ssh into either of the devices and get what I want, (in my local network). I used to use tailscale
+as a VPN, but I have not felt the need of it for now.
+Obtainium is to install packages and updates to my apps, since LineageOS doesn't have an app store. It gets apps straight from sources like
+git-services, fdroids-repos and web-links. I can get the apps from right where the bakers baked it.
+Every other app is pretty self-explanatory and they do their job well.
+NixOS (Linux)
+I have a full-fledged desktop environment (DE) and a minimal window manager (WM) installed on my laptop. I normally live on my window manager
+but sometimes it doesn't cut it, or I have to configure it (which takes some time) so I just fall back on the DE and get the work done. Yes it
+breaks from the &#34DRY&#34 principle, but WM and DE are like my DND Focus and Normal Mode for the laptop.
+Nix Package Manager also works somewhat like obtainium (I am oversimplifying this a lot.) I can get the apps straight from source and compile it
+on device or I can get the packages from the NixOS repos.
+Technically, the terminal and the browser should be sufficient for everything. But I like my dedicated apps.
+Window Manager (Niri)
+My window manager is set up in such a way that everything is hidden by default. If I hover over the correct places on my screen, I will get what I
+want to quickly access like brightness, volume, mic sensitivity, time, battery and the tray.
+
+And the scrolling tiling window management is by far the best window management workflow I have experienced till now. I can categorize
+my windows in 2 dimensions (Technically all 3, but I rarely want to use the third.) and choose to focus on 1–2 windows while all other windows
+are one swipe away. I can't explain it by just yapping about it here, you need to use it to feel it.
+Desktop Environment (GNOME)
+It looks similar to niri at first glance, but I have tweaked it with extensions to be minimal. I don't open it unless I am playing a game from Steam or using an app that only supports XOrg because niri doesn't have XWayland support and the workarounds are a bit clunky. Or, if niri crashes for some reason.
+Browser(s)
+
+Firefox (Gecko) - I have my own userCSS and that is the workflow I want in my browser, minimal by default, powerful when needed.
+QuteBrowser (Blink/QTWebEngine) - It is almost what I wanted in a chromium based browser, if only it had support for Firefox extensions.
+Epiphany (WebKit) - It's a WebKit browser when I need to test things for a WebKit environment.
+
+Firefox is the only browser that has extensions support on my device. I have UBlockOrigin, Unhook, SponsorBlock, VimiumC and Bitwarden installed
+and if not all, UBlockOrigin and Bitwarden are the absolute must-haves for me. [I am spoiled by UBlockOrigin.]
+QuteBrowser is my current primary browser because I feel like it uses less power than Firefox does. Also, it is minimal and uses the
+whole area for web rendering and not browser components like url-bar and buttons and menus, and also it is entirely keyboard
+oriented with VIM-style workflow. I have set its AdBlock to use UBlockOrigin's block list, and it does pretty well, but not as well as UBlockOrigin.
+Unlike Firefox, I have left the YouTube feed to show up in it, but I don't play YouTube on the browser but instead utilize MPV and yt-dlp to watch
+on my video player of choice. (The YouTube player is automatically paused and hidden using a greasemonkey script, which is the closest to extensions that Qute has.)
+Epiphany is a browser I almost never use but keep for the sake of testing stuff on WebKit when doing web development.
+Applications
+I said &#34app&#34 for mobile but &#34application&#34 for desktop because they are exactly how they sound like.
+
+App List
+
+Browsers - We already discussed them.
+Terminal - Ghostty + Alacritty (I couldn't choose between features and minimalism on this one.)
+Inkscape - Vector Graphics
+Emacs - Note-taking using org-roam and for almost nothing else.
+Neovide - Neovim dedicated GUI where I do all my text editing and programming.
+NewsFlash - RSS Reader
+Thunderbird - Email Client
+Steam - For Hollow Knight which I play once a month
+Valent - A gnome implementation of KDE Connect
+Fractal - A matrix client
+Foliate - Book Reader
+Sioyek - PDF Reader
+Fragments - Torrent Client
+Refine - The New Gnome Tweaks
+Gnome Apps - Weather, Software, Files, Audio Player, Discs, Camera, Calculator, etc.
+Spotify + Spicetify - Music Streaming
+Telegram - Chat
+Signal - Chat
+
+
+The things I mostly use are QuteBrowser and Ghostty and I can prolly do the entirety of what I do within these two apps.
+(Maybe I'll use Firefox instead of Qute if I was forced to use only two apps.)
+Social Media
+Yes! It deserves its own topic. It's not like I don't use social media, how did you find this blog?
+But I don't use social media as much. I am not a saint, and I do use things like Microsoft, Meta, and Google
+Services and Social media they offer because that's where everyone is.
+My favourite is The Fediverse; it's calm, and I can get caught up with everyone I follow within 5 minutes of scrolling,
+not even that much. But as much as I love you guys, I still have real-life friends who don't use and don't know about the Fediverse.
+So, I have to use Facebook Messenger to contact almost anyone I know. But I have my Facebook ID
+deactivated to only use Messenger and don't have Instagram and also WhatsApp.
+I made a LinkedIn account a while back, and I sometimes scroll through it to check what everyone
+is up to. I do post once in a while but have not done anything worthy of posting there lately.
+I have Telegram just to check in with custom ROM communities and mobile Linux communities, but I rarely do that nowadays.
+Signal for the dearest who do use it. It's what I use for texting people and have it on my phone as well.
+Lastly, let's talk about YouTube. I didn't consider it a social media and used to use the full-fledged YouTube apps, but
+I got so addicted to it that I could not stop scrolling, looking for videos to watch. I spent most of the time of the
+day on it. But it is definitely a social media, and it definitely should be used and not consumed. And I hate shorts with
+passion. Most of my device usage was for YouTube and YouTube only. I am still a YouTube addict, but I am consuming less and
+using it more each day.
+Lastly
+Though, reading all this (if you really did) made you feel like it is definitely not a minimalist setup. It really is.
+I feel like I have fixed my social media overconsumption with this setup. At least I am getting more work done and also
+getting a good sleep.
+I used to take my phone to bed and scroll YouTube till I slept, and I would always sleep the next day (i.e., after 00:00)
+but now I get sleep at 10 and will be asleep within 10 minutes. (That is, unless something is bugging me.)
+My phone does absolutely nothing to distract me, and I don't have my laptop at all times. The only thing I don't have that is
+necessary is banking apps, but not having that has made me spend even less, so it's still a win.
+
+I have been writing this since 04:45 and it's 08:45, I'll be back after breakfast.
+09:06 I'm Back!
+
+Yeah! I don't think I have more to write about it. The flow got interrupted. I had to do something for my addiction, and it
+is what I did. Hopefully I don't fall back into the same trap again. Meet you guys in the next blog; byeeeee.
+" name=description><meta content="Firstly
+I don't really have hardware that is minimal. It could be minimal for some people, but having a working smartphone
+and a pretty good laptop isn't minimal, judging by the plethora of things I can do within these devices.
+A huge chunk of my personality is influenced by Linux and the principles/philosophies I have learned to interact with the
+Linux and Open Source ecosystem. KISS, UNIX, DRY, YAGNI, etc. These are some of the things I have been exposed to
+for too many times. I see that they all have one thing in common; Minimalism.
+What are thoseeeee?
+Let's start with KISS because I like the sound of it,
+KISS
+Keep It Simple Stupid or one of the variations below implies that simplicity should be a design goal.
+
+Variations
+
+Keep It Super Simple
+Keep It Simple, Silly
+Keep It Short and Simple
+Keep It Short and Sweet
+Keep It Simple and Straightforward
+Keep It Small and Simple
+Keep It Simple, Sweetie
+Keep It Stupidly Simple
+Keep It Sweet and Simple
+
+
+UNIX
+UNIX philosophy is a set of norms and philosophical approaches to minimalist, modular software development.
+The most emphasized concept is,&#34Write programs that do one thing and do it well.&#34
+DRY
+The Don't Repeat Yourself principle is stated as &#34Every piece of knowledge must have a single,
+unambiguous, authoritative representation within a system&#34. What I understand by it is that, redundancy
+makes a system confusing and unintuitive.
+YAGNI
+&#34You aren't gonna need it&#34 or &#34You ain't gonna need it&#34 is something that arose from Doing the simplest
+thing that could possibly work.
+etc
+&#34End of thinking capacity&#34 or I don't want to lengthen my blog yapping about acronyms and want to
+come to the actual topic.
+So, what did you do?
+I am trying to follow these principles in my daily life and in using tech in general. Partly because I
+want to live outside these devices more, and mostly because I don't like the &#34attention economy&#34 and big
+tech constantly trying to pull our attention and make us watch more ads. In general, &#34I don't want to be
+the product.&#34 I guess the reasons for partly and mostly should have been the other way around, but I'll get
+the same outcome anyway.
+For starters, I bought a watch, just so that I don't have to keep pulling out my phone and check the time only to see
+a notification and get sucked into the rabbit hole. That has made keeping the phone in my bag instead of in my pocket
+possible.
+
+That's the only thing I bought.
+
+Everything else is software minimalism now. I removed my previous ROM and installed LineageOS on my phone. And, I
+removed Windows and installed Linux. (Technically, I have been using Linux for years by now, but I did remove windows.)
+How are your devices set up?
+Let's start with my phone because it was the thing I used the most while being aware that I am using it the most, and it was
+wasting my time more than I was utilizing it.
+LineageOS (Android)
+The first thing I will see when I pick up my phone is the lock screen, and it is set up such that my screen will not light
+up when I receive a notification, but, the notifications are visible with content in the lock screen because it is easier for
+me to decide if I need to respond immediately, or it can wait.
+I have my phone almost perpetually in DND mode with the exception of my parents being in favorite and being able to ring me anytime.
+For others, if I receive two calls within a 15-second interval, I'll get the call. And all text messages and notifications are
+disabled while the DND Mode is on.
+Now, let the phone be unlocked. I have YAM Launcher installed, and I will only be able to see the time on the
+home screen. Upon a swipe up, the app list opens up with only text and edited to represent what it'll do instead of
+the app's name.
+
+
+App List
+
+Browser - Firefox Nightly
+Calculator
+Camera
+Contacts
+Devices - KDE Connect
+Email - Thunderbird Daily
+Files
+Gallery - Aves Gallery
+Messaging
+Packages - Obtainium
+Passwords - Bitwarden (Keyguard)
+Phone
+Reader - Readest
+Recorder
+Settings
+Signal - Signal FOSS
+Terminal - Termux
+Videos - VLC
+YouTube - NewPipe (Tubular)
+
+
+Inside the browser I have UBlock Origin installed, and it blocks all ads and redirects and also YouTube. YouTube links
+on my phone are automatically redirected to NewPipe which has no feeds and suggestions, only search and play.
+KDE Connect is for transferring files from my phone to my laptop and vice versa and sometimes clipboard contents, but If
+I really need it; I could ssh into either of the devices and get what I want, (in my local network). I used to use tailscale
+as a VPN, but I have not felt the need of it for now.
+Obtainium is to install packages and updates to my apps, since LineageOS doesn't have an app store. It gets apps straight from sources like
+git-services, fdroids-repos and web-links. I can get the apps from right where the bakers baked it.
+Every other app is pretty self-explanatory and they do their job well.
+NixOS (Linux)
+I have a full-fledged desktop environment (DE) and a minimal window manager (WM) installed on my laptop. I normally live on my window manager
+but sometimes it doesn't cut it, or I have to configure it (which takes some time) so I just fall back on the DE and get the work done. Yes it
+breaks from the &#34DRY&#34 principle, but WM and DE are like my DND Focus and Normal Mode for the laptop.
+Nix Package Manager also works somewhat like obtainium (I am oversimplifying this a lot.) I can get the apps straight from source and compile it
+on device or I can get the packages from the NixOS repos.
+Technically, the terminal and the browser should be sufficient for everything. But I like my dedicated apps.
+Window Manager (Niri)
+My window manager is set up in such a way that everything is hidden by default. If I hover over the correct places on my screen, I will get what I
+want to quickly access like brightness, volume, mic sensitivity, time, battery and the tray.
+
+And the scrolling tiling window management is by far the best window management workflow I have experienced till now. I can categorize
+my windows in 2 dimensions (Technically all 3, but I rarely want to use the third.) and choose to focus on 1–2 windows while all other windows
+are one swipe away. I can't explain it by just yapping about it here, you need to use it to feel it.
+Desktop Environment (GNOME)
+It looks similar to niri at first glance, but I have tweaked it with extensions to be minimal. I don't open it unless I am playing a game from Steam or using an app that only supports XOrg because niri doesn't have XWayland support and the workarounds are a bit clunky. Or, if niri crashes for some reason.
+Browser(s)
+
+Firefox (Gecko) - I have my own userCSS and that is the workflow I want in my browser, minimal by default, powerful when needed.
+QuteBrowser (Blink/QTWebEngine) - It is almost what I wanted in a chromium based browser, if only it had support for Firefox extensions.
+Epiphany (WebKit) - It's a WebKit browser when I need to test things for a WebKit environment.
+
+Firefox is the only browser that has extensions support on my device. I have UBlockOrigin, Unhook, SponsorBlock, VimiumC and Bitwarden installed
+and if not all, UBlockOrigin and Bitwarden are the absolute must-haves for me. [I am spoiled by UBlockOrigin.]
+QuteBrowser is my current primary browser because I feel like it uses less power than Firefox does. Also, it is minimal and uses the
+whole area for web rendering and not browser components like url-bar and buttons and menus, and also it is entirely keyboard
+oriented with VIM-style workflow. I have set its AdBlock to use UBlockOrigin's block list, and it does pretty well, but not as well as UBlockOrigin.
+Unlike Firefox, I have left the YouTube feed to show up in it, but I don't play YouTube on the browser but instead utilize MPV and yt-dlp to watch
+on my video player of choice. (The YouTube player is automatically paused and hidden using a greasemonkey script, which is the closest to extensions that Qute has.)
+Epiphany is a browser I almost never use but keep for the sake of testing stuff on WebKit when doing web development.
+Applications
+I said &#34app&#34 for mobile but &#34application&#34 for desktop because they are exactly how they sound like.
+
+App List
+
+Browsers - We already discussed them.
+Terminal - Ghostty + Alacritty (I couldn't choose between features and minimalism on this one.)
+Inkscape - Vector Graphics
+Emacs - Note-taking using org-roam and for almost nothing else.
+Neovide - Neovim dedicated GUI where I do all my text editing and programming.
+NewsFlash - RSS Reader
+Thunderbird - Email Client
+Steam - For Hollow Knight which I play once a month
+Valent - A gnome implementation of KDE Connect
+Fractal - A matrix client
+Foliate - Book Reader
+Sioyek - PDF Reader
+Fragments - Torrent Client
+Refine - The New Gnome Tweaks
+Gnome Apps - Weather, Software, Files, Audio Player, Discs, Camera, Calculator, etc.
+Spotify + Spicetify - Music Streaming
+Telegram - Chat
+Signal - Chat
+
+
+The things I mostly use are QuteBrowser and Ghostty and I can prolly do the entirety of what I do within these two apps.
+(Maybe I'll use Firefox instead of Qute if I was forced to use only two apps.)
+Social Media
+Yes! It deserves its own topic. It's not like I don't use social media, how did you find this blog?
+But I don't use social media as much. I am not a saint, and I do use things like Microsoft, Meta, and Google
+Services and Social media they offer because that's where everyone is.
+My favourite is The Fediverse; it's calm, and I can get caught up with everyone I follow within 5 minutes of scrolling,
+not even that much. But as much as I love you guys, I still have real-life friends who don't use and don't know about the Fediverse.
+So, I have to use Facebook Messenger to contact almost anyone I know. But I have my Facebook ID
+deactivated to only use Messenger and don't have Instagram and also WhatsApp.
+I made a LinkedIn account a while back, and I sometimes scroll through it to check what everyone
+is up to. I do post once in a while but have not done anything worthy of posting there lately.
+I have Telegram just to check in with custom ROM communities and mobile Linux communities, but I rarely do that nowadays.
+Signal for the dearest who do use it. It's what I use for texting people and have it on my phone as well.
+Lastly, let's talk about YouTube. I didn't consider it a social media and used to use the full-fledged YouTube apps, but
+I got so addicted to it that I could not stop scrolling, looking for videos to watch. I spent most of the time of the
+day on it. But it is definitely a social media, and it definitely should be used and not consumed. And I hate shorts with
+passion. Most of my device usage was for YouTube and YouTube only. I am still a YouTube addict, but I am consuming less and
+using it more each day.
+Lastly
+Though, reading all this (if you really did) made you feel like it is definitely not a minimalist setup. It really is.
+I feel like I have fixed my social media overconsumption with this setup. At least I am getting more work done and also
+getting a good sleep.
+I used to take my phone to bed and scroll YouTube till I slept, and I would always sleep the next day (i.e., after 00:00)
+but now I get sleep at 10 and will be asleep within 10 minutes. (That is, unless something is bugging me.)
+My phone does absolutely nothing to distract me, and I don't have my laptop at all times. The only thing I don't have that is
+necessary is banking apps, but not having that has made me spend even less, so it's still a win.
+
+I have been writing this since 04:45 and it's 08:45, I'll be back after breakfast.
+09:06 I'm Back!
+
+Yeah! I don't think I have more to write about it. The flow got interrupted. I had to do something for my addiction, and it
+is what I did. Hopefully I don't fall back into the same trap again. Meet you guys in the next blog; byeeeee.
+" name=og:description><link rel="shortcut icon" href=/res/thumbnail.svg type=image/x-icon><meta content="width=device-width,initial-scale=1" name=viewport><meta content="rgb(253, 246, 227)" name=theme-color><script defer src=/assets/js/copy-button.js></script><link href=https://github.com/scientiac rel=me><link href=mailto:spandan@scientiac.space rel=me><link href=https://webmention.io/scientiac.space/webmention rel=webmention><meta content=@iac@polymaths.social name=fediverse:creator><body onload=updateThemeSelector();><div class=logo-container><a href=/> <div class=inner-logo-container></div> </a></div><nav data-style=classy><span><a href=/>Main</a></span><span><a href=/blog>Blog</a></span><span><a href=/syndications>Ping</a></span><span><a href=/more>More</a></span></nav><section class=section-body><div class=container><div class=h-entry><a class="u-url hidden" href=https://scientiac.space/blog/tech-minimalism/>https://scientiac.space/blog/tech-minimalism/</a><div class=section><h1 class="p-name title">Tech Minimalism</h1><div class=pagedate><time class="dt-published dateandtag hidden" datetime=2025-05-29T00:00:00Z> 2025-05-29 </time><code class=dateandtag>2025-05-29</code><code class="u-category dateandtag">Articles</code></div><p><div class="hidden p-author h-card"><a class=u-url href=https://scientiac.space rel=me> <img alt="Profile photo of scientiac" class=u-photo src=/res/thumbnail.png> <span class=p-name>scientiac</span> </a></div><div class=e-content><h2 id=firstly>Firstly</h2><p>I don't really have hardware that is minimal. It could be minimal for some people, but having a working smartphone and a pretty good laptop isn't minimal, judging by the plethora of things I can do within these devices.<p>A huge chunk of my personality is influenced by Linux and the principles/philosophies I have learned to interact with the Linux and Open Source ecosystem. KISS, UNIX, DRY, YAGNI, etc. These are some of the things I have been exposed to for too many times. I see that they all have one thing in common; <strong><em>Minimalism</em></strong>.<h2 id=what-are-thoseeeee>What are thoseeeee?</h2><p>Let's start with <strong>KISS</strong> because I like the sound of it,<h4 id=kiss>KISS</h4><p><strong>Keep It Simple Stupid</strong> or one of the variations below implies that simplicity should be a design goal.<details><summary>Variations</summary> <ul><li>Keep It Super Simple<li>Keep It Simple, Silly<li>Keep It Short and Simple<li>Keep It Short and Sweet<li>Keep It Simple and Straightforward<li>Keep It Small and Simple<li>Keep It Simple, Sweetie<li>Keep It Stupidly Simple<li>Keep It Sweet and Simple</ul></details><h4 id=unix>UNIX</h4><p><strong>UNIX</strong> philosophy is a set of norms and philosophical approaches to minimalist, modular software development. The most emphasized concept is,"Write programs that do one thing and do it well."<h4 id=dry>DRY</h4><p>The <strong>Don't Repeat Yourself</strong> principle is stated as "Every piece of knowledge must have a single, unambiguous, authoritative representation within a system". What I understand by it is that, redundancy makes a system confusing and unintuitive.<h4 id=yagni>YAGNI</h4><p>"You aren't gonna need it" or "You ain't gonna need it" is something that arose from <em>Doing the simplest thing that could possibly work</em>.<h4 id=etc>etc</h4><p>"End of thinking capacity" or I don't want to lengthen my blog yapping about acronyms and want to come to the actual topic.<h2 id=so-what-did-you-do>So, what did you do?</h2><p>I am trying to follow these principles in my daily life and in using tech in general. Partly because I want to live outside these devices more, and mostly because I don't like the "attention economy" and big tech constantly trying to pull our attention and make us watch more ads. In general, "I don't want to be the product." I guess the reasons for partly and mostly should have been the other way around, but I'll get the same outcome anyway.<p>For starters, I bought a watch, just so that I don't have to keep pulling out my phone and check the time only to see a notification and get sucked into the rabbit hole. That has made keeping the phone in my bag instead of in my pocket possible.<blockquote><p><em>That's the only thing I bought.</em></blockquote><p>Everything else is software minimalism now. I removed my previous ROM and installed LineageOS on my phone. And, I removed Windows and installed Linux. (Technically, I have been using Linux for years by now, but I did remove windows.)<h3 id=how-are-your-devices-set-up>How are your devices set up?</h3><p>Let's start with my phone because it was the thing I used the most while being aware that I am using it the most, and it was wasting my time more than I was utilizing it.<h4 id=lineageos-android>LineageOS (Android)</h4><p>The first thing I will see when I pick up my phone is the <strong>lock screen</strong>, and it is set up such that my screen will not light up when I receive a notification, but, the notifications are visible with content in the lock screen because it is easier for me to decide if I need to respond immediately, or it can wait.<p>I have my phone <em>almost perpetually in DND mode</em> with the exception of my parents being in favorite and being able to ring me anytime. For others, if I receive two calls within a 15-second interval, I'll get the call. And all text messages and notifications are disabled while the DND Mode is on.<p>Now, let the phone be unlocked. I have <strong>YAM Launcher</strong> installed, and I will only be able to see the time on the home screen. Upon a swipe up, the app list opens up with only text and edited to represent what it'll do instead of the app's name.<p><video controls src=/images/tech_minimalism/yam.webm style=width:15rem></video><details><summary>App List</summary> <ol><li>Browser - Firefox Nightly<li>Calculator<li>Camera<li>Contacts<li>Devices - KDE Connect<li>Email - Thunderbird Daily<li>Files<li>Gallery - Aves Gallery<li>Messaging<li>Packages - Obtainium<li>Passwords - Bitwarden (Keyguard)<li>Phone<li>Reader - Readest<li>Recorder<li>Settings<li>Signal - Signal FOSS<li>Terminal - Termux<li>Videos - VLC<li>YouTube - NewPipe (Tubular)</ol></details><p>Inside the <strong>browser</strong> I have <strong>UBlock Origin</strong> installed, and it blocks all ads and redirects and also YouTube. YouTube links on my phone are automatically redirected to <strong>NewPipe</strong> which has no feeds and suggestions, only search and play.<p><strong>KDE Connect</strong> is for transferring files from my phone to my laptop and vice versa and sometimes clipboard contents, but If I really need it; I could <strong>ssh</strong> into either of the devices and get what I want, (in my local network). I used to use tailscale as a VPN, but I have not felt the need of it for now.<p><strong>Obtainium</strong> is to install packages and updates to my apps, since LineageOS doesn't have an app store. It gets apps straight from sources like git-services, fdroids-repos and web-links. I can get the apps from right where the bakers baked it.<p>Every other app is pretty self-explanatory and they do their job well.<h4 id=nixos-linux>NixOS (Linux)</h4><p>I have a full-fledged desktop environment (DE) and a minimal window manager (WM) installed on my laptop. I normally live on my window manager but sometimes it doesn't cut it, or I have to configure it (which takes some time) so I just fall back on the DE and get the work done. Yes it breaks from the "DRY" principle, but WM and DE are like my DND Focus and Normal Mode for the laptop.<p><strong>Nix Package Manager</strong> also works somewhat like obtainium (I am oversimplifying this a lot.) I can get the apps straight from source and compile it on device or I can get the packages from the NixOS repos.<p>Technically, the terminal and the browser should be sufficient for everything. But I like my dedicated apps.<h4 id=window-manager-niri>Window Manager (Niri)</h4><p>My window manager is set up in such a way that everything is hidden by default. If I hover over the correct places on my screen, I will get what I want to quickly access like brightness, volume, mic sensitivity, time, battery and the tray.<p><video controls src=/images/tech_minimalism/zen-mode.webm></video><p>And the scrolling tiling window management is by far the best window management workflow I have experienced till now. I can categorize my windows in 2 dimensions (Technically all 3, but I rarely want to use the third.) and choose to focus on 1–2 windows while all other windows are one swipe away. I can't explain it by just yapping about it here, you need to use it to feel it.<h4 id=desktop-environment-gnome>Desktop Environment (GNOME)</h4><p>It looks similar to niri at first glance, but I have tweaked it with extensions to be minimal. I don't open it unless I am playing a game from <strong>Steam</strong> or using an app that only supports XOrg because niri doesn't have XWayland support and the workarounds are a bit clunky. Or, if niri crashes for some reason.<h4 id=browser-s>Browser(s)</h4><ol><li>Firefox (Gecko) - I have my own userCSS and that is the workflow I want in my browser, minimal by default, powerful when needed.<li>QuteBrowser (Blink/QTWebEngine) - It is almost what I wanted in a chromium based browser, if only it had support for Firefox extensions.<li>Epiphany (WebKit) - It's a WebKit browser when I need to test things for a WebKit environment.</ol><p><strong>Firefox</strong> is the only browser that has extensions support on my device. I have UBlockOrigin, Unhook, SponsorBlock, VimiumC and Bitwarden installed and if not all, UBlockOrigin and Bitwarden are the absolute must-haves for me. [<em>I am spoiled by UBlockOrigin.</em>]<p><strong>QuteBrowser</strong> is my current primary browser because I feel like it uses less power than Firefox does. Also, it is minimal and uses the whole area for web rendering and not browser components like url-bar and buttons and menus, and also it is entirely keyboard oriented with VIM-style workflow. I have set its AdBlock to use UBlockOrigin's block list, and it does pretty well, but not as well as UBlockOrigin. Unlike Firefox, I have left the YouTube feed to show up in it, but I don't play YouTube on the browser but instead utilize MPV and <code>yt-dlp</code> to watch on my video player of choice. (The YouTube player is automatically paused and hidden using a greasemonkey script, which is the closest to extensions that Qute has.)<p><strong>Epiphany</strong> is a browser I almost never use but keep for the sake of testing stuff on WebKit when doing web development.<h4 id=applications>Applications</h4><p>I said "app" for mobile but "application" for desktop because they are exactly how they sound like.<details><summary>App List</summary> <ol><li>Browsers - We already discussed them.<li>Terminal - Ghostty + Alacritty (I couldn't choose between features and minimalism on this one.)<li>Inkscape - Vector Graphics<li>Emacs - Note-taking using org-roam and for almost nothing else.<li>Neovide - Neovim dedicated GUI where I do all my text editing and programming.<li>NewsFlash - RSS Reader<li>Thunderbird - Email Client<li>Steam - For <em>Hollow Knight</em> which I play once a month<li>Valent - A gnome implementation of KDE Connect<li>Fractal - A matrix client<li>Foliate - Book Reader<li>Sioyek - PDF Reader<li>Fragments - Torrent Client<li>Refine - The New Gnome Tweaks<li>Gnome Apps - Weather, Software, Files, Audio Player, Discs, Camera, Calculator, etc.<li>Spotify + Spicetify - Music Streaming<li>Telegram - Chat<li>Signal - Chat</ol></details><p>The things I mostly use are QuteBrowser and Ghostty and I can prolly do the entirety of what I do within these two apps. (Maybe I'll use Firefox instead of Qute if I was forced to use only two apps.)<h2 id=social-media>Social Media</h2><p>Yes! It deserves its own topic. It's not like I don't use social media, how did you find this blog? But I don't use social media as much. I am not a saint, and I do use things like Microsoft, Meta, and Google Services and Social media they offer because that's where everyone is.<p>My favourite is <strong>The Fediverse;</strong> it's calm, and I can get caught up with everyone I follow within 5 minutes of scrolling, not even that much. But as much as I love you guys, I still have real-life friends who don't use and don't know about the Fediverse.<p>So, I have to use <strong>Facebook Messenger</strong> to contact almost anyone I know. But I have my Facebook ID deactivated to only use Messenger and don't have Instagram and also WhatsApp.<p>I made a <strong>LinkedIn</strong> account a while back, and I sometimes scroll through it to check what everyone is up to. I do post once in a while but have not done anything worthy of posting there lately.<p>I have <strong>Telegram</strong> just to check in with custom ROM communities and mobile Linux communities, but I rarely do that nowadays.<p><strong>Signal</strong> for the dearest who do use it. It's what I use for texting people and have it on my phone as well.<p>Lastly, let's talk about <strong>YouTube</strong>. I didn't consider it a social media and used to use the full-fledged YouTube apps, but I got so addicted to it that I could not stop scrolling, looking for videos to watch. I spent most of the time of the day on it. But it is definitely a social media, and it definitely should be used and not consumed. And I hate shorts with passion. Most of my device usage was for YouTube and YouTube only. I am still a YouTube addict, but I am consuming less and using it more each day.<h2 id=lastly>Lastly</h2><p>Though, reading all this (if you really did) made you feel like it is definitely not a minimalist setup. It really is. I feel like I have fixed my social media overconsumption with this setup. At least I am getting more work done and also getting a good sleep.<p>I used to take my phone to bed and scroll YouTube till I slept, and I would always sleep the next day (i.e., after 00:00) but now I get sleep at 10 and will be asleep within 10 minutes. (That is, unless something is bugging me.)<p>My phone does absolutely nothing to distract me, and I don't have my laptop at all times. The only thing I don't have that is necessary is banking apps, but not having that has made me spend even less, so it's still a win.<blockquote><p>I have been writing this since 04:45 and it's 08:45, I'll be back after breakfast.<br> 09:06 I'm Back!</blockquote><p>Yeah! I don't think I have more to write about it. The flow got interrupted. I had to do something for my addiction, and it is what I did. Hopefully I don't fall back into the same trap again. Meet you guys in the next blog; byeeeee.</div></div></div><div id=webmention><hr><h2>Webmentions</h2><form action=https://webmention.io/scientiac.space/webmention class=webmention-form method=post><div id=email-comment><p>Have you written a <a href=https://indieweb.org/responses>response</a> to this? Let me know the URL, Or, you can send your response via <a href="mailto:iac@scientiac.space?subject=Reply%3A%20Tech%20Minimalism">mail:</a><code>iac@scientiac.space</code></div><div class=send-webmention><input name=source type=url><button>Send Webmention</button></div><div><div class="ui message"></div></div><input name=target type=hidden value=https://scientiac.space/blog/tech-minimalism/></form><div class=interaction-box></div></div></div><script defer src=/assets/js/themeSelector.js></script></section><div class=hidden><a href=https://polymaths.social/@iac rel=me>Fediverse</a></div><div class="hidden h-card"><img class="u-photo icon" alt=scientiac src=/res/thumbnail.png><a class="p-name u-url" href=https://scientiac.space rel=me>scientiac</a><p class=p-note>A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does.</div><footer><p class=codewithlove>I can't think of things to write on a footer. So, just <span class=main-background>imagine</span> something yourself.<p><a href=/series>Series</a> | <a href=/atom.xml>RSS</a> | <a href=https://github.com/scientiac/scientiac.github.io target=_blank>Source Code</a><p>All articles are usable under <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank>CC BY-SA 4.0</a>.</footer><ol id=themeSelector reversed></ol>

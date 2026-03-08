@@ -1,0 +1,580 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><script>(()=>{try{const a={light:`gruvbox-light`,dark:`night-solis`};const b=window.matchMedia(`(prefers-color-scheme: dark)`).matches;const c=localStorage.theme||(b?a.dark:a.light);document.documentElement.dataset.theme=c}catch(a){}})()</script><link href=/assets/css/themes.css rel=stylesheet><link href=/assets/css/readable.css rel=stylesheet><link href=/assets/css/global.css rel=stylesheet><link href=/assets/css/fonts.css rel=stylesheet><link href=/assets/css/logo.css rel=stylesheet><link href=/assets/css/genre/Reports.css rel=stylesheet><link href=https://scientiac.space/atom.xml rel=alternate title=RSS type=application/atom+xml><meta content=Reports property=og:type><meta content=scientiac.space property=og:site_name><meta content=https://scientiac.space/res/thumbnail-light.png property=og:image><title>Static Site Webmentions</title><meta content="Static Site Webmentions" name=og:title><meta content="I had set up Webmentions on my static site a while back. It was because I really like the concept of a completely custom yet static social media where it's not instant but it's regular communication. But, the drawback of any kind of unique and DIY technology is not having people that actually use it.
+Ironically, after the setup, I only have received Webmentions from myself during testing (I am not counting the mastodon likes that propagated through Bridgy Fed). I am still sceptical about Bridgy Fed because It isn't what I wanted Webmentions to be, I didn't want any connections to a social media but I wanted to test the workings so I connected it.
+How I Do It
+My blog is a static site and being static comes with the cost of not being able to continuously listen to incoming messages. So, Webmentions don't really work on a static site. At least that's what I thought at first, then I found out about webmention.io.
+It's sort of like a retrofitted static site to support Webmentions.
+Components
+
+A Static Site Generator www.getzola.org
+Indieweb Compatibility indiewebify.me
+Send webmentions webmention.app
+Receive Webmentions webmention.io
+Render Webmentions keats.github.io/tera
+Runner GitHub actions
+
+A Static Site Generator
+I am using zola as my static site generator and I love it. The comfort of just writing in markdown and letting zola do the heavy lifting to generate feeds is awesome. Generating an Atom/RSS feed is a must. This is needed by webmention.app to send webmentions by reading all your posts.
+Indieweb Compatibility
+To make an Indieweb compatible static site you need to pass these tests from indiewebify.me.
+
+Web Sign In - This helps you sign in to indieweb services with your domain. You must have your own registered domain name.
+h-card and h-entry classes on homepage as well as on the &#34post&#34 page.
+Ability to send Webmentions.
+
+Sending Webmentions
+I use my generated Atom feed and webmention.app CLI to send Webmentions.
+It is as simple as running:
+npx webmention https://scientiac.space/atom.xml --limit=0 --send
+
+Receiving Webmentions
+To receive Webmentions you need a perpetual listening server and the service is provided by webmention.io.
+
+Sign into webmention.io with your domain. It will use indielogin.com. This requires you to have at least an email address on your h-card.
+Go to sites and in the table click on Get Setup Code which will give you a tag to put on your HTML template header.
+Test that you actually can receive Webmentions by mentioning yourself in a site and running the above command. It should show up in the dashboard of webmention.io.
+
+Render Webmentions
+You can now fetch the json feed of the Webmentions you have received in webmention.io using the following command and replacing the ${WEBMENTION_TOKEN} with your own token.
+curl -s &ampquot;https://webmention.io/api/mentions.json?token=${WEBMENTION_TOKEN}&ampquot; -o webmentions.json
+
+This json file can be used to render the Webmentions on your website using your static site generator's feature to read json files.
+I made and activity page in zola where all the webmention activities are listed.
+
+Zola Template HTML
+This is located at templates/activity.html and used at content/activity/_index.md
+templates/activity.html
+{% extends &ampquot;base.html&ampquot; %}
+
+{% block content %}
+
+&amplt;div class=section&ampgt;
+
+{% set data = load_data(path=&ampquot;webmentions.json&ampquot;, format=&ampquot;json&ampquot;) %}
+
+&amplt;div class=&ampquot;activity-box&ampquot;&ampgt;
+{% for links in data.links %}
+    {% set trimmed_path = links.target | trim_start_matches(pat=&ampquot;https://&ampquot; ~ config.extra.url ~ &ampquot;/&ampquot;) | trim_end_matches(pat=&ampquot;/&ampquot;) %}
+    {% set relative_path = trimmed_path ~ &ampquot;.md&ampquot; %}
+    {% set target_page = get_page(path=relative_path) %}
+    {% if not links.source is starting_with(&ampquot;https://&ampquot; ~ config.extra.url) %}
+        {% if links.activity.type == &ampquot;like&ampquot; %}
+            &amplt;div class=&ampquot;mention-profile like&ampquot;&ampgt;
+                &amplt;code&ampgt;&amplt;a href=&ampquot;{{ links.source }}&ampquot;&ampgt;{{ links.data.author.name }}&amplt;/a&ampgt; liked &amplt;a href=&ampquot;{{ links.target }}&ampquot;&ampgt;{{ target_page.title }}&amplt;/a&ampgt;&amplt;/code&ampgt;
+            &amplt;/div&ampgt;
+        {% endif %}
+
+        {% if links.activity.type == &ampquot;link&ampquot; %}
+            &amplt;div class=&ampquot;mention-profile link&ampquot;&ampgt;
+                &amplt;code&ampgt;&amplt;a href=&ampquot;{{ links.source }}&ampquot;&ampgt;{{ links.data.author.name }}&amplt;/a&ampgt; mentioned &amplt;a href=&ampquot;{{ links.target }}&ampquot;&ampgt;{{ target_page.title }}&amplt;/a&ampgt;&amplt;/code&ampgt;
+            &amplt;/div&ampgt;
+        {% endif %}
+
+        {% if links.activity.type == &ampquot;reply&ampquot; %}
+            &amplt;div class=&ampquot;mention-profile reply&ampquot;&ampgt;
+                &amplt;code&ampgt;&amplt;a href=&ampquot;{{ links.source }}&ampquot;&ampgt;{{ links.data.author.name }}&amplt;/a&ampgt; replied to &amplt;a href=&ampquot;{{ links.target }}&ampquot;&ampgt;{{ target_page.title }}&amplt;/a&ampgt;&amplt;/code&ampgt;
+            &amplt;/div&ampgt;
+        {% endif %}
+    {% endif %}
+{% endfor %}
+&amplt;/div&ampgt;
+
+&amplt;/div&ampgt;
+
+{% endblock content %}
+
+content/activity/_index.md
++++
+template = &ampquot;activity.html&ampquot;
++++
+
+
+Webmentions are rendered by zola utilizing the load_data function of tera templating engine. The fetched webmention.json file is parsed and formatted. [Can be seen in activity.html in the above template.]
+Runner
+To rebuild the site by fetching new Webmentions we will need a runner that does the process repeatedly in said amount of time. This is where GitHub actions come in. I have three workflows send-webmentions.yaml, zola.yml and fetch-webmentions.yaml which as the name says, sends Webmentions from the site, builds the site using zola and fetches received Webmentions from webmention.io.
+For fetching I have saved my webmention.app api key as a secret in GitHub and use that in the workflow file.
+First put your token form webmention.io in settings &ampgt; security &ampgt; secrets and variables &ampgt; actions &ampgt; new repository secret of your GitHub repo with the name WEBMENTION_TOKEN.
+Then, the workflow files should be put in place.
+
+Workflow Files
+This is located at .github/workflows/ from the root of your repository.
+First workflow fetches new mentions every 30 minutes.
+fetch-webmentions.yml
+name: Fetch Webmentions
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: &amp#39;*/30 * * * *&amp#39;  # Runs every 30 minutes
+  workflow_dispatch:  # Allows manual triggering of the workflow if needed
+
+jobs:
+  fetch_webmentions:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Fetch Webmentions
+        env:
+          WEBMENTION_TOKEN: ${{ secrets.WEBMENTION_TOKEN }}
+        run: |
+          mkdir -p static/webmention
+          # Fetch webmentions and save (overwrite) to a single file
+          curl -s &ampquot;https://webmention.io/api/mentions.json?token=${WEBMENTION_TOKEN}&ampquot; -o static/webmentions.json
+
+      - name: Commit and Push Webmentions
+        run: |
+          git config --global user.name &ampquot;github-actions[bot]&ampquot;
+          git config --global user.email &ampquot;github-actions[bot]@users.noreply.github.com&ampquot;
+          git add static/webmentions.json
+          git commit -m &ampquot;Update webmentions&ampquot; || echo &ampquot;No changes to commit&ampquot;
+          # Pull latest changes from main with rebase to avoid conflicts
+          git pull --rebase origin main
+          # Now push the updated branch
+          git push
+
+Second workflow builds the site from the source after fetching the Webmentions.
+zola.yml
+name: Zola on GitHub Pages
+
+on:
+  workflow_run:
+    workflows: [&ampquot;Fetch Webmentions&ampquot;]
+    types:
+      - completed
+
+jobs:
+  build:
+    name: Publish site
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout main
+      uses: actions/checkout@v4
+    - name: Build and deploy
+      uses: shalzz/zola-deploy-action@v0.19.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+Third workflow sends Webmentions from the detected links in the newly generated atom.xml.
+send-webmentions.yml
+name: Send Webmentions
+on:
+  workflow_run:
+    workflows: [&ampquot;Zola on GitHub Pages&ampquot;]
+    types:
+      - completed
+jobs:
+  send_webmentions:
+    name: Send Webmentions with Delay
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        
+      - name: Wait for Delay
+        run: sleep 60  # Waits for 1 minute (60 seconds) before running the next steps
+        
+      - name: Read Site URL from CNAME
+        id: get_url
+        run: |
+          SITE_URL=$(cat static/CNAME)
+          echo &ampquot;site_url=$SITE_URL&ampquot; &ampgt;&ampgt; $GITHUB_OUTPUT
+        
+      - name: Install Webmention Package
+        run: npm install @remy/webmention
+        
+      - name: Send Webmentions
+        run: npx webmention https://${{ steps.get_url.outputs.site_url }}/atom.xml --limit=0 --send
+
+
+Sending Webmentions
+In order to send Webmentions, the content should be formatted accordingly. In general I like to utilize three activities to send Webmentions.
+[It is preferred to only use one activity for one mention.]
+Mention
+One can mention a site using webmention by simply putting the link to the page being mentioned.
+The site will get the webmention if it supports it.
+[Void Bed](https://flux.carboxi.de/void-bed/) by flux.
+or
+&amplt;a href=&ampquot;https://flux.carboxi.de/void-bed/&ampquot;&ampgt;Void Bed&amplt;/a&ampgt; by flux
+
+Like
+One can like a post using webmention by formatting the link as follows:
+I like how flux talks about his bed in &amplt;a class=&ampquot;u-like-of&ampquot; href=&ampquot;https://flux.carboxi.de/void-bed/&ampquot;&ampgt;Void Bed&amplt;/a&ampgt;
+
+I like how flux talks about his bed in Void Bed
+Reply
+One can reply to a post by formatting the link and the text as follows:
+&amplt;a class=&ampquot;u-in-reply-to&ampquot; href=&ampquot;https://flux.carboxi.de/void-bed/&ampquot;&ampgt;Void Bed&amplt;/a&ampgt;
+
+I feel the same about my bed. Nice writing flux!
+
+Bridges
+Though I have connected this site to the fediverse with Bridgy Fed, it is opt in using a zola shortcode. Because, I want the articles to have a &#34blog interaction&#34 from other peoples blog but not from the social media. But, I do use bridgy on my short posts sometimes. Webmentions and Linux is/not Difficult are some posts I have used bridgy with and they also work as example posts to see how different webmention activities look like in my website.
+Lastly
+I had forgotten about webmentions and interactions on my site, but I recently read a post from Joel titled Webmentions but manual (for Jekyll) and people giving names to the interactions really caught my attention. I haven't given it a name because mine are just Webmentions but I feel like Webmentions are still a good option to have (with much less spam) for interaction if it isn't connected to an actual social media.
+Some other posts I read were:
+[At least for the sake of just pinging them.]
+Implementing Community Echoes
+Blog interactions
+What Others Said...
+I hope webmention on blogging sites takes off. Or maybe it has already taken off. I want the future where everyone can express themselves with their own taste and creativity not having to compromise personality for protocols.
+" name=description><meta content="I had set up Webmentions on my static site a while back. It was because I really like the concept of a completely custom yet static social media where it's not instant but it's regular communication. But, the drawback of any kind of unique and DIY technology is not having people that actually use it.
+Ironically, after the setup, I only have received Webmentions from myself during testing (I am not counting the mastodon likes that propagated through Bridgy Fed). I am still sceptical about Bridgy Fed because It isn't what I wanted Webmentions to be, I didn't want any connections to a social media but I wanted to test the workings so I connected it.
+How I Do It
+My blog is a static site and being static comes with the cost of not being able to continuously listen to incoming messages. So, Webmentions don't really work on a static site. At least that's what I thought at first, then I found out about webmention.io.
+It's sort of like a retrofitted static site to support Webmentions.
+Components
+
+A Static Site Generator www.getzola.org
+Indieweb Compatibility indiewebify.me
+Send webmentions webmention.app
+Receive Webmentions webmention.io
+Render Webmentions keats.github.io/tera
+Runner GitHub actions
+
+A Static Site Generator
+I am using zola as my static site generator and I love it. The comfort of just writing in markdown and letting zola do the heavy lifting to generate feeds is awesome. Generating an Atom/RSS feed is a must. This is needed by webmention.app to send webmentions by reading all your posts.
+Indieweb Compatibility
+To make an Indieweb compatible static site you need to pass these tests from indiewebify.me.
+
+Web Sign In - This helps you sign in to indieweb services with your domain. You must have your own registered domain name.
+h-card and h-entry classes on homepage as well as on the &#34post&#34 page.
+Ability to send Webmentions.
+
+Sending Webmentions
+I use my generated Atom feed and webmention.app CLI to send Webmentions.
+It is as simple as running:
+npx webmention https://scientiac.space/atom.xml --limit=0 --send
+
+Receiving Webmentions
+To receive Webmentions you need a perpetual listening server and the service is provided by webmention.io.
+
+Sign into webmention.io with your domain. It will use indielogin.com. This requires you to have at least an email address on your h-card.
+Go to sites and in the table click on Get Setup Code which will give you a tag to put on your HTML template header.
+Test that you actually can receive Webmentions by mentioning yourself in a site and running the above command. It should show up in the dashboard of webmention.io.
+
+Render Webmentions
+You can now fetch the json feed of the Webmentions you have received in webmention.io using the following command and replacing the ${WEBMENTION_TOKEN} with your own token.
+curl -s &ampquot;https://webmention.io/api/mentions.json?token=${WEBMENTION_TOKEN}&ampquot; -o webmentions.json
+
+This json file can be used to render the Webmentions on your website using your static site generator's feature to read json files.
+I made and activity page in zola where all the webmention activities are listed.
+
+Zola Template HTML
+This is located at templates/activity.html and used at content/activity/_index.md
+templates/activity.html
+{% extends &ampquot;base.html&ampquot; %}
+
+{% block content %}
+
+&amplt;div class=section&ampgt;
+
+{% set data = load_data(path=&ampquot;webmentions.json&ampquot;, format=&ampquot;json&ampquot;) %}
+
+&amplt;div class=&ampquot;activity-box&ampquot;&ampgt;
+{% for links in data.links %}
+    {% set trimmed_path = links.target | trim_start_matches(pat=&ampquot;https://&ampquot; ~ config.extra.url ~ &ampquot;/&ampquot;) | trim_end_matches(pat=&ampquot;/&ampquot;) %}
+    {% set relative_path = trimmed_path ~ &ampquot;.md&ampquot; %}
+    {% set target_page = get_page(path=relative_path) %}
+    {% if not links.source is starting_with(&ampquot;https://&ampquot; ~ config.extra.url) %}
+        {% if links.activity.type == &ampquot;like&ampquot; %}
+            &amplt;div class=&ampquot;mention-profile like&ampquot;&ampgt;
+                &amplt;code&ampgt;&amplt;a href=&ampquot;{{ links.source }}&ampquot;&ampgt;{{ links.data.author.name }}&amplt;/a&ampgt; liked &amplt;a href=&ampquot;{{ links.target }}&ampquot;&ampgt;{{ target_page.title }}&amplt;/a&ampgt;&amplt;/code&ampgt;
+            &amplt;/div&ampgt;
+        {% endif %}
+
+        {% if links.activity.type == &ampquot;link&ampquot; %}
+            &amplt;div class=&ampquot;mention-profile link&ampquot;&ampgt;
+                &amplt;code&ampgt;&amplt;a href=&ampquot;{{ links.source }}&ampquot;&ampgt;{{ links.data.author.name }}&amplt;/a&ampgt; mentioned &amplt;a href=&ampquot;{{ links.target }}&ampquot;&ampgt;{{ target_page.title }}&amplt;/a&ampgt;&amplt;/code&ampgt;
+            &amplt;/div&ampgt;
+        {% endif %}
+
+        {% if links.activity.type == &ampquot;reply&ampquot; %}
+            &amplt;div class=&ampquot;mention-profile reply&ampquot;&ampgt;
+                &amplt;code&ampgt;&amplt;a href=&ampquot;{{ links.source }}&ampquot;&ampgt;{{ links.data.author.name }}&amplt;/a&ampgt; replied to &amplt;a href=&ampquot;{{ links.target }}&ampquot;&ampgt;{{ target_page.title }}&amplt;/a&ampgt;&amplt;/code&ampgt;
+            &amplt;/div&ampgt;
+        {% endif %}
+    {% endif %}
+{% endfor %}
+&amplt;/div&ampgt;
+
+&amplt;/div&ampgt;
+
+{% endblock content %}
+
+content/activity/_index.md
++++
+template = &ampquot;activity.html&ampquot;
++++
+
+
+Webmentions are rendered by zola utilizing the load_data function of tera templating engine. The fetched webmention.json file is parsed and formatted. [Can be seen in activity.html in the above template.]
+Runner
+To rebuild the site by fetching new Webmentions we will need a runner that does the process repeatedly in said amount of time. This is where GitHub actions come in. I have three workflows send-webmentions.yaml, zola.yml and fetch-webmentions.yaml which as the name says, sends Webmentions from the site, builds the site using zola and fetches received Webmentions from webmention.io.
+For fetching I have saved my webmention.app api key as a secret in GitHub and use that in the workflow file.
+First put your token form webmention.io in settings &ampgt; security &ampgt; secrets and variables &ampgt; actions &ampgt; new repository secret of your GitHub repo with the name WEBMENTION_TOKEN.
+Then, the workflow files should be put in place.
+
+Workflow Files
+This is located at .github/workflows/ from the root of your repository.
+First workflow fetches new mentions every 30 minutes.
+fetch-webmentions.yml
+name: Fetch Webmentions
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: &amp#39;*/30 * * * *&amp#39;  # Runs every 30 minutes
+  workflow_dispatch:  # Allows manual triggering of the workflow if needed
+
+jobs:
+  fetch_webmentions:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Fetch Webmentions
+        env:
+          WEBMENTION_TOKEN: ${{ secrets.WEBMENTION_TOKEN }}
+        run: |
+          mkdir -p static/webmention
+          # Fetch webmentions and save (overwrite) to a single file
+          curl -s &ampquot;https://webmention.io/api/mentions.json?token=${WEBMENTION_TOKEN}&ampquot; -o static/webmentions.json
+
+      - name: Commit and Push Webmentions
+        run: |
+          git config --global user.name &ampquot;github-actions[bot]&ampquot;
+          git config --global user.email &ampquot;github-actions[bot]@users.noreply.github.com&ampquot;
+          git add static/webmentions.json
+          git commit -m &ampquot;Update webmentions&ampquot; || echo &ampquot;No changes to commit&ampquot;
+          # Pull latest changes from main with rebase to avoid conflicts
+          git pull --rebase origin main
+          # Now push the updated branch
+          git push
+
+Second workflow builds the site from the source after fetching the Webmentions.
+zola.yml
+name: Zola on GitHub Pages
+
+on:
+  workflow_run:
+    workflows: [&ampquot;Fetch Webmentions&ampquot;]
+    types:
+      - completed
+
+jobs:
+  build:
+    name: Publish site
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout main
+      uses: actions/checkout@v4
+    - name: Build and deploy
+      uses: shalzz/zola-deploy-action@v0.19.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+Third workflow sends Webmentions from the detected links in the newly generated atom.xml.
+send-webmentions.yml
+name: Send Webmentions
+on:
+  workflow_run:
+    workflows: [&ampquot;Zola on GitHub Pages&ampquot;]
+    types:
+      - completed
+jobs:
+  send_webmentions:
+    name: Send Webmentions with Delay
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        
+      - name: Wait for Delay
+        run: sleep 60  # Waits for 1 minute (60 seconds) before running the next steps
+        
+      - name: Read Site URL from CNAME
+        id: get_url
+        run: |
+          SITE_URL=$(cat static/CNAME)
+          echo &ampquot;site_url=$SITE_URL&ampquot; &ampgt;&ampgt; $GITHUB_OUTPUT
+        
+      - name: Install Webmention Package
+        run: npm install @remy/webmention
+        
+      - name: Send Webmentions
+        run: npx webmention https://${{ steps.get_url.outputs.site_url }}/atom.xml --limit=0 --send
+
+
+Sending Webmentions
+In order to send Webmentions, the content should be formatted accordingly. In general I like to utilize three activities to send Webmentions.
+[It is preferred to only use one activity for one mention.]
+Mention
+One can mention a site using webmention by simply putting the link to the page being mentioned.
+The site will get the webmention if it supports it.
+[Void Bed](https://flux.carboxi.de/void-bed/) by flux.
+or
+&amplt;a href=&ampquot;https://flux.carboxi.de/void-bed/&ampquot;&ampgt;Void Bed&amplt;/a&ampgt; by flux
+
+Like
+One can like a post using webmention by formatting the link as follows:
+I like how flux talks about his bed in &amplt;a class=&ampquot;u-like-of&ampquot; href=&ampquot;https://flux.carboxi.de/void-bed/&ampquot;&ampgt;Void Bed&amplt;/a&ampgt;
+
+I like how flux talks about his bed in Void Bed
+Reply
+One can reply to a post by formatting the link and the text as follows:
+&amplt;a class=&ampquot;u-in-reply-to&ampquot; href=&ampquot;https://flux.carboxi.de/void-bed/&ampquot;&ampgt;Void Bed&amplt;/a&ampgt;
+
+I feel the same about my bed. Nice writing flux!
+
+Bridges
+Though I have connected this site to the fediverse with Bridgy Fed, it is opt in using a zola shortcode. Because, I want the articles to have a &#34blog interaction&#34 from other peoples blog but not from the social media. But, I do use bridgy on my short posts sometimes. Webmentions and Linux is/not Difficult are some posts I have used bridgy with and they also work as example posts to see how different webmention activities look like in my website.
+Lastly
+I had forgotten about webmentions and interactions on my site, but I recently read a post from Joel titled Webmentions but manual (for Jekyll) and people giving names to the interactions really caught my attention. I haven't given it a name because mine are just Webmentions but I feel like Webmentions are still a good option to have (with much less spam) for interaction if it isn't connected to an actual social media.
+Some other posts I read were:
+[At least for the sake of just pinging them.]
+Implementing Community Echoes
+Blog interactions
+What Others Said...
+I hope webmention on blogging sites takes off. Or maybe it has already taken off. I want the future where everyone can express themselves with their own taste and creativity not having to compromise personality for protocols.
+" name=og:description><link rel="shortcut icon" href=/res/thumbnail.svg type=image/x-icon><meta content="width=device-width,initial-scale=1" name=viewport><meta content="rgb(253, 246, 227)" name=theme-color><script defer src=/assets/js/copy-button.js></script><link href=https://github.com/scientiac rel=me><link href=mailto:spandan@scientiac.space rel=me><link href=https://webmention.io/scientiac.space/webmention rel=webmention><meta content=@iac@polymaths.social name=fediverse:creator><body onload=updateThemeSelector();><div class=logo-container><a href=/> <div class=inner-logo-container></div> </a></div><nav data-style=classy><span><a href=/>Main</a></span><span><a href=/blog>Blog</a></span><span><a href=/syndications>Ping</a></span><span><a href=/more>More</a></span></nav><section class=section-body><div class=container><div class=h-entry><a class="u-url hidden" href=https://scientiac.space/blog/webmentions/>https://scientiac.space/blog/webmentions/</a><div class=section><h1 class="p-name title">Static Site Webmentions</h1><div class=pagedate><time class="dt-published dateandtag hidden" datetime=2025-08-31T00:00:00Z> 2025-08-31 </time><code class=dateandtag>2025-08-31</code><code class="u-category dateandtag">Reports</code></div><p><div class="hidden p-author h-card"><a class=u-url href=https://scientiac.space rel=me> <img alt="Profile photo of scientiac" class=u-photo src=/res/thumbnail.png> <span class=p-name>scientiac</span> </a></div><div class=e-content><p>I had set up Webmentions on my static site <a href=/syndications/posse-2024-11-05/>a while back</a>. It was because I really like the concept of a completely custom yet static social media where it's not instant but it's regular communication. But, the drawback of any kind of unique and DIY technology is not having people that actually use it.<p>Ironically, after the setup, I only have received Webmentions from myself during testing (<em>I am not counting the mastodon likes that propagated through <a href=https://fed.brid.gy/web/scientiac.space>Bridgy Fed</a>)</em>. I am still sceptical about Bridgy Fed because It isn't what I wanted Webmentions to be, I didn't want any connections to a social media but I wanted to test the workings so I connected it.<h2 id=how-i-do-it>How I Do It</h2><p>My blog is a static site and being static comes with the cost of not being able to continuously listen to incoming messages. So, Webmentions don't really work on a static site. At least that's what I thought at first, then I found out about <a href=https://webmention.io/>webmention.io</a>.<p>It's sort of like a retrofitted static site to support Webmentions.<h3 id=components>Components</h3><ul><li>A Static Site Generator <a href=https://www.getzola.org/>www.getzola.org</a><li>Indieweb Compatibility <a href=https://indiewebify.me/>indiewebify.me</a><li>Send webmentions <a href=https://webmention.app/>webmention.app</a><li>Receive Webmentions <a href=https://webmention.io/>webmention.io</a><li>Render Webmentions <a href=https://keats.github.io/tera/>keats.github.io/tera</a><li>Runner <a href=https://docs.github.com/en/actions>GitHub actions</a></ul><h4 id=a-static-site-generator>A Static Site Generator</h4><p>I am using <code>zola</code> as my static site generator and I love it. The comfort of just writing in <code>markdown</code> and letting <code>zola</code> do the heavy lifting to generate feeds is awesome. Generating an Atom/RSS feed is a must. This is needed by webmention.app to send webmentions by reading all your posts.<h4 id=indieweb-compatibility>Indieweb Compatibility</h4><p>To make an Indieweb compatible static site you need to pass these tests from <a href=https://indiewebify.me/>indiewebify.me</a>.<ol><li>Web Sign In - This helps you sign in to indieweb services with your domain. <em>You must have your own registered domain name.</em><li><code>h-card</code> and <code>h-entry</code> classes on homepage as well as on the "post" page.<li>Ability to send Webmentions.</ol><h4 id=sending-webmentions>Sending Webmentions</h4><p>I use my generated Atom feed and webmention.app <a href=https://webmention.app/docs#using-the-command-line>CLI</a> to send Webmentions. It is as simple as running:<pre class=language-bash data-lang=bash style=color:#fdf4c1aa;background-color:#282828><code class=language-bash data-lang=bash><span style=color:#fdf4c1>npx webmention https://scientiac.space/atom.xml --limit</span><span style=color:#fe8019>=</span><span style=color:#fdf4c1>0 --send
+</span></code></pre><h4 id=receiving-webmentions>Receiving Webmentions</h4><p>To receive Webmentions you need a perpetual listening server and the service is provided by <a href=https://webmention.io/>webmention.io</a>.<ol><li>Sign into webmention.io with your domain. It will use <a href=https://indielogin.com/>indielogin.com</a>. This requires you to have at least an email address on your h-card.<li>Go to <code>sites</code> and in the table click on <code>Get Setup Code</code> which will give you a tag to put on your HTML template header.<li>Test that you actually can receive Webmentions by mentioning yourself in a site and running the above command. It should show up in the dashboard of <code>webmention.io</code>.</ol><h4 id=render-webmentions>Render Webmentions</h4><p>You can now fetch the json feed of the Webmentions you have received in webmention.io using the following command and replacing the <code>${WEBMENTION_TOKEN}</code> with your own token.<pre class=language-bash data-lang=bash style=color:#fdf4c1aa;background-color:#282828><code class=language-bash data-lang=bash><span style=color:#fdf4c1>curl -s </span><span style=color:#b8bb26>"https://webmention.io/api/mentions.json?token=${</span><span style=color:#fdf4c1>WEBMENTION_TOKEN</span><span style=color:#b8bb26>}"</span><span style=color:#fdf4c1> -o webmentions.json
+</span></code></pre><p>This json file can be used to render the Webmentions on your website using your static site generator's feature to read json files.<p>I made and activity page in zola where all the webmention activities are listed.<details><summary>Zola Template HTML</summary> <p>This is located at <code>templates/activity.html</code> and used at <code>content/activity/_index.md</code></p> <p><code>templates/activity.html</code></p> <pre class=language-html data-lang=html style=color:#fdf4c1aa;background-color:#282828><code class=language-html data-lang=html><span>{% extends "base.html" %}
+</span><span>
+</span><span>{% block content %}
+</span><span>
+</span><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>div </span><span style=color:#8ec07c>class=</span><span style=color:#b8bb26>section</span><span style=color:#83a598>>
+</span><span>
+</span><span>{% set data = load_data(path="webmentions.json", format="json") %}
+</span><span>
+</span><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>div </span><span style=color:#8ec07c>class=</span><span style=color:#b8bb26>"activity-box"</span><span style=color:#83a598>>
+</span><span>{% for links in data.links %}
+</span><span>    {% set trimmed_path = links.target | trim_start_matches(pat="https://" ~ config.extra.url ~ "/") | trim_end_matches(pat="/") %}
+</span><span>    {% set relative_path = trimmed_path ~ ".md" %}
+</span><span>    {% set target_page = get_page(path=relative_path) %}
+</span><span>    {% if not links.source is starting_with("https://" ~ config.extra.url) %}
+</span><span>        {% if links.activity.type == "like" %}
+</span><span>            </span><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>div </span><span style=color:#8ec07c>class=</span><span style=color:#b8bb26>"mention-profile like"</span><span style=color:#83a598>>
+</span><span>                </span><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>code</span><span style=color:#83a598>><</span><span style=color:#8ec07c;font-weight:700>a </span><span style=color:#8ec07c>href=</span><span style=color:#b8bb26>"{{ links.source }}"</span><span style=color:#83a598>></span><span>{{ links.data.author.name }}</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>a</span><span style=color:#83a598>></span><span> liked </span><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>a </span><span style=color:#8ec07c>href=</span><span style=color:#b8bb26>"{{ links.target }}"</span><span style=color:#83a598>></span><span>{{ target_page.title }}</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>a</span><span style=color:#83a598>>&LT/</span><span style=color:#8ec07c;font-weight:700>code</span><span style=color:#83a598>>
+</span><span>            </span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>div</span><span style=color:#83a598>>
+</span><span>        {% endif %}
+</span><span>
+</span><span>        {% if links.activity.type == "link" %}
+</span><span>            </span><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>div </span><span style=color:#8ec07c>class=</span><span style=color:#b8bb26>"mention-profile link"</span><span style=color:#83a598>>
+</span><span>                </span><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>code</span><span style=color:#83a598>><</span><span style=color:#8ec07c;font-weight:700>a </span><span style=color:#8ec07c>href=</span><span style=color:#b8bb26>"{{ links.source }}"</span><span style=color:#83a598>></span><span>{{ links.data.author.name }}</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>a</span><span style=color:#83a598>></span><span> mentioned </span><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>a </span><span style=color:#8ec07c>href=</span><span style=color:#b8bb26>"{{ links.target }}"</span><span style=color:#83a598>></span><span>{{ target_page.title }}</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>a</span><span style=color:#83a598>>&LT/</span><span style=color:#8ec07c;font-weight:700>code</span><span style=color:#83a598>>
+</span><span>            </span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>div</span><span style=color:#83a598>>
+</span><span>        {% endif %}
+</span><span>
+</span><span>        {% if links.activity.type == "reply" %}
+</span><span>            </span><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>div </span><span style=color:#8ec07c>class=</span><span style=color:#b8bb26>"mention-profile reply"</span><span style=color:#83a598>>
+</span><span>                </span><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>code</span><span style=color:#83a598>><</span><span style=color:#8ec07c;font-weight:700>a </span><span style=color:#8ec07c>href=</span><span style=color:#b8bb26>"{{ links.source }}"</span><span style=color:#83a598>></span><span>{{ links.data.author.name }}</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>a</span><span style=color:#83a598>></span><span> replied to </span><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>a </span><span style=color:#8ec07c>href=</span><span style=color:#b8bb26>"{{ links.target }}"</span><span style=color:#83a598>></span><span>{{ target_page.title }}</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>a</span><span style=color:#83a598>>&LT/</span><span style=color:#8ec07c;font-weight:700>code</span><span style=color:#83a598>>
+</span><span>            </span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>div</span><span style=color:#83a598>>
+</span><span>        {% endif %}
+</span><span>    {% endif %}
+</span><span>{% endfor %}
+</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>div</span><span style=color:#83a598>>
+</span><span>
+</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>div</span><span style=color:#83a598>>
+</span><span>
+</span><span>{% endblock content %}
+</span></code></pre> <p><code>content/activity/_index.md</code></p> <pre class=language-md data-lang=md style=color:#fdf4c1aa;background-color:#282828><code class=language-md data-lang=md><span>+++
+</span><span>template = "activity.html"
+</span><span>+++
+</span></code></pre></details><p>Webmentions are rendered by zola utilizing the <code>load_data</code> function of tera templating engine. The fetched <code>webmention.json</code> file is parsed and formatted. [<em>Can be seen in <code>activity.html</code> in the above template.</em>]<h4 id=runner>Runner</h4><p>To rebuild the site by fetching new Webmentions we will need a runner that does the process repeatedly in said amount of time. This is where GitHub actions come in. I have three workflows <code>send-webmentions.yaml</code>, <code>zola.yml</code> and <code>fetch-webmentions.yaml</code> which as the name says, sends Webmentions from the site, builds the site using zola and fetches received Webmentions from <code>webmention.io</code>.<p>For fetching I have saved my webmention.app api key as a secret in GitHub and use that in the workflow file.<p>First put your token form webmention.io in <code>settings > security > secrets and variables > actions > new repository secret</code> of your GitHub repo with the name <code>WEBMENTION_TOKEN</code>.<p>Then, the workflow files should be put in place.<details><summary>Workflow Files</summary> <p>This is located at <code>.github/workflows/</code> from the root of your repository.</p> <p>First workflow fetches new mentions every 30 minutes.<br> <code>fetch-webmentions.yml</code></p> <pre class=language-yml data-lang=yml style=color:#fdf4c1aa;background-color:#282828><code class=language-yml data-lang=yml><span style=color:#8ec07c;font-weight:700>name</span><span>: </span><span style=color:#b8bb26>Fetch Webmentions
+</span><span>
+</span><span style=color:#d3869b>on</span><span>:
+</span><span>  </span><span style=color:#8ec07c;font-weight:700>push</span><span>:
+</span><span>    </span><span style=color:#8ec07c;font-weight:700>branches</span><span>:
+</span><span>      - </span><span style=color:#b8bb26>main
+</span><span>  </span><span style=color:#8ec07c;font-weight:700>schedule</span><span>:
+</span><span>    - </span><span style=color:#8ec07c;font-weight:700>cron</span><span>: </span><span style=color:#b8bb26>'*/30 * * * *'  </span><span style=color:#928374;font-style:italic># Runs every 30 minutes
+</span><span>  </span><span style=color:#8ec07c;font-weight:700>workflow_dispatch</span><span>:  </span><span style=color:#928374;font-style:italic># Allows manual triggering of the workflow if needed
+</span><span>
+</span><span style=color:#8ec07c;font-weight:700>jobs</span><span>:
+</span><span>  </span><span style=color:#8ec07c;font-weight:700>fetch_webmentions</span><span>:
+</span><span>    </span><span style=color:#8ec07c;font-weight:700>runs-on</span><span>: </span><span style=color:#b8bb26>ubuntu-latest
+</span><span>
+</span><span>    </span><span style=color:#8ec07c;font-weight:700>steps</span><span>:
+</span><span>      - </span><span style=color:#8ec07c;font-weight:700>name</span><span>: </span><span style=color:#b8bb26>Checkout Repository
+</span><span>        </span><span style=color:#8ec07c;font-weight:700>uses</span><span>: </span><span style=color:#b8bb26>actions/checkout@v4
+</span><span>
+</span><span>      - </span><span style=color:#8ec07c;font-weight:700>name</span><span>: </span><span style=color:#b8bb26>Fetch Webmentions
+</span><span>        </span><span style=color:#8ec07c;font-weight:700>env</span><span>:
+</span><span>          </span><span style=color:#8ec07c;font-weight:700>WEBMENTION_TOKEN</span><span>: </span><span style=color:#b8bb26>${{ secrets.WEBMENTION_TOKEN }}
+</span><span>        </span><span style=color:#8ec07c;font-weight:700>run</span><span>: </span><span style=color:#fa5c4b>|
+</span><span style=color:#b8bb26>          mkdir -p static/webmention
+</span><span style=color:#b8bb26>          # Fetch webmentions and save (overwrite) to a single file
+</span><span style=color:#b8bb26>          curl -s "https://webmention.io/api/mentions.json?token=${WEBMENTION_TOKEN}" -o static/webmentions.json
+</span><span style=color:#b8bb26>
+</span><span>      - </span><span style=color:#8ec07c;font-weight:700>name</span><span>: </span><span style=color:#b8bb26>Commit and Push Webmentions
+</span><span>        </span><span style=color:#8ec07c;font-weight:700>run</span><span>: </span><span style=color:#fa5c4b>|
+</span><span style=color:#b8bb26>          git config --global user.name "github-actions[bot]"
+</span><span style=color:#b8bb26>          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+</span><span style=color:#b8bb26>          git add static/webmentions.json
+</span><span style=color:#b8bb26>          git commit -m "Update webmentions" || echo "No changes to commit"
+</span><span style=color:#b8bb26>          # Pull latest changes from main with rebase to avoid conflicts
+</span><span style=color:#b8bb26>          git pull --rebase origin main
+</span><span style=color:#b8bb26>          # Now push the updated branch
+</span><span style=color:#b8bb26>          git push
+</span></code></pre> <p>Second workflow builds the site from the source after fetching the Webmentions.<br> <code>zola.yml</code></p> <pre class=language-yml data-lang=yml style=color:#fdf4c1aa;background-color:#282828><code class=language-yml data-lang=yml><span style=color:#8ec07c;font-weight:700>name</span><span>: </span><span style=color:#b8bb26>Zola on GitHub Pages
+</span><span>
+</span><span style=color:#d3869b>on</span><span>:
+</span><span>  </span><span style=color:#8ec07c;font-weight:700>workflow_run</span><span>:
+</span><span>    </span><span style=color:#8ec07c;font-weight:700>workflows</span><span>: [</span><span style=color:#b8bb26>"Fetch Webmentions"</span><span>]
+</span><span>    </span><span style=color:#8ec07c;font-weight:700>types</span><span>:
+</span><span>      - </span><span style=color:#b8bb26>completed
+</span><span>
+</span><span style=color:#8ec07c;font-weight:700>jobs</span><span>:
+</span><span>  </span><span style=color:#8ec07c;font-weight:700>build</span><span>:
+</span><span>    </span><span style=color:#8ec07c;font-weight:700>name</span><span>: </span><span style=color:#b8bb26>Publish site
+</span><span>    </span><span style=color:#8ec07c;font-weight:700>runs-on</span><span>: </span><span style=color:#b8bb26>ubuntu-latest
+</span><span>    </span><span style=color:#8ec07c;font-weight:700>steps</span><span>:
+</span><span>    - </span><span style=color:#8ec07c;font-weight:700>name</span><span>: </span><span style=color:#b8bb26>Checkout main
+</span><span>      </span><span style=color:#8ec07c;font-weight:700>uses</span><span>: </span><span style=color:#b8bb26>actions/checkout@v4
+</span><span>    - </span><span style=color:#8ec07c;font-weight:700>name</span><span>: </span><span style=color:#b8bb26>Build and deploy
+</span><span>      </span><span style=color:#8ec07c;font-weight:700>uses</span><span>: </span><span style=color:#b8bb26>shalzz/zola-deploy-action@v0.19.2
+</span><span>      </span><span style=color:#8ec07c;font-weight:700>env</span><span>:
+</span><span>        </span><span style=color:#8ec07c;font-weight:700>GITHUB_TOKEN</span><span>: </span><span style=color:#b8bb26>${{ secrets.GITHUB_TOKEN }}
+</span></code></pre> <p>Third workflow sends Webmentions from the detected links in the newly generated <code>atom.xml</code>.<br> <code>send-webmentions.yml</code></p> <pre class=language-yml data-lang=yml style=color:#fdf4c1aa;background-color:#282828><code class=language-yml data-lang=yml><span style=color:#8ec07c;font-weight:700>name</span><span>: </span><span style=color:#b8bb26>Send Webmentions
+</span><span style=color:#d3869b>on</span><span>:
+</span><span>  </span><span style=color:#8ec07c;font-weight:700>workflow_run</span><span>:
+</span><span>    </span><span style=color:#8ec07c;font-weight:700>workflows</span><span>: [</span><span style=color:#b8bb26>"Zola on GitHub Pages"</span><span>]
+</span><span>    </span><span style=color:#8ec07c;font-weight:700>types</span><span>:
+</span><span>      - </span><span style=color:#b8bb26>completed
+</span><span style=color:#8ec07c;font-weight:700>jobs</span><span>:
+</span><span>  </span><span style=color:#8ec07c;font-weight:700>send_webmentions</span><span>:
+</span><span>    </span><span style=color:#8ec07c;font-weight:700>name</span><span>: </span><span style=color:#b8bb26>Send Webmentions with Delay
+</span><span>    </span><span style=color:#8ec07c;font-weight:700>runs-on</span><span>: </span><span style=color:#b8bb26>ubuntu-latest
+</span><span>    </span><span style=color:#8ec07c;font-weight:700>steps</span><span>:
+</span><span>      - </span><span style=color:#8ec07c;font-weight:700>name</span><span>: </span><span style=color:#b8bb26>Checkout Repository
+</span><span>        </span><span style=color:#8ec07c;font-weight:700>uses</span><span>: </span><span style=color:#b8bb26>actions/checkout@v4
+</span><span>        
+</span><span>      - </span><span style=color:#8ec07c;font-weight:700>name</span><span>: </span><span style=color:#b8bb26>Wait for Delay
+</span><span>        </span><span style=color:#8ec07c;font-weight:700>run</span><span>: </span><span style=color:#b8bb26>sleep 60  </span><span style=color:#928374;font-style:italic># Waits for 1 minute (60 seconds) before running the next steps
+</span><span>        
+</span><span>      - </span><span style=color:#8ec07c;font-weight:700>name</span><span>: </span><span style=color:#b8bb26>Read Site URL from CNAME
+</span><span>        </span><span style=color:#8ec07c;font-weight:700>id</span><span>: </span><span style=color:#b8bb26>get_url
+</span><span>        </span><span style=color:#8ec07c;font-weight:700>run</span><span>: </span><span style=color:#fa5c4b>|
+</span><span style=color:#b8bb26>          SITE_URL=$(cat static/CNAME)
+</span><span style=color:#b8bb26>          echo "site_url=$SITE_URL" >> $GITHUB_OUTPUT
+</span><span style=color:#b8bb26>        
+</span><span>      - </span><span style=color:#8ec07c;font-weight:700>name</span><span>: </span><span style=color:#b8bb26>Install Webmention Package
+</span><span>        </span><span style=color:#8ec07c;font-weight:700>run</span><span>: </span><span style=color:#b8bb26>npm install @remy/webmention
+</span><span>        
+</span><span>      - </span><span style=color:#8ec07c;font-weight:700>name</span><span>: </span><span style=color:#b8bb26>Send Webmentions
+</span><span>        </span><span style=color:#8ec07c;font-weight:700>run</span><span>: </span><span style=color:#b8bb26>npx webmention https://${{ steps.get_url.outputs.site_url }}/atom.xml --limit=0 --send
+</span></code></pre></details><h2 id=sending-webmentions-1>Sending Webmentions</h2><p>In order to send Webmentions, the content should be formatted accordingly. In general I like to utilize three activities to send Webmentions. [<em>It is preferred to only use one activity for one mention.</em>]<h3 id=mention>Mention</h3><p>One can mention a site using webmention by simply putting the link to the page being mentioned. The site will get the webmention if it supports it.<pre class=language-md data-lang=md style=color:#fdf4c1aa;background-color:#282828><code class=language-md data-lang=md><span>[Void Bed](https://flux.carboxi.de/void-bed/) by flux.
+</span><span>or
+</span><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>a </span><span style=color:#8ec07c>href=</span><span style=color:#b8bb26>"https://flux.carboxi.de/void-bed/"</span><span style=color:#83a598>></span><span>Void Bed</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>a</span><span style=color:#83a598>></span><span> by flux
+</span></code></pre><h3 id=like>Like</h3><p>One can like a post using webmention by formatting the link as follows:<pre class=language-md data-lang=md style=color:#fdf4c1aa;background-color:#282828><code class=language-md data-lang=md><span>I like how flux talks about his bed in </span><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>a </span><span style=color:#8ec07c>class=</span><span style=color:#b8bb26>"u-like-of" </span><span style=color:#8ec07c>href=</span><span style=color:#b8bb26>"https://flux.carboxi.de/void-bed/"</span><span style=color:#83a598>></span><span>Void Bed</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>a</span><span style=color:#83a598>>
+</span></code></pre><p>I like how flux talks about his bed in <a class=u-like-of href=https://flux.carboxi.de/void-bed/>Void Bed</a><h3 id=reply>Reply</h3><p>One can reply to a post by formatting the link and the text as follows:<pre class=language-md data-lang=md style=color:#fdf4c1aa;background-color:#282828><code class=language-md data-lang=md><span style=color:#83a598><</span><span style=color:#8ec07c;font-weight:700>a </span><span style=color:#8ec07c>class=</span><span style=color:#b8bb26>"u-in-reply-to" </span><span style=color:#8ec07c>href=</span><span style=color:#b8bb26>"https://flux.carboxi.de/void-bed/"</span><span style=color:#83a598>></span><span>Void Bed</span><span style=color:#83a598>&LT/</span><span style=color:#8ec07c;font-weight:700>a</span><span style=color:#83a598>>
+</span><span>
+</span><span>I feel the same about my bed. Nice writing flux!
+</span></code></pre><h3 id=bridges>Bridges</h3><p>Though I have connected this site to the fediverse with Bridgy Fed, it is opt in using a zola shortcode. Because, I want the articles to have a "blog interaction" from other peoples blog but not from the social media. But, I do use bridgy on my short posts sometimes. <a href=/syndications/posse-2024-11-05/>Webmentions</a> and <a href=/syndications/posse-2025-02-04/>Linux is/not Difficult</a> are some posts I have used bridgy with and they also work as example posts to see how different webmention activities look like in my website.<h2 id=lastly>Lastly</h2><p>I had forgotten about webmentions and interactions on my site, but I recently read a post from Joel titled <a href=https://joelchrono.xyz/blog/webmentions-but-manual/>Webmentions but manual (for Jekyll)</a> and people giving names to the interactions really caught my attention. I haven't given it a name because mine are just Webmentions but I feel like Webmentions are still a good option to have <em>(with much less spam)</em> for interaction if it isn't connected to an actual social media. Some other posts I read were: [<em>At least for the sake of just pinging them.</em>]<p><a href=https://notes.jeddacp.com/implementing-community-echoes/>Implementing Community Echoes</a><br> <a href=https://forkingmad.blog/blog-interactions/>Blog interactions</a><br> <a href=https://kevquirk.com/blog/what-others-said>What Others Said...</a><p>I hope webmention on blogging sites takes off. Or maybe it has already taken off. I want the future where everyone can express themselves with their own taste and creativity not having to compromise personality for protocols.</div></div></div><div id=webmention><hr><h2>Webmentions</h2><form action=https://webmention.io/scientiac.space/webmention class=webmention-form method=post><div id=email-comment><p>Have you written a <a href=https://indieweb.org/responses>response</a> to this? Let me know the URL, Or, you can send your response via <a href="mailto:iac@scientiac.space?subject=Reply%3A%20Static%20Site%20Webmentions">mail:</a><code>iac@scientiac.space</code></div><div class=send-webmention><input name=source type=url><button>Send Webmention</button></div><div><div class="ui message"></div></div><input name=target type=hidden value=https://scientiac.space/blog/webmentions/></form><div class=interaction-box><div class="mention-profile link"><a href=https://islandinthenet.com/sn/142426/> <img src="https://secure.gravatar.com/avatar/2f88c80005db8d6bc27301a3023cc557e267ae64b6ccd8dd5773120511910312?s=32&r=pg"> </a></div><div class="mention-profile like"><a href=https://artlung.com/likes/1899173ed83d619aa896dd702afe1dea> <img src=https://artlung.com/blog/wp-content/uploads/2023/02/IMG_9150-100x100@2x.jpeg> </a></div><div class="mention-profile link"><a href=https://node.lordmatt.co.uk/2025/09/09/posts/i-love-to-see-new-uptake-of-webmention/> <img src="https://secure.gravatar.com/avatar/f88b8edb210aacdd9582bc28a19357263c2de48976b07da93f41d9df45c6fab7?s=90&d=retro&r=g"> </a></div></div></div></div><script defer src=/assets/js/themeSelector.js></script></section><div class=hidden><a href=https://polymaths.social/@iac rel=me>Fediverse</a></div><div class="hidden h-card"><img class="u-photo icon" alt=scientiac src=/res/thumbnail.png><a class="p-name u-url" href=https://scientiac.space rel=me>scientiac</a><p class=p-note>A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does.</div><footer><p class=codewithlove>I can't think of things to write on a footer. So, just <span class=main-background>imagine</span> something yourself.<p><a href=/series>Series</a> | <a href=/atom.xml>RSS</a> | <a href=https://github.com/scientiac/scientiac.github.io target=_blank>Source Code</a><p>All articles are usable under <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank>CC BY-SA 4.0</a>.</footer><ol id=themeSelector reversed></ol>

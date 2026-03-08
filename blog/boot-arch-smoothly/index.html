@@ -1,0 +1,413 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><script>(()=>{try{const a={light:`gruvbox-light`,dark:`night-solis`};const b=window.matchMedia(`(prefers-color-scheme: dark)`).matches;const c=localStorage.theme||(b?a.dark:a.light);document.documentElement.dataset.theme=c}catch(a){}})()</script><link href=/assets/css/themes.css rel=stylesheet><link href=/assets/css/readable.css rel=stylesheet><link href=/assets/css/global.css rel=stylesheet><link href=/assets/css/fonts.css rel=stylesheet><link href=/assets/css/logo.css rel=stylesheet><link href=/assets/css/genre/Reports.css rel=stylesheet><link href=https://scientiac.space/atom.xml rel=alternate title=RSS type=application/atom+xml><meta content=Reports property=og:type><meta content=scientiac.space property=og:site_name><meta content=https://scientiac.space/res/thumbnail-light.png property=og:image><title>Booting Arch Linux Smoothly</title><meta content="Booting Arch Linux Smoothly" name=og:title><meta content="My Device
+
+                  -`                     scientiac@einstein
+                 .o+`                    ------------------
+                `ooo/                    OS: Arch Linux x86_64
+               `+oooo:                   Host: ASUS Zenbook 14 UM3406HA_UM3406HA (1.0)
+              `+oooooo:                  Kernel: Linux 6.15.4-arch2-1
+              -+oooooo+:                 Uptime: 31 mins
+            `/:-:++oooo+:                Packages: 997 (pacman)
+           `/++++/+++++++:               Shell: zsh 5.9
+          `/++++++++++++++:              Display (SDC419D): 2880x1800 @ 60 Hz (as 1440x900) in 14&ampquot; [Built-in]
+         `/+++ooooooooooooo/`            WM: niri (Wayland)
+        ./ooosssso++osssssso+`           Cursor: Adwaita (24px)
+       .oossssso-````/ossssss+`          Terminal: ghostty 1.1.3-arch1
+      -osssssso.      :ssssssso.         Terminal Font: FantasqueSansM Nerd Font Mono (11pt)
+     :osssssss/        osssso+++.        CPU: AMD Ryzen 7 8840HS (16) @ 5.13 GHz
+    /ossssssss/        +ssssooo/-        GPU: AMD Radeon 780M Graphics [Integrated]
+  `/ossssso+/:-        -:/+osssso+-      Memory: 2.51 GiB / 14.91 GiB (17%)
+ `+sso+:-`                 `.-/+oso:     Swap: 0 B / 4.00 GiB (0%)
+`++:.                           `-/+/    Disk (/): 20.95 GiB / 475.94 GiB (4%) - btrfs
+.`                                 `/    Local IP (wlan0): 192.168.1.71/24
+                                         Battery (ASUS Battery): 52% [Discharging]
+                                         Locale: en_US.UTF-8
+
+
+Firstly...
+My friend challenged me to achieve flicker free boot on my laptop like someone achieved it many-many years ago, and said if fedora can do it by default why can't we?
+
+
+Technically he didn't challenge me, he only mentioned that it was possible. And, I took it as a challenge. Because I know that linux can be as smooth and polished looking as
+other commercial OS offerings. And I want my laptop to be as smooth as possible and as clean looking as possible.
+So, I tried.
+How did you start?
+The only thing I didn't really want to do was reinstall my OS again. But, I had to.
+I had never used the Unified Kernel Image (UKI) and I was using systemd-boot as my bootloader.
+So, the bootloader had to go and UKI had to be installed.
+
+	Note
+	1. When installing Arch Linux, use UKI Unified Kernel Image and instead of using a bootloader, use EFIstub (EFI Boot Stub)
+
+
+I used archinstall and it had both of these options. It was very easy. I picked all other configurations as I used to do and just installed the system.
+After Installation
+I had to change the kernel parameters, to make all those text go away. So, I tried using efibootmgr and failed again and again.
+I couldn't for science's sake use it properly. Once, I tried using the script recommended by the arch-wiki, the boot process flickered more than It had ever flickered.
+Luckily it hadn't removed the original entry and efibootmgr had a way to remove the broken entries, so I brought everything back to normal and tried it a countless times, failing each time.
+I gave up on efibootmgr, from previous experiences with booting with a splash screen, I knew plymouth was a thing. So, I installed it. And went searching for ways to put kernel-parameters during boot. Plymouth needed quiet splash to work.
+Then, I found /etc/kernel/cmdline. I added quiet splash to the end of the line and then rebooted. It showed no changes.
+I found out that I had to rebuild the initial ramdisk environment. In other words I had to run:
+
+# To (re-)generate initramfs images based on all existing presets, the -P/--allpresets switch is used. 
+sudo mkinitcpio -P
+
+
+
+	Note
+	2. To add kernel parameters, you need to append the text on /etc/kernel/cmdline and then, rebuild the initramfs image using sudo mkinitcpio -P.
+
+
+My /etc/kernel/cmdline looks like this:
+
+root=PARTUUID=4638cd24-77e4-4ed3-bb8a-9478d9c2d2db zswap.enabled=0 rw rootfstype=btrfs quiet loglevel=3 udev.log-priority=3 systemd.show_status=false splash
+
+
+The part until rootfstyps=btrfs was autogenerated during installation and I added the rest afterwards.
+Now, It Worked! But, it was the same(somewhat). The splash animation for ASUS ran, then it showed me a big Arch Linux logo, then the screen went black and then the splash screen reappeared and it dropped me to my login manager. This was the behavior it used to show before I installed arch without doing anything I previously did. Basically, I was back to how it was before I reinstalled my OS. All that copying and configuring for nothing.
+Why you should not give up
+So, I started putting different kernel params to check if one of it worked and if any of it removed blackout before showing me the splash screen again. The wiki for silent boot suggested I put loglevel=3 systemd.show_status=auto rd.udev.log_level=3 in the kernel parameters.
+It also said:
+
+If you also want to stop systemd from printing its version number when booting, you should also append udev.log_level=3 to your kernel parameters. If systemd is used in an initramfs, append rd.udev.log_level=3 instead.
+
+Since, I wasn't using systemd in the initramfs, I used udev.log_level=3 instead. Then I rebuilt the initramfs and rebooted. It was the same.
+
+	Note
+	3. Append quiet loglevel=3 udev.log-priority=3 systemd.show_status=false splash in /etc/kernel/cmdline to enable splash and quiet out the logs.
+
+
+Then I became desperate and started looking everywhere; forums, wikis, even YouTube comment section. And, you know what? YouTube comments helped for once.
+
+This comment is from the YouTube video I have linked above.
+I finally realised, plymouth was the culprit. The kernel had to hand over the process to plymouth and it caused the delay after the big Arch Linux logo.
+I also found out that kernel itself can render the logo without plymouth, that was how the Arch Linux Logo was being rendered even before plymouth had started.
+If only, I had read the silent boot wiki entry properly:
+
+To prevent the kernel from blanking the vendor logo, Linux 4.19 introduced a new configuration option FRAMEBUFFER_CONSOLE_DEFERRED_TAKEOVER that retains the contents of the framebuffer until text needs to be printed on the framebuffer console. Since version 4.19.arch1, the official Arch Linux kernels are compiled with CONFIG_FRAMEBUFFER_CONSOLE_DEFERRED_TAKEOVER=y.
+
+Thanks to arch I didn't have to recompile the kernel to get that.
+
+	Tip
+	There is no need to use plymouth because the Linux kernel can show splash images by itself and enabling both only makes the process less smoother.
+
+
+It still wasn't &#34smooth&#34
+I didn't want the Arch Linux logo, I wanted my vendor logo to be continued, like it was still booting until my login screen appeared.
+If only I can replace the &#34Arch Linux&#34 logo with bgrt (The vendor's splash logo). So, I went looking where I could change that.
+
+The Boot Graphics Record Table (BGRT) is an optional ACPI table which contains a pointer to the image that has been drawn during boot.
+
+I found /etc/mkinitcpio.d/linux.preset to be the exact thing I was looking for. And from the name itself I knew I needed to rebuild the initramfs again for the changes to be reflected.
+I had to change the following line in linux.preset:
+
+default_options=&ampquot;--splash /usr/share/systemd/bootctl/splash-arch.bmp&ampquot;
+
+
+My first instinct was to go to /usr/share/systemd/bootctl/ and rm splash-arch.bmp. I did that and rebooted, Now, It showed black screen until the login manager showed up.
+It was progress.
+Then I found my bgrt image in /sys/firmware/acpi/bgrt/ it was named image with no file extension.
+So, I changed the above line to:
+
+ default_options=&ampquot;--splash /sys/firmware/acpi/bgrt/image&ampquot;
+
+
+Then I rebuilt the initramfs and rebooted. To be greeted with a smooth boot. Like I wanted it to be. Showing bgrt until the login manager showed up.
+
+	Note
+	4. Change the default_options= configuration to /sys/firmware/acpi/bgrt/image in /etc/mkinitcpio.d/linux.preset then rebuild the initramfs by doing sudo mkinitcpio -P.
+
+
+It was not as &#34smooth&#34 as plymouth
+The booting process was good and how I wanted it to be, but when it came to rebooting it showed:
+
+[    54.796241] watchdog: watchdog0: watchdog did not stop!
+[    54.918590] watchdog: watchdog0: watchdog did not stop!
+[    55.597358] reboot: Restarting system
+
+
+I didn't want that to show up and with a bit of research, I came to a conclusion that disabling watchdog was fine so I did. I edited /etc/modprobe.d/blacklist.conf and added blacklist sp5100_tco. Intel users are supposed to blacklist iTCO_wdt or the watchdog that their system used.
+Now my /etc/modprobe.d/blacklist.conf has:
+
+# Do not load the watchdog module on boot.
+blacklist sp5100_tco
+
+
+
+	Note
+	5. Blacklist your watchdog so you don't get watchdog messages when rebooting and powering off by editing /etc/modprobe.d/blacklist.conf.
+
+
+I don't like having nice things
+What I did above is enough to get flicker free boot/smooth boot or whatever you call it, but I wanted more, I want plymouth to work without flicker. Spoiler: I couldn't.
+Anyway, I switched to systemd instead of udev so my /etc/mkinitcpio.conf has the following hooks now:
+
+HOOKS=(base systemd modconf autodetect kms keyboard sd-vconsole block filesystems fsck plymouth)
+
+
+I reinstalled plymouth, and I like it when it smoothly transitions to GDM instead of flashing me to GDM. It was a tradeoff between GDM flash or just flicker when loading spalash screen.
+I added more kernel parameters to mitigate the flashing but I couldn't do it.
+
+root=PARTUUID=4638cd24-77e4-4ed3-bb8a-9478d9c2d2db zswap.enabled=0 rw rootfstype=btrfs amdgpu.modeset=1 amdgpu.dc=1 video=efifb:keep plymouth.use-simpledrm quiet vt.global_cursor_default=0 loglevel=3 rd.udev.log_level=3 systemd.show_status=auto splash
+
+
+plymouth.use-simpledrm does start plymouth immediately but when the amdgpu driver is ready it mode-switches to it and the black screen appears. I can technically use nomodeset and achieve true flicker free boot with plymouth and everything but then I lose out on my graphics driver setting dpi scaling and brightness and more for me on boot.
+I even tried setting /etc/plymouth/plymouthd.conf to delay it's starting but it still doesn't stop flickering. It either flickers or it skips and I get the UKI splash screen until the login manager.
+
+[Daemon]
+ShowDelay=0
+DeviceTimeout=30
+
+
+I think I will just remove the plymouth configuration since it isn't helping anything. Or maybe I'll just leave it there because it is not doing anything.
+Removing Arch Linux Logo
+To remove the logo from GDM I quickly installed gdm-settings and there was a toggle which I turned off.
+I didn't like the logo shown by plymouth during boot either, so I just removed the image watermark.png from the spinner theme in /usr/share/plymouth/themes/spinner/. I also removed all animation and throbber images just to make everything clean.
+Conclusion
+I did eventually come back to &#34not so smooth boot&#34 but I am one sudo pacman -R plymouth away from it. Furthermore, I can boast about having 3 splash screens that look the same transitioning seamlessly*, even 4 if you count the UEFI animation.
+It goes as follows:
+
+UEFI animation starts and ends.
+UKI Splash Screen starts and ends.
+simpledrm backed plymouth bgrt theme starts and screen goes blank.
+amdgpu backed plymouth screen gradually appears and transitions to GDM.
+
+But, if I remove plymouth:
+
+UEFI animation starts and ends.
+UKI Splash Screen starts and drops me to GDM.
+
+" name=description><meta content="My Device
+
+                  -`                     scientiac@einstein
+                 .o+`                    ------------------
+                `ooo/                    OS: Arch Linux x86_64
+               `+oooo:                   Host: ASUS Zenbook 14 UM3406HA_UM3406HA (1.0)
+              `+oooooo:                  Kernel: Linux 6.15.4-arch2-1
+              -+oooooo+:                 Uptime: 31 mins
+            `/:-:++oooo+:                Packages: 997 (pacman)
+           `/++++/+++++++:               Shell: zsh 5.9
+          `/++++++++++++++:              Display (SDC419D): 2880x1800 @ 60 Hz (as 1440x900) in 14&ampquot; [Built-in]
+         `/+++ooooooooooooo/`            WM: niri (Wayland)
+        ./ooosssso++osssssso+`           Cursor: Adwaita (24px)
+       .oossssso-````/ossssss+`          Terminal: ghostty 1.1.3-arch1
+      -osssssso.      :ssssssso.         Terminal Font: FantasqueSansM Nerd Font Mono (11pt)
+     :osssssss/        osssso+++.        CPU: AMD Ryzen 7 8840HS (16) @ 5.13 GHz
+    /ossssssss/        +ssssooo/-        GPU: AMD Radeon 780M Graphics [Integrated]
+  `/ossssso+/:-        -:/+osssso+-      Memory: 2.51 GiB / 14.91 GiB (17%)
+ `+sso+:-`                 `.-/+oso:     Swap: 0 B / 4.00 GiB (0%)
+`++:.                           `-/+/    Disk (/): 20.95 GiB / 475.94 GiB (4%) - btrfs
+.`                                 `/    Local IP (wlan0): 192.168.1.71/24
+                                         Battery (ASUS Battery): 52% [Discharging]
+                                         Locale: en_US.UTF-8
+
+
+Firstly...
+My friend challenged me to achieve flicker free boot on my laptop like someone achieved it many-many years ago, and said if fedora can do it by default why can't we?
+
+
+Technically he didn't challenge me, he only mentioned that it was possible. And, I took it as a challenge. Because I know that linux can be as smooth and polished looking as
+other commercial OS offerings. And I want my laptop to be as smooth as possible and as clean looking as possible.
+So, I tried.
+How did you start?
+The only thing I didn't really want to do was reinstall my OS again. But, I had to.
+I had never used the Unified Kernel Image (UKI) and I was using systemd-boot as my bootloader.
+So, the bootloader had to go and UKI had to be installed.
+
+	Note
+	1. When installing Arch Linux, use UKI Unified Kernel Image and instead of using a bootloader, use EFIstub (EFI Boot Stub)
+
+
+I used archinstall and it had both of these options. It was very easy. I picked all other configurations as I used to do and just installed the system.
+After Installation
+I had to change the kernel parameters, to make all those text go away. So, I tried using efibootmgr and failed again and again.
+I couldn't for science's sake use it properly. Once, I tried using the script recommended by the arch-wiki, the boot process flickered more than It had ever flickered.
+Luckily it hadn't removed the original entry and efibootmgr had a way to remove the broken entries, so I brought everything back to normal and tried it a countless times, failing each time.
+I gave up on efibootmgr, from previous experiences with booting with a splash screen, I knew plymouth was a thing. So, I installed it. And went searching for ways to put kernel-parameters during boot. Plymouth needed quiet splash to work.
+Then, I found /etc/kernel/cmdline. I added quiet splash to the end of the line and then rebooted. It showed no changes.
+I found out that I had to rebuild the initial ramdisk environment. In other words I had to run:
+
+# To (re-)generate initramfs images based on all existing presets, the -P/--allpresets switch is used. 
+sudo mkinitcpio -P
+
+
+
+	Note
+	2. To add kernel parameters, you need to append the text on /etc/kernel/cmdline and then, rebuild the initramfs image using sudo mkinitcpio -P.
+
+
+My /etc/kernel/cmdline looks like this:
+
+root=PARTUUID=4638cd24-77e4-4ed3-bb8a-9478d9c2d2db zswap.enabled=0 rw rootfstype=btrfs quiet loglevel=3 udev.log-priority=3 systemd.show_status=false splash
+
+
+The part until rootfstyps=btrfs was autogenerated during installation and I added the rest afterwards.
+Now, It Worked! But, it was the same(somewhat). The splash animation for ASUS ran, then it showed me a big Arch Linux logo, then the screen went black and then the splash screen reappeared and it dropped me to my login manager. This was the behavior it used to show before I installed arch without doing anything I previously did. Basically, I was back to how it was before I reinstalled my OS. All that copying and configuring for nothing.
+Why you should not give up
+So, I started putting different kernel params to check if one of it worked and if any of it removed blackout before showing me the splash screen again. The wiki for silent boot suggested I put loglevel=3 systemd.show_status=auto rd.udev.log_level=3 in the kernel parameters.
+It also said:
+
+If you also want to stop systemd from printing its version number when booting, you should also append udev.log_level=3 to your kernel parameters. If systemd is used in an initramfs, append rd.udev.log_level=3 instead.
+
+Since, I wasn't using systemd in the initramfs, I used udev.log_level=3 instead. Then I rebuilt the initramfs and rebooted. It was the same.
+
+	Note
+	3. Append quiet loglevel=3 udev.log-priority=3 systemd.show_status=false splash in /etc/kernel/cmdline to enable splash and quiet out the logs.
+
+
+Then I became desperate and started looking everywhere; forums, wikis, even YouTube comment section. And, you know what? YouTube comments helped for once.
+
+This comment is from the YouTube video I have linked above.
+I finally realised, plymouth was the culprit. The kernel had to hand over the process to plymouth and it caused the delay after the big Arch Linux logo.
+I also found out that kernel itself can render the logo without plymouth, that was how the Arch Linux Logo was being rendered even before plymouth had started.
+If only, I had read the silent boot wiki entry properly:
+
+To prevent the kernel from blanking the vendor logo, Linux 4.19 introduced a new configuration option FRAMEBUFFER_CONSOLE_DEFERRED_TAKEOVER that retains the contents of the framebuffer until text needs to be printed on the framebuffer console. Since version 4.19.arch1, the official Arch Linux kernels are compiled with CONFIG_FRAMEBUFFER_CONSOLE_DEFERRED_TAKEOVER=y.
+
+Thanks to arch I didn't have to recompile the kernel to get that.
+
+	Tip
+	There is no need to use plymouth because the Linux kernel can show splash images by itself and enabling both only makes the process less smoother.
+
+
+It still wasn't &#34smooth&#34
+I didn't want the Arch Linux logo, I wanted my vendor logo to be continued, like it was still booting until my login screen appeared.
+If only I can replace the &#34Arch Linux&#34 logo with bgrt (The vendor's splash logo). So, I went looking where I could change that.
+
+The Boot Graphics Record Table (BGRT) is an optional ACPI table which contains a pointer to the image that has been drawn during boot.
+
+I found /etc/mkinitcpio.d/linux.preset to be the exact thing I was looking for. And from the name itself I knew I needed to rebuild the initramfs again for the changes to be reflected.
+I had to change the following line in linux.preset:
+
+default_options=&ampquot;--splash /usr/share/systemd/bootctl/splash-arch.bmp&ampquot;
+
+
+My first instinct was to go to /usr/share/systemd/bootctl/ and rm splash-arch.bmp. I did that and rebooted, Now, It showed black screen until the login manager showed up.
+It was progress.
+Then I found my bgrt image in /sys/firmware/acpi/bgrt/ it was named image with no file extension.
+So, I changed the above line to:
+
+ default_options=&ampquot;--splash /sys/firmware/acpi/bgrt/image&ampquot;
+
+
+Then I rebuilt the initramfs and rebooted. To be greeted with a smooth boot. Like I wanted it to be. Showing bgrt until the login manager showed up.
+
+	Note
+	4. Change the default_options= configuration to /sys/firmware/acpi/bgrt/image in /etc/mkinitcpio.d/linux.preset then rebuild the initramfs by doing sudo mkinitcpio -P.
+
+
+It was not as &#34smooth&#34 as plymouth
+The booting process was good and how I wanted it to be, but when it came to rebooting it showed:
+
+[    54.796241] watchdog: watchdog0: watchdog did not stop!
+[    54.918590] watchdog: watchdog0: watchdog did not stop!
+[    55.597358] reboot: Restarting system
+
+
+I didn't want that to show up and with a bit of research, I came to a conclusion that disabling watchdog was fine so I did. I edited /etc/modprobe.d/blacklist.conf and added blacklist sp5100_tco. Intel users are supposed to blacklist iTCO_wdt or the watchdog that their system used.
+Now my /etc/modprobe.d/blacklist.conf has:
+
+# Do not load the watchdog module on boot.
+blacklist sp5100_tco
+
+
+
+	Note
+	5. Blacklist your watchdog so you don't get watchdog messages when rebooting and powering off by editing /etc/modprobe.d/blacklist.conf.
+
+
+I don't like having nice things
+What I did above is enough to get flicker free boot/smooth boot or whatever you call it, but I wanted more, I want plymouth to work without flicker. Spoiler: I couldn't.
+Anyway, I switched to systemd instead of udev so my /etc/mkinitcpio.conf has the following hooks now:
+
+HOOKS=(base systemd modconf autodetect kms keyboard sd-vconsole block filesystems fsck plymouth)
+
+
+I reinstalled plymouth, and I like it when it smoothly transitions to GDM instead of flashing me to GDM. It was a tradeoff between GDM flash or just flicker when loading spalash screen.
+I added more kernel parameters to mitigate the flashing but I couldn't do it.
+
+root=PARTUUID=4638cd24-77e4-4ed3-bb8a-9478d9c2d2db zswap.enabled=0 rw rootfstype=btrfs amdgpu.modeset=1 amdgpu.dc=1 video=efifb:keep plymouth.use-simpledrm quiet vt.global_cursor_default=0 loglevel=3 rd.udev.log_level=3 systemd.show_status=auto splash
+
+
+plymouth.use-simpledrm does start plymouth immediately but when the amdgpu driver is ready it mode-switches to it and the black screen appears. I can technically use nomodeset and achieve true flicker free boot with plymouth and everything but then I lose out on my graphics driver setting dpi scaling and brightness and more for me on boot.
+I even tried setting /etc/plymouth/plymouthd.conf to delay it's starting but it still doesn't stop flickering. It either flickers or it skips and I get the UKI splash screen until the login manager.
+
+[Daemon]
+ShowDelay=0
+DeviceTimeout=30
+
+
+I think I will just remove the plymouth configuration since it isn't helping anything. Or maybe I'll just leave it there because it is not doing anything.
+Removing Arch Linux Logo
+To remove the logo from GDM I quickly installed gdm-settings and there was a toggle which I turned off.
+I didn't like the logo shown by plymouth during boot either, so I just removed the image watermark.png from the spinner theme in /usr/share/plymouth/themes/spinner/. I also removed all animation and throbber images just to make everything clean.
+Conclusion
+I did eventually come back to &#34not so smooth boot&#34 but I am one sudo pacman -R plymouth away from it. Furthermore, I can boast about having 3 splash screens that look the same transitioning seamlessly*, even 4 if you count the UEFI animation.
+It goes as follows:
+
+UEFI animation starts and ends.
+UKI Splash Screen starts and ends.
+simpledrm backed plymouth bgrt theme starts and screen goes blank.
+amdgpu backed plymouth screen gradually appears and transitions to GDM.
+
+But, if I remove plymouth:
+
+UEFI animation starts and ends.
+UKI Splash Screen starts and drops me to GDM.
+
+" name=og:description><link rel="shortcut icon" href=/res/thumbnail.svg type=image/x-icon><meta content="width=device-width,initial-scale=1" name=viewport><meta content="rgb(253, 246, 227)" name=theme-color><script defer src=/assets/js/copy-button.js></script><link href=https://github.com/scientiac rel=me><link href=mailto:spandan@scientiac.space rel=me><link href=https://webmention.io/scientiac.space/webmention rel=webmention><meta content=@iac@polymaths.social name=fediverse:creator><body onload=updateThemeSelector();><div class=logo-container><a href=/> <div class=inner-logo-container></div> </a></div><nav data-style=classy><span><a href=/>Main</a></span><span><a href=/blog>Blog</a></span><span><a href=/syndications>Ping</a></span><span><a href=/more>More</a></span></nav><section class=section-body><div class=container><div class=h-entry><a class="u-url hidden" href=https://scientiac.space/blog/boot-arch-smoothly/>https://scientiac.space/blog/boot-arch-smoothly/</a><div class=section><h1 class="p-name title">Booting Arch Linux Smoothly</h1><div class=pagedate><time class="dt-published dateandtag hidden" datetime=2025-07-05T00:00:00Z> 2025-07-05 </time><code class=dateandtag>2025-07-05</code><code class="u-category dateandtag">Reports</code></div><p><div class="hidden p-author h-card"><a class=u-url href=https://scientiac.space rel=me> <img alt="Profile photo of scientiac" class=u-photo src=/res/thumbnail.png> <span class=p-name>scientiac</span> </a></div><div class=e-content><h2 id=my-device>My Device</h2><pre style=color:#fdf4c1aa;background-color:#282828><code><span>
+</span><span>                  -`                     scientiac@einstein
+</span><span>                 .o+`                    ------------------
+</span><span>                `ooo/                    OS: Arch Linux x86_64
+</span><span>               `+oooo:                   Host: ASUS Zenbook 14 UM3406HA_UM3406HA (1.0)
+</span><span>              `+oooooo:                  Kernel: Linux 6.15.4-arch2-1
+</span><span>              -+oooooo+:                 Uptime: 31 mins
+</span><span>            `/:-:++oooo+:                Packages: 997 (pacman)
+</span><span>           `/++++/+++++++:               Shell: zsh 5.9
+</span><span>          `/++++++++++++++:              Display (SDC419D): 2880x1800 @ 60 Hz (as 1440x900) in 14" [Built-in]
+</span><span>         `/+++ooooooooooooo/`            WM: niri (Wayland)
+</span><span>        ./ooosssso++osssssso+`           Cursor: Adwaita (24px)
+</span><span>       .oossssso-````/ossssss+`          Terminal: ghostty 1.1.3-arch1
+</span><span>      -osssssso.      :ssssssso.         Terminal Font: FantasqueSansM Nerd Font Mono (11pt)
+</span><span>     :osssssss/        osssso+++.        CPU: AMD Ryzen 7 8840HS (16) @ 5.13 GHz
+</span><span>    /ossssssss/        +ssssooo/-        GPU: AMD Radeon 780M Graphics [Integrated]
+</span><span>  `/ossssso+/:-        -:/+osssso+-      Memory: 2.51 GiB / 14.91 GiB (17%)
+</span><span> `+sso+:-`                 `.-/+oso:     Swap: 0 B / 4.00 GiB (0%)
+</span><span>`++:.                           `-/+/    Disk (/): 20.95 GiB / 475.94 GiB (4%) - btrfs
+</span><span>.`                                 `/    Local IP (wlan0): 192.168.1.71/24
+</span><span>                                         Battery (ASUS Battery): 52% [Discharging]
+</span><span>                                         Locale: en_US.UTF-8
+</span><span>
+</span></code></pre><h2 id=firstly>Firstly...</h2><p>My friend challenged me to achieve flicker free boot on my laptop like someone achieved it many-many years ago, and said if fedora can do it by default why can't we?</p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class=youtube-embed referrerpolicy=strict-origin-when-cross-origin src=https://www.youtube-nocookie.com/embed/5DW2JgJmsuY></iframe><p>Technically he didn't challenge me, he only mentioned that it was possible. And, I took it as a challenge. Because I know that linux can be as smooth and polished looking as other commercial OS offerings. And I want my laptop to be as smooth as possible and as clean looking as possible.<p>So, I tried.<h3 id=how-did-you-start>How did you start?</h3><p>The only thing I didn't really want to do was reinstall my OS again. But, I had to. I had never used the Unified Kernel Image (UKI) and I was using <code>systemd-boot</code> as my bootloader. So, the bootloader had to go and UKI had to be installed.<blockquote class=note><p class=alert-title>Note<p><strong>1.</strong> <em>When installing Arch Linux, use <code>UKI</code> Unified Kernel Image and instead of using a bootloader, use <code>EFIstub</code> (EFI Boot Stub)</em></blockquote><p>I used <code>archinstall</code> and it had both of these options. It was very easy. I picked all other configurations as I used to do and just installed the system.<h3 id=after-installation>After Installation</h3><p>I had to change the kernel parameters, to make all those text go away. So, I tried using <code>efibootmgr</code> and failed again and again. I couldn't for science's sake use it properly. Once, I tried using the script recommended by the <code>arch-wiki</code>, the boot process flickered more than It had ever flickered. Luckily it hadn't removed the original entry and <code>efibootmgr</code> had a way to remove the broken entries, so I brought everything back to normal and tried it a countless times, failing each time.<p>I gave up on <code>efibootmgr</code>, from previous experiences with booting with a splash screen, I knew <code>plymouth</code> was a thing. So, I installed it. And went searching for ways to put kernel-parameters during boot. Plymouth needed <code>quiet splash</code> to work.<p>Then, I found <code>/etc/kernel/cmdline</code>. I added <code>quiet splash</code> to the end of the line and then rebooted. It showed no changes. I found out that I had to rebuild the initial ramdisk environment. In other words I had to run:<pre class=language-bash data-lang=bash style=color:#fdf4c1aa;background-color:#282828><code class=language-bash data-lang=bash><span>
+</span><span style=color:#928374;font-style:italic># To (re-)generate initramfs images based on all existing presets, the -P/--allpresets switch is used. 
+</span><span style=color:#fdf4c1>sudo mkinitcpio -P
+</span><span>
+</span></code></pre><blockquote class=note><p class=alert-title>Note<p><strong>2.</strong> <em>To add kernel parameters, you need to append the text on <code>/etc/kernel/cmdline</code> and then, rebuild the initramfs image using <code>sudo mkinitcpio -P</code>.</em></blockquote><p>My <code>/etc/kernel/cmdline</code> looks like this:<pre class=language-txt data-lang=txt style=color:#fdf4c1aa;background-color:#282828><code class=language-txt data-lang=txt><span>
+</span><span>root=PARTUUID=4638cd24-77e4-4ed3-bb8a-9478d9c2d2db zswap.enabled=0 rw rootfstype=btrfs quiet loglevel=3 udev.log-priority=3 systemd.show_status=false splash
+</span><span>
+</span></code></pre><p>The part until <code>rootfstyps=btrfs</code> was autogenerated during installation and I added the rest afterwards.<p>Now, <strong>It Worked!</strong> But, it was the same(somewhat). The splash animation for ASUS ran, then it showed me a big Arch Linux logo, then the screen went black and then the splash screen reappeared and it dropped me to my login manager. This was the behavior it used to show before I installed arch without doing anything I previously did. Basically, I was back to how it was before I reinstalled my OS. All that copying and configuring for nothing.<h3 id=why-you-should-not-give-up>Why you should not give up</h3><p>So, I started putting different kernel params to check if one of it worked and if any of it removed blackout before showing me the splash screen again. The wiki for <a href=https://wiki.archlinux.org/title/Silent_boot>silent boot</a> suggested I put <code>loglevel=3 systemd.show_status=auto rd.udev.log_level=3</code> in the kernel parameters.<p>It also said:<blockquote><p><em>If you also want to stop systemd from printing its version number when booting, you should also append udev.log_level=3 to your kernel parameters. If systemd is used in an initramfs, append rd.udev.log_level=3 instead.</em></blockquote><p>Since, I wasn't using <code>systemd</code> in the initramfs, I used <code>udev.log_level=3</code> instead. Then I rebuilt the initramfs and rebooted. <strong>It was the same.</strong><blockquote class=note><p class=alert-title>Note<p><strong>3.</strong> <em>Append <code>quiet loglevel=3 udev.log-priority=3 systemd.show_status=false splash</code> in <code>/etc/kernel/cmdline</code> to enable splash and quiet out the logs.</em></blockquote><p>Then I became desperate and started looking everywhere; forums, wikis, even YouTube comment section. And, you know what? YouTube comments helped for once.<p><img alt="Youtube Comment" src=/images/boot-arch-smoothly/comment.png> This comment is from the YouTube video I have linked above.<p>I finally realised, <code>plymouth</code> was the culprit. The kernel had to hand over the process to plymouth and it caused the delay after the big Arch Linux logo.<p>I also found out that kernel itself can render the logo without plymouth, that was how the Arch Linux Logo was being rendered even before plymouth had started. If only, I had read the silent boot wiki entry properly:<blockquote><p><em>To prevent the kernel from blanking the vendor logo, Linux 4.19 introduced a new configuration option <code>FRAMEBUFFER_CONSOLE_DEFERRED_TAKEOVER</code> that retains the contents of the framebuffer until text needs to be printed on the framebuffer console. Since version 4.19.arch1, the official Arch Linux kernels are compiled with <code>CONFIG_FRAMEBUFFER_CONSOLE_DEFERRED_TAKEOVER=y</code>.</em></blockquote><p>Thanks to arch I didn't have to recompile the kernel to get that.<blockquote class=tip><p class=alert-title>Tip<p><em>There is no need to use <code>plymouth</code> because the Linux kernel can show splash images by itself and enabling both only makes the process less smoother.</em></blockquote><h3 id=it-still-wasn-t-smooth>It still wasn't "smooth"</h3><p>I didn't want the Arch Linux logo, I wanted my vendor logo to be continued, like it was still booting until my login screen appeared. If only I can replace the "Arch Linux" logo with <code>bgrt</code> (The vendor's splash logo). So, I went looking where I could change that.<blockquote><p><em>The Boot Graphics Record Table (BGRT) is an optional ACPI table which contains a pointer to the image that has been drawn during boot.</em></blockquote><p>I found <code>/etc/mkinitcpio.d/linux.preset</code> to be the exact thing I was looking for. And from the name itself I knew I needed to rebuild the initramfs again for the changes to be reflected.<p>I had to change the following line in <code>linux.preset</code>:<pre class=language-ini data-lang=ini style=color:#fdf4c1aa;background-color:#282828><code class=language-ini data-lang=ini><span>
+</span><span style=color:#fdf4c1>default_options</span><span style=color:#fe8019>=</span><span style=color:#b8bb26>"--splash /usr/share/systemd/bootctl/splash-arch.bmp"
+</span><span>
+</span></code></pre><p>My first instinct was to go to <code>/usr/share/systemd/bootctl/</code> and <code>rm splash-arch.bmp</code>. I did that and rebooted, Now, It showed black screen until the login manager showed up. It was progress.<p>Then I found my <code>bgrt</code> image in <code>/sys/firmware/acpi/bgrt/</code> it was named <code>image</code> with no file extension.<p>So, I changed the above line to:<pre class=language-ini data-lang=ini style=color:#fdf4c1aa;background-color:#282828><code class=language-ini data-lang=ini><span>
+</span><span> </span><span style=color:#fdf4c1>default_options</span><span style=color:#fe8019>=</span><span style=color:#b8bb26>"--splash /sys/firmware/acpi/bgrt/image"
+</span><span>
+</span></code></pre><p>Then I rebuilt the initramfs and rebooted. To be greeted with a smooth boot. Like I wanted it to be. Showing bgrt until the login manager showed up.<blockquote class=note><p class=alert-title>Note<p><strong>4.</strong> <em>Change the <code>default_options=</code> configuration to <code>/sys/firmware/acpi/bgrt/image</code> in <code>/etc/mkinitcpio.d/linux.preset</code> then rebuild the initramfs by doing <code>sudo mkinitcpio -P</code>.</em></blockquote><h3 id=it-was-not-as-smooth-as-plymouth>It was not as "smooth" as plymouth</h3><p>The booting process was good and how I wanted it to be, but when it came to rebooting it showed:<pre class=language-txt data-lang=txt style=color:#fdf4c1aa;background-color:#282828><code class=language-txt data-lang=txt><span>
+</span><span>[    54.796241] watchdog: watchdog0: watchdog did not stop!
+</span><span>[    54.918590] watchdog: watchdog0: watchdog did not stop!
+</span><span>[    55.597358] reboot: Restarting system
+</span><span>
+</span></code></pre><p>I didn't want that to show up and with a bit of research, I came to a conclusion that disabling watchdog was fine so I did. I edited <code>/etc/modprobe.d/blacklist.conf</code> and added <code>blacklist sp5100_tco</code>. Intel users are supposed to <code>blacklist iTCO_wdt</code> or the watchdog that their system used.<p>Now my <code>/etc/modprobe.d/blacklist.conf</code> has:<pre class=language-txt data-lang=txt style=color:#fdf4c1aa;background-color:#282828><code class=language-txt data-lang=txt><span>
+</span><span># Do not load the watchdog module on boot.
+</span><span>blacklist sp5100_tco
+</span><span>
+</span></code></pre><blockquote class=note><p class=alert-title>Note<p><strong>5.</strong> <em>Blacklist your watchdog so you don't get watchdog messages when rebooting and powering off by editing <code>/etc/modprobe.d/blacklist.conf</code>.</em></blockquote><h3 id=i-don-t-like-having-nice-things>I don't like having nice things</h3><p>What I did above is enough to get flicker free boot/smooth boot or whatever you call it, but I wanted more, I want <code>plymouth</code> to work without flicker. Spoiler: I couldn't.<p>Anyway, I switched to <code>systemd</code> instead of <code>udev</code> so my <code>/etc/mkinitcpio.conf</code> has the following hooks now:<pre class=language-txt data-lang=txt style=color:#fdf4c1aa;background-color:#282828><code class=language-txt data-lang=txt><span>
+</span><span>HOOKS=(base systemd modconf autodetect kms keyboard sd-vconsole block filesystems fsck plymouth)
+</span><span>
+</span></code></pre><p>I reinstalled plymouth, and I like it when it smoothly transitions to GDM instead of flashing me to GDM. It was a tradeoff between GDM flash or just flicker when loading spalash screen.<p>I added more kernel parameters to mitigate the flashing but I couldn't do it.<pre class=language-txt data-lang=txt style=color:#fdf4c1aa;background-color:#282828><code class=language-txt data-lang=txt><span>
+</span><span>root=PARTUUID=4638cd24-77e4-4ed3-bb8a-9478d9c2d2db zswap.enabled=0 rw rootfstype=btrfs amdgpu.modeset=1 amdgpu.dc=1 video=efifb:keep plymouth.use-simpledrm quiet vt.global_cursor_default=0 loglevel=3 rd.udev.log_level=3 systemd.show_status=auto splash
+</span><span>
+</span></code></pre><p><code>plymouth.use-simpledrm</code> does start plymouth immediately but when the <code>amdgpu</code> driver is ready it mode-switches to it and the black screen appears. I can technically use <code>nomodeset</code> and achieve true flicker free boot with plymouth and everything but then I lose out on my graphics driver setting dpi scaling and brightness and more for me on boot.<p>I even tried setting <code>/etc/plymouth/plymouthd.conf</code> to delay it's starting but it still doesn't stop flickering. It either flickers or it skips and I get the UKI splash screen until the login manager.<pre class=language-ini data-lang=ini style=color:#fdf4c1aa;background-color:#282828><code class=language-ini data-lang=ini><span>
+</span><span style=color:#fa5c4b>[Daemon]
+</span><span style=color:#fdf4c1>ShowDelay</span><span style=color:#fe8019>=</span><span style=color:#d3869b>0
+</span><span style=color:#fdf4c1>DeviceTimeout</span><span style=color:#fe8019>=</span><span style=color:#d3869b>30
+</span><span>
+</span></code></pre><p>I think I will just remove the plymouth configuration since it isn't helping anything. Or maybe I'll just leave it there because it is not doing anything.<h3 id=removing-arch-linux-logo>Removing Arch Linux Logo</h3><p>To remove the logo from GDM I quickly installed <code>gdm-settings</code> and there was a toggle which I turned off.<p>I didn't like the logo shown by plymouth during boot either, so I just removed the image <code>watermark.png</code> from the spinner theme in <code>/usr/share/plymouth/themes/spinner/</code>. I also removed all animation and throbber images just to make everything clean.<h3 id=conclusion>Conclusion</h3><p>I did eventually come back to "not so smooth boot" but I am one <code>sudo pacman -R plymouth</code> away from it. Furthermore, I can boast about having 3 splash screens that look the same transitioning seamlessly*, even 4 if you count the UEFI animation.<p>It goes as follows:<ol><li><code>UEFI</code> animation starts and ends.<li><code>UKI Splash Screen</code> starts and ends.<li><code>simpledrm</code> backed <code>plymouth</code> bgrt theme starts and screen goes blank.<li><code>amdgpu</code> backed plymouth screen gradually appears and transitions to GDM.</ol><p>But, if I remove plymouth:<ol><li><code>UEFI</code> animation starts and ends.<li><code>UKI Splash Screen</code> starts and drops me to GDM.</ol></div></div></div><div id=webmention><hr><h2>Webmentions</h2><form action=https://webmention.io/scientiac.space/webmention class=webmention-form method=post><div id=email-comment><p>Have you written a <a href=https://indieweb.org/responses>response</a> to this? Let me know the URL, Or, you can send your response via <a href="mailto:iac@scientiac.space?subject=Reply%3A%20Booting%20Arch%20Linux%20Smoothly">mail:</a><code>iac@scientiac.space</code></div><div class=send-webmention><input name=source type=url><button>Send Webmention</button></div><div><div class="ui message"></div></div><input name=target type=hidden value=https://scientiac.space/blog/boot-arch-smoothly/></form><div class=interaction-box></div></div></div><script defer src=/assets/js/themeSelector.js></script></section><div class=hidden><a href=https://polymaths.social/@iac rel=me>Fediverse</a></div><div class="hidden h-card"><img class="u-photo icon" alt=scientiac src=/res/thumbnail.png><a class="p-name u-url" href=https://scientiac.space rel=me>scientiac</a><p class=p-note>A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does.</div><footer><p class=codewithlove>I can't think of things to write on a footer. So, just <span class=main-background>imagine</span> something yourself.<p><a href=/series>Series</a> | <a href=/atom.xml>RSS</a> | <a href=https://github.com/scientiac/scientiac.github.io target=_blank>Source Code</a><p>All articles are usable under <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank>CC BY-SA 4.0</a>.</footer><ol id=themeSelector reversed></ol>
