@@ -1,0 +1,208 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><script>(()=>{try{const a={light:`gruvbox-light`,dark:`night-solis`};const b=window.matchMedia(`(prefers-color-scheme: dark)`).matches;const c=localStorage.theme||(b?a.dark:a.light);document.documentElement.dataset.theme=c}catch(a){}})()</script><link href=/assets/css/themes.css rel=stylesheet><link href=/assets/css/readable.css rel=stylesheet><link href=/assets/css/global.css rel=stylesheet><link href=/assets/css/fonts.css rel=stylesheet><link href=/assets/css/logo.css rel=stylesheet><link href=/assets/css/genre/Articles.css rel=stylesheet><link href=https://scientiac.space/atom.xml rel=alternate title=RSS type=application/atom+xml><meta content=Articles property=og:type><meta content=scientiac.space property=og:site_name><meta content=https://scientiac.space/res/thumbnail-light.png property=og:image><title>Typst is Love</title><meta content="Typst is Love" name=og:title><meta content="Let me start by saying, I just love typst. A bit too must at this point. Whenever I get the chance I just sit down and open typst. Electricity goes down, I open typst. I feel bored I open typst.
+Now that I think of it, I don't have anything else to do on my laptop and only interactive thing is typst.
+You might be thinking what typst is. So, let me introduce you to typst.
+Introduction to typst
+Typst is a typesetting software that help you make documents. And since documents are the things we all just need to make, it is one of the most essential piece of software for everyone.
+It is no new idea [I mean, it is a new idea but, making documents using a typesetting in plaintext has been a thing since ages.] There has been LaTeX and Markdown and org and other typesetting software and each of them have their own strengths and weaknesses. Typst aims to achieve all their strengths and none of their weaknesses. At least, that is how I see typst to be.
+Comparing Typst with other typesetting software
+PropertiesTypstLaTexMarkdownOrg
+Fast PreviewYesNoYesYes
+LightweightYesNoYesNo
+ExtensibleYesYesNoYes
+Simple SyntaxYesNoYesYes
+Platform AgnosticYesYesYesNo
+Automatic Dependency ManagementYesNoNot SupportedNot Supported
+Single BinaryYesNoNoNo
+
+Let me tell you what all these means too:
+
+
+Fast Preview: If you can see the changes live as you type.
+
+
+Lightweight: If it can be installed quickly and has a small footprint(storage consumption).
+
+
+Extensible: If modules/packages can be made and used as dependencies that you can just import. Like templates, styles and formatting that can just be imported to use.
+
+
+Simple Syntax: If you can do the basic formatting without needing to know complex syntax for it. For e.g.
+
+
+
+&ampquot;\begin{itemize} \item &amplt;text&ampgt; \end{itemize}&ampquot; makes a bullet list in LaTeX
+&ampquot;- &amplt;Text&ampgt;&ampquot; Makes a bullet list in Typst
+&ampquot;* &amplt;Text&ampgt;&ampquot; Makes a bullet list in Markdown
+&ampquot;- &amplt;Text&ampgt;&ampquot; Makes a bullet list in Org
+
+
+
+
+Platform Agnostic: Here technically every software is platform agnostic and can be used in any text editor of your choice but the complete &#34Org-mode&#34 is only available in emacs and is very difficult to replicate it anywhere else.
+
+
+Automatic Dependency Management: I only realised that it is a thing when I actually used Typst, but if you import something, the LSP automatically installs the module if it isn't available on your device. Latex cannot do that and the other software are not extensible so, you cannot use modules at all.
+
+
+Single Binary: This makes typst very portable and easy to install since it doesn't need to rely on other packages in the system to work. Which is not the case with Latex at all and not for others too unless they are, in that case, sorry I didn't know.
+
+
+How I use it
+I use typst with my text editor of choice neovim. If you ask a person who uses Neovim as their text editor, they'll say how much they hate it when they have to type text in a normal text editor. Since it is just plain text, I surely can write it without the need of any LSP or Plugins and use the typst compiler to render it continuously on save. But, it has a LSP called tinymist and it has a previewer plugin for Neovim called typst-preview which generates live SVG preview and any good browser can render it.
+The best thing about tinymist and typst-preview coming from vimtex for LaTeX, the preview is instant and it also follows the cursor as I move in neovim. When, I am bored I just scroll on my neovim to see the preview scroll automatically on the browser.
+Talking about browser, I use qutebrowser for preview since it supports the VIM keys by default and I can remove all the UI elements to just see the preview while it being a full fledged browser. And it is just awesome.
+I use lazy as my plugin manager for neovim and the following snippet sets my whole environment for typst apart from installing typst itself and qutebrowser:
+
+return {
+  &ampquot;chomosuke/typst-preview.nvim&ampquot;,
+  ft = &ampquot;typst&ampquot;,
+  version = &amp#39;1.*&amp#39;,
+  opts = {
+    formatterMode = &ampquot;typstyle&ampquot;,
+    invert_colors = &amp#39;{&ampquot;rest&ampquot;: &ampquot;auto&ampquot;,&ampquot;image&ampquot;: &ampquot;never&ampquot;}&amp#39;,
+    open_cmd = &amp#39;qutebrowser %s&amp#39;
+  },
+  config = function(_, opts)
+    require(&amp#39;typst-preview&amp#39;).setup(opts)
+    vim.api.nvim_create_autocmd(&ampquot;FileType&ampquot;, {
+      pattern = &ampquot;typst&ampquot;,
+      callback = function()
+        vim.defer_fn(function()
+          vim.cmd(&ampquot;TypstPreview&ampquot;)
+        end, 10)
+      end,
+    })
+  end,
+
+}
+
+Here is how my typst setup looks like. It doesn't look like much but it works too well. I use harper-ls for my grammar checking and with everything on the single environment I can write my documents in the editor I want with proper formatting, live preview and offline grammar checking. What more can I ask for?
+
+If you want to check the document and see how I have formatted it you can see the source code here, and the compliled PDF here. You can also visit the directory in github.
+You might be wondering, why I didn't mention Microsoft or Google Docs.
+I forgot about it. I am being honest here, I forgot about it while writing the comparison but the typst homepage has a pretty nice comparison between LaTeX, Typst and Google Docs.
+But, if you want to know my take on these Word Processing Software is that I just hate aligning and placing figures and images in them. The age old meme still holds true. (Or, maybe it's my skill issue.)
+
+Mandatory &#34In the end&#34
+I love using typst. I feel like I have made documents in typst more than I have used any other software to make documents in my life. And after the neovim setup I just fell madly, deeply, truly in love with it. And I just recommend it to everyone and want typst to grow to the point where all academic journals accept it as a format to support papers in. It will be just smooth sailing from there on.
+My only wish is being able to do Literate Programming in typst, then it'll be the best for writing reproducable technical documents, kinda like what org can do with org-tangle. But, it is just a wish and if someone esle doesn't, I might try to make it a reality.
+This much for today, I might add more to this if I feel like I missed something. Or, maybe I will write a follow up blog on this. Seeya soon...
+" name=description><meta content="Let me start by saying, I just love typst. A bit too must at this point. Whenever I get the chance I just sit down and open typst. Electricity goes down, I open typst. I feel bored I open typst.
+Now that I think of it, I don't have anything else to do on my laptop and only interactive thing is typst.
+You might be thinking what typst is. So, let me introduce you to typst.
+Introduction to typst
+Typst is a typesetting software that help you make documents. And since documents are the things we all just need to make, it is one of the most essential piece of software for everyone.
+It is no new idea [I mean, it is a new idea but, making documents using a typesetting in plaintext has been a thing since ages.] There has been LaTeX and Markdown and org and other typesetting software and each of them have their own strengths and weaknesses. Typst aims to achieve all their strengths and none of their weaknesses. At least, that is how I see typst to be.
+Comparing Typst with other typesetting software
+PropertiesTypstLaTexMarkdownOrg
+Fast PreviewYesNoYesYes
+LightweightYesNoYesNo
+ExtensibleYesYesNoYes
+Simple SyntaxYesNoYesYes
+Platform AgnosticYesYesYesNo
+Automatic Dependency ManagementYesNoNot SupportedNot Supported
+Single BinaryYesNoNoNo
+
+Let me tell you what all these means too:
+
+
+Fast Preview: If you can see the changes live as you type.
+
+
+Lightweight: If it can be installed quickly and has a small footprint(storage consumption).
+
+
+Extensible: If modules/packages can be made and used as dependencies that you can just import. Like templates, styles and formatting that can just be imported to use.
+
+
+Simple Syntax: If you can do the basic formatting without needing to know complex syntax for it. For e.g.
+
+
+
+&ampquot;\begin{itemize} \item &amplt;text&ampgt; \end{itemize}&ampquot; makes a bullet list in LaTeX
+&ampquot;- &amplt;Text&ampgt;&ampquot; Makes a bullet list in Typst
+&ampquot;* &amplt;Text&ampgt;&ampquot; Makes a bullet list in Markdown
+&ampquot;- &amplt;Text&ampgt;&ampquot; Makes a bullet list in Org
+
+
+
+
+Platform Agnostic: Here technically every software is platform agnostic and can be used in any text editor of your choice but the complete &#34Org-mode&#34 is only available in emacs and is very difficult to replicate it anywhere else.
+
+
+Automatic Dependency Management: I only realised that it is a thing when I actually used Typst, but if you import something, the LSP automatically installs the module if it isn't available on your device. Latex cannot do that and the other software are not extensible so, you cannot use modules at all.
+
+
+Single Binary: This makes typst very portable and easy to install since it doesn't need to rely on other packages in the system to work. Which is not the case with Latex at all and not for others too unless they are, in that case, sorry I didn't know.
+
+
+How I use it
+I use typst with my text editor of choice neovim. If you ask a person who uses Neovim as their text editor, they'll say how much they hate it when they have to type text in a normal text editor. Since it is just plain text, I surely can write it without the need of any LSP or Plugins and use the typst compiler to render it continuously on save. But, it has a LSP called tinymist and it has a previewer plugin for Neovim called typst-preview which generates live SVG preview and any good browser can render it.
+The best thing about tinymist and typst-preview coming from vimtex for LaTeX, the preview is instant and it also follows the cursor as I move in neovim. When, I am bored I just scroll on my neovim to see the preview scroll automatically on the browser.
+Talking about browser, I use qutebrowser for preview since it supports the VIM keys by default and I can remove all the UI elements to just see the preview while it being a full fledged browser. And it is just awesome.
+I use lazy as my plugin manager for neovim and the following snippet sets my whole environment for typst apart from installing typst itself and qutebrowser:
+
+return {
+  &ampquot;chomosuke/typst-preview.nvim&ampquot;,
+  ft = &ampquot;typst&ampquot;,
+  version = &amp#39;1.*&amp#39;,
+  opts = {
+    formatterMode = &ampquot;typstyle&ampquot;,
+    invert_colors = &amp#39;{&ampquot;rest&ampquot;: &ampquot;auto&ampquot;,&ampquot;image&ampquot;: &ampquot;never&ampquot;}&amp#39;,
+    open_cmd = &amp#39;qutebrowser %s&amp#39;
+  },
+  config = function(_, opts)
+    require(&amp#39;typst-preview&amp#39;).setup(opts)
+    vim.api.nvim_create_autocmd(&ampquot;FileType&ampquot;, {
+      pattern = &ampquot;typst&ampquot;,
+      callback = function()
+        vim.defer_fn(function()
+          vim.cmd(&ampquot;TypstPreview&ampquot;)
+        end, 10)
+      end,
+    })
+  end,
+
+}
+
+Here is how my typst setup looks like. It doesn't look like much but it works too well. I use harper-ls for my grammar checking and with everything on the single environment I can write my documents in the editor I want with proper formatting, live preview and offline grammar checking. What more can I ask for?
+
+If you want to check the document and see how I have formatted it you can see the source code here, and the compliled PDF here. You can also visit the directory in github.
+You might be wondering, why I didn't mention Microsoft or Google Docs.
+I forgot about it. I am being honest here, I forgot about it while writing the comparison but the typst homepage has a pretty nice comparison between LaTeX, Typst and Google Docs.
+But, if you want to know my take on these Word Processing Software is that I just hate aligning and placing figures and images in them. The age old meme still holds true. (Or, maybe it's my skill issue.)
+
+Mandatory &#34In the end&#34
+I love using typst. I feel like I have made documents in typst more than I have used any other software to make documents in my life. And after the neovim setup I just fell madly, deeply, truly in love with it. And I just recommend it to everyone and want typst to grow to the point where all academic journals accept it as a format to support papers in. It will be just smooth sailing from there on.
+My only wish is being able to do Literate Programming in typst, then it'll be the best for writing reproducable technical documents, kinda like what org can do with org-tangle. But, it is just a wish and if someone esle doesn't, I might try to make it a reality.
+This much for today, I might add more to this if I feel like I missed something. Or, maybe I will write a follow up blog on this. Seeya soon...
+" name=og:description><link rel="shortcut icon" href=/res/thumbnail.svg type=image/x-icon><meta content="width=device-width,initial-scale=1" name=viewport><meta content="rgb(253, 246, 227)" name=theme-color><link crossorigin href=https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css integrity=sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+ rel=stylesheet><script crossorigin defer integrity=sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg src=https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js></script><script crossorigin defer integrity=sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk src=https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js></script><script>document.addEventListener(`DOMContentLoaded`,(()=>{let a=`\$\$`,b=`\$`;renderMathInElement(document.body,{delimiters:[{left:a,right:a,display:!0},{left:b,right:b,display:!1},{left:`\\\\(`,right:`\\\\)`,display:!1},{left:`\\\\[`,right:`\\\\]`,display:!0}],throwOnError:!1})}))</script><script defer src=/assets/js/copy-button.js></script><link href=https://github.com/scientiac rel=me><link href=mailto:spandan@scientiac.space rel=me><link href=https://webmention.io/scientiac.space/webmention rel=webmention><meta content=@iac@polymaths.social name=fediverse:creator><body onload=updateThemeSelector();><div class=logo-container><a href=/> <div class=inner-logo-container></div> </a></div><nav data-style=classy><span><a href=/>Main</a></span><span><a href=/blog>Blog</a></span><span><a href=/syndications>Ping</a></span><span><a href=/more>More</a></span></nav><section class=section-body><div class=container><div class=h-entry><a class="u-url hidden" href=https://scientiac.space/blog/typst/>https://scientiac.space/blog/typst/</a><div class=section><h1 class="p-name title">Typst is Love</h1><div class=pagedate><time class="dt-published dateandtag hidden" datetime=2025-07-12T00:00:00Z> 2025-07-12 </time><code class=dateandtag>2025-07-12</code><code class="u-category dateandtag">Articles</code></div><p><div class="hidden p-author h-card"><a class=u-url href=https://scientiac.space rel=me> <img alt="Profile photo of scientiac" class=u-photo src=/res/thumbnail.png> <span class=p-name>scientiac</span> </a></div><div class=e-content><p>Let me start by saying, I just love typst. A bit too must at this point. Whenever I get the chance I just sit down and open typst. Electricity goes down, I open typst. I feel bored I open typst.<p><em>Now that I think of it, I don't have anything else to do on my laptop and only interactive thing is typst.</em><p>You might be thinking what <code>typst</code> is. So, let me introduce you to typst.<h2 id=introduction-to-typst>Introduction to typst</h2><p>Typst is a typesetting software that help you make documents. And since documents are the things we all just need to make, it is one of the most essential piece of software for everyone.<p>It is no new idea [<em>I mean, it is a new idea but, making documents using a typesetting in plaintext has been a thing since ages.</em>] There has been LaTeX and Markdown and org and other typesetting software and each of them have their own strengths and weaknesses. Typst aims to achieve all their strengths and none of their weaknesses. At least, that is how I see typst to be.<h3 id=comparing-typst-with-other-typesetting-software>Comparing Typst with other typesetting software</h3><table><thead><tr><th>Properties<th>Typst<th>LaTex<th>Markdown<th>Org<tbody><tr><td>Fast Preview<td>Yes<td>No<td>Yes<td>Yes<tr><td>Lightweight<td>Yes<td>No<td>Yes<td>No<tr><td>Extensible<td>Yes<td>Yes<td>No<td>Yes<tr><td>Simple Syntax<td>Yes<td>No<td>Yes<td>Yes<tr><td>Platform Agnostic<td>Yes<td>Yes<td>Yes<td>No<tr><td>Automatic Dependency Management<td>Yes<td>No<td>Not Supported<td>Not Supported<tr><td>Single Binary<td>Yes<td>No<td>No<td>No</table><p>Let me tell you what all these means too:<ol><li><p><strong>Fast Preview:</strong> If you can see the changes live as you type.</p><li><p><strong>Lightweight</strong>: If it can be installed quickly and has a small footprint(storage consumption).</p><li><p><strong>Extensible:</strong> If modules/packages can be made and used as dependencies that you can just import. Like templates, styles and formatting that can just be imported to use.</p><li><p><strong>Simple Syntax:</strong> If you can do the basic formatting without needing to know complex syntax for it. For e.g.</p></ol><pre style=color:#fdf4c1aa;background-color:#282828><code><span>
+</span><span>"\begin{itemize} \item &LTtext> \end{itemize}" makes a bullet list in LaTeX
+</span><span>"- &LTText>" Makes a bullet list in Typst
+</span><span>"* &LTText>" Makes a bullet list in Markdown
+</span><span>"- &LTText>" Makes a bullet list in Org
+</span><span>
+</span></code></pre><ol start=5><li><p><strong>Platform Agnostic</strong>: Here technically every software is platform agnostic and can be used in any text editor of your choice but the complete "Org-mode" is only available in <code>emacs</code> and is very difficult to replicate it anywhere else.</p><li><p><strong>Automatic Dependency Management:</strong> I only realised that it is a thing when I actually used Typst, but if you import something, the LSP automatically installs the module if it isn't available on your device. Latex cannot do that and the other software are not extensible so, you cannot use modules at all.</p><li><p><strong>Single Binary:</strong> This makes typst very portable and easy to install since it doesn't need to rely on other packages in the system to work. Which is not the case with Latex at all and not for others too unless they are, in that case, sorry I didn't know.</p></ol><h2 id=how-i-use-it>How I use it</h2><p>I use typst with my text editor of choice <code>neovim</code>. If you ask a person who uses Neovim as their text editor, they'll say how much they hate it when they have to type text in a normal text editor. Since it is just plain text, I surely can write it without the need of any LSP or Plugins and use the typst compiler to render it continuously on save. But, it has a LSP called <code>tinymist</code> and it has a previewer plugin for Neovim called <code>typst-preview</code> which generates live SVG preview and any good browser can render it.<p>The best thing about <code>tinymist</code> and <code>typst-preview</code> coming from <code>vimtex</code> for LaTeX, the preview is instant and it also follows the cursor as I move in neovim. When, I am bored I just scroll on my <code>neovim</code> to see the preview scroll automatically on the browser.<p>Talking about browser, I use <code>qutebrowser</code> for preview since it supports the VIM keys by default and I can remove all the UI elements to just see the preview while it being a full fledged browser. And it is just awesome.<p>I use <code>lazy</code> as my plugin manager for <code>neovim</code> and the following snippet sets my whole environment for typst apart from installing <code>typst</code> itself and <code>qutebrowser</code>:<pre class=language-lua data-lang=lua style=color:#fdf4c1aa;background-color:#282828><code class=language-lua data-lang=lua><span>
+</span><span style=color:#fa5c4b>return </span><span>{
+</span><span>  </span><span style=color:#b8bb26>"chomosuke/typst-preview.nvim"</span><span>,
+</span><span>  </span><span style=color:#b8bb26>ft </span><span>= </span><span style=color:#b8bb26>"typst"</span><span>,
+</span><span>  </span><span style=color:#b8bb26>version </span><span>= </span><span style=color:#b8bb26>'1.*'</span><span>,
+</span><span>  </span><span style=color:#b8bb26>opts </span><span>= {
+</span><span>    </span><span style=color:#b8bb26>formatterMode </span><span>= </span><span style=color:#b8bb26>"typstyle"</span><span>,
+</span><span>    </span><span style=color:#b8bb26>invert_colors </span><span>= </span><span style=color:#b8bb26>'{"rest": "auto","image": "never"}'</span><span>,
+</span><span>    </span><span style=color:#b8bb26>open_cmd </span><span>= </span><span style=color:#b8bb26>'qutebrowser %s'
+</span><span>  },
+</span><span>  </span><span style=color:#8ec07c>config </span><span>= </span><span style=color:#fa5c4b>function</span><span>(</span><span style=color:#fdf4c1>_</span><span>, </span><span style=color:#fdf4c1>opts</span><span>)
+</span><span>    </span><span style=color:#fabd2f>require</span><span style=color:#fdf4c1>(</span><span style=color:#b8bb26>'typst-preview'</span><span style=color:#fdf4c1>)</span><span>.</span><span style=color:#fdf4c1>setup(opts)
+</span><span>    </span><span style=color:#fdf4c1>vim</span><span>.api.</span><span style=color:#fdf4c1>nvim_create_autocmd(</span><span style=color:#b8bb26>"FileType"</span><span style=color:#fdf4c1>, {
+</span><span style=color:#fdf4c1>      </span><span style=color:#b8bb26>pattern </span><span style=color:#fdf4c1>= </span><span style=color:#b8bb26>"typst"</span><span style=color:#fdf4c1>,
+</span><span style=color:#fdf4c1>      </span><span style=color:#8ec07c>callback </span><span style=color:#fdf4c1>= </span><span style=color:#fa5c4b>function</span><span style=color:#fdf4c1>()
+</span><span style=color:#fdf4c1>        vim.defer_fn(</span><span style=color:#fa5c4b>function</span><span style=color:#fdf4c1>()
+</span><span style=color:#fdf4c1>          vim.cmd(</span><span style=color:#b8bb26>"TypstPreview"</span><span style=color:#fdf4c1>)
+</span><span style=color:#fdf4c1>        </span><span style=color:#fa5c4b>end</span><span style=color:#fdf4c1>, </span><span style=color:#d3869b>10</span><span style=color:#fdf4c1>)
+</span><span style=color:#fdf4c1>      </span><span style=color:#fa5c4b>end</span><span style=color:#fdf4c1>,
+</span><span style=color:#fdf4c1>    })
+</span><span>  </span><span style=color:#fa5c4b>end</span><span>,
+</span><span>
+</span><span>}
+</span></code></pre><p>Here is how my typst setup looks like. It doesn't look like much but it works too well. I use <code>harper-ls</code> for my grammar checking and with everything on the single environment I can write my documents in the editor I want with proper formatting, live preview and offline grammar checking. What more can I ask for?<p><img alt="My Typst Environment" src=/images/typst/typst-environment.png><p>If you want to check the document and see how I have formatted it you can see the source code <a href=/images/typst/creative-suite-that-doesnt-trap-you/creative-suite-that-doesnt-trap-you.typ>here</a>, and the compliled PDF <a href=/images/typst/creative-suite-that-doesnt-trap-you/creative-suite-that-doesnt-trap-you.pdf>here</a>. You can also visit the directory in <a href=https://github.com/scientiac/scientiac.github.io/tree/main/static/images/typst/creative-suite-that-doesnt-trap-you>github</a>.<h3 id=you-might-be-wondering-why-i-didn-t-mention-microsoft-or-google-docs>You might be wondering, why I didn't mention Microsoft or Google Docs.</h3><p>I forgot about it. I am being honest here, I forgot about it while writing the comparison but the <a href="https://typst.app/#:~:text=Why%20should%20I%20use%20Typst%20instead%20of%20...">typst homepage</a> has a pretty nice comparison between <code>LaTeX</code>, <code>Typst</code> and <code>Google Docs</code>.<p>But, if you want to know my take on these Word Processing Software is that I just hate aligning and placing figures and images in them. The age old meme still holds true. (<em>Or, maybe it's my skill issue.</em>)<p><img alt="Microsoft Word Meme" src=/images/typst/meme.png><h3 id=mandatory-in-the-end>Mandatory "In the end"</h3><p>I love using typst. I feel like I have made documents in typst more than I have used any other software to make documents in my life. And after the <code>neovim</code> setup I just fell madly, deeply, truly in love with it. And I just recommend it to everyone and want typst to grow to the point where all academic journals accept it as a format to support papers in. It will be just smooth sailing from there on.<p>My only wish is being able to do Literate Programming in <code>typst</code>, then it'll be the best for writing reproducable technical documents, kinda like what org can do with <code>org-tangle</code>. But, it is just a wish and if someone esle doesn't, I might try to make it a reality.<p>This much for today, I might add more to this if I feel like I missed something. Or, maybe I will write a follow up blog on this. Seeya soon...</div></div></div><div id=webmention><hr><h2>Webmentions</h2><form action=https://webmention.io/scientiac.space/webmention class=webmention-form method=post><div id=email-comment><p>Have you written a <a href=https://indieweb.org/responses>response</a> to this? Let me know the URL, Or, you can send your response via <a href="mailto:iac@scientiac.space?subject=Reply%3A%20Typst%20is%20Love">mail:</a><code>iac@scientiac.space</code></div><div class=send-webmention><input name=source type=url><button>Send Webmention</button></div><div><div class="ui message"></div></div><input name=target type=hidden value=https://scientiac.space/blog/typst/></form><div class=interaction-box></div></div></div><script defer src=/assets/js/themeSelector.js></script></section><div class=hidden><a href=https://polymaths.social/@iac rel=me>Fediverse</a></div><div class="hidden h-card"><img class="u-photo icon" alt=scientiac src=/res/thumbnail.png><a class="p-name u-url" href=https://scientiac.space rel=me>scientiac</a><p class=p-note>A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does.</div><footer><p class=codewithlove>I can't think of things to write on a footer. So, just <span class=main-background>imagine</span> something yourself.<p><a href=/series>Series</a> | <a href=/atom.xml>RSS</a> | <a href=https://github.com/scientiac/scientiac.github.io target=_blank>Source Code</a><p>All articles are usable under <a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank>CC BY-SA 4.0</a>.</footer><ol id=themeSelector reversed></ol>
