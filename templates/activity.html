@@ -8,7 +8,7 @@
 <div class="activity-box">
 {% for links in data.links %}
     {% if links.target != "https://scientiac.space/" %}
-        {% set display_name = links.data.name | default(value=links.source) %}
+        {% set display_name = links.data.author.name | default(value=links.source) %}
         {% if links.activity.type == "like" %}
             <div class="mention-profile like">
                 <code><a href="{{ links.source }}">{{ display_name }} liked</a> <a href="{{ links.target }}">{{ links.target }}</a></code>
