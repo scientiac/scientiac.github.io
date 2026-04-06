@@ -36,7 +36,7 @@ High Level representation of OverlayFS
 {% end %}
 
 ## The First Contact
-When we contacted the people making RedoxOS on their matrix server, we found out that someone had started the preliminary work for OverlayFS. We then contacted him and said that we wanted to help make the thing. He was positive about it and said that though he couldn't mentor us for it, he would leave [some notes](https://gitlab.redox-os.org/redox-os/redox/-/issues/1568) for us to better kickstart the project. We took the notes and started the preliminary work on the alien codebase of redox-os.
+When we contacted the people making RedoxOS on their matrix server, we found out that someone had started the preliminary work for OverlayFS. We then contacted him and said that we wanted to help make the thing. He was positive about it and said that though he couldn't mentor us for it, he would leave [some notes](https://gitlab.redox-os.org/redox-os/redox/-/issues/1568) for us to better kickstart the project. We took the notes and started the preliminary work on the alien codebase of RedoxOS.
 
 ## The Struggle Begins
 It was a completely new territory for us. 
@@ -64,7 +64,7 @@ In the first implementation, a delegate `FileSystem` struct was written that wou
 - Some tests for those functions to verify that they were working as expected.
 
 ## Scheming with SchemeMut then SchemeSync
-After the `SchemeMut` for OverlayFS was implemented and the `main` scheme function was implemented we could test the workings of initial syscall implements on RedoxOS as well as on Linux. But, `SchemeMut` was not what the RedoxOS team was using for other schemes. Later, the `SchemeMut` implementation was replaced with `SchemeSync` which finally brought the project to a fairly usable state.
+After the `SchemeMut` for OverlayFS was implemented and the `main` scheme function was implemented we could test the workings of initial syscall implementations on RedoxOS as well as on Linux. But, `SchemeMut` was not what the RedoxOS team was using for other schemes. Later, the `SchemeMut` implementation was replaced with `SchemeSync` which finally brought the project to a fairly usable state.
 
 ## The Great Big Purge
 After the verification that the implementation worked in practice, the initial structure of source code wasn't fit for a more involved implementation. The structure was reimplemented using rust's `struct` and `impl` syntax. All that was left was to implement each individual filesystem syscall that the scheme required to work with the OverlayFS implementation logic.
@@ -137,7 +137,7 @@ Since RedoxOS is a very unstable operating system, which is heavily in developme
 Near the project submission a fresh pull from RedoxOS introduced mismatches with our overlay code: path handling and validation required fixes, some Scheme APIs (`SchemeSync` and related types) had their methods changed so we needed to implement new functions. 
 Also, the way Scheme was started changed (we later found root-start resembled our old approach, but the new init-system startup only allowed a single overlay instance). During this we also came across a runtime freeze where a std library function appeared to hang with no error or panic which was unlikely in upstream CI, so we suspected a deadlock in our code.
 
-So, we decided to limit the implementation on the older commit and settled to showing what already worked on our system in our final project demonstration. This means we won't able to contribute the implementation upstream, and to be very honest we are very insecure _(almost unsatisfied)_ about our current implementation which is one more excuse for us to procrastinate now that the defence is over.
+So, we decided to limit the implementation on the older commit and settled to showing what already worked on our system in our final project demonstration. This means we won't able to contribute the implementation upstream, and to be very honest we are very insecure _(almost unsatisfied)_ about [our current implementation](https://gitlab.com/carboxide/overlayfs) which is one more excuse for us to procrastinate now that the defence is over.
 
 ## Mentors and Developers
 Though everything I contributed to the project was mentored to me by faultypointer, he didn't have anyone who mentored him. 
