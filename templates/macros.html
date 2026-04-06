@@ -26,12 +26,13 @@
         {% if links.activity.type == "like" %}
             {% set_global like_count = like_count + 1 %}
             {% set author_name = links.data.author.name | default(value=links.source) %}
+            {% set author_display = author_name | replace(from="https://", to="") | replace(from="http://", to="") %}
             <div class="mention-profile like">
                 <a href="{{ links.source }}">
                   {% if links.data.author.photo %}
                     <img src="{{ links.data.author.photo }}" alt="{{ author_name }}">
                   {% else %}
-                    <span class="mention-avatar-fallback">{{ author_name | truncate(length=1, end="") | upper }}</span>
+                    <span class="mention-avatar-fallback">{{ author_display | truncate(length=1, end="") | upper }}</span>
                   {% endif %}
                 </a>
             </div>
@@ -40,12 +41,13 @@
         {% if links.activity.type == "repost" %}
             {% set_global repost_count = repost_count + 1 %}
             {% set author_name = links.data.author.name | default(value=links.source) %}
+            {% set author_display = author_name | replace(from="https://", to="") | replace(from="http://", to="") %}
             <div class="mention-profile repost">
                 <a href="{{ links.source }}">
                   {% if links.data.author.photo %}
                     <img src="{{ links.data.author.photo }}" alt="{{ author_name }}">
                   {% else %}
-                    <span class="mention-avatar-fallback">{{ author_name | truncate(length=1, end="") | upper }}</span>
+                    <span class="mention-avatar-fallback">{{ author_display | truncate(length=1, end="") | upper }}</span>
                   {% endif %}
                 </a>
             </div>
@@ -54,12 +56,13 @@
         {% if links.activity.type == "link" %}
             {% set_global repost_count = repost_count + 1 %}
             {% set author_name = links.data.author.name | default(value=links.source) %}
+            {% set author_display = author_name | replace(from="https://", to="") | replace(from="http://", to="") %}
             <div class="mention-profile link">
                 <a href="{{ links.source }}">
                   {% if links.data.author.photo %}
                     <img src="{{ links.data.author.photo }}" alt="{{ author_name }}">
                   {% else %}
-                    <span class="mention-avatar-fallback">{{ author_name | truncate(length=1, end="") | upper }}</span>
+                    <span class="mention-avatar-fallback">{{ author_display | truncate(length=1, end="") | upper }}</span>
                   {% endif %}
                 </a>
             </div>
@@ -76,7 +79,7 @@
                 {% if links.data.author.photo %}
                   <img src="{{ links.data.author.photo }}" alt="{{ author_name }}">
                 {% else %}
-                  <span class="mention-avatar-fallback">{{ author_name | truncate(length=1, end="") | upper }}</span>
+                  <span class="mention-avatar-fallback">{{ author_display | truncate(length=1, end="") | upper }}</span>
                 {% endif %}
                 <code><a href="{{ links.source }}">@{{ author_name }}</a></code>
             </div>
