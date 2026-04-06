@@ -764,6 +764,21 @@ pre {
 	}
 }
 
+.mention-avatar-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;        /* match your img size */
+  height: 2rem;
+  border-radius: 50%;
+  background-color: var(--accent-color, #666);
+  color: var(--bg-color, #fff);
+  font-size: 0.85rem;
+  font-weight: bold;
+  font-family: monospace;
+  user-select: none;
+}
+
 .mention-profile::after {
     position: absolute;
     top: -15px;

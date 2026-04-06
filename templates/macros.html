@@ -70,6 +70,7 @@
 {% for links in data.links %}
     {% if links.target == page.permalink and links.activity.type == "reply" %}
         {% set author_name = links.data.author.name | default(value=links.source) %}
+        {% set author_display = author_name | replace(from="https://", to="") | replace(from="http://", to="") %}
         <div class="webmention">
             <div class="mention-profile">
                 {% if links.data.author.photo %}
