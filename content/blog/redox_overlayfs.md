@@ -1,10 +1,11 @@
 +++
-title = "OverlayFS for RedoxOS, Importance of Mentorship and Respect for Low Level Developers"
+title = "OverlayFS for RedoxOS"
 date = 2026-03-31
 [taxonomies]
 writings=["Reports"]
 +++
 
+## Along with the Importance of Mentorship and Respect for Low Level Developers
 
 When we were searching for a project to do for our final year submission, I came across a feature request on RedoxOS asking for OverlayFS support. I had kept it as something "I wish I could do". When pitching our ideas for the project, I also said that I wish we could do something like this, to my teammate [faultypointer](https://github.com/faultypointer). Since, he was interested in working on low level too while the whole world was doing AI projects we decided that we would do it. Afterall, when we take on the project we must complete it anyhow, otherwise we risk getting the degree.
 
@@ -16,7 +17,7 @@ _RedoxOS GUI running Cosmic Applications_
 
 </center>
 
-And, so it started. We proposed the idea to the faculty and they accepted, but they said that it must be a completely original work, without using any existing code written by RedoxOS contributors. We then started the research on how the OS was architectured and how we could implement something like OverlayFS.
+And, so it began. We proposed the idea to the faculty and they accepted, but they said that it must be a completely original work, without using any existing code written by RedoxOS contributors. We then started the research on how the OS was architectured and how we could implement something like OverlayFS.
 
 
 {% alert(note=true) %}
@@ -132,7 +133,9 @@ _Copy-Up in Graphical UI_
 
 ## Change is Inevitable
 
-Since RedoxOS is a very unstable Operating system, which is heavily in development, during the development of the OverlayFS, various parts had to be rewritten to keep up with upstream changes. Near the project submission there was mismatch between our overlay code and the upstream system changes (freshly pulled commits from RedoxOS) and it required fixes to path handling and validation. 
+Since RedoxOS is a very unstable operating system, which is heavily in development, during the development of the OverlayFS we repeatedly rewrote parts to keep up with upstream changes. 
+Near the project submission a fresh pull from RedoxOS introduced mismatches with our overlay code: path handling and validation required fixes, some Scheme APIs (`SchemeSync` and related types) had their methods changed so we needed to implement new functions. 
+Also, the way Scheme was started changed (we later found root-start resembled our old approach, but the new init-system startup only allowed a single overlay instance). During this we also came across a runtime freeze where a std library function appeared to hang with no error or panic which was unlikely in upstream CI, so we suspected a deadlock in our code.
 
 So, we decided to limit the implementation on the older commit and settled to showing what already worked on our system in our final project demonstration. This means we won't able to contribute the implementation upstream, and to be very honest we are very insecure _(almost unsatisfied)_ about our current implementation which is one more excuse for us to procrastinate now that the defence is over.
 
