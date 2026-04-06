@@ -702,10 +702,11 @@ pre {
 
 .webmention {
 	border-radius: var(--half-line);
+	gap: 0.5rem;
 	background-color: var(--background-color-1);
   display: flex;
-  align-items: center;
-  padding: calc(0.2 * var(--one-line)); 
+  align-items: flex-start;
+  padding: calc(0.4 * var(--one-line)); 
 	margin-bottom: var(--half-line);
 	
 	p {
@@ -741,7 +742,6 @@ pre {
   position: relative;
   border-radius: var(--half-line);
 	border-radius: var(--half-line);	
-	padding: var(--half-line);
 	img {
 		border-style: solid;
 		border-width: 1px;
@@ -749,6 +749,18 @@ pre {
 		width: 1.5rem;
 		border-radius: 50%;
 		position: relative; /* Keeps the image in the normal flow */
+	}
+	code {
+		padding-top: var(--half-line);
+	}
+}
+
+.webmention > div {
+	background-color: var(--background-color-0);
+	padding: var(--half-line);
+	border-radius: var(--half-line);	
+	p {
+			padding: var(--half-line);
 	}
 }
 
