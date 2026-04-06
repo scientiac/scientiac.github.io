@@ -1,45 +1,36 @@
 {% extends "base.html" %}
-
 {% block content %}
-
-<div class=section>
+<div class="section">
 <h1 class="title">
   {{ page.title }}
 </h1>
-
 {% set data = load_data(path="webmention/webmentions.json", format="json") %}
-
-
 <div class="activity-box">
 {% for links in data.links %}
     {% if links.target != "https://scientiac.space/" %}
+        {% set display_name = links.data.name | default(value=links.source) %}
         {% if links.activity.type == "like" %}
             <div class="mention-profile like">
-                <code><a href="{{ links.source }}">{{ links.data.author.name }} liked</a> <a href="{{ links.target }}">{{ links.target }}</a></code>
+                <code><a href="{{ links.source }}">{{ display_name }} liked</a> <a href="{{ links.target }}">{{ links.target }}</a></code>
             </div>
         {% endif %}
-
         {% if links.activity.type == "repost" %}
             <div class="mention-profile repost">
-                <code><a href="{{ links.source }}">{{ links.data.author.name }} reposted</a> <a href="{{ links.target }}">{{ links.target }}</a></code>
+                <code><a href="{{ links.source }}">{{ display_name }} reposted</a> <a href="{{ links.target }}">{{ links.target }}</a></code>
             </div>
         {% endif %}
-
         {% if links.activity.type == "link" %}
             <div class="mention-profile link">
-                <code><a href="{{ links.source }}">{{ links.data.author.name }} linked to</a> <a href="{{ links.target }}">{{ links.target }}</a></code>
+                <code><a href="{{ links.source }}">{{ display_name }} linked to</a> <a href="{{ links.target }}">{{ links.target }}</a></code>
             </div>
         {% endif %}
-
         {% if links.activity.type == "reply" %}
             <div class="mention-profile reply">
-                <code><a href="{{ links.source }}">{{ links.data.author.name }} replied to</a> <a href="{{ links.target }}">{{ links.target }}</a></code>
+                <code><a href="{{ links.source }}">{{ display_name }} replied to</a> <a href="{{ links.target }}">{{ links.target }}</a></code>
             </div>
         {% endif %}
     {% endif %}
 {% endfor %}
 </div>
-
 </div>
-
 {% endblock content %}
