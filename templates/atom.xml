@@ -17,7 +17,7 @@
         <content type="html"><![CDATA[
           {{ page.content | replace(from='src="/', to='src="' ~ config.base_url ~ '/') | replace(from='href="/', to='href="' ~ config.base_url ~ '/') | safe }}
           <hr/>
-          <p><i>Thanks for reading this via RSS.</i></p>
+          <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
         ]]></content>
     </entry>
     {%- endfor %}
