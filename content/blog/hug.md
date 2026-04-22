@@ -6,8 +6,7 @@ writings=["Poems"]
 series=["Valentine 2K26"]
 +++
 
-<em>
-<div style="text-align: left">
+<div style="text-align: left; font-style: italic;">
 
 I'll keep you warm, I'll tuck you tight.  
 You'll never want to leave.  
@@ -61,4 +60,3 @@ A hug so firm, and full of love.
 It transcends space and time.
 
 </div>
-</em>

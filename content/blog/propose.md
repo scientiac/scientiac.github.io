@@ -6,8 +6,7 @@ writings=["Poems"]
 series=["Valentine 2K26"]
 +++
 
-<em>
-<div style="text-align: left">
+<div style="text-align: left; font-style: italic;">
 
 Should I state the truth or just follow.  
 Fluffy coat around my heart that's hollow.  
@@ -25,4 +24,3 @@ No matter the story, the end had to hurt us.
 Choosing to propose someone lacking a purpose.  
 
 </div>
-</em>

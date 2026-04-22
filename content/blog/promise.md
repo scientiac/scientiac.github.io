@@ -6,8 +6,7 @@ writings=["Poems"]
 series=["Valentine 2K26"]
 +++
 
-<em>
-<div style="text-align: left">
+<div style="text-align: left; font-style: italic;">
 
 What could have been if promises were enforced?  
 A price to pay for every broken promises.  
@@ -28,4 +27,3 @@ A promise can make a bond so strong, that's unheard of.
 But, don't you dare make a promise when you know you can not love.  
 
 </div>
-</em>

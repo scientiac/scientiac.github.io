@@ -6,8 +6,7 @@ writings=["Poems"]
 series=["Valentine 2K26"]
 +++
 
-<em>
-<div style="text-align: left">
+<div style="text-align: left; font-style: italic;">
 
 I had forgotten the world.  
 Didn't know what's real from fake.  
@@ -37,4 +36,3 @@ I had never suspected a thing.
 Hallucinating to the taste of your lipstick.  
 
 </div>
-</em>

@@ -6,8 +6,7 @@ writings=["Poems"]
 series=["Valentine 2K26"]
 +++
 
-<em>
-<div style="text-align: left">
+<div style="text-align: left; font-style: italic;">
 
 As a poet, I am not ready.  
 Hurts my brain trying to rhyme teddy.  
@@ -19,4 +18,3 @@ Completing this poem is making me hungry.
 Now, all I can think is about chicken gravy.  
 
 </div>
-</em>

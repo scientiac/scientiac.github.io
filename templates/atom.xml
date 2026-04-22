@@ -4,6 +4,7 @@
     <title>{{ config.title }}</title>
     <subtitle>{{ config.description }}</subtitle>
     <link href="{{ config.base_url }}"/>
+    <link href="{{ get_url(path="atom.xml", trailing_slash=false) | safe }}" rel="self" type="application/atom+xml"/>
     <updated>{{ last_updated | date(format="%+") }}</updated>
     <id>{{ config.base_url }}</id>
     {%- for page in pages %}
@@ -14,9 +15,9 @@
         <author><name>{{ config.author }}</name></author>
         <id>{{ page.permalink }}</id>
         <content type="html"><![CDATA[
-          {{ page.content | safe }}
+          {{ page.content | replace(from='src="/', to='src="' ~ config.base_url ~ '/') | replace(from='href="/', to='href="' ~ config.base_url ~ '/') | safe }}
           <hr/>
-          <p><i>You're awesome for reading this via RSS.</i></p>
+          <p><i>Thanks for reading this via RSS.</i></p>
         ]]></content>
     </entry>
     {%- endfor %}

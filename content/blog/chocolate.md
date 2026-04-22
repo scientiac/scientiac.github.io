@@ -6,8 +6,7 @@ writings=["Poems"]
 series=["Valentine 2K26"]
 +++
 
-<em>
-<div style="text-align: left">
+<div style="text-align: left; font-style: italic;">
 
 Never doubt the power of something sweet.  
 Intoxicates your mind till you cannot quit.  
@@ -28,4 +27,3 @@ I'm so desperate, I don't even fear death.
 In my deathbed, bring me a bag of chocolate.
 
 </div>
-</em>

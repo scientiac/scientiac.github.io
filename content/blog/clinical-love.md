@@ -21,7 +21,7 @@ series=["Valentine 2K26"]
 
 ---
 
-<em>
+<div style="font-style: italic;">
 
 It's a list of order that you cannot touch.  
 Some BID, Some QD but never too much.  
@@ -39,5 +39,5 @@ Talk a little less but keep listening to her rambles.
 Don't put too much effort, just be kind and humble.  
 
 
-</em>
+</div>
 </div>

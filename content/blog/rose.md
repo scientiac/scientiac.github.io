@@ -6,8 +6,7 @@ writings=["Poems"]
 series=["Valentine 2K26"]
 +++
 
-<em>
-<div style="text-align: left">
+<div style="text-align: left; font-style: italic;">
 
 Dear Rose,  
 
@@ -32,4 +31,3 @@ that you will always be mine.
 And, forever will be mine.
 
 </div>
-</em>
