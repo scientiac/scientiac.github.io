@@ -51,10 +51,11 @@ function updateThemeSelector() {
     if (themes[id].length) {
       html += `<li><details${theme.split('-')[0] === id ? ' open' : ''}><summary>${id}</summary>`;
     } else {
-      html += `<li><a${theme === id ? ' class="current"' : ''}  href="javascript:setTheme('${id}')">${id}</a></li>`;
+      html += `<li><a${theme === id ? ' class="current"' : ''} data-theme-id="${id}" href="#">${id}</a></li>`;
     }
     for (var variant of themes[id]) {
-      html += ` <li><a${theme === id + '-' + variant ? ' class="current"' : ''} href="javascript:setTheme('${id}-${variant}')">${variant}</a></li>`;
+      const fullId = `${id}-${variant}`;
+      html += ` <li><a${theme === fullId ? ' class="current"' : ''} data-theme-id="${fullId}" href="#">${variant}</a></li>`;
     }
     if (themes[id].length) html += `</details></li>`;
   }
@@ -62,6 +63,14 @@ function updateThemeSelector() {
   html += `</details>`;
 
   q('#themeSelector').innerHTML = html;
+
+  // Add event listeners for theme links
+  q('#themeSelector').querySelectorAll('a[data-theme-id]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      setTheme(link.getAttribute('data-theme-id'));
+    });
+  });
 
   // get colors
   const colors = {
@@ -79,3 +88,5 @@ function setTheme(id) {
   theme = id;
   updateThemeSelector();
 }
+
+updateThemeSelector();

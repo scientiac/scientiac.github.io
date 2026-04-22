@@ -3,21 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <script>
-  (function () {
-    try {
-      const defaultThemes = {
-        light: "gruvbox-light",
-        dark: "night-solis"
-      };
-
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const theme = localStorage.theme || (prefersDark ? defaultThemes.dark : defaultThemes.light);
-
-      document.documentElement.dataset.theme = theme;
-    } catch (e) {}
-  })();
-  </script>
+  <script src="/assets/js/theme-init.js"></script>
     <link rel="stylesheet" type="text/css" href="/assets/css/themes.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/readable.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/global.css">
@@ -74,22 +60,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            renderMathInElement(document.body, {
-              // customised options
-              // • auto-render specific keys, e.g.:
-              delimiters: [
-                  {left: '$$', right: '$$', display: true},
-                  {left: '$', right: '$', display: false},
-                  {left: '\\(', right: '\\)', display: false},
-                  {left: '\\[', right: '\\]', display: true}
-              ],
-              // • rendering keys, e.g.:
-              throwOnError : false
-            });
-        });
-    </script>
+    <script defer src="/assets/js/katex-init.js"></script>
   	{% endif %}
     <!----------------   /KaTex    ------------------>
 
@@ -114,7 +85,7 @@
 </head>
 
 
-<body onload="updateThemeSelector();">
+<body>
 
   <!------------------LOGO------------------->
   <div class="logo-container">
@@ -177,5 +148,5 @@
 
     </footer>
 
-    <ol id="themeSelector" reversed></ol>
+    <ol id="themeSelector" class="js-only" reversed></ol>
 </html>

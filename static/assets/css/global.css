@@ -341,6 +341,10 @@ pre.highlight {
 	display: none
 }
 
+html:not(.js) .js-only {
+	display: none !important;
+}
+
 a.codewithlove {
 	font-weight: bold;
 	color: var(--text-highlight-0);

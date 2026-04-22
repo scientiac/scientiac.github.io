@@ -1,3 +1,49 @@
+:root {
+    --background-image: #fbf1c7;
+    --background-color-0: #fbf1c7;
+    --background-color-1: #ebdbb2;
+    --color: #3c3836;
+    --color-comments: #928374;
+    --text-highlight-0: #9d0006;
+    --text-highlight-1: #076678;
+    --text-highlight-2: #8f3f71;
+    --text-highlight-3: #427b58;
+    --text-highlight-4: #b57614;
+    --text-highlight-5: #79740e;
+    --note-color: #427b58;
+    --tip-color: #076678;
+    --important-color: #8f3f71;
+    --warning-color: #9d0006;
+    --caution-color: #b57614;
+    --logo-mode: url('/res/colors/logo-gruvbox-light.svg');
+    --font-family-swap: Latin Modern;
+
+    --background-color: var(--background-color-0);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-image: #161512;
+        --background-color-0: #161512;
+        --background-color-1: #312f2b;
+        --color: #ebebea;
+        --color-comments: #c9c8c5;
+        --text-highlight-0: #d71010;
+        --text-highlight-1: #38a78c;
+        --text-highlight-2: #ed851c;
+        --text-highlight-3: #19c434;
+        --text-highlight-4: #f8cb2b;
+        --text-highlight-5: #e6994a;
+        --note-color: #19c434;
+        --tip-color: #38a78c;
+        --important-color: #ed851c;
+        --warning-color: #d71010;
+        --caution-color: #f8cb2b;
+        --logo-mode: url('/res/colors/logo-night-solis.svg');
+        --font-family-swap: Latin Modern;
+    }
+}
+
 :root[data-theme] {
     --background-color: var(--background-color-0);
     --color-comments: var(--color);
