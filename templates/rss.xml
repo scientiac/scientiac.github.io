@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+    <channel>
+        <title>{{ config.title }}</title>
+        <link>{{ config.base_url }}</link>
+        <description>{{ config.description }}</description>
+        {%- for page in pages %}
+        <item>
+            <title>{{ page.title }}</title>
+            <link>{{ page.permalink }}</link>
+            <pubDate>{{ page.date | date(format="%a, %d %b %Y %H:%M:%S %z") }}</pubDate>
+            <dc:creator>{{ config.author }}</dc:creator>
+            <guid>{{ page.permalink }}</guid>
+            <description><![CDATA[
+                {{ content | safe }}
+                <p><br><i>You're awesome for reading this via RSS.</i></p>
+            ]]></description>
+        </item>
+        {%- endfor %}
+    </channel>
+</rss>

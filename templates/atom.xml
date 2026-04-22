@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>{{ config.title }}</title>
+    <link href="{{ config.base_url }}"/>
+    <updated>{{ last_updated | date(format="%+") }}</updated>
+    <id>{{ config.base_url }}</id>
+    {%- for page in pages %}
+    <entry>
+        <title>{{ page.title }}</title>
+        <link href="{{ page.permalink }}"/>
+        <updated>{{ page.date | date(format="%+") }}</updated>
+        <author><name>{{ config.author }}</name></author>
+        <id>{{ page.permalink }}</id>
+        <content type="html"><![CDATA[
+            {{ content | safe }}
+            <p><br><i>You're awesome for reading this via RSS.</i></p>
+        ]]></content>
+    </entry>
+    {%- endfor %}
+</feed>
