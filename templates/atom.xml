@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="{{ get_url(path="feed.xsl", trailing_slash=false) | safe }}" type="text/xsl"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title>{{ config.title }}</title>
+    <subtitle>{{ config.description }}</subtitle>
     <link href="{{ config.base_url }}"/>
     <updated>{{ last_updated | date(format="%+") }}</updated>
     <id>{{ config.base_url }}</id>
@@ -12,8 +14,9 @@
         <author><name>{{ config.author }}</name></author>
         <id>{{ page.permalink }}</id>
         <content type="html"><![CDATA[
-            {{ page.content | safe }}
-            <p><br><i>You're awesome for reading this via RSS.</i></p>
+          {{ page.content | safe }}
+          <hr/>
+          <p><i>You're awesome for reading this via RSS.</i></p>
         ]]></content>
     </entry>
     {%- endfor %}

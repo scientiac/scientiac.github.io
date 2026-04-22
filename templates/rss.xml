@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="{{ get_url(path="feed.xsl", trailing_slash=false) | safe }}" type="text/xsl"?>
 <rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
     <channel>
         <title>{{ config.title }}</title>
@@ -12,8 +13,9 @@
             <dc:creator>{{ config.author }}</dc:creator>
             <guid>{{ page.permalink }}</guid>
             <description><![CDATA[
-                {{ page.content | safe }}
-                <p><br><i>You're awesome for reading this via RSS.</i></p>
+              {{ page.content | safe }}
+              <hr/>
+              <p><i>You're awesome for reading this via RSS.</i></p>
             ]]></description>
         </item>
         {%- endfor %}
