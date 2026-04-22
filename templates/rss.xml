@@ -12,7 +12,7 @@
             <dc:creator>{{ config.author }}</dc:creator>
             <guid>{{ page.permalink }}</guid>
             <description><![CDATA[
-                {{ content | safe }}
+                {{ page.content | safe }}
                 <p><br><i>You're awesome for reading this via RSS.</i></p>
             ]]></description>
         </item>

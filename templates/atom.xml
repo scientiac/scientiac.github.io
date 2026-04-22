@@ -12,7 +12,7 @@
         <author><name>{{ config.author }}</name></author>
         <id>{{ page.permalink }}</id>
         <content type="html"><![CDATA[
-            {{ content | safe }}
+            {{ page.content | safe }}
             <p><br><i>You're awesome for reading this via RSS.</i></p>
         ]]></content>
     </entry>

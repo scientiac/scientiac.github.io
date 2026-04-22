@@ -16,7 +16,7 @@ minify_html = true
 build_search_index = true
 
 # generate rss feed
-feed_filenames = [ "atom.xml" ]
+feed_filenames = [ "atom.xml", "rss.xml" ]
 generate_feeds = true
 
 # make lists according to assigned tags
