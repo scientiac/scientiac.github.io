@@ -2,7 +2,7 @@
   description = "An empty flake template that you can adapt to your own environment";
 
   # Flake inputs
-  inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
   # Flake outputs
   outputs = { self, nixpkgs }:
@@ -28,9 +28,6 @@
           packages = with pkgs; [ 
             zola
           ];
-
-          # Set any environment variables for your dev shell
-          env = { };
 
           # Add any shell logic you want executed any time the environment is activated
           shellHook = ''

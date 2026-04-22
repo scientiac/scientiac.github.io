@@ -32,9 +32,8 @@ include_description = false
 include_path = false
 include_content = true
 
-[markdown]
-highlight_code = true
-highlight_theme = "gruvbox-dark"
+[markdown.highlighting]
+theme = "gruvbox-dark-medium"
 
 [extra]
 author = "scientiac"
