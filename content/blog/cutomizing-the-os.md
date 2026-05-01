@@ -2,7 +2,7 @@
 title = "Customizing the Operating System"
 date = 2026-04-30
 [taxonomies]
-writings=["Articles"]
+writings=["Reports"]
 +++
 
 _I just love tinkering with my devices, and have a design philosophy._
