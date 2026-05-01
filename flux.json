@@ -1,0 +1,11 @@
+{
+  "contentDir": "content",
+  "useStaticFolder": true,
+  "staticDir": "static",
+  "assetsDir": "assets",
+  "postTemplate": "+++\ntitle = \"{{title}}\"\ndate = {{date}} \n[taxonomies]\nwritings=[\"Poems\",\"Stories\",\"Reports\",\"Articles\"]\n+++\n\n",
+  "siteUrl": "https://scientiac.space",
+  "showAdvancedFiles": false,
+  "syncSettingsToGitHub": true,
+  "sortBy": "alphabetical"
+}
