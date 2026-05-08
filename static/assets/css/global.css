@@ -842,6 +842,33 @@ footer:not(.exclude) {
   border-color: var(--background-color-1);
 }
 
+/* The main container */
+.footer-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
+}
+
+/* Individual badge items */
+.badge-item {
+  display: flex;
+  align-items: center;
+}
+
+.badge-item img {
+  display: block;
+  height: 31px;
+  width: auto;
+  border: none;
+  border-radius: 0;
+}
+
+.badge-item a:hover img {
+  opacity: 0.8;
+}
+
 @media print {
 
   .logo-container {

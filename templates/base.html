@@ -134,36 +134,32 @@
       <p class="codewithlove">I can't think of things to write on a footer. So, just <span class="main-background">imagine</span> something yourself.</p>
 
       <p><a href="/series">Series</a> | <a href="/atom.xml">RSS</a> | <a href="https://github.com/scientiac/scientiac.github.io" target="_blank">Source Code</a></p>
-
-
-      <p>All articles are usable under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>.</p>
       {% endblock footer %}
 
-      <div class="webring-footer" style="margin-top: 20px;">
-        <map name="indie8831">
-          <area shape="rect" coords="38,0,88,15" href="https://xn--sr8hvo.ws/previous" alt="Previous">
-          <area shape="rect" coords="38,16,88,31" href="https://xn--sr8hvo.ws/next" alt="Next">
-          <area shape="rect" coords="0,0,38,31" href="https://xn--sr8hvo.ws" alt="IndieWeb">
-        </map>
+<div class="footer-badges">
 
-        <img src="/assets/indieweb.png" 
-             usemap="#indie8831" 
-             width="88" 
-             height="31" 
-             alt="IndieWeb Webring" 
-             style="display: block; 
-                    margin: 0 auto; 
-                    width: 88px; 
-                    height: 31px; 
-                    max-width: none; 
-                    border-radius: 0 !important; 
-                    image-rendering: pixelated; 
-                    border: none;">
+  <!-- IndieWeb Badge -->
+  <div class="badge-item">
+    <map name="indie8831">
+      <area shape="rect" coords="38,0,88,15" href="https://xn--sr8hvo.ws/previous" alt="Previous">
+      <area shape="rect" coords="38,16,88,31" href="https://xn--sr8hvo.ws/next" alt="Next">
+      <area shape="rect" coords="0,0,38,31" href="https://xn--sr8hvo.ws" alt="IndieWeb">
+    </map>
+    <img src="/assets/indieweb.png" usemap="#indie8831" alt="IndieWeb Webring">
+  </div>
 
-        <div style="font-size: 0; opacity: 0; height: 0; width: 0; overflow: hidden;">
-          <a href="https://xn--sr8hvo.ws/previous" rel="prev">Previous</a>
-          <a href="https://xn--sr8hvo.ws/next" rel="next">Next</a>
-        </div>
+  <!-- CC BY-SA Badge -->
+  <div class="badge-item">
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">
+      <img src="/assets/cc-by-sa.png" alt="CC BY-SA 4.0">
+    </a>
+  </div>
+
+</div>
+
+      <div style="font-size: 0; opacity: 0; height: 0; width: 0; overflow: hidden;">
+        <a href="https://xn--sr8hvo.ws/previous" rel="prev">Previous</a>
+        <a href="https://xn--sr8hvo.ws/next" rel="next">Next</a>
       </div>
 
     </footer>
