@@ -139,12 +139,27 @@
       <p>All articles are usable under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>.</p>
       {% endblock footer %}
 
-      <p>
-      You’re in my terrace on the <a href="https://xn--sr8hvo.ws">IndieWeb Webring</a>. <br> Perhaps you visited the
-        <a href="https://xn--sr8hvo.ws/previous">previous</a> one; continue to the
-        <a href="https://xn--sr8hvo.ws/next">next</a> garden, it’s a surprise.
-      </p>
+<div class="webring-footer" style="margin-top: 20px;">
+  <map name="indie8831">
+    <area shape="rect" coords="38,0,88,15" href="https://xn--sr8hvo.ws/previous" alt="Previous">
+    <area shape="rect" coords="38,16,88,31" href="https://xn--sr8hvo.ws/next" alt="Next">
+    <area shape="rect" coords="0,0,38,31" href="https://xn--sr8hvo.ws" alt="IndieWeb">
+  </map>
 
+  <img src="assets/indieweb.png" 
+       usemap="#indie8831" 
+       width="88" 
+       height="31" 
+       alt="IndieWeb Webring" 
+       style="display: block; 
+              margin: 0 auto; 
+              width: 88px; 
+              height: 31px; 
+              max-width: none; 
+              border-radius: 0 !important; 
+              image-rendering: pixelated; 
+              border: none;">
+</div>
 
     </footer>
 
