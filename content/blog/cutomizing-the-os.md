@@ -99,7 +99,16 @@ I use [Niri](https://github.com/niri-wm/niri) as my window manger of choice. But
 
 The default Arch Linux `GDM` has the Arch Linux logo there which I remove using the [GDM Settings](https://github.com/gdm-settings/gdm-settings) application. There might be a way to remove it via the command line but I am lazy and I just delete the application once I change this setting and it remains persistent. Tell me if you know the way. `;)`
 
-`edit: 2026-05-03: start`
+`edit: 2026-05-27: start`
+```sh
+sudo mkdir -p /etc/dconf/db/gdm.d
+echo -e "[org/gnome/login-screen]\nlogo=''" | sudo tee /etc/dconf/db/gdm.d/02-logo
+sudo dconf update
+```
+`edit: 2026-05-03: end`
+
+
+`edit: 2026-05-27: start`
 ### greetd 
 
 I switched from `GDM` to `greetd` to have the same style on the login manager which I have for the lock screen. Which also meant sacrificing the lock screen of the GNOME session and using something new that I know nothing about. I starting tracking the setup for `greetd` in a [markdown](https://raw.githubusercontent.com/scientiac/einstein.chezmoi/refs/heads/main/dot_config/quickshell/scigreet/README.md) file.
