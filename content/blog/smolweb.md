@@ -129,3 +129,5 @@ You can use individual clients for individual protocols like Gopher, Gemini, or 
 I first came across these places during the COVID days. Matter of fact, I started writing and posting on the web in `gemini://` even before I had a `https://` website. So, it is very special to me. While I have not updated the site in a while I still visit it time to time to water my plant in [astrobotany](gemini://astrobotany.mozz.us/public/933334f8342242fbbbad7ecc2931c02e) and see what's going on in the [station](gemini://station.martinrue.com/). I hope you explore these places too and meet new people and make new friends. Or, at the very least find interesting people to follow.
 
 Goodnight! `<3`
+
+I said I'd talk about the other parts of the web too but this much for today. I will write about the more difficult darker part of the web in another post someday. Ok? `^ ^`
