@@ -550,22 +550,37 @@ button:hover {
 /* For Alerts */
 .note {
 	background-color: var(--note-color);
+	 a {
+		color: var(--text-highlight-0);
+	}
 }
 
 .tip {
 	background-color: var(--tip-color);
+	 a {
+		color: var(--text-highlight-0);
+	}
 }
 
 .important {
 	background-color: var(--important-color);
+	 a {
+		color: var(--text-highlight-0);
+	}
 }
 
 .warning {
 	background-color: var(--warning-color);
+	 a {
+		color: var(--text-highlight-1);
+	}
 }
 
 .caution {
 	background-color: var(--caution-color);
+	 a {
+		color: var(--text-highlight-0);
+	}
 }
 
 /* For Spoilers */

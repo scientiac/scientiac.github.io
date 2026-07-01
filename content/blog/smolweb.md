@@ -5,6 +5,10 @@ date = 2026-06-30
 writings=["Articles"]
 +++
 
+{% alert(tip=true) %}
+If you prefer to listen or watch instead of reading [highly unlikely since you came here, but still] I tried creating a _[video](https://youtu.be/GjBRhMTN2WI)_ for the first time 
+{% end %}
+
 There is so much more to the internet than your Facebook, Instagram, Twitter, Google, and chat GPTs. And these things are not known by the general masses, not because it's a quality problem, but instead it's a discovery problem. 
 
 Honestly, the content in these places are more human and heartwarming, if not high quality. That is, if you go on the right places. The internet is full of people and every person is unique. You might get a feeling of awe or you might come across very horrifying things.
