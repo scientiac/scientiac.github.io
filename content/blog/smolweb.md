@@ -30,15 +30,15 @@ There are various circles of people's blogs called webrings. Some of them are:
 
 There are various directories where you can find different people sharing their things in their own way. You can find people with interesting hobbies in:
 
-- [ooh.directory](ooh.directory)
-- [nownownow.com](nownownow.com)
-- [Blog of the .Day](blogofthe.day)
+- [ooh.directory](https://ooh.directory)
+- [nownownow.com](https://nownownow.com)
+- [Blog of the .Day](https://blogofthe.day)
 
 If you really want social media or feed style place, there are:
 
-- [bubbles.town](bubbles.town)
-- [lobste.rs](lobste.rs)
-- [news.ycombinator.com](news.ycombinator.com)
+- [bubbles.town](https://bubbles.town)
+- [lobste.rs](https://lobste.rs)
+- [news.ycombinator.com](https://news.ycombinator.com)
 
 Or if you prefer the more modern meaning of social media, there are various platforms like Mastodon, Pixelfed, Gotosocial, PeerTube, etc in the fediverse. 
 
