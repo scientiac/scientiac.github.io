@@ -1,0 +1,211 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><script src=/assets/js/theme-init.js></script><link href=/assets/css/themes.css rel=stylesheet><link href=/assets/css/readable.css rel=stylesheet><link href=/assets/css/global.css rel=stylesheet><link href=/assets/css/fonts.css rel=stylesheet><link href=/assets/css/logo.css rel=stylesheet><link href=/assets/css/genre/Reports.css rel=stylesheet><link href=https://scientiac.space/atom.xml rel=alternate title=RSS type=application/atom+xml><meta content=Reports property=og:type><meta content=scientiac.space property=og:site_name><meta content=https://scientiac.space/res/thumbnail-light.png property=og:image><title>OverlayFS for RedoxOS</title><meta content="OverlayFS for RedoxOS" name=og:title><meta content="Along with the Importance of Mentorship and Respect for Low Level Developers
+When we were searching for a project to do for our final year submission, I came across a feature request on RedoxOS asking for OverlayFS support. I had kept it as something &#34;I wish I could do&#34;. When pitching our ideas for the project, I also said that I wish we could do something like this, to my teammate faultypointer. Since, he was interested in working on low level too while the whole world was doing AI projects we decided that we would do it. Afterall, when we take on the project we must complete it anyhow, otherwise we risk getting the degree.
+
+
+RedoxOS GUI running Cosmic Applications
+
+And, so it began. We proposed the idea to the faculty and they accepted, but they said that it must be a completely original work, without using any existing code written by RedoxOS contributors. We then started the research on how the OS was architectured and how we could implement something like OverlayFS.
+
+	Note
+	Overlay filesystems are pseudo-filesystems which combines multiple filesystems or
+multiple directories from same filesystems into one, resulting in a single directory
+structure that contains underlying files and sub-directories from all sources.
+
+
+High Level representation of OverlayFS
+
+
+The First Contact
+When we contacted the people making RedoxOS on their matrix server, we found out that someone had started the preliminary work for OverlayFS. We then contacted him and said that we wanted to help make the thing. He was positive about it and said that though he couldn't mentor us for it, he would leave some notes for us to better kickstart the project. We took the notes and started the preliminary work on the alien codebase of RedoxOS.
+The Struggle Begins
+It was a completely new territory for us.
+Though we had some theoretical knowledge on Operating System and their Architecture from our syllabus, our practical experience for OS development was closer to none.
+Reading the RedoxOS Book was fun though, I got to learn about the various components of RedoxOS and what their philosophy was.
+Though I read about RedoxOS in detail, I hadn't made up my mind on where I would start developing the OverlayFS.
+First few months, taking about the project and having in my mind that it's a low level project I wanted to do was like a dream.
+I was excited and so was faultypointer. We talked about the architecture and discussed the plans and theory of how OverlayFS worked, we gathered resources and references. Those were exciting days.
+The Build System
+It had been very long since we have just studied the theory and we hadn't implemented anything. Until that time we managed to understand the build pipeline and how the source code of RedoxOS was structured. We were using NixOS at the time so, we had to jump to a more normal Linux distribution to make out life easier to work with building RedoxOS.
+I don't even know how many times we built RedoxOS from scratch deleting containers and reinstalling them again and again and again.
+Another thing we realized while building RedoxOS is that it wasn't self-hosted yet. Meaning, you couldn't build programs for RedoxOS from inside RedoxOS. We knew from James Matlik's Implementation Proposal that we had to make a delegate pattern in order to make it on Linux and then integrate it with RedoxOS. I wasn't familier to delegate patterns so, I was still learning about it.
+The Initial Implementation
+While I was busy wasting time asking AI to guide me to start the project, faultypointer had already written the preliminary filesystem struct and made the delegate struct to prototype it on Linux.
+While I hadn't done much, I was much relieved that actual work on the project was finally started. Finally we (by we mean just faultypointer) had started work on the project.
+In the first implementation, a delegate FileSystem struct was written that would do the things the overlay scheme would do in the future. What it contained was:
+
+Functions for open, read, write, close, unlink, readdir.
+Helper functions for copying up files from lower to upper layer, checking for whiteout files and creating whiteout files.
+Some tests for those functions to verify that they were working as expected.
+
+Scheming with SchemeMut then SchemeSync
+After the SchemeMut for OverlayFS was implemented and the main scheme function was implemented we could test the workings of initial syscall implementations on RedoxOS as well as on Linux. But, SchemeMut was not what the RedoxOS team was using for other schemes. Later, the SchemeMut implementation was replaced with SchemeSync which finally brought the project to a fairly usable state.
+The Great Big Purge
+After the verification that the implementation worked in practice, the initial structure of source code wasn't fit for a more involved implementation. The structure was reimplemented using rust's struct and impl syntax. All that was left was to implement each individual filesystem syscall that the scheme required to work with the OverlayFS implementation logic.
+Starting to write syscalls, the rust libraries soon didn't cut it. Then libc had to be used.open was implemented. The most visual part of the whole project was done by the getdents syscall, which listed the directory entries that showed the logical merged/overlay layer of the OverlayFS, hence, that had to be implemented next.
+
+	Important
+	Due to RedoxOS being a microkernel based Operating System, it's own filesystem and our OverlayFS was outside the kernel space. The architecture of the OverlayFS can be visualized as follows:
+
+
+Architecture of the filesystem within RedoxOS
+
+
+System Calls
+After everything was set up, all that remained was implementing more and more syscalls untill each one was implemented. The implemented syscalls in order are as follows:
+
+open - Resolves path checking upper then lower layer, respects whiteouts, and forwards UID/GID for permission checks.
+getdents - Merges directory entries from upper then lower layer, excluding shadowed names and honoring opaque directories; maintains opaque offsets.
+read - Reads from whichever layer the file was resolved from at open time.
+write - Performs copy-on-write: copies lower-layer file to upper layer on first write, then writes to the upper copy.
+fpath - Retrieves the path for a file descriptor via the scheme interface.
+unlink - Removes upper-layer files directly; for lower-layer files creates a whiteout in the upper layer.
+rmdir - Validates directory emptiness and removes directories, creating upper-layer markers if the directory originated from lower layer.
+fchown - Triggers copy-up for lower-layer files, then applies ownership change to the upper-layer copy.
+fchmod - Triggers copy-up for lower-layer files, then applies permission change to the upper-layer copy.
+fsize - Returns size metadata from the layer where the file resides (upper or lower).
+fcntl - Manipulates file descriptor flags through the scheme interface.
+fvent - Registers events for asynchronous I/O through the scheme interface.
+flink - Creates hard links only within the upper layer; linking to a lower-layer file triggers copy-up first.
+ftruncate - Performs copy-on-write if needed, then truncates the upper-layer copy.
+statvfs - Aggregates filesystem statistics across both layers to report combined capacity and inode usage.
+futimens - Performs copy-on-write if needed, then updates timestamps on the upper-layer copy.
+dup - Duplicates file descriptors, preserving the resolved-layer behavior of the underlying handle.
+
+Proof that Syscalls for OverlayFS Work(ed).
+
+  
+  
+
+
+Copy-Up in Terminal UI
+
+
+  
+  
+
+
+Copy-Up in Graphical UI
+
+Change is Inevitable
+Since RedoxOS is a very unstable operating system, which is heavily in development, during the development of the OverlayFS we repeatedly rewrote parts to keep up with upstream changes.
+Near the project submission a fresh pull from RedoxOS introduced mismatches with our overlay code: path handling and validation required fixes, some Scheme APIs (SchemeSync and related types) had their methods changed so we needed to implement new functions.
+Also, the way Scheme was started changed (we later found root-start resembled our old approach, but the new init-system startup only allowed a single overlay instance). During this we also came across a runtime freeze where a std library function appeared to hang with no error or panic which was unlikely in upstream CI, so we suspected a deadlock in our code.
+So, we decided to limit the implementation on the older commit and settled to showing what already worked on our system in our final project demonstration. This means we won't able to contribute the implementation upstream, and to be very honest we are very insecure (almost unsatisfied) about our current implementation which is one more excuse for us to procrastinate now that the defence is over.
+Mentors and Developers
+Though everything I contributed to the project was mentored to me by faultypointer, he didn't have anyone who mentored him.
+I admire faultypointer for his dedication to the craft and his knowledge and flexibility to understand and work on an alien codebase.
+I don't even know if I had taken up the project and faultypointer wasn't on our team that we could even make an implementation of OverlayFS that actually worked.
+Near the final defence I saw exhaustion and burnout on faulty's face that I had never seen before, I wasn't knowledged/skilled enough to help him either.
+That moment was the time I (maybe we both) realized the importance of mentor and mentorship. After all we are just students learning in this field.
+Though I admire low level developers and I try to dabble on it, but, I also like visuals and graphics and something that looks presentable.
+The amount of work that faultypointer has put on this project compared to me is stellar, and of that work the final result being something so simple that can be explained in 3 sentences is very underwhelming (one might say anticlimactic).
+This project has immensely increased my respect towards the low-level developers and most importantly faultypointer (Sudesh).
+End of an Era
+This being a final year project of my bachelor degree also makes me very sentimental about it. Hopefully, we keep in touch even after we part ways to our respective future.
+Love you brother! I'll find you from under the ocean and over the sky if you don't keep in touch. This is very much a warning as it is a request.
+" name=description><meta content="Along with the Importance of Mentorship and Respect for Low Level Developers
+When we were searching for a project to do for our final year submission, I came across a feature request on RedoxOS asking for OverlayFS support. I had kept it as something &#34;I wish I could do&#34;. When pitching our ideas for the project, I also said that I wish we could do something like this, to my teammate faultypointer. Since, he was interested in working on low level too while the whole world was doing AI projects we decided that we would do it. Afterall, when we take on the project we must complete it anyhow, otherwise we risk getting the degree.
+
+
+RedoxOS GUI running Cosmic Applications
+
+And, so it began. We proposed the idea to the faculty and they accepted, but they said that it must be a completely original work, without using any existing code written by RedoxOS contributors. We then started the research on how the OS was architectured and how we could implement something like OverlayFS.
+
+	Note
+	Overlay filesystems are pseudo-filesystems which combines multiple filesystems or
+multiple directories from same filesystems into one, resulting in a single directory
+structure that contains underlying files and sub-directories from all sources.
+
+
+High Level representation of OverlayFS
+
+
+The First Contact
+When we contacted the people making RedoxOS on their matrix server, we found out that someone had started the preliminary work for OverlayFS. We then contacted him and said that we wanted to help make the thing. He was positive about it and said that though he couldn't mentor us for it, he would leave some notes for us to better kickstart the project. We took the notes and started the preliminary work on the alien codebase of RedoxOS.
+The Struggle Begins
+It was a completely new territory for us.
+Though we had some theoretical knowledge on Operating System and their Architecture from our syllabus, our practical experience for OS development was closer to none.
+Reading the RedoxOS Book was fun though, I got to learn about the various components of RedoxOS and what their philosophy was.
+Though I read about RedoxOS in detail, I hadn't made up my mind on where I would start developing the OverlayFS.
+First few months, taking about the project and having in my mind that it's a low level project I wanted to do was like a dream.
+I was excited and so was faultypointer. We talked about the architecture and discussed the plans and theory of how OverlayFS worked, we gathered resources and references. Those were exciting days.
+The Build System
+It had been very long since we have just studied the theory and we hadn't implemented anything. Until that time we managed to understand the build pipeline and how the source code of RedoxOS was structured. We were using NixOS at the time so, we had to jump to a more normal Linux distribution to make out life easier to work with building RedoxOS.
+I don't even know how many times we built RedoxOS from scratch deleting containers and reinstalling them again and again and again.
+Another thing we realized while building RedoxOS is that it wasn't self-hosted yet. Meaning, you couldn't build programs for RedoxOS from inside RedoxOS. We knew from James Matlik's Implementation Proposal that we had to make a delegate pattern in order to make it on Linux and then integrate it with RedoxOS. I wasn't familier to delegate patterns so, I was still learning about it.
+The Initial Implementation
+While I was busy wasting time asking AI to guide me to start the project, faultypointer had already written the preliminary filesystem struct and made the delegate struct to prototype it on Linux.
+While I hadn't done much, I was much relieved that actual work on the project was finally started. Finally we (by we mean just faultypointer) had started work on the project.
+In the first implementation, a delegate FileSystem struct was written that would do the things the overlay scheme would do in the future. What it contained was:
+
+Functions for open, read, write, close, unlink, readdir.
+Helper functions for copying up files from lower to upper layer, checking for whiteout files and creating whiteout files.
+Some tests for those functions to verify that they were working as expected.
+
+Scheming with SchemeMut then SchemeSync
+After the SchemeMut for OverlayFS was implemented and the main scheme function was implemented we could test the workings of initial syscall implementations on RedoxOS as well as on Linux. But, SchemeMut was not what the RedoxOS team was using for other schemes. Later, the SchemeMut implementation was replaced with SchemeSync which finally brought the project to a fairly usable state.
+The Great Big Purge
+After the verification that the implementation worked in practice, the initial structure of source code wasn't fit for a more involved implementation. The structure was reimplemented using rust's struct and impl syntax. All that was left was to implement each individual filesystem syscall that the scheme required to work with the OverlayFS implementation logic.
+Starting to write syscalls, the rust libraries soon didn't cut it. Then libc had to be used.open was implemented. The most visual part of the whole project was done by the getdents syscall, which listed the directory entries that showed the logical merged/overlay layer of the OverlayFS, hence, that had to be implemented next.
+
+	Important
+	Due to RedoxOS being a microkernel based Operating System, it's own filesystem and our OverlayFS was outside the kernel space. The architecture of the OverlayFS can be visualized as follows:
+
+
+Architecture of the filesystem within RedoxOS
+
+
+System Calls
+After everything was set up, all that remained was implementing more and more syscalls untill each one was implemented. The implemented syscalls in order are as follows:
+
+open - Resolves path checking upper then lower layer, respects whiteouts, and forwards UID/GID for permission checks.
+getdents - Merges directory entries from upper then lower layer, excluding shadowed names and honoring opaque directories; maintains opaque offsets.
+read - Reads from whichever layer the file was resolved from at open time.
+write - Performs copy-on-write: copies lower-layer file to upper layer on first write, then writes to the upper copy.
+fpath - Retrieves the path for a file descriptor via the scheme interface.
+unlink - Removes upper-layer files directly; for lower-layer files creates a whiteout in the upper layer.
+rmdir - Validates directory emptiness and removes directories, creating upper-layer markers if the directory originated from lower layer.
+fchown - Triggers copy-up for lower-layer files, then applies ownership change to the upper-layer copy.
+fchmod - Triggers copy-up for lower-layer files, then applies permission change to the upper-layer copy.
+fsize - Returns size metadata from the layer where the file resides (upper or lower).
+fcntl - Manipulates file descriptor flags through the scheme interface.
+fvent - Registers events for asynchronous I/O through the scheme interface.
+flink - Creates hard links only within the upper layer; linking to a lower-layer file triggers copy-up first.
+ftruncate - Performs copy-on-write if needed, then truncates the upper-layer copy.
+statvfs - Aggregates filesystem statistics across both layers to report combined capacity and inode usage.
+futimens - Performs copy-on-write if needed, then updates timestamps on the upper-layer copy.
+dup - Duplicates file descriptors, preserving the resolved-layer behavior of the underlying handle.
+
+Proof that Syscalls for OverlayFS Work(ed).
+
+  
+  
+
+
+Copy-Up in Terminal UI
+
+
+  
+  
+
+
+Copy-Up in Graphical UI
+
+Change is Inevitable
+Since RedoxOS is a very unstable operating system, which is heavily in development, during the development of the OverlayFS we repeatedly rewrote parts to keep up with upstream changes.
+Near the project submission a fresh pull from RedoxOS introduced mismatches with our overlay code: path handling and validation required fixes, some Scheme APIs (SchemeSync and related types) had their methods changed so we needed to implement new functions.
+Also, the way Scheme was started changed (we later found root-start resembled our old approach, but the new init-system startup only allowed a single overlay instance). During this we also came across a runtime freeze where a std library function appeared to hang with no error or panic which was unlikely in upstream CI, so we suspected a deadlock in our code.
+So, we decided to limit the implementation on the older commit and settled to showing what already worked on our system in our final project demonstration. This means we won't able to contribute the implementation upstream, and to be very honest we are very insecure (almost unsatisfied) about our current implementation which is one more excuse for us to procrastinate now that the defence is over.
+Mentors and Developers
+Though everything I contributed to the project was mentored to me by faultypointer, he didn't have anyone who mentored him.
+I admire faultypointer for his dedication to the craft and his knowledge and flexibility to understand and work on an alien codebase.
+I don't even know if I had taken up the project and faultypointer wasn't on our team that we could even make an implementation of OverlayFS that actually worked.
+Near the final defence I saw exhaustion and burnout on faulty's face that I had never seen before, I wasn't knowledged/skilled enough to help him either.
+That moment was the time I (maybe we both) realized the importance of mentor and mentorship. After all we are just students learning in this field.
+Though I admire low level developers and I try to dabble on it, but, I also like visuals and graphics and something that looks presentable.
+The amount of work that faultypointer has put on this project compared to me is stellar, and of that work the final result being something so simple that can be explained in 3 sentences is very underwhelming (one might say anticlimactic).
+This project has immensely increased my respect towards the low-level developers and most importantly faultypointer (Sudesh).
+End of an Era
+This being a final year project of my bachelor degree also makes me very sentimental about it. Hopefully, we keep in touch even after we part ways to our respective future.
+Love you brother! I'll find you from under the ocean and over the sky if you don't keep in touch. This is very much a warning as it is a request.
+" name=og:description><link rel="shortcut icon" href=/res/thumbnail.svg type=image/x-icon><meta content="width=device-width,initial-scale=1" name=viewport><meta content="rgb(253, 246, 227)" name=theme-color><script defer src=/assets/js/copy-button.js></script><link href=https://github.com/scientiac rel=me><link href=mailto:spandan@scientiac.space rel=me><link href=https://webmention.io/scientiac.space/webmention rel=webmention><meta content=@iac@polymaths.social name=fediverse:creator><body><div class=logo-container><a href=/> <div class=inner-logo-container></div> </a></div><nav data-style=classy><span><a href=/>Main</a></span><span><a href=/blog>Blog</a></span><span><a href=/syndications>Ping</a></span><span><a href=/more>More</a></span></nav><section class=section-body><div class=container><div class=h-entry><a class="u-url hidden" href=https://scientiac.space/blog/redox-overlayfs/>https://scientiac.space/blog/redox-overlayfs/</a><div class=section><h1 class="p-name title">OverlayFS for RedoxOS</h1><div class=pagedate><time class="dt-published dateandtag hidden" datetime=2026-03-31T00:00:00Z> 2026-03-31 </time><code class=dateandtag>2026-03-31</code><code class="u-category dateandtag">Reports</code></div><p><div class="hidden p-author h-card"><a class=u-url href=https://scientiac.space rel=me> <img alt="Profile photo of scientiac" class=u-photo src=/res/thumbnail.png> <span class=p-name>scientiac</span> </a></div><div class=e-content><h2 id=along-with-the-importance-of-mentorship-and-respect-for-low-level-developers>Along with the Importance of Mentorship and Respect for Low Level Developers</h2><p>When we were searching for a project to do for our final year submission, I came across a feature request on RedoxOS asking for OverlayFS support. I had kept it as something "I wish I could do". When pitching our ideas for the project, I also said that I wish we could do something like this, to my teammate <a href=https://github.com/faultypointer rel=external>faultypointer</a>. Since, he was interested in working on low level too while the whole world was doing AI projects we decided that we would do it. Afterall, when we take on the project we must complete it anyhow, otherwise we risk getting the degree.</p><img src=/images/redox_overlayfs/redoxos.png style=border-radius:.5rem;padding:.25rem><center> <p><em>RedoxOS GUI running Cosmic Applications</em></p> </center><p>And, so it began. We proposed the idea to the faculty and they accepted, but they said that it must be a completely original work, without using any existing code written by RedoxOS contributors. We then started the research on how the OS was architectured and how we could implement something like OverlayFS.<blockquote class=note><p class=alert-title>Note<p>Overlay filesystems are pseudo-filesystems which combines multiple filesystems or multiple directories from same filesystems into one, resulting in a single directory structure that contains underlying files and sub-directories from all sources.</p><img src=/images/redox_overlayfs/overlayfs.png style=border-radius:1rem;padding:.25rem><center> <p>High Level representation of OverlayFS</p> </center></blockquote><h2 id=the-first-contact>The First Contact</h2><p>When we contacted the people making RedoxOS on their matrix server, we found out that someone had started the preliminary work for OverlayFS. We then contacted him and said that we wanted to help make the thing. He was positive about it and said that though he couldn't mentor us for it, he would leave <a href=https://gitlab.redox-os.org/redox-os/redox/-/issues/1568 rel=external>some notes</a> for us to better kickstart the project. We took the notes and started the preliminary work on the alien codebase of RedoxOS.<h2 id=the-struggle-begins>The Struggle Begins</h2><p>It was a completely new territory for us. Though we had some theoretical knowledge on Operating System and their Architecture from our syllabus, our practical experience for OS development was closer to none. Reading the <a href=https://doc.redox-os.org/book/ rel=external>RedoxOS Book</a> was fun though, I got to learn about the various components of RedoxOS and what their philosophy was. Though I read about RedoxOS in detail, I hadn't made up my mind on where I would start developing the OverlayFS.<p>First few months, taking about the project and having in my mind that it's a low level project I wanted to do was like a dream. I was excited and so was faultypointer. We talked about the architecture and discussed the plans and theory of how OverlayFS worked, we gathered resources and references. Those were exciting days.<h2 id=the-build-system>The Build System</h2><p>It had been very long since we have just studied the theory and we hadn't implemented anything. Until that time we managed to understand the build pipeline and how the source code of RedoxOS was structured. We were using NixOS at the time so, we had to jump to a more normal Linux distribution to make out life easier to work with building RedoxOS. I don't even know how many times we built RedoxOS from scratch deleting containers and reinstalling them again and again and again.<p>Another thing we realized while building RedoxOS is that <strong>it wasn't self-hosted</strong> yet. Meaning, you couldn't build programs for RedoxOS from inside RedoxOS. We knew from <a href=https://gitlab.redox-os.org/matlik rel=external>James Matlik's</a> Implementation Proposal that we had to make a delegate pattern in order to make it on Linux and then integrate it with RedoxOS. I wasn't familier to delegate patterns so, I was still learning about it.<h2 id=the-initial-implementation>The Initial Implementation</h2><p>While I was busy wasting time asking AI to guide me to start the project, faultypointer had already written the preliminary filesystem struct and made the delegate struct to prototype it on Linux. While I hadn't done much, I was much relieved that actual work on the project was finally started. Finally we <em>(by we mean just faultypointer)</em> had started work on the project.<p>In the first implementation, a delegate <code>FileSystem</code> struct was written that would do the things the overlay scheme would do in the future. What it contained was:<ul><li>Functions for <code>open</code>, <code>read</code>, <code>write</code>, <code>close</code>, <code>unlink</code>, <code>readdir</code>.<li>Helper functions for copying up files from lower to upper layer, checking for whiteout files and creating whiteout files.<li>Some tests for those functions to verify that they were working as expected.</ul><h2 id=scheming-with-schememut-then-schemesync>Scheming with SchemeMut then SchemeSync</h2><p>After the <code>SchemeMut</code> for OverlayFS was implemented and the <code>main</code> scheme function was implemented we could test the workings of initial syscall implementations on RedoxOS as well as on Linux. But, <code>SchemeMut</code> was not what the RedoxOS team was using for other schemes. Later, the <code>SchemeMut</code> implementation was replaced with <code>SchemeSync</code> which finally brought the project to a fairly usable state.<h2 id=the-great-big-purge>The Great Big Purge</h2><p>After the verification that the implementation worked in practice, the initial structure of source code wasn't fit for a more involved implementation. The structure was reimplemented using rust's <code>struct</code> and <code>impl</code> syntax. All that was left was to implement each individual filesystem syscall that the scheme required to work with the OverlayFS implementation logic.<p>Starting to write syscalls, the <code>rust</code> libraries soon didn't cut it. Then <code>libc</code> had to be used.<code>open</code> was implemented. The most visual part of the whole project was done by the <code>getdents</code> syscall, which listed the directory entries that showed the logical merged/overlay layer of the OverlayFS, hence, that had to be implemented next.<blockquote class=important><p class=alert-title>Important<p>Due to RedoxOS being a microkernel based Operating System, it's own filesystem and our OverlayFS was outside the kernel space. The architecture of the OverlayFS can be visualized as follows:</p><img src=/images/redox_overlayfs/architecture.png style=border-radius:1rem;padding:.25rem><center> <p>Architecture of the filesystem within RedoxOS</p> </center></blockquote><h2 id=system-calls>System Calls</h2><p>After everything was set up, all that remained was implementing more and more syscalls untill each one was implemented. The implemented syscalls in order are as follows:<ol><li><code>open</code> - Resolves path checking upper then lower layer, respects whiteouts, and forwards UID/GID for permission checks.<li><code>getdents</code> - Merges directory entries from upper then lower layer, excluding shadowed names and honoring opaque directories; maintains opaque offsets.<li><code>read</code> - Reads from whichever layer the file was resolved from at open time.<li><code>write</code> - Performs copy-on-write: copies lower-layer file to upper layer on first write, then writes to the upper copy.<li><code>fpath</code> - Retrieves the path for a file descriptor via the scheme interface.<li><code>unlink</code> - Removes upper-layer files directly; for lower-layer files creates a whiteout in the upper layer.<li><code>rmdir</code> - Validates directory emptiness and removes directories, creating upper-layer markers if the directory originated from lower layer.<li><code>fchown</code> - Triggers copy-up for lower-layer files, then applies ownership change to the upper-layer copy.<li><code>fchmod</code> - Triggers copy-up for lower-layer files, then applies permission change to the upper-layer copy.<li><code>fsize</code> - Returns size metadata from the layer where the file resides (upper or lower).<li><code>fcntl</code> - Manipulates file descriptor flags through the scheme interface.<li><code>fvent</code> - Registers events for asynchronous I/O through the scheme interface.<li><code>flink</code> - Creates hard links only within the upper layer; linking to a lower-layer file triggers copy-up first.<li><code>ftruncate</code> - Performs copy-on-write if needed, then truncates the upper-layer copy.<li><code>statvfs</code> - Aggregates filesystem statistics across both layers to report combined capacity and inode usage.<li><code>futimens</code> - Performs copy-on-write if needed, then updates timestamps on the upper-layer copy.<li><code>dup</code> - Duplicates file descriptors, preserving the resolved-layer behavior of the underlying handle.</ol><h2 id=proof-that-syscalls-for-overlayfs-work-ed>Proof that Syscalls for OverlayFS Work(ed).</h2><div class=gallery style=flex-wrap:wrap;display:flex><img src=/images/redox_overlayfs/getdents.png style=border-radius:.5rem;width:19rem;padding:.25rem><img src=/images/redox_overlayfs/copyup.png style=border-radius:.5rem;width:19rem;padding:.25rem></div><div style=text-align:center><p><em>Copy-Up in Terminal UI</em></div><div class=gallery style=flex-wrap:wrap;display:flex><img src=/images/redox_overlayfs/graphical-getdents.png style=border-radius:.5rem;width:19rem;padding:.25rem><img src=/images/redox_overlayfs/graphical-copyup.png style=border-radius:.5rem;width:19rem;padding:.25rem></div><div style=text-align:center><p><em>Copy-Up in Graphical UI</em></div><h2 id=change-is-inevitable>Change is Inevitable</h2><p>Since RedoxOS is a very unstable operating system, which is heavily in development, during the development of the OverlayFS we repeatedly rewrote parts to keep up with upstream changes. Near the project submission a fresh pull from RedoxOS introduced mismatches with our overlay code: path handling and validation required fixes, some Scheme APIs (<code>SchemeSync</code> and related types) had their methods changed so we needed to implement new functions. Also, the way Scheme was started changed (we later found root-start resembled our old approach, but the new init-system startup only allowed a single overlay instance). During this we also came across a runtime freeze where a std library function appeared to hang with no error or panic which was unlikely in upstream CI, so we suspected a deadlock in our code.<p>So, we decided to limit the implementation on the older commit and settled to showing what already worked on our system in our final project demonstration. This means we won't able to contribute the implementation upstream, and to be very honest we are very insecure <em>(almost unsatisfied)</em> about <a href=https://gitlab.com/carboxide/overlayfs rel=external>our current implementation</a> which is one more excuse for us to procrastinate now that the defence is over.<h2 id=mentors-and-developers>Mentors and Developers</h2><p>Though everything I contributed to the project was mentored to me by faultypointer, he didn't have anyone who mentored him. I admire faultypointer for his dedication to the craft and his knowledge and flexibility to understand and work on an alien codebase. I don't even know if I had taken up the project and faultypointer wasn't on our team that we could even make an implementation of OverlayFS that actually worked.<p>Near the final defence I saw exhaustion and burnout on faulty's face that I had never seen before, I wasn't knowledged/skilled enough to help him either. That moment was the time I <em>(maybe we both)</em> realized the importance of mentor and mentorship. After all we are just students learning in this field.<p>Though I admire low level developers and I try to dabble on it, but, I also like visuals and graphics and something that looks presentable. The amount of work that faultypointer has put on this project compared to me is stellar, and of that work the final result being something so simple that can be explained in 3 sentences is very underwhelming <em>(one might say anticlimactic)</em>. This project has immensely increased my respect towards the low-level developers and most importantly faultypointer <code>(Sudesh)</code>.<h2 id=end-of-an-era>End of an Era</h2><p>This being a final year project of my bachelor degree also makes me very sentimental about it. Hopefully, we keep in touch even after we part ways to our respective future.<p>Love you brother! I'll find you from under the ocean and over the sky if you don't keep in touch. This is very much a warning as it is a request.</div></div></div><div id=webmention><hr><h2>Webmentions</h2><form action=https://webmention.io/scientiac.space/webmention class=webmention-form method=post><div id=email-comment><p>Have you written a <a href=https://indieweb.org/responses>response</a> to this? Let me know the URL, Or, you can send your response via <a href="mailto:iac@scientiac.space?subject=Reply%3A%20OverlayFS%20for%20RedoxOS">mail:</a><code>iac@scientiac.space</code></div><div class=send-webmention><input name=source type=url><button>Send Webmention</button></div><div><div class="ui message"></div></div><input name=target type=hidden value=https://scientiac.space/blog/redox-overlayfs/></form><div class=interaction-box><div class="mention-profile link"><a href=https://lemmy.bestiver.se/post/1032902> <span class=mention-avatar-fallback>L</span> </a></div><div class="mention-profile link"><a href=https://lemmy.world/post/45252496> <span class=mention-avatar-fallback>L</span> </a></div></div></div></div><script defer src=/assets/js/themeSelector.js></script></section><div class=hidden><a href=https://polymaths.social/@iac rel=me>Fediverse</a></div><div class="hidden h-card"><img class="u-photo icon" alt=scientiac src=/res/thumbnail.png><a class="p-name u-url" href=https://scientiac.space rel=me>scientiac</a><p class=p-note>A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does.</div><footer><p class=codewithlove>I can't think of things to write on a footer. So, just <span class=main-background>imagine</span> something yourself.<p><a href=/series>Series</a> | <a href=/atom.xml>RSS</a> | <a href=https://github.com/scientiac/scientiac.github.io target=_blank>Source Code</a><div class=footer-badges><div class=badge-item><map name=indie8831><area alt=Previous coords=38,0,88,15 href=https://xn--sr8hvo.ws/previous><area alt=Next coords=38,16,88,31 href=https://xn--sr8hvo.ws/next><area alt=IndieWeb coords=0,0,38,31 href=https://xn--sr8hvo.ws></map><img alt="IndieWeb Webring" src=/assets/indieweb.png usemap=#indie8831></div><div class=badge-item><a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank> <img alt="CC BY-SA 4.0" src=/assets/cc-by-sa.png> </a></div></div><div style=opacity:0;width:0;height:0;font-size:0;overflow:hidden><a href=https://xn--sr8hvo.ws/previous rel=prev>Previous</a><a href=https://xn--sr8hvo.ws/next rel=next>Next</a></div></footer><ol class=js-only id=themeSelector reversed></ol>

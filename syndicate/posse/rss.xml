@@ -1,0 +1,974 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="https://scientiac.space/feed.xsl" type="text/xsl"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>scientiac::syntropy</title>
+        <link>https:&#x2F;&#x2F;scientiac.space</link>
+        <description>A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does.</description>
+        <atom:link href="https://scientiac.space/rss.xml" rel="self" type="application/rss+xml" />
+        <item>
+            <title>From a Teacher</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2026-06-08&#x2F;</link>
+            <pubDate>Mon, 08 Jun 2026 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2026-06-08&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p>I read this article by <a rel="external" href="http://ozark.hendrix.edu/~yorgey/forest/00FD/index.xml">ozark.hendrix.edu/~yorgey</a> dedicated to his students and I loved it. While everything he had to say had an effect on me like it was targeted toward me, the last point he made touched me the most.</p>
+<blockquote>
+<p>Above all, be motivated by love instead of fear.</p>
+</blockquote>
+<p>Fear has been taking over lately.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>Indieweb Webring Button</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2026-05-08&#x2F;</link>
+            <pubDate>Fri, 08 May 2026 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2026-05-08&#x2F;</guid>
+            <description><![CDATA[
+              <p>Inspired by <a rel="external" href="https://webring.ghostk.id/online/">The Online Webring</a>, I made an Indieweb webring button that has mapped clickable regions for <code>previous</code>, <code>next</code> and <code>webring</code> links.</p>
+<div class="webring-footer" style="margin-top: 20px;">
+<map name="indie8831">
+  <area shape="rect" coords="38,0,88,15" href="https://xn--sr8hvo.ws/previous" alt="Previous">
+  <area shape="rect" coords="38,16,88,31" href="https://xn--sr8hvo.ws/next" alt="Next">
+  <area shape="rect" coords="0,0,38,31" href="https://xn--sr8hvo.ws" alt="IndieWeb">
+</map>
+<p><img src="https://scientiac.space/assets/indieweb.png" 
+     usemap="#indie8831" 
+     width="88" 
+     height="31" 
+     alt="IndieWeb Webring" 
+     style="display: block; 
+            margin: 0 auto; 
+            width: 88px; 
+            height: 31px; 
+            max-width: none; 
+            border-radius: 0 !important; 
+            image-rendering: pixelated; 
+            border: none;"></p>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="html"><span class="giallo-l"><span style="color: #83A598;">&lt;</span><span style="color: #8EC07C;font-weight: bold;">div</span><span style="color: #FABD2F;"> style</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">margin-top: 20px;</span><span style="color: #A89984;">&quot;</span><span style="color: #83A598;">&gt;</span></span>
+<span class="giallo-l"><span style="color: #83A598;">&lt;</span><span style="color: #8EC07C;font-weight: bold;">map</span><span style="color: #FABD2F;"> name</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">indie8831</span><span style="color: #A89984;">&quot;</span><span style="color: #83A598;">&gt;</span></span>
+<span class="giallo-l"><span style="color: #83A598;">  &lt;</span><span style="color: #8EC07C;font-weight: bold;">area</span><span style="color: #FABD2F;"> shape</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">rect</span><span style="color: #A89984;">&quot;</span><span style="color: #FABD2F;"> coords</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">38,0,88,15</span><span style="color: #A89984;">&quot;</span><span style="color: #FABD2F;"> href</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">https://xn--sr8hvo.ws/previous</span><span style="color: #A89984;">&quot;</span><span style="color: #FABD2F;"> alt</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">Previous</span><span style="color: #A89984;">&quot;</span><span style="color: #83A598;">&gt;</span></span>
+<span class="giallo-l"><span style="color: #83A598;">  &lt;</span><span style="color: #8EC07C;font-weight: bold;">area</span><span style="color: #FABD2F;"> shape</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">rect</span><span style="color: #A89984;">&quot;</span><span style="color: #FABD2F;"> coords</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">38,16,88,31</span><span style="color: #A89984;">&quot;</span><span style="color: #FABD2F;"> href</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">https://xn--sr8hvo.ws/next</span><span style="color: #A89984;">&quot;</span><span style="color: #FABD2F;"> alt</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">Next</span><span style="color: #A89984;">&quot;</span><span style="color: #83A598;">&gt;</span></span>
+<span class="giallo-l"><span style="color: #83A598;">  &lt;</span><span style="color: #8EC07C;font-weight: bold;">area</span><span style="color: #FABD2F;"> shape</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">rect</span><span style="color: #A89984;">&quot;</span><span style="color: #FABD2F;"> coords</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">0,0,38,31</span><span style="color: #A89984;">&quot;</span><span style="color: #FABD2F;"> href</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">https://xn--sr8hvo.ws</span><span style="color: #A89984;">&quot;</span><span style="color: #FABD2F;"> alt</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">IndieWeb</span><span style="color: #A89984;">&quot;</span><span style="color: #83A598;">&gt;</span></span>
+<span class="giallo-l"><span style="color: #83A598;">&lt;/</span><span style="color: #8EC07C;font-weight: bold;">map</span><span style="color: #83A598;">&gt;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #83A598;">&lt;</span><span style="color: #8EC07C;font-weight: bold;">img</span><span style="color: #FABD2F;"> src</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">https://scientiac.space/assets/indieweb.png</span><span style="color: #A89984;">&quot;</span><span> </span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">     usemap</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">#indie8831</span><span style="color: #A89984;">&quot;</span><span> </span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">     width</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">88</span><span style="color: #A89984;">&quot;</span><span> </span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">     height</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">31</span><span style="color: #A89984;">&quot;</span><span> </span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">     alt</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">IndieWeb Webring</span><span style="color: #A89984;">&quot;</span><span> </span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">     style</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">display: block; </span></span>
+<span class="giallo-l"><span style="color: #B8BB26;">            margin: 0 auto; </span></span>
+<span class="giallo-l"><span style="color: #B8BB26;">            width: 88px; </span></span>
+<span class="giallo-l"><span style="color: #B8BB26;">            height: 31px; </span></span>
+<span class="giallo-l"><span style="color: #B8BB26;">            max-width: none; </span></span>
+<span class="giallo-l"><span style="color: #B8BB26;">            border-radius: 0 !important; </span></span>
+<span class="giallo-l"><span style="color: #B8BB26;">            image-rendering: pixelated; </span></span>
+<span class="giallo-l"><span style="color: #B8BB26;">            border: none;</span><span style="color: #A89984;">&quot;</span><span style="color: #83A598;">&gt;</span></span>
+<span class="giallo-l"><span style="color: #83A598;">&lt;/</span><span style="color: #8EC07C;font-weight: bold;">div</span><span style="color: #83A598;">&gt;</span></span></code></pre></div>
+<p>But, I had to use this on my footer which basically hides the links but still make my site valid to the webring bot:</p>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="html"><span class="giallo-l"><span style="color: #83A598;">&lt;</span><span style="color: #8EC07C;font-weight: bold;">div</span><span style="color: #FABD2F;"> style</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">font-size: 0; opacity: 0; height: 0; width: 0; overflow: hidden;</span><span style="color: #A89984;">&quot;</span><span style="color: #83A598;">&gt;</span></span>
+<span class="giallo-l"><span style="color: #83A598;">  &lt;</span><span style="color: #8EC07C;font-weight: bold;">a</span><span style="color: #FABD2F;"> href</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">https://xn--sr8hvo.ws/previous</span><span style="color: #A89984;">&quot;</span><span style="color: #FABD2F;"> rel</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">prev</span><span style="color: #A89984;">&quot;</span><span style="color: #83A598;">&gt;</span><span>Previous</span><span style="color: #83A598;">&lt;/</span><span style="color: #8EC07C;font-weight: bold;">a</span><span style="color: #83A598;">&gt;</span></span>
+<span class="giallo-l"><span style="color: #83A598;">  &lt;</span><span style="color: #8EC07C;font-weight: bold;">a</span><span style="color: #FABD2F;"> href</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">https://xn--sr8hvo.ws/next</span><span style="color: #A89984;">&quot;</span><span style="color: #FABD2F;"> rel</span><span style="color: #A89984;">=&quot;</span><span style="color: #B8BB26;">next</span><span style="color: #A89984;">&quot;</span><span style="color: #83A598;">&gt;</span><span>Next</span><span style="color: #83A598;">&lt;/</span><span style="color: #8EC07C;font-weight: bold;">a</span><span style="color: #83A598;">&gt;</span></span>
+<span class="giallo-l"><span style="color: #83A598;">&lt;/</span><span style="color: #8EC07C;font-weight: bold;">div</span><span style="color: #83A598;">&gt;</span></span></code></pre>
+<p>Please tell me if that should not be done. Also, If you want to make changes to it, I made it as an <a href="https://scientiac.space/assets/indieweb.svg">SVG</a> using Inkscape.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>No JS? No Problem</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2026-04-22&#x2F;</link>
+            <pubDate>Wed, 22 Apr 2026 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2026-04-22&#x2F;</guid>
+            <description><![CDATA[
+              <p>I have been using Firefox focus on my phone with JS disabled as my only browser.
+And I noticed that, even though the site relies very little on JS it looked completely borked.</p>
+<p>So, I just fixed it, I'd say my site is now css first <em>(Akin to local first.)</em> but can add a little tiny bit more pizzazz if JS is enabled.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>KL-OS: File System</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2026-01-05&#x2F;</link>
+            <pubDate>Mon, 05 Jan 2026 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2026-01-05&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p><a rel="external" href="https://codeberg.org/scientiac/KL-OS/src/branch/main/progress/day-15.md">Day 15</a> was about File System.</p>
+<p>The <a rel="external" href="https://operating-system-in-1000-lines.vercel.app/en/">book</a> that I am following has come to an end with <strong>File System</strong> as the final chapter where it teaches to implement <code>tar</code> file as a filesystem.</p>
+<p><code>tar</code> is an archive format (like zip) that can contain multiple files. It contains file contents, filenames, creation dates, and other information necessary for a filesystem. Compared to common filesystem formats like FAT or ext2, tar has a much simpler data structure.</p>
+<p>First a simple directory with two files is made as an example which is then archived/compressed into the <code>tar</code> format using the command line <code>tar</code> tool. Which, also is added to the <code>buildscript</code> before launching the <code>qemu</code> VM.</p>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #A89984;">(</span><span style="color: #FE8019;">cd</span><span style="color: #B8BB26;"> disk</span><span style="color: #A89984;"> &amp;&amp;</span><span style="color: #FABD2F;"> tar</span><span style="color: #B8BB26;"> cf ../disk.tar</span><span style="color: #D3869B;"> --format=ustar</span><span style="color: #83A598;"> *</span><span style="color: #B8BB26;">.txt</span><span style="color: #A89984;">)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #928374;font-style: italic;"># The following flag is also added to qemu.</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">-drive</span><span style="color: #B8BB26;"> id=drive0,file=disk.tar,format=raw,if=none</span><span style="color: #D3869B;"> \</span></span></code></pre>
+<p>To read the filesystem, first, the data structures related to the tar filesystem is defined in <code>kernel.h</code>. This implementation has all files read from the disk at boot.</p>
+<p>To write to the disk, the contents of the <code>files</code> variable is written back to the disk in the tar file format. The <code>files</code> variable contains the copy of the <code>disk</code> variable declared as a static variable (It is a temporary buffer and, since the stack has a limited size it is preferred to use static variable instead of local <code>stack</code> variable.) which contains the disk image.</p>
+<p>File read/write system calls are then designed in the <code>user.c</code> and <code>user.h</code> files and then the system calls are implemented on the kernel files and then the system calls are implemented in the kernel. We also add the read and write commands to the shell.</p>
+<p>But, we still have to address the user pointers.</p>
+<p>In RISC-V, the behaviour of <code>S-Mode</code> (kernel) can be configured through <code>sstatus</code> <code>CSR</code>, including SUM (permit Supervisor User Memory access) bit. When SUM is not set, <code>S-Mode</code> programs (i.e. kernel) cannot access U-Mode (user) pages.</p>
+<p>All we need to do is to set the SUM bit when entering user space and voila! Our OS with a filesystem implementation is now ready.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>KL-OS: Disk I&#x2F;O</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2026-01-04&#x2F;</link>
+            <pubDate>Sun, 04 Jan 2026 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2026-01-04&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p><a rel="external" href="https://codeberg.org/scientiac/KL-OS/src/branch/main/progress/day-14.md">Day 14</a> was about Disk <code>I/O</code>.</p>
+<p>A device driver for the <code>virtio-blk</code>, a virtual disk device was implemented.</p>
+<p><code>Virtio</code> is one of the APIs for device drivers to control devices. It is widely used in virtualization environments such as QEMU.
+The <code>virtio</code> devices have a structure called <code>virtqueue</code> and it is a queue shared between the driver and the device.
+It consists of <code>Discriptor Table</code>, <code>Available Ring</code> and <code>Used Ring</code>.</p>
+<p>First we enable <code>virtio</code> drivers in our <code>buildscript</code> which is <code>run.sh</code>. We use the following flags for <code>qemu</code>:</p>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #FABD2F;">    -drive</span><span style="color: #B8BB26;"> id=drive0,file=lorem.txt,format=raw,if=none</span></span>
+<span class="giallo-l"><span style="color: #FABD2F;">    -device</span><span style="color: #B8BB26;"> virtio-blk-device,drive=drive0,bus=virtio-mmio-bus.0</span></span></code></pre>
+<p>Here, <code>lorem.txt</code> is a file made for testing purposes beforehand.</p>
+<p>Then, the definition of <code>c</code> structs and macros is done in <code>kernel.h</code>. To access the <code>MMIO</code> registers we add that functionality in <code>kernel.c</code>.</p>
+<p>The <code>create_process</code> function is modified to map the <code>virtio-blk</code> <code>MMIO</code> region to the page table so the kernel can access the <code>MMIO</code> registers. <code>MMIO</code> region to the page table so the kernel can access the <code>MMIO</code> registers.</p>
+<p>Then the <code>Virtio Device Initialization</code> and <code>Virtqueue Initialization</code> is done with the process described in the <a rel="external" href="https://ozlabs.org/~rusty/virtio-spec/virtio-0.9.5.pdf">spec</a>.</p>
+<p><code>I/O</code> requests to the disk is implemented by "adding processing requests to the <code>virtqueue</code>".</p>
+<p>A request is sent in the following steps:</p>
+<ol>
+<li>Construct a request in <code>blk_req</code>. Specify the sector number you want to access and the type of read/write.</li>
+<li>Construct a descriptor chain pointing to each area of <code>blk_req</code> (see below).</li>
+<li>Add the index of the head descriptor of the descriptor chain to the Available Ring.</li>
+<li>Notify the device that there is a new pending request.</li>
+<li>Wait until the device finishes processing (aka busy-waiting or polling).</li>
+<li>Check the response from the device.</li>
+</ol>
+<p>To test, we initialize the <code>virtio</code> device in the kernel main and try reading and writing to the disk with the implemented functions.</p>
+<blockquote>
+<p>Device drivers are just "glue" between the OS and devices. Drivers don't control the hardware directly; drivers communicate with other software running on the device (e.g., firmware). Devices and their software, not the OS driver, will do the rest of the heavy lifting, like moving disk read/write heads.</p>
+</blockquote>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>KL-OS: System Call</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2026-01-03&#x2F;</link>
+            <pubDate>Sat, 03 Jan 2026 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2026-01-03&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p><a rel="external" href="https://codeberg.org/scientiac/KL-OS/src/branch/main/progress/day-13.md">Day 13</a> was about system call.</p>
+<p>Similar to <code>SBI Call</code> implementation, the system calls are invoked in a similar way.</p>
+<p>The <code>syscall</code> function sets the system call number in the <code>a3</code> register and the system call arguments in the <code>a0</code> to <code>a2</code> registers, then executes the <code>ecall</code> instruction. The <code>ecall</code> instruction is a special instruction used to delegate processing to the kernel. When the <code>ecall</code> instruction is executed, an exception handler is called, and control is transferred to the kernel. The return value from the kernel is set in the <code>a0</code> register.</p>
+<p>The first <code>systemcall</code> implemented is <code>putchar</code>. It takes a character as the first argument and the second and subsequent unused arguments are set to 0.</p>
+<p>Then the <code>ecall</code> instruction is handled in the kernel. The calling of <code>ecall</code> can by determined by checking the value of <code>scause</code>. Before calling the <code>handle_syscall</code> function we also add the size of <code>ecall</code> instruction (4) to the value of <code>sepc</code>.</p>
+<p>This is because <code>sepc</code> points to the program counter that caused the exception, which points to the <code>ecall</code> instruction. If we don't change it, the kernel goes back to the same place, and the <code>ecall</code> instruction is executed repeatedly.</p>
+<p>Then a <code>system call</code>  handler is made and is called from trap handler. It receives a
+structure of registers at the time of exception that was saved in the trap handler. It determined the type of system call by checking the value of <code>a3</code> register.</p>
+<p>The system call was then tested with a main print function in <code>shell.c</code>.</p>
+<p>An <code>exit</code> system call is also implemented where it takes the first argument as <code>3</code> which is defined as <code>SYS_EXIT</code>.</p>
+<p>The system call changes the process state to <code>PROC_EXITED</code>, and calls yield to give up the CPU to other processes. The scheduler will only execute processes in <code>PROC_RUNNABLE</code> state, so it will never return to this process. However, <code>PANIC</code> macro is added to cause a panic in case it does return.</p>
+<p>A bare-bones shell was then implemented to use the syscalls to perform actions from the user mode.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>KL-OS: User Mode</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2026-01-02&#x2F;</link>
+            <pubDate>Fri, 02 Jan 2026 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2026-01-02&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p><a rel="external" href="https://codeberg.org/scientiac/KL-OS/src/branch/main/progress/day-12.md">Day 12</a> was about user mode.</p>
+<p>The application that we had made had to be run on the user mode. And since, the execution
+image is a raw binary, it needs to be prepared with a fixed binary.</p>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="c"><span class="giallo-l"><span style="color: #A89984;">#</span><span style="color: #8EC07C;">define</span><span style="color: #FABD2F;"> USER_BASE</span><span style="color: #B8BB26;"> 0x</span><span style="color: #D3869B;">1000000</span></span></code></pre>
+<p>After defining the symbols to use in the embedded raw binary, the create process function is updated to start the application from the <code>user_entry</code>.</p>
+<p>The <code>create_process</code> is modified to take the pointer to the execution image and image size as arguments. It copies the execution image page by page for the specified size and maps it to the process page table.</p>
+<p>Finally, the <code>create_process</code> function is modified to create a user process.</p>
+<p>After checking if the execution image is mapped as expected, to run applications we must transition the CPU to the user mode. Or, in RISC-V, the U-Mode.</p>
+<p>This switch from <code>S-Mode</code> to <code>U-mode</code> is done with the <code>sret</code> instruction. It does two writes to CSRs while switching:</p>
+<ul>
+<li><code>PC</code> is set for when transitioning in U-Mode in the <code>sepc</code> register where <code>sret</code> jumps to.</li>
+<li>Then, setting <code>SPIE</code> bit in the <code>sstatus</code> register enables hardware interrupts and the handler set in the <code>stvec</code> register will be called while entering the <code>U-Mode</code>.</li>
+</ul>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>KL-OS: Application</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2026-01-01&#x2F;</link>
+            <pubDate>Thu, 01 Jan 2026 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2026-01-01&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p><a rel="external" href="https://codeberg.org/scientiac/KL-OS/src/branch/main/progress/day-11.md">Day 11</a> was about application.</p>
+<p>First, a linker script named <code>user.ln</code> was made this time starting at address <code>1000000</code> so that the application doesn't overlap with the kernel space.</p>
+<p>Then a simple <code>userland</code> library is created with minimal features just enough to indicate the existence of a userland application.
+A header file for the userland library is also made.</p>
+<p>Then an application is made, very <code>barebones</code>, it is just an infinite loop for now since there is no way to print characters at the moment.</p>
+<p>To build the application, we first compile it with cc to get an executable in a <code>ELF</code> format. The executable is then converted to raw binary format with the <code>objcopy</code> tool.
+Then the raw binary executable format is then again converted to a format that can be embedded in the C language.</p>
+<p>Lastly, the <code>shell.bin.o</code> output is then passed to <code>clang</code> (kernel build section of the script) which gets embedded into the kernel image.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>KL-OS: Examining Pages</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2025-12-31&#x2F;</link>
+            <pubDate>Wed, 31 Dec 2025 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2025-12-31&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p><a rel="external" href="https://codeberg.org/scientiac/KL-OS/src/branch/main/progress/day-10.md">Day 10</a> was about testing and debugging paging and page table contents.</p>
+<p>Running the <code>buildscript</code> should give us the exact same output of repeating letters similar to how it was before paging was implemented.</p>
+<p>Then the page table contents were examined. To check about the registers, following command was run on the <code>qemu</code> console.</p>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #A89984;">(</span><span style="color: #FABD2F;">qemu</span><span style="color: #A89984;">)</span><span style="color: #FABD2F;"> info</span><span style="color: #B8BB26;"> registers</span></span></code></pre>
+<p>Then the value of <code>satp</code> register is read and then interpreted by doing the following hexadecimal math:</p>
+<pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="python"><span class="giallo-l"><span style="color: #FE8019;">hex</span><span style="color: #A89984;">((</span><span style="color: #CC241D;">0x</span><span style="color: #8EC07C;">&lt;</span><span style="color: #D5C4A1;">val of satp</span><span style="color: #8EC07C;">&gt; &amp;</span><span style="color: #FE8019;"> 0x</span><span style="color: #D3869B;">3fffff</span><span style="color: #A89984;">)</span><span style="color: #8EC07C;"> *</span><span style="color: #D3869B;"> 4096</span><span style="color: #A89984;">)</span></span></code></pre>
+<p>Then the <code>VPN[1]</code> and <code>VPN[0]</code> physical addressed were also examined.</p>
+<p>The consequences of forgetting to set the paging mode, specifying physical address instead of physical page number was also seen. <code>qemu</code> logs were also enabled.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>KL-OS: Page Table</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2025-12-30&#x2F;</link>
+            <pubDate>Tue, 30 Dec 2025 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2025-12-30&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p><a rel="external" href="https://codeberg.org/scientiac/KL-OS/src/branch/main/progress/day-9.md">Day 9</a> was about memory management and virtual addressing.</p>
+<p>The structure of the virtual address is defined by the RISC-V paging mechanism called <code>Sv32</code>.
+It uses a two level page table where the 32 bit virtual address  is divided into a first-level page table index, a second level and a page offset. The tables are named <code>VPN[1]</code> and <code>VPN[0]</code> respectively.</p>
+<p>First the macros for the construction of the page table are defined. Then the function to map pages <code>map_page</code> is made which is utilized in process creation. For that we also add an element called <code>page_table</code> on the <code>struct</code> of process. And to make everything work we define the starting address of the kernel space <code>__kernel__base</code> in the linker script just after boot.</p>
+<p>To utilize the above setup of page tables and switch them, we specify the first-level page table in <code>satp</code> (Supervisor Address Translation and Protection) register.</p>
+<p>I still need to understand more about this. I am not satisfied with the explanation from the resource.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>KL-OS: Process</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2025-12-29&#x2F;</link>
+            <pubDate>Mon, 29 Dec 2025 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2025-12-29&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p><a rel="external" href="https://codeberg.org/scientiac/KL-OS/src/branch/main/progress/day-8.md">Day 8</a> was about Process. Though, modern operating systems use the concept of threads to provide execution context. We treat processes like individual threads being run for our implementation.</p>
+<p>First we define a structure for PCB (Process Control Block). We first define <code>PROC_UNUSED</code> and <code>0</code> and <code>PROC_RUNNABLE</code> as <code>1</code>. Then we create a structure for a unit process with the following slots:</p>
+<ul>
+<li>Process ID as an Integer.</li>
+<li>State (<em><code>PROC_UNUSED </code>or <code>PROC_RUNNABLE</code></em>) as an Integer as defined before.</li>
+<li>Stack Pointer as a <code>vaddr_t</code> (Virtual Address Type).</li>
+<li>Kernel Stack as a list of unsigned <code>8bit</code> Integers.</li>
+</ul>
+<p>The Kernel Stack is essential for saving the registers while context switching.</p>
+<p>Then, we defined the <code>switch_context</code> function that does the context switching. It takes
+the previous and next stack pointer as arguments and then switches them during execution.
+It saves the callee-saved registers into the stack, switches the stack pointer then restores the callee-saved registers from the stack. <em>The execution context is saved as a temporary local variable on the stack.</em></p>
+<p>Then, we work on process creation. The process creation function <code>create_process</code> takes
+in the entry point of the process as a parameter and then returns the process struct.</p>
+<p>The <code>delay</code> function is also created to act as a sleep style function which just does <code>nop</code> (Nothing) for 30000000 clock pulses.</p>
+<p>Then a <strong>scheduler</strong> is made to make the context switching more autonomous.
+A scheduler is basically a Kernel program which decides the next process.</p>
+<p>Then, in the exception handler, we make it so that each process has it's own independent kernel stack. While switching, the contents of <code>sscratch</code> are switched too to resume the execution of process from where it was interrupted as if nothing had happened.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>KL-OS: Memory Allocation</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2025-12-28&#x2F;</link>
+            <pubDate>Sun, 28 Dec 2025 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2025-12-28&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p><a rel="external" href="https://codeberg.org/scientiac/KL-OS/src/branch/main/progress/day-7.md">Day 7</a> was about Memory Allocation. First the memory regions were defined in the linker script so that it can determine the position to avoid overlapping the memory to kernel's static data.</p>
+<p>The size of the memory space was <code>64 * 1024 * 1024</code> bytes or <code>64MB</code> and it is aligned to a <code>4KB</code> boundary.</p>
+<p>Then a function <code>alloc_pages</code> was implemented which allocated <code>n</code> pages of memory and returned it's starting address.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>KL-OS: Exceptions</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2025-12-27&#x2F;</link>
+            <pubDate>Sat, 27 Dec 2025 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2025-12-27&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p><a rel="external" href="https://codeberg.org/scientiac/KL-OS/src/branch/main/progress/day-6.md">Day 6</a> was about Exceptions and handling those Exceptions in the kernel.</p>
+<p>In RISC-V the CPU first checks <code>medeleg</code> register to determine which operation mode should handle the exception.
+In our case <code>U-mode/S-mode</code> is already handled by <code>OpenSBI</code>.
+Then, the CPU saves states into various <code>CSRs</code>.
+<code>stvec</code> register is set to <code>pc</code> then the exception is handled using the handler. Then <code>sret</code> is called to resume execution from the point where exception occurred.</p>
+<p>The <code>handle_trap</code> function reads why the exception occurred and triggers the kernel panic. Which was implemented yesterday.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>KL-OS: PANIC</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2025-12-26&#x2F;</link>
+            <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2025-12-26&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p>Perfect topic for today because early morning I was shown why It was a stupid decision to do something, then at afternoon I got into a bike accident. Though it was minor with no injuries to both parties except some scratches on the bikes. It could have caused huge consequences. Then I did another mistake and then another.</p>
+<p>PANIC!</p>
+<p>It is <a rel="external" href="https://codeberg.org/scientiac/KL-OS/src/branch/main/progress/day-5.md">day 5</a>. Implementing panic was very easy, it is implemented as a macro because if we defined it as a function it would have printed the <code>__LINE__</code> and <code>__FILE__</code> where <code>PANIC</code> is defined and not where it is called. And to halt the kernel it uses a <code>while true</code> loop which goes on infinitely.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>KL-OS: C Standard Library</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2025-12-25&#x2F;</link>
+            <pubDate>Thu, 25 Dec 2025 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2025-12-25&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p>To make a useful kernel we require it to perform tasks like setting a memory chunk to zero,
+or copying the memory from a source address to destination address. It may have to understand
+what a boolean is or what NULL is. So, for that we require the "C Standard Library" and hence
+we need to implement it (or the functions it contains as abstractions to commonly used functions).</p>
+<p>For this, in <a rel="external" href="https://codeberg.org/scientiac/KL-OS/src/branch/main/progress/day-4.md">day 4</a> I utilized <code>clang</code>'s internal C library as well as resorted to writing the functions all by myself.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>KL-OS: Printing</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2025-12-24&#x2F;</link>
+            <pubDate>Wed, 24 Dec 2025 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2025-12-24&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p>As the days progress the journey is getting more fun and interesting.
+It was the part where actual text was going to be printed.
+It was a kernel <code>hello-world</code>.</p>
+<p><a rel="external" href="https://codeberg.org/scientiac/KL-OS/src/branch/main/progress/day-3.md">Day 3</a> focused on printing characters on the console by talking to SBI finally implementing <code>putchar</code> and eventually <code>printf</code>.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>KL-OS: Boot</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2025-12-23&#x2F;</link>
+            <pubDate>Tue, 23 Dec 2025 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2025-12-23&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p>The actual development of OS started with making the build script <code>run.sh</code> in bash to setup and launch a <code>qemu</code> RISC-V virtual machine with <code>OpenSBI</code> as bios for QEMU.</p>
+<p>Then a linker script <code>kernel.ld</code> was made and a basic kernel process <code>kernel.c</code> was written. Finally, the build script was updated to include compiler and execution commands and flags to properly boot the kernel.</p>
+<p><a rel="external" href="https://codeberg.org/scientiac/KL-OS/src/branch/main/progress/day-2.md">Day 2</a> focused on writing a basic starting process of a kernel and running it in a virtual machine.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>KL-OS: Setting Up</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2025-12-22&#x2F;</link>
+            <pubDate>Mon, 22 Dec 2025 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2025-12-22&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p>I have set up the environment required to run RISC-V 64 toolchain using <code>QEMU</code>.</p>
+<p>Installed a <code>debian</code> RISC-V 64 <code>iso</code> and set it up to my liking with <code>autologin</code> and proper terminal emulation and <code>sudo</code>. I then installed <code>gcc</code>, <code>gdb</code> and <code>neovim</code> for writing and compiling programs.</p>
+<p>Details of what happened on <a rel="external" href="https://codeberg.org/scientiac/KL-OS/src/branch/main/progress/day-1.md">Day 1</a> is tracked using <code>git</code> with <code>codeberg</code> as a remote.</p>
+<p>I have decided to use <a rel="external" href="https://operating-system-in-1000-lines.vercel.app/">Operating System in 1000 Lines</a> as the learning material because it was featured as a beginner level learning material in <a rel="external" href="https://github.com/riscv/learn">github:riscv/learn</a>.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>KL-OS: Checkpoint</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2025-12-21&#x2F;</link>
+            <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;kl-os-2025-12-21&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p>I want to learn systems programming and I thought why not go with the open source one which is currency in development.
+So, I chose the RISC-V architecture.
+That way if I decide to keep pursuing it, I can grow along with the ISA slowly catching up to it.</p>
+<p>I want to keep a streak by posting here every day about what I learn. Let's hope it goes well.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>Rusting</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2025-08-28&#x2F;</link>
+            <pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2025-08-28&#x2F;</guid>
+            <description><![CDATA[
+              <p>Trying to replace as many apps I use with the apps written in rust to see how much is possible.</p>
+<p><a class="u-in-reply-to" href="https://flux.3o14.com/continuous-oxidation/">Continuous: Oxidation</a> by flux was very helpful.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>A quote from &#x27;Daredevil: Born Again&#x27;</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2025-03-26&#x2F;</link>
+            <pubDate>Wed, 26 Mar 2025 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2025-03-26&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<center>
+<p><em>Don't rely on anyone to do what you can do for yourself.</em></p>
+<p><code>Angela Del Toro, Daredevil: Born Again, 2025</code></p>
+</center>
+<p>I don't mean it in a dangerous sense, like how she does in the series. But think it in a more general sense. It's a good advice.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>Ingenuity</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2025-03-23&#x2F;</link>
+            <pubDate>Sun, 23 Mar 2025 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2025-03-23&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p>I have tears in my eyes, hearing that ingenuity is dead, but not fully dead. First she just shocks everyone by living more than we anticipated her to, and now she is dead because she can no longer do what she went there to do. But, still alive that she's doing work that she wasn't even assigned to do, with broken wings and muddy eyes.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>Mufasa: Not a very good brother</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2025-02-19-second&#x2F;</link>
+            <pubDate>Wed, 19 Feb 2025 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2025-02-19-second&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p>So, Scar was suffering from depression, after all he had the pressure of becoming a king, and yet he wasn't trained, cared, taught, loved....(As described in the story.). Why did Mufasa not understand and forgive him and let him be the part of the family (While he was once lost and alone too.)?</p>
+<p>Spoiler Alert: He wanted the villain to its sequel.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>What is Hate?</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2025-02-06&#x2F;</link>
+            <pubDate>Thu, 06 Feb 2025 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2025-02-06&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<center>
+<p>Until next time,</p>
+<p><em>Hate is when you are hurt seeing them happy.</em></p>
+<p><code>The Adventures of Scientiac, 2025</code></p>
+</center>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>Linux is&#x2F;not Difficult</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2025-02-04&#x2F;</link>
+            <pubDate>Tue, 04 Feb 2025 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2025-02-04&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p>Using linux coming from windows is like, talking in a different language. You try to use your grammar with their words (making it an accent) and you feel difficult communicating.</p>
+<p>And saying linux is harder to use than windows is like speaking <code>&lt;insert foreign language here&gt;</code> is harder than speaking <code>&lt;insert your language here&gt;</code>.</p>
+<p>Live in the place for some time and instead of worrying about the language, you'll think about the services, products and lifestyle the place offers.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>Verification</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2025-01-29&#x2F;</link>
+            <pubDate>Wed, 29 Jan 2025 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2025-01-29&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p>I once called myself an optimist.</p>
+<p>But since negativity has started seeping in, it has become very difficult to focus on the positives, not even for people who ( is, are ) would have been loved if it wasn't for that negativity ( pride, ego, narcisicim, misogeny, misandry, .... ).</p>
+<p>I won't trust me for how I describe people, and won't trust anyone but myself to really know one. And neither should you. I suggest you create a picture of a person on your own and not from someone else's description or bias.</p>
+<p>This won't change the people who I say are are bad to not be bad, but verifying it is essential. Thank you.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>&quot;Advices from a Male&quot;</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2025-01-28&#x2F;</link>
+            <pubDate>Tue, 28 Jan 2025 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2025-01-28&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p>How are people supposed to trust you when all you give are excuses. When are you gonna learn that your actions have consequences, consequences that affect other people.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>Charlie</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2025-01-14&#x2F;</link>
+            <pubDate>Tue, 14 Jan 2025 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2025-01-14&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<center>
+Charlie Puth remains my favourite.
+</center>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>What is Love?</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2025-01-01&#x2F;</link>
+            <pubDate>Wed, 01 Jan 2025 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2025-01-01&#x2F;</guid>
+            <description><![CDATA[
+              <center>
+<p>Until next time,</p>
+<p><em>Love is just a choice.</em></p>
+<p><code>The Adventures of Scientiac, 2025</code></p>
+</center>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>Webmentions</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2024-11-05&#x2F;</link>
+            <pubDate>Tue, 05 Nov 2024 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2024-11-05&#x2F;</guid>
+            <description><![CDATA[
+              <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans"></a>
+<p>Indieweb is such a cool place. And the fact that you have webrings and
+webmentions makes it the most open and custom social media. The possibility of interactions and replies adds beauty with convenience to this unique form of communication.</p>
+<p>I just love it. Thanks <a rel="external" href="https://aaronparecki.com/2018/06/30/11/your-first-webmention">@aaronpk</a> for the tests.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>Hurt</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2024-11-04&#x2F;</link>
+            <pubDate>Mon, 04 Nov 2024 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2024-11-04&#x2F;</guid>
+            <description><![CDATA[
+              <p>Sometimes I want to hurt (not physically) people (when I am disappointed or dissatisfied).
+To maybe let them know that I am hurt (I know I Know it's the wrong way).</p>
+<p>I'd do things that would hurt me, to hurt them, but it hurts me back when they don't feel a thing when the thing would have hurt me.
+Call it a weakness, call it "doesn't make sense" but at last the one who gets hurt is the one who tried to hurt people (not those who hurt people).</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>What is Love?</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2024-08-25&#x2F;</link>
+            <pubDate>Sun, 25 Aug 2024 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2024-08-25&#x2F;</guid>
+            <description><![CDATA[
+              <center>
+<p>Until next time,</p>
+<p><em>Love is when two people agree on what love is.</em></p>
+<p><code>The Adventures of Scientiac, 2024</code></p>
+</center>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>Windblows</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2024-07-31&#x2F;</link>
+            <pubDate>Wed, 31 Jul 2024 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2024-07-31&#x2F;</guid>
+            <description><![CDATA[
+              <p>I bought a new laptop. It's Zenbook 14 OLED 2024, Ryzen 7 8840HS and well it came with Windows Home preinstalled as expected. I had never really daily drived windows. I had installed linux the first day I got my first laptop. Soooo, I am giving windows a try, it's been some days and I haven't used that many applicaitons.</p>
+<p>I have installed firefox and given it a nice css makeover, then I installed NixOS-WSL and set that as the default terminal and ported my terminal home manager config with git, bash, starship, and other tools over to it. And that's all, I guess i will use the linux terminal and the windows GUI for some days now.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>Breakdown</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2024-05-25&#x2F;</link>
+            <pubDate>Sat, 25 May 2024 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2024-05-25&#x2F;</guid>
+            <description><![CDATA[
+              <pre class="giallo" style="color: #EBDBB2; background-color: #282828;"><code data-lang="plain"><span class="giallo-l"></span>
+<span class="giallo-l"><span> Did I grow old?</span></span>
+<span class="giallo-l"><span> Am I weak?</span></span>
+<span class="giallo-l"><span> Do I have something that nobody can change in me?</span></span>
+<span class="giallo-l"><span> Have I changed too much?</span></span>
+<span class="giallo-l"><span> Did I stop writing?</span></span>
+<span class="giallo-l"><span> Did I stop being curious?</span></span>
+<span class="giallo-l"><span> Did I stop making things?</span></span>
+<span class="giallo-l"><span> Am I taking too much pressure?</span></span>
+<span class="giallo-l"><span> Am I hiding too much pressure?</span></span>
+<span class="giallo-l"><span> Did I give up on asking for love?</span></span>
+<span class="giallo-l"><span> Did I give up using the word &quot;love&quot;?</span></span>
+<span class="giallo-l"><span> Did I give up myself being carefree?</span></span>
+<span class="giallo-l"><span> Did I start pushing back everyone?</span></span>
+<span class="giallo-l"><span> Did I fail too many times?</span></span>
+<span class="giallo-l"><span> Did I start saying no to all?</span></span>
+<span class="giallo-l"><span> Did I give up on responsibilities?</span></span>
+<span class="giallo-l"><span> Did I give up on grammar?</span></span>
+<span class="giallo-l"><span> Did I give up on being attractive?</span></span>
+<span class="giallo-l"><span> Did I give up on sorries?</span></span>
+<span class="giallo-l"><span> Did I?</span></span>
+<span class="giallo-l"></span></code></pre>
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>The New Way</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2024-04-23&#x2F;</link>
+            <pubDate>Tue, 23 Apr 2024 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2024-04-23&#x2F;</guid>
+            <description><![CDATA[
+              <center>
+<p><em>It is only the way it is until we discover the new way it is, and then that is the way it is until we discover the new way it is, and so it goes until the world is no longer flat, electricity lights the night, and shoes are no longer tied with ribbons.</em></p>
+<p><code>Poor Things, 2023</code></p>
+</center>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>KDE Network Nepal</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2024-02-27&#x2F;</link>
+            <pubDate>Tue, 27 Feb 2024 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2024-02-27&#x2F;</guid>
+            <description><![CDATA[
+              <p>The KDE Network is a group of KDE representatives in their respective cities/countries promoting KDE, and it’s work in their local community. Additionally, they are responsible for helping to grow the community, and to act as a liaison between their local community and KDE.</p>
+<p>This is what I found when going through KDE wiki wondering how KDE as a community was structured. Seeing there were not many local groups listed, I wanted to contribute by forming a group here in Nepal. Hence, the introduction event with megarelease celebration.</p>
+<p><img src="https://scientiac.space/images/posse/kde_network.png" alt="KDE Network" /></p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>Attending GNOME.Asia 2023</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-12-06&#x2F;</link>
+            <pubDate>Wed, 06 Dec 2023 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-12-06&#x2F;</guid>
+            <description><![CDATA[
+              <p>I'm back home from Kathmandu. This time it was an event from GNOME; the GNOME.Asia 2023. There were poeple from Fedora, GNOME, Phosh form different parts of world ; USA, Indonesia, India in Kathmandu, Nepal for a conference about FOSS. It was quite an event. Also, got to contribute to fedora by eating the 20th anniversary cake too😉, there should really be a badge for "has eaten fedora cake" in fedora badges.</p>
+<p>It was a very fun and educational experience. I realize that the people in FOSS are generally very generous, friendly and helpful.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>My First PC Game</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-11-02&#x2F;</link>
+            <pubDate>Thu, 02 Nov 2023 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-11-02&#x2F;</guid>
+            <description><![CDATA[
+              <p>I'm not much of a gamer and haven't gamed in a very long time even on mobile which was the only thing I had before I got my laptop.  Also, being a tinkerer, I spent most of my time tinkering with my Linux system and android custom ROMs.</p>
+<p>Today I felt like I was missing out a lot and kinda wanted to game. Gave it a quick search and found "Hollow Knight" which seems like my type of game so I purchased it on steam. Might as well call it my first desktop game. It feels special.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>You and What&#x27;s on Your Mind</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-10-20&#x2F;</link>
+            <pubDate>Sat, 21 Oct 2023 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-10-20&#x2F;</guid>
+            <description><![CDATA[
+              <p>I think it's normal to assume whats going one someone's mind (prejudge) and make decisions based on it. Like, If I assume something about you and do something based on that assumption and you feel like I understand you, It's a different feeling, a happy feeling. But, it's a gamble, because what if the assumption is
+incorrect, what if how I acted ruined the interaction?</p>
+<p>So, I believe knowing a person requires a longer time then we want it to take and it will consist of mistakes and lucks that'll slowly form a decent representation of a person in our mind. For a tech nerd like me the best example for the process of getting to know a person is like training an AI model. Like, look at how DALL.E could generate images a few years back and how it generates images in the current state.</p>
+<p>So, yeah! We don't know a person within a month or even an year or a lifetime because knowing is only predicting what the other mind would think and it's constantly changing and evolving. And when we think we know a person it's only a close enough representation of the actual person in our head compared to what they really are, similar to DALL.E making images out of probability and assumptions.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>Holidays and Plans</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-10-04&#x2F;</link>
+            <pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-10-04&#x2F;</guid>
+            <description><![CDATA[
+              <p>3rd Semester of Computer Engineering is over now, and the vacation starts. This time, like all the semester endings, I have a lot of ideas and plans in mind and I hope to complete at least some of them if not all. Last vacation I looked into the Rust book and this holidays I want to try making a project in rust.</p>
+<p>The other thing is that I switched from Fedora to NixOS, the Nix language and the OS's declerativeness has gotten me interested in Haskell and functional paradigm in general. Also, lambda calculus, currying, monads and other concepts originated from functional paradigm are very interesting.</p>
+<p>I hope to learn something flashy✨, something technical⚙ and something unique❄️ this holiday.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>GitHub Field Day</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-08-14&#x2F;</link>
+            <pubDate>Mon, 14 Aug 2023 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-08-14&#x2F;</guid>
+            <description><![CDATA[
+              <p>I like the initiative by GitHub to bring like-minded people of tech in a single place by organising un-conferences around the globe. On one hand, I am excited to meet people like me but on the other hand, it's GitHub(Microsoft) whose product I will become as the saying goes "If you aren't paying for the product, you are the product".</p>
+<p>Anyways, meeting my people is more important and about being a product, that should be handled strategically. I'll try to include other git hosting platforms like gitlab, codeberg and forgejo whenever I say the word GitHub, think that's more healthy.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>research::map</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-07-27&#x2F;</link>
+            <pubDate>Mon, 24 Jul 2023 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-07-27&#x2F;</guid>
+            <description><![CDATA[
+              <p>I created a new section called <a rel="external" href="https://map.scientiac.space">map.scientiac.space</a> to keep track of researches and notes I create throughout my journey in the tech world. It's integrated with my obsidian workflow so, I can easily put in and out the things I want to track which is sooo cool!</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>Mental Liquidity</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-06-13&#x2F;</link>
+            <pubDate>Tue, 13 Jun 2023 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-06-13&#x2F;</guid>
+            <description><![CDATA[
+              <p>I came across a <a rel="external" href="https://collabfund.com/blog/mental-liquidity/">blog</a> post about Mental Liquidity, and it got me into thinking how people do not want to change their mind, especially when it comes to generationally gapped individuals. One's beliefs can be drastically different from the other and yet none would listen to the other and look at it from their perspective as well. Humans have evolved learning things and passing the technique that helped them survive to the new generation, so it isn't a big deal to assume that they survived fine with those beliefs, and it is far optimal to pass on that belief than to gamble with new opinions.</p>
+<p>Anyway, I hope it doesn't just remain as a new term in my vocabulary. I believe that one should be able to change their mind on things, change my mind!</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>Officially a Space Explorer</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-05-03&#x2F;</link>
+            <pubDate>Wed, 03 May 2023 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-05-03&#x2F;</guid>
+            <description><![CDATA[
+              <center>
+<p><strong>Domain</strong><br />
+<code>dō-mān′</code></p>
+</center>
+<ol>
+<li>A territory over which rule or control is exercised.</li>
+<li>A sphere of activity, influence, or knowledge: synonym: field.</li>
+<li>The set of all possible values of an independent variable of a function.</li>
+<li>An open connected set that contains at least one point.</li>
+</ol>
+<p>Yep! I have my own domain now. My own territory, my own space, <a rel="external" href="https://scientiac.space">scientiac.space</a>.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>Eww! Yuck!</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-05-02&#x2F;</link>
+            <pubDate>Tue, 02 May 2023 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-05-02&#x2F;</guid>
+            <description><![CDATA[
+              <p>Gnome is officially out of the system now. I loved it but I love hyprland better now. Anyways, the consistency with GTK apps was what I liked about it and the essence of that still remains in hyprland with EWW which is configured in yuck, hence the title.</p>
+<p>EWW works as almost all the things, but some standalone apps are still better to have, so I have used swaync as the notification daemon and rofi-wayland as the launcher. Overall the system is pretty usable now, and I just love hyprland's animations.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>Chapter Two: Sophomore</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-04-30&#x2F;</link>
+            <pubDate>Sun, 30 Apr 2023 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-04-30&#x2F;</guid>
+            <description><![CDATA[
+              <p>Yes! The freshman year is over now. And I already feel like I have more responsibilities than usual. It feels good for some time until the feeling that you're getting old hits you. This year passed with a blink of an eye, I remember getting inside the college and feeling exited about what I was going to be. Let's see how the life as a middle child in the college goes. Wow! Three more binks and I'll be a graduate, it's scary.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>Exponential Fluctuations</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-04-29-second&#x2F;</link>
+            <pubDate>Sat, 29 Apr 2023 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-04-29-second&#x2F;</guid>
+            <description><![CDATA[
+              <center>
+<p>Sometimes It's the end of the world,<br />
+sometimes MEH! It is what it is.<br />
+The same thing kills you sometimes,<br />
+and sometimes it makes you fly.<br />
+It's never neutral, never stable,<br />
+never in an equilibrium.<br />
+6 hours worth of contemplation,<br />
+a minute will change it all.</p>
+</center>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>Experimenting with Feelings</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-04-29&#x2F;</link>
+            <pubDate>Sat, 29 Apr 2023 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-04-29&#x2F;</guid>
+            <description><![CDATA[
+              <p>Yeah! Yeah! Yeah! This is one of those hot takes on "Love" ooOooh!!</p>
+<p>Human nature is weird. Like, how someone would behave when they feel like they're loved and how the behavior would change when they feel like they are indifferent to them. It's quite fascinating that the behavioral and psychological pattern change, how cute turns into offensive and feelings turn into conscious infatuation. Apparently hope plays quite a big role in it. One could argue that "love" is nothing but just hopefulness. And when one gets hopeless, everybody knows how that goes.</p>
+<p>This is neither a paper nor a thesis, it's just my take on love today. So, I suppose it's better incomplete and a hot take than a "WHAT I SAY IS ALWAYS TRUE" of a vibe. Bye!</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>Some Fleabag</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-04-28&#x2F;</link>
+            <pubDate>Fri, 28 Apr 2023 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-04-28&#x2F;</guid>
+            <description><![CDATA[
+              <p>I kinda binged fleabag and it was quite awesome. It's more of a six-hour movie than a show, I'd say. I had watched season 1 and season 2 wasn't difficult to finish. This is one of those series which I hated the first season, and it made my mind with the second. It's a masterpiece as it ended with an actual ending and wasn't extended due to public demand or just money.</p>
+<p>Yeah! The fact that it ended is my second favorite thing about the show.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>Continuing the Redesign</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-04-27&#x2F;</link>
+            <pubDate>Thu, 27 Apr 2023 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-04-27&#x2F;</guid>
+            <description><![CDATA[
+              <p>I made link previews, made logo dynamic with color changes, stylized POSSE views and little improvements like: isolating readable.css and improving the paginator layout.</p>
+<p>And talking about my achievement today, I unlocked a pimple on my face due to sleeplessness. Yayyyy!</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>Second Day</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-04-26&#x2F;</link>
+            <pubDate>Wed, 26 Apr 2023 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-04-26&#x2F;</guid>
+            <description><![CDATA[
+              <p>This is day two of redesigning the site, it is going fine, I added designs, and it's cool now. Some new fonts and SVG backgrounds, and we have a completely different design. I'm loving it. My favorite theme if you ask is everforest-dark every time.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+        <item>
+            <title>POSSE</title>
+            <link>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-04-25&#x2F;</link>
+            <pubDate>Tue, 25 Apr 2023 00:00:00 +0000</pubDate>
+            <dc:creator>scientiac</dc:creator>
+            <guid>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2023-04-25&#x2F;</guid>
+            <description><![CDATA[
+              <p>So, this is the mini-blog thingy that I was planning to make for some time now. And maybe I'll share my thoughts following POSSE (Publish on your Own Site, Syndicate Elsewhere) and share the link to this to everywhere else. I have an RSS feed for this, which I'll try to use for fetching and scripting if needed and anybody can just use it normally as intended as well.</p>
+
+              <hr/>
+              <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+            ]]></description>
+        </item>
+    </channel>
+</rss>

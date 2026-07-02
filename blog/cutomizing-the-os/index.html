@@ -1,0 +1,276 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><script src=/assets/js/theme-init.js></script><link href=/assets/css/themes.css rel=stylesheet><link href=/assets/css/readable.css rel=stylesheet><link href=/assets/css/global.css rel=stylesheet><link href=/assets/css/fonts.css rel=stylesheet><link href=/assets/css/logo.css rel=stylesheet><link href=/assets/css/genre/Reports.css rel=stylesheet><link href=https://scientiac.space/atom.xml rel=alternate title=RSS type=application/atom+xml><meta content=Reports property=og:type><meta content=scientiac.space property=og:site_name><meta content=https://scientiac.space/res/thumbnail-light.png property=og:image><title>Customizing the Operating System</title><meta content="Customizing the Operating System" name=og:title><meta content="I just love tinkering with my devices, and have a design philosophy.
+Sorry KDE,
+&#34;Nothing by default, just there when needed.&#34;
+Which I know is not a perfect system because sometimes things get lost. And I have to search them which isn't very efficient. Since I have started from the drawbacks and pain points lets just continue with it.
+
+Things get lost sometimes.
+Moving the mouse can cause different panes to open.
+There are only limited places to hide things.
+Sometimes you just wish you could see things without having to do anything.
+
+Now that we've got that out of the way, lets start with everything that I have set up:
+So, by now you might have already realized what the theme for today is. Yes!, it's Extreme Minimalism.
+Let's start from the bottom up:
+Pre-Desktop
+BIOS
+Fortunately my BIOS boot animation is very pretty, and I love that the logo of my vendor also somewhat resembles Arch Linux. It's the new ASUS Zenbook Logo, which is located at /sys/firmware/acpi/bgrt/image on my system.
+If you know how to extract the actual animation from the BIOS please tell me how, I want to make it into a plymouth boot animation.
+
+This is the end result image after the BIOS animation completes and before it hands over control to the Bootloader.
+Bootloader
+I use systemd-boot which itself is super minimal. But, I have configured it to be invisible by setting the timeout to be 0.
+
+It can be done by editing /boot/loader/loader.conf and setting timeout 0. Here comes the philosophy of keeping things hidden while still accessible. Because, holding shift while the system boots will let me see the Bootloader Entries if it is necessary.
+I normally keep two kernels in case one breaks. Above image is only for reference to show how minimal the UI of systemd-boot is.
+initramfs
+Since I use the systemd ecosystem including the bootloader and init system. I have used mkinitcpio to build a systemd dependent initramfs. Hence I use the the Hook List table to set up mkinitcpio.
+I also add plymouth to the hook in /etc/mkinitcpio.conf:
+HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole block filesystems fsck plymouth)Unified Kernel Image (UKI)
+The default Arch Linux UKI has it's own splash image. And I don't like different things flashing when the system boots. So, I change the splash image of the Arch Linux UKI my BIOS image mentioned above. For that I edit /etc/mkinitcpio.d/linux.preset to have:
+default_options=&amp;quot;--splash /sys/firmware/acpi/bgrt/image&amp;quot;Kernel cmdline
+In order to supress the messages in the boot process I put the following arguments to /etc/kernel/cmdline:
+loglevel=3 quiet splash
+The log level and quiet arguments supress the messages while the splash enables the splash screen which will come into play when plymouth is installed.
+Plymouth
+It is a system that uses Kernel Mode Setting (KMS) to set the native resolution of the display as early as possible, then provides a  splash screen leading all the way up to the login manager.
+After installing plymouth through pacman, the default splash screen it uses is BGRT which stands for Boot Graphics Resource Table which also utilizes the spinner theme to put a spinner on the bottom of the splash screen.
+The spinner theme the Arch Linux logo which I don't want there. So, I delete it from /usr/share/plymouth/themes/spinner/ and delete all animation and throbber images too just to make everything clean. The Arch Linux and spinners will be gone on the next boot.
+But, my device boots really fast, so after the kernel splash screen, there is a blank screen for a second then plymouth launches which lasts for not even a second. This causes me to see only a flicker of plymouth. So I have delayed the launch of it by 15 seconds.
+In /etc/plymouth/plymouthd.conf:
+[Daemon]
+ShowDelay=15
+Well, you might ask why delay plymouth instead of just uninstalling the it entirely. It is because plymouth also appears during poweroff and reboot while the system is shutting down, which I want to have.
+GDM
+I use Niri as my window manger of choice. But, have a fallback GNOME session since niri plays well with GNOME's set of utilities.
+
+The default Arch Linux GDM has the Arch Linux logo there which I remove using the GDM Settings application. There might be a way to remove it via the command line but I am lazy and I just delete the application once I change this setting and it remains persistent. Tell me if you know the way. ;)
+edit: 2026-05-27: start
+greetd
+I switched from GDM to greetd to have the same style on the login manager which I have for the lock screen. Which also meant sacrificing the lock screen of the GNOME session and using something new that I know nothing about. I starting tracking the setup for greetd in a markdown file.
+For the greeter I use niri as it's compositor and quickshell for the UI.
+The immediate issue was, the GNOME Keyring not being unlocked by default. Which was easily fixed by editing /etc/pam.d/greetd with the following PAM(Pluggable Authentication Modules) setup:
+#%PAM-1.0
+
+auth       required     pam_securetty.so
+auth       requisite    pam_nologin.so
+auth       include      system-local-login
+auth       optional     pam_gnome_keyring.so
+account    include      system-local-login
+session    include      system-local-login
+session    optional     pam_gnome_keyring.so auto_start
+Using greetd meant living with the logs when going from greeter to compositor. So, I went down a rabbit hole. I tried disabling systemd logs for user, for system, for greeter user and what not. I used google, duckduckgo, chatgpt, gemini, heck even grok to find a solution, but nothing helped.
+Then, I found out about a side effect of the framebuffer console boot options from the Linux Kernel Documentation saying, &#34;One side effect that may be useful is using a map value that exceeds the number of loaded fb drivers. For example, if only one driver is available, fb0, adding fbcon=map:1 tells fbcon not to take over the console.&#34;
+So, I appended fbcon=map:1 to /etc/kernel/cmdline.
+This completely disabled the console, which meant no text will be printed during switch from greeter to the compositor. But, this also meant that there is now no way to go to ttyX if I had to debug the system in case it breaks. And since it's Arch Linux, noone can guarantee that it would not.
+I then went down on another rabbit hole trying to enable the other framebuffers from userspace command line after system fully booted. Which I couldn't solve.
+Looking for other console options, I found kmscon, and out of sheer curosity I installed it and rebooted the system. And I can't state the joy I felt when I tried to switch to tty2 and it dropped me into a console. I also found out that it supported fonts and can use pango which I loved and immediately switched to a Nerd Font. I also themed it with the same colors that I theme my Terminal Emulator.
+It was as easy as sudo pacman -s kmscon then reboot. By, default only tty2 with ctrl+alt+f2 works, but other sessions can be enabled with systemd too.
+So, there it is, another minimal component, greetd added to the my system replacing GNOME's GDM. With the pretty-pretty kmscon, which is my love at first sight.
+
+edit: 2026-05-03: end
+Poweroff and Reboot
+I hate the annoying systemd wall messages when shutting down or rebooting the system:
+Broadcast message from user@host (Thu 1970-01-01 00:00:00 UTC):
+
+The system will power off now!
+So I use this one liner from Kira-NT/disable-systemd-wall-messages to disable the wall messages:
+curl -Ls https://github.com/Kira-NT/disable-systemd-wall-messages/blob/HEAD/install.sh?raw=true | sudo sh -s
+And for the times I use terminal to reboot or power off I put the following shell alias for them:
+alias reboot=&amp;quot;reboot --no-wall&amp;quot;
+alias poweroff=&amp;quot;poweroff --no-wall&amp;quot;Desktop
+All that for the 10 to 20 seconds it takes to get from hitting the power button into my desktop.
+But, now we are finally at the desktop.
+Niri
+As I have already mentioned, I use Niri as my desktop of choice. Lets start from then start then!
+Wallpaper
+awww is what I use to set the wallpaper since it has the ability to set wallpapers to different layers in niri. I start the daemon as follows:
+awww-daemon -n wp-front &amp;amp;
+awww-daemon -n wp-back &amp;amp;
+The wp-front is the namespace for actual layer where niri's wallpaper will be set.
+The wp-back is the namespace for the layer behind the desktop where niri's overview backdrop will be set.
+
+I set my wallpaper on wp-front and a blurred version of the same wallpaper on wp-back to get the above results. With the following setting on the niri config:
+layer-rule {
+    match namespace=&amp;quot;wp-back&amp;quot;
+    place-within-backdrop true
+}
+and the command to set:
+awww img &amp;quot;$BLURRED_WALLPAPER&amp;quot; -n wp-back &amp;amp;
+awww img &amp;quot;$SELECTED_WALLPAPER&amp;quot; -n wp-front &amp;amp;Launcher
+In the past I used to use very minimal and customizable launchers like rofi, wofi and tofi but after watching enough number of ads for the Raycast launcher, I fell in love with vicinae.
+
+It just works! The only thing I changed was the fonts to be FantasqueSansM Nerd Font Propo, the Icon theme to Morewaita and enabled blur.
+The Shell
+I decided to write this blog post because of this shell. It gives me joy with a mix of pain and impostor syndrome to call it mine. I wrote it using AI in quickshell. One one hand, It'd had taken me weeks to completely write all this myself, but I did it in a single day, and it isn't system critical so I guess I get a pass for not doing it myself.
+Lockscreen: I decided to recreate the swaylock-effects lockscreen with a blurred screen setup using quickshell.
+
+I want to make the same UI for greetd and use it for the Display Manager too but, I am afraid GNOME will not like it when I use something other than GDM. [ I did it! ]
+OSD: For OSD, I took design inspiration from the IOS dynamic island and decided to create an interactive bottom notch.
+
+Bar: For the Bar, I took inspiration from the OSD and made it top notch.
+
+Notifications: Similar to OSD and Bars I made the notifications with a corner swoop.
+
+As a whole it looks like this:
+
+Sorry for the flashbang.
+Almost everything in the shell is quickshell now, which replaced various applications like:
+
+way-edges for bar
+swayosd for brightness and volume OSD
+battery-osd for battery notifications and OSD
+swaylock for lock screen
+swaync for notifications
+
+This is Fun
+Funny how describing the setup of the 10 second boot process took more words than describing the desktop. But, if we consider &#34;A picture is worth a thousand words.&#34; the desktop wins by a long shot!
+If you see some lag, it's because of the screen record. I have applied this &#34;Nothing by default, just there when needed.&#34; philosophy everywhere from bootloader to shell (desktop),browser, editor and individual applications if possible. This is how I like it. Tell me if you like it.
+Also please give me recommendations if you have any.
+See you on the next one!
+" name=description><meta content="I just love tinkering with my devices, and have a design philosophy.
+Sorry KDE,
+&#34;Nothing by default, just there when needed.&#34;
+Which I know is not a perfect system because sometimes things get lost. And I have to search them which isn't very efficient. Since I have started from the drawbacks and pain points lets just continue with it.
+
+Things get lost sometimes.
+Moving the mouse can cause different panes to open.
+There are only limited places to hide things.
+Sometimes you just wish you could see things without having to do anything.
+
+Now that we've got that out of the way, lets start with everything that I have set up:
+So, by now you might have already realized what the theme for today is. Yes!, it's Extreme Minimalism.
+Let's start from the bottom up:
+Pre-Desktop
+BIOS
+Fortunately my BIOS boot animation is very pretty, and I love that the logo of my vendor also somewhat resembles Arch Linux. It's the new ASUS Zenbook Logo, which is located at /sys/firmware/acpi/bgrt/image on my system.
+If you know how to extract the actual animation from the BIOS please tell me how, I want to make it into a plymouth boot animation.
+
+This is the end result image after the BIOS animation completes and before it hands over control to the Bootloader.
+Bootloader
+I use systemd-boot which itself is super minimal. But, I have configured it to be invisible by setting the timeout to be 0.
+
+It can be done by editing /boot/loader/loader.conf and setting timeout 0. Here comes the philosophy of keeping things hidden while still accessible. Because, holding shift while the system boots will let me see the Bootloader Entries if it is necessary.
+I normally keep two kernels in case one breaks. Above image is only for reference to show how minimal the UI of systemd-boot is.
+initramfs
+Since I use the systemd ecosystem including the bootloader and init system. I have used mkinitcpio to build a systemd dependent initramfs. Hence I use the the Hook List table to set up mkinitcpio.
+I also add plymouth to the hook in /etc/mkinitcpio.conf:
+HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole block filesystems fsck plymouth)Unified Kernel Image (UKI)
+The default Arch Linux UKI has it's own splash image. And I don't like different things flashing when the system boots. So, I change the splash image of the Arch Linux UKI my BIOS image mentioned above. For that I edit /etc/mkinitcpio.d/linux.preset to have:
+default_options=&amp;quot;--splash /sys/firmware/acpi/bgrt/image&amp;quot;Kernel cmdline
+In order to supress the messages in the boot process I put the following arguments to /etc/kernel/cmdline:
+loglevel=3 quiet splash
+The log level and quiet arguments supress the messages while the splash enables the splash screen which will come into play when plymouth is installed.
+Plymouth
+It is a system that uses Kernel Mode Setting (KMS) to set the native resolution of the display as early as possible, then provides a  splash screen leading all the way up to the login manager.
+After installing plymouth through pacman, the default splash screen it uses is BGRT which stands for Boot Graphics Resource Table which also utilizes the spinner theme to put a spinner on the bottom of the splash screen.
+The spinner theme the Arch Linux logo which I don't want there. So, I delete it from /usr/share/plymouth/themes/spinner/ and delete all animation and throbber images too just to make everything clean. The Arch Linux and spinners will be gone on the next boot.
+But, my device boots really fast, so after the kernel splash screen, there is a blank screen for a second then plymouth launches which lasts for not even a second. This causes me to see only a flicker of plymouth. So I have delayed the launch of it by 15 seconds.
+In /etc/plymouth/plymouthd.conf:
+[Daemon]
+ShowDelay=15
+Well, you might ask why delay plymouth instead of just uninstalling the it entirely. It is because plymouth also appears during poweroff and reboot while the system is shutting down, which I want to have.
+GDM
+I use Niri as my window manger of choice. But, have a fallback GNOME session since niri plays well with GNOME's set of utilities.
+
+The default Arch Linux GDM has the Arch Linux logo there which I remove using the GDM Settings application. There might be a way to remove it via the command line but I am lazy and I just delete the application once I change this setting and it remains persistent. Tell me if you know the way. ;)
+edit: 2026-05-27: start
+greetd
+I switched from GDM to greetd to have the same style on the login manager which I have for the lock screen. Which also meant sacrificing the lock screen of the GNOME session and using something new that I know nothing about. I starting tracking the setup for greetd in a markdown file.
+For the greeter I use niri as it's compositor and quickshell for the UI.
+The immediate issue was, the GNOME Keyring not being unlocked by default. Which was easily fixed by editing /etc/pam.d/greetd with the following PAM(Pluggable Authentication Modules) setup:
+#%PAM-1.0
+
+auth       required     pam_securetty.so
+auth       requisite    pam_nologin.so
+auth       include      system-local-login
+auth       optional     pam_gnome_keyring.so
+account    include      system-local-login
+session    include      system-local-login
+session    optional     pam_gnome_keyring.so auto_start
+Using greetd meant living with the logs when going from greeter to compositor. So, I went down a rabbit hole. I tried disabling systemd logs for user, for system, for greeter user and what not. I used google, duckduckgo, chatgpt, gemini, heck even grok to find a solution, but nothing helped.
+Then, I found out about a side effect of the framebuffer console boot options from the Linux Kernel Documentation saying, &#34;One side effect that may be useful is using a map value that exceeds the number of loaded fb drivers. For example, if only one driver is available, fb0, adding fbcon=map:1 tells fbcon not to take over the console.&#34;
+So, I appended fbcon=map:1 to /etc/kernel/cmdline.
+This completely disabled the console, which meant no text will be printed during switch from greeter to the compositor. But, this also meant that there is now no way to go to ttyX if I had to debug the system in case it breaks. And since it's Arch Linux, noone can guarantee that it would not.
+I then went down on another rabbit hole trying to enable the other framebuffers from userspace command line after system fully booted. Which I couldn't solve.
+Looking for other console options, I found kmscon, and out of sheer curosity I installed it and rebooted the system. And I can't state the joy I felt when I tried to switch to tty2 and it dropped me into a console. I also found out that it supported fonts and can use pango which I loved and immediately switched to a Nerd Font. I also themed it with the same colors that I theme my Terminal Emulator.
+It was as easy as sudo pacman -s kmscon then reboot. By, default only tty2 with ctrl+alt+f2 works, but other sessions can be enabled with systemd too.
+So, there it is, another minimal component, greetd added to the my system replacing GNOME's GDM. With the pretty-pretty kmscon, which is my love at first sight.
+
+edit: 2026-05-03: end
+Poweroff and Reboot
+I hate the annoying systemd wall messages when shutting down or rebooting the system:
+Broadcast message from user@host (Thu 1970-01-01 00:00:00 UTC):
+
+The system will power off now!
+So I use this one liner from Kira-NT/disable-systemd-wall-messages to disable the wall messages:
+curl -Ls https://github.com/Kira-NT/disable-systemd-wall-messages/blob/HEAD/install.sh?raw=true | sudo sh -s
+And for the times I use terminal to reboot or power off I put the following shell alias for them:
+alias reboot=&amp;quot;reboot --no-wall&amp;quot;
+alias poweroff=&amp;quot;poweroff --no-wall&amp;quot;Desktop
+All that for the 10 to 20 seconds it takes to get from hitting the power button into my desktop.
+But, now we are finally at the desktop.
+Niri
+As I have already mentioned, I use Niri as my desktop of choice. Lets start from then start then!
+Wallpaper
+awww is what I use to set the wallpaper since it has the ability to set wallpapers to different layers in niri. I start the daemon as follows:
+awww-daemon -n wp-front &amp;amp;
+awww-daemon -n wp-back &amp;amp;
+The wp-front is the namespace for actual layer where niri's wallpaper will be set.
+The wp-back is the namespace for the layer behind the desktop where niri's overview backdrop will be set.
+
+I set my wallpaper on wp-front and a blurred version of the same wallpaper on wp-back to get the above results. With the following setting on the niri config:
+layer-rule {
+    match namespace=&amp;quot;wp-back&amp;quot;
+    place-within-backdrop true
+}
+and the command to set:
+awww img &amp;quot;$BLURRED_WALLPAPER&amp;quot; -n wp-back &amp;amp;
+awww img &amp;quot;$SELECTED_WALLPAPER&amp;quot; -n wp-front &amp;amp;Launcher
+In the past I used to use very minimal and customizable launchers like rofi, wofi and tofi but after watching enough number of ads for the Raycast launcher, I fell in love with vicinae.
+
+It just works! The only thing I changed was the fonts to be FantasqueSansM Nerd Font Propo, the Icon theme to Morewaita and enabled blur.
+The Shell
+I decided to write this blog post because of this shell. It gives me joy with a mix of pain and impostor syndrome to call it mine. I wrote it using AI in quickshell. One one hand, It'd had taken me weeks to completely write all this myself, but I did it in a single day, and it isn't system critical so I guess I get a pass for not doing it myself.
+Lockscreen: I decided to recreate the swaylock-effects lockscreen with a blurred screen setup using quickshell.
+
+I want to make the same UI for greetd and use it for the Display Manager too but, I am afraid GNOME will not like it when I use something other than GDM. [ I did it! ]
+OSD: For OSD, I took design inspiration from the IOS dynamic island and decided to create an interactive bottom notch.
+
+Bar: For the Bar, I took inspiration from the OSD and made it top notch.
+
+Notifications: Similar to OSD and Bars I made the notifications with a corner swoop.
+
+As a whole it looks like this:
+
+Sorry for the flashbang.
+Almost everything in the shell is quickshell now, which replaced various applications like:
+
+way-edges for bar
+swayosd for brightness and volume OSD
+battery-osd for battery notifications and OSD
+swaylock for lock screen
+swaync for notifications
+
+This is Fun
+Funny how describing the setup of the 10 second boot process took more words than describing the desktop. But, if we consider &#34;A picture is worth a thousand words.&#34; the desktop wins by a long shot!
+If you see some lag, it's because of the screen record. I have applied this &#34;Nothing by default, just there when needed.&#34; philosophy everywhere from bootloader to shell (desktop),browser, editor and individual applications if possible. This is how I like it. Tell me if you like it.
+Also please give me recommendations if you have any.
+See you on the next one!
+" name=og:description><link rel="shortcut icon" href=/res/thumbnail.svg type=image/x-icon><meta content="width=device-width,initial-scale=1" name=viewport><meta content="rgb(253, 246, 227)" name=theme-color><script defer src=/assets/js/copy-button.js></script><link href=https://github.com/scientiac rel=me><link href=mailto:spandan@scientiac.space rel=me><link href=https://webmention.io/scientiac.space/webmention rel=webmention><meta content=@iac@polymaths.social name=fediverse:creator><body><div class=logo-container><a href=/> <div class=inner-logo-container></div> </a></div><nav data-style=classy><span><a href=/>Main</a></span><span><a href=/blog>Blog</a></span><span><a href=/syndications>Ping</a></span><span><a href=/more>More</a></span></nav><section class=section-body><div class=container><div class=h-entry><a class="u-url hidden" href=https://scientiac.space/blog/cutomizing-the-os/>https://scientiac.space/blog/cutomizing-the-os/</a><div class=section><h1 class="p-name title">Customizing the Operating System</h1><div class=pagedate><time class="dt-published dateandtag hidden" datetime=2026-04-30T00:00:00Z> 2026-04-30 </time><code class=dateandtag>2026-04-30</code><code class="u-category dateandtag">Reports</code></div><p><div class="hidden p-author h-card"><a class=u-url href=https://scientiac.space rel=me> <img alt="Profile photo of scientiac" class=u-photo src=/res/thumbnail.png> <span class=p-name>scientiac</span> </a></div><div class=e-content><p><em>I just love tinkering with my devices, and have a design philosophy.</em><p><em>Sorry KDE</em>,<br> <em><strong>"Nothing by default, just there when needed."</strong></em><p>Which I know is not a perfect system because sometimes things get lost. And I have to search them which isn't very efficient. Since I have started from the drawbacks and pain points lets just continue with it.<ol><li>Things get lost sometimes.<li>Moving the mouse can cause different panes to open.<li>There are only limited places to hide things.<li>Sometimes you just wish you could see things without having to do anything.</ol><p>Now that we've got that out of the way, lets start with everything that I have set up:<p><em>So, by now you might have already realized what the theme for today is.</em> <em>Yes!, it's <strong>Extreme Minimalism</strong>.</em><p>Let's start from the bottom up:<h2 id=pre-desktop>Pre-Desktop</h2><h3 id=bios>BIOS</h3><p>Fortunately my BIOS boot animation is very pretty, and I love that the logo of my vendor also somewhat resembles Arch Linux. It's the new ASUS Zenbook Logo, which is located at <code>/sys/firmware/acpi/bgrt/image</code> on my system.<p><em><strong>If you know how to extract the actual animation from the BIOS please tell me how, I want to make it into a <code>plymouth</code> boot animation.</strong></em><p><img alt="BIOS Logo" src=/images/customizing-the-os/bios.png><p>This is the end result image after the BIOS animation completes and before it hands over control to the <code>Bootloader</code>.<h3 id=bootloader>Bootloader</h3><p>I use <code>systemd-boot</code> which itself is super minimal. But, I have configured it to be invisible by setting the timeout to be 0.<p><img alt="Systemd Boot" src=/images/customizing-the-os/systemd-boot.png><p>It can be done by editing <code>/boot/loader/loader.conf</code> and setting <code>timeout 0</code>. Here comes the philosophy of keeping things hidden while still accessible. Because, holding <kbd>shift</kbd> while the system boots will let me see the Bootloader Entries if it is necessary.<p>I normally keep two kernels in case one breaks. Above image is only for reference to show how minimal the UI of <code>systemd-boot</code> is.<h3 id=initramfs>initramfs</h3><p>Since I use the <code>systemd</code> ecosystem including the <code>bootloader</code> and <code>init</code> system. I have used <code>mkinitcpio</code> to build a <code>systemd</code> dependent <code>initramfs</code>. Hence I use the the <a href=https://wiki.archlinux.org/title/Mkinitcpio#Hook_list rel=external>Hook List</a> table to set up <code>mkinitcpio</code>.<p>I also add plymouth to the hook in <code>/etc/mkinitcpio.conf</code>:<pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=plain><span class=giallo-l><span>HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole block filesystems fsck plymouth)</span></span></code></pre><h3 id=unified-kernel-image-uki>Unified Kernel Image (UKI)</h3><p>The default Arch Linux UKI has it's own splash image. And I don't like different things flashing when the system boots. So, I change the splash image of the Arch Linux UKI my BIOS image mentioned above. For that I edit <code>/etc/mkinitcpio.d/linux.preset</code> to have:<pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=plain><span class=giallo-l><span>default_options="--splash /sys/firmware/acpi/bgrt/image"</span></span></code></pre><h3 id=kernel-cmdline>Kernel <code>cmdline</code></h3><p>In order to supress the messages in the boot process I put the following arguments to <code>/etc/kernel/cmdline</code>:<pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=plain><span class=giallo-l><span>loglevel=3 quiet splash</span></span></code></pre><p>The log level and quiet arguments supress the messages while the splash enables the splash screen which will come into play when <code>plymouth</code> is installed.<h3 id=plymouth>Plymouth</h3><p>It is a system that uses Kernel Mode Setting (KMS) to set the native resolution of the display as early as possible, then provides a splash screen leading all the way up to the login manager.<p>After installing <code>plymouth</code> through <code>pacman</code>, the default splash screen it uses is <code>BGRT</code> which stands for Boot Graphics Resource Table which also utilizes the <code>spinner</code> theme to put a spinner on the bottom of the splash screen.<p>The spinner theme the Arch Linux logo which I don't want there. So, I delete it from <code>/usr/share/plymouth/themes/spinner/</code> and delete all animation and throbber images too just to make everything clean. The Arch Linux and spinners will be gone on the next boot.<p>But, my device boots really fast, so after the kernel splash screen, there is a blank screen for a second then <code>plymouth</code> launches which lasts for not even a second. This causes me to see only a flicker of plymouth. So I have delayed the launch of it by 15 seconds.<p>In <code>/etc/plymouth/plymouthd.conf</code>:<pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=plain><span class=giallo-l><span>[Daemon]</span></span>
+<span class=giallo-l><span>ShowDelay=15</span></span></code></pre><p>Well, you might ask why delay <code>plymouth</code> instead of just uninstalling the it entirely. It is because <code>plymouth</code> also appears during <code>poweroff</code> and <code>reboot</code> while the system is shutting down, which I want to have.<h3 id=gdm>GDM</h3><p>I use <a href=https://github.com/niri-wm/niri rel=external>Niri</a> as my window manger of choice. But, have a fallback <a href=https://www.gnome.org/ rel=external>GNOME</a> session since <code>niri</code> plays well with GNOME's set of utilities.<p><img alt=GDM src=/images/customizing-the-os/gdm.png><p>The default Arch Linux <code>GDM</code> has the Arch Linux logo there which I remove using the <a href=https://github.com/gdm-settings/gdm-settings rel=external>GDM Settings</a> application. There might be a way to remove it via the command line but I am lazy and I just delete the application once I change this setting and it remains persistent. Tell me if you know the way. <code>;)</code><p><code>edit: 2026-05-27: start</code><h3 id=greetd>greetd</h3><p>I switched from <code>GDM</code> to <code>greetd</code> to have the same style on the login manager which I have for the lock screen. Which also meant sacrificing the lock screen of the GNOME session and using something new that I know nothing about. I starting tracking the setup for <code>greetd</code> in a <a href=https://raw.githubusercontent.com/scientiac/einstein.chezmoi/refs/heads/main/dot_config/quickshell/scigreet/README.md rel=external>markdown</a> file.<p>For the greeter I use <code>niri</code> as it's compositor and <code>quickshell</code> for the UI.<p>The immediate issue was, the GNOME Keyring not being unlocked by default. Which was easily fixed by editing <code>/etc/pam.d/greetd</code> with the following PAM(Pluggable Authentication Modules) setup:<pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=plain><span class=giallo-l><span>#%PAM-1.0</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span>auth       required     pam_securetty.so</span></span>
+<span class=giallo-l><span>auth       requisite    pam_nologin.so</span></span>
+<span class=giallo-l><span>auth       include      system-local-login</span></span>
+<span class=giallo-l><span>auth       optional     pam_gnome_keyring.so</span></span>
+<span class=giallo-l><span>account    include      system-local-login</span></span>
+<span class=giallo-l><span>session    include      system-local-login</span></span>
+<span class=giallo-l><span>session    optional     pam_gnome_keyring.so auto_start</span></span></code></pre><p>Using <code>greetd</code> meant living with the logs when going from greeter to compositor. So, I went down a rabbit hole. I tried disabling systemd logs for user, for system, for greeter user and what not. I used google, duckduckgo, chatgpt, gemini, heck even grok to find a solution, but nothing helped.<p>Then, I found out about a side effect of the framebuffer console boot options from the <a href=https://www.kernel.org/doc/html/latest/fb/fbcon.html rel=external>Linux Kernel Documentation</a> saying, "<em>One side effect that may be useful is using a map value that exceeds the number of loaded fb drivers. For example, if only one driver is available, fb0, adding fbcon=map:1 tells fbcon not to take over the console.</em>"<p>So, I appended fbcon=map:1 to <code>/etc/kernel/cmdline</code>.<p>This completely disabled the console, which meant no text will be printed during switch from greeter to the compositor. <strong>But</strong>, this also meant that there is now no way to go to <code>ttyX</code> if I had to debug the system in case it breaks. And since it's Arch Linux, noone can guarantee that it would not.<p>I then went down on another rabbit hole trying to enable the other framebuffers from userspace command line after system fully booted. Which I couldn't solve.<p>Looking for other console options, <strong>I found <code>kmscon</code></strong>, and out of sheer curosity I installed it and rebooted the system. And I can't state the joy I felt when I tried to switch to tty2 and it dropped me into a console. I also found out that it supported fonts and can use <code>pango</code> which I loved and immediately switched to a Nerd Font. I also themed it with the same colors that I theme my Terminal Emulator.<p>It was as easy as <code>sudo pacman -s kmscon</code> then reboot. By, default only <code>tty2</code> with <code>ctrl+alt+f2</code> works, but other sessions can be enabled with <code>systemd</code> too.<p>So, there it is, another minimal component, <code>greetd</code> added to the my system replacing GNOME's <code>GDM</code>. With the pretty-pretty <code>kmscon</code>, which is my love at first sight.<p><br> <code>edit: 2026-05-03: end</code><h3 id=poweroff-and-reboot>Poweroff and Reboot</h3><p>I hate the annoying systemd wall messages when shutting down or rebooting the system:<pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=plain><span class=giallo-l><span>Broadcast message from user@host (Thu 1970-01-01 00:00:00 UTC):</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span>The system will power off now!</span></span></code></pre><p>So I use this one liner from <a href=https://github.com/Kira-NT/disable-systemd-wall-messages rel=external>Kira-NT/disable-systemd-wall-messages</a> to disable the wall messages:<pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=shellscript><span class=giallo-l><span style=color:#fabd2f>curl</span><span style=color:#d3869b> -Ls</span><span style=color:#b8bb26> https://github.com/Kira-NT/disable-systemd-wall-messages/blob/HEAD/install.sh?raw=</span><span style=color:#d3869b>true</span><span style=color:#8ec07c> |</span><span style=color:#fabd2f> sudo</span><span style=color:#b8bb26> sh</span><span style=color:#d3869b> -s</span></span></code></pre><p>And for the times I use terminal to reboot or power off I put the following shell alias for them:<pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=shellscript><span class=giallo-l><span style=color:#fe8019>alias</span><span style=color:#83a598> reboot</span><span style=color:#8ec07c>=</span><span style=color:#a89984>"</span><span style=color:#b8bb26>reboot --no-wall</span><span style=color:#a89984>"</span></span>
+<span class=giallo-l><span style=color:#fe8019>alias</span><span style=color:#83a598> poweroff</span><span style=color:#8ec07c>=</span><span style=color:#a89984>"</span><span style=color:#b8bb26>poweroff --no-wall</span><span style=color:#a89984>"</span></span></code></pre><h2 id=desktop>Desktop</h2><p>All that for the 10 to 20 seconds it takes to get from hitting the power button into my desktop.<p>But, now we are finally at the desktop.<h3 id=niri>Niri</h3><p>As I have already mentioned, I use Niri as my desktop of choice. Lets start from then start then!<h4 id=wallpaper>Wallpaper</h4><p><code>awww</code> is what I use to set the wallpaper since it has the ability to set wallpapers to different layers in <code>niri</code>. I start the daemon as follows:<pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=shellscript><span class=giallo-l><span style=color:#fabd2f>awww-daemon</span><span style=color:#d3869b> -n</span><span style=color:#b8bb26> wp-front</span><span style=color:#a89984> &</span></span>
+<span class=giallo-l><span style=color:#fabd2f>awww-daemon</span><span style=color:#d3869b> -n</span><span style=color:#b8bb26> wp-back</span><span style=color:#a89984> &</span></span></code></pre><p>The <code>wp-front</code> is the namespace for actual layer where <code>niri</code>'s wallpaper will be set. The <code>wp-back</code> is the namespace for the layer behind the desktop where <code>niri</code>'s overview backdrop will be set.<p><img alt=Wallpapers src=/images/customizing-the-os/wallpapers.png><p>I set my wallpaper on <code>wp-front</code> and a blurred version of the same wallpaper on <code>wp-back</code> to get the above results. With the following setting on the niri config:<pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=kdl><span class=giallo-l><span style=color:#8ec07c>layer-rule</span><span> {</span></span>
+<span class=giallo-l><span style=color:#8ec07c>    match</span><span style=color:#fabd2f> namespace</span><span style=color:#a89984>=</span><span style=color:#b8bb26>"wp-back"</span></span>
+<span class=giallo-l><span style=color:#8ec07c>    place-within-backdrop</span><span style=color:#cc241d> true</span></span>
+<span class=giallo-l><span>}</span></span></code></pre><p>and the command to set:<pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=shellscript><span class=giallo-l><span style=color:#fabd2f>awww</span><span style=color:#b8bb26> img</span><span style=color:#a89984> "</span><span style=color:#83a598>$BLURRED_WALLPAPER</span><span style=color:#a89984>"</span><span style=color:#d3869b> -n</span><span style=color:#b8bb26> wp-back</span><span style=color:#a89984> &</span></span>
+<span class=giallo-l><span style=color:#fabd2f>awww</span><span style=color:#b8bb26> img</span><span style=color:#a89984> "</span><span style=color:#83a598>$SELECTED_WALLPAPER</span><span style=color:#a89984>"</span><span style=color:#d3869b> -n</span><span style=color:#b8bb26> wp-front</span><span style=color:#a89984> &</span></span></code></pre><h4 id=launcher>Launcher</h4><p>In the past I used to use very minimal and customizable launchers like <code>rofi</code>, <code>wofi</code> and <code>tofi</code> but after watching enough number of ads for the Raycast launcher, I fell in love with <a href=https://github.com/vicinaehq/vicinae rel=external>vicinae</a>.<p><img alt=Launcher src=/images/customizing-the-os/launcher.png><p>It just works! The only thing I changed was the fonts to be <code>FantasqueSansM Nerd Font Propo</code>, the Icon theme to <code>Morewaita</code> and enabled blur.<h4 id=the-shell>The Shell</h4><p>I decided to write this blog post because of this shell. It gives me joy with a mix of pain and impostor syndrome to call it mine. I wrote it using AI in <code>quickshell</code>. One one hand, It'd had taken me weeks to completely write all this myself, but I did it in a single day, and it isn't system critical so I guess I get a pass for not doing it myself.<p><strong>Lockscreen:</strong> I decided to recreate the <code>swaylock-effects</code> lockscreen with a blurred screen setup using quickshell.<p><img alt=Lockscreen src=/images/customizing-the-os/lockscreen.png><p>I want to make the same UI for <code>greetd</code> and use it for the Display Manager too but, I am afraid <code>GNOME</code> will not like it when I use something other than GDM. [ <strong><em>I did it!</em></strong> ]<p><strong>OSD:</strong> For OSD, I took design inspiration from the IOS dynamic island and decided to create an interactive bottom notch.<p><video autoplay loop src=/images/customizing-the-os/osd.mp4></video><p><strong>Bar:</strong> For the Bar, I took inspiration from the OSD and made it top notch.<p><video autoplay loop src=/images/customizing-the-os/bar.mp4></video><p><strong>Notifications:</strong> Similar to OSD and Bars I made the notifications with a corner swoop.<p><video autoplay loop src=/images/customizing-the-os/notification.mp4></video><p>As a whole it looks like this:<p><video controls src=/images/customizing-the-os/desktop.mp4></video><p><em>Sorry for the flashbang.</em><p>Almost everything in the shell is <code>quickshell</code> now, which replaced various applications like:<ul><li><code>way-edges</code> for bar<li><code>swayosd</code> for brightness and volume OSD<li><code>battery-osd</code> for battery notifications and OSD<li><code>swaylock</code> for lock screen<li><code>swaync</code> for notifications</ul><h2 id=this-is-fun>This is Fun</h2><p>Funny how describing the setup of the 10 second boot process took more words than describing the desktop. But, if we consider "<em>A picture is worth a thousand words.</em>" the desktop wins by a long shot!<p>If you see some lag, it's because of the screen record. I have applied this <em><strong>"Nothing by default, just there when needed."</strong></em> philosophy everywhere from <code>bootloader</code> to <code>shell (desktop)</code>,<code>browser</code>, <code>editor</code> and individual applications if possible. This is how I like it. Tell me if you like it.<p>Also please give me recommendations if you have any.<p><em>See you on the next one!</em></div></div></div><div id=webmention><hr><h2>Webmentions</h2><form action=https://webmention.io/scientiac.space/webmention class=webmention-form method=post><div id=email-comment><p>Have you written a <a href=https://indieweb.org/responses>response</a> to this? Let me know the URL, Or, you can send your response via <a href="mailto:iac@scientiac.space?subject=Reply%3A%20Customizing%20the%20Operating%20System">mail:</a><code>iac@scientiac.space</code></div><div class=send-webmention><input name=source type=url><button>Send Webmention</button></div><div><div class="ui message"></div></div><input name=target type=hidden value=https://scientiac.space/blog/cutomizing-the-os/></form><div class=interaction-box></div></div></div><script defer src=/assets/js/themeSelector.js></script></section><div class=hidden><a href=https://polymaths.social/@iac rel=me>Fediverse</a></div><div class="hidden h-card"><img class="u-photo icon" alt=scientiac src=/res/thumbnail.png><a class="p-name u-url" href=https://scientiac.space rel=me>scientiac</a><p class=p-note>A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does.</div><footer><p class=codewithlove>I can't think of things to write on a footer. So, just <span class=main-background>imagine</span> something yourself.<p><a href=/series>Series</a> | <a href=/atom.xml>RSS</a> | <a href=https://github.com/scientiac/scientiac.github.io target=_blank>Source Code</a><div class=footer-badges><div class=badge-item><map name=indie8831><area alt=Previous coords=38,0,88,15 href=https://xn--sr8hvo.ws/previous><area alt=Next coords=38,16,88,31 href=https://xn--sr8hvo.ws/next><area alt=IndieWeb coords=0,0,38,31 href=https://xn--sr8hvo.ws></map><img alt="IndieWeb Webring" src=/assets/indieweb.png usemap=#indie8831></div><div class=badge-item><a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank> <img alt="CC BY-SA 4.0" src=/assets/cc-by-sa.png> </a></div></div><div style=opacity:0;width:0;height:0;font-size:0;overflow:hidden><a href=https://xn--sr8hvo.ws/previous rel=prev>Previous</a><a href=https://xn--sr8hvo.ws/next rel=next>Next</a></div></footer><ol class=js-only id=themeSelector reversed></ol>
