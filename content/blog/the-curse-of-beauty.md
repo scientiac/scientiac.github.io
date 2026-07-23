@@ -30,7 +30,7 @@ Constantly scared, still wanting to live more.
 Should I blame my beauty for giving me scars?  
 Am I just their trophy they win with wars?  
 They'll call me a bitch, or slut or a hoe.  
-Use once then through when that's all they know.  
+Use once then throw when that's all they know.  
 
 
 </i>
