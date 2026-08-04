@@ -10,7 +10,7 @@ writings=["Poems"]
  I get flowers and I get poems written for me.  
  I get showers of praises directed to me.  
  All these compliments, even more promises,  
- I get everything, every single thing to me.  
+ I get everything, every fucking thing to me.  
 
  My beauty is a symbol of power through views.  
  A power that I cannot control or use.  
@@ -24,7 +24,7 @@ writings=["Poems"]
 
 I've seen things you couldn't even dream of.  
 I've felt things you'll never think to wish for.    
-Countless ick pics, encounters with a rapist.  
+Countless dick pics, encounters with a rapist.  
 Constantly scared, still wanting to live more.  
 
 Should I blame my beauty for giving me scars?  
