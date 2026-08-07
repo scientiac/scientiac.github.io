@@ -764,14 +764,15 @@ blockquote:not(.exclude) {
 
 .mention-profile {
 	display: grid;
-  position: relative;
-  border-radius: var(--half-line);
+	position: relative;
+	border-radius: var(--half-line);
 	border-radius: var(--half-line);	
 	img {
 		border-style: solid;
 		border-width: 1px;
-		border-color: var(--text-highlight-2);
 		width: 2rem;
+		height: 2rem;
+		border-color: var(--text-highlight-2);
 		border-radius: 50%;
 		position: relative; /* Keeps the image in the normal flow */
 	}
@@ -815,19 +816,19 @@ blockquote:not(.exclude) {
 
 /* Different icons for likes and reposts */
 .mention-profile.like::after {
-    content: "Ã°Å¸â€™â„¢";
+    content: "💙";
 }
 
 .mention-profile.repost::after {
-    content: "Ã°Å¸â€Â";
+    content: "🔁";
 }
 
 .mention-profile.link::after {
-    content: "Ã°Å¸Å’Â";
+    content: "🌐";
 }
 
 .mention-profile.reply::after {
-    content: "Ã¢â€ Â©Ã¯Â¸Â";
+    content: "↩️";
 }
 
 .target-link {
