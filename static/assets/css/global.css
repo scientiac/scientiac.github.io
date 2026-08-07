@@ -295,6 +295,21 @@ pre > code {
 	margin: 0 calc(0.125 * var(--one-line));
 }
 
+article.listing.looking > p > code {
+	padding: calc(0.35 * var(--one-line)) calc(0.75 * var(--one-line));
+	margin: 0;
+	border-radius: 0.5rem;
+	line-height: 2rem;
+}
+
+article.listing.looking > p {
+	margin: 0.3rem;
+}
+
+article.listing.looking > h2 {
+	margin-bottom: 0.25rem;
+}
+
 code.language-text {
 	background-color: var(--color-1);
 }

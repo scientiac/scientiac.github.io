@@ -4,16 +4,20 @@
 
 <div class="logs">
 
-{% set writings = get_taxonomy(kind="writings") %}
-<p class="subtitle --center">
-{% for term in writings.items %}
-  <code class="dateandtag"><a href="{{ term.permalink }}">{{ term.name }}</a><sup>{{ term.pages | length }}</sup></code>
-{% endfor %}
-</p>
+<article class="listing looking">
+  <h2><a href=""></a>Looking for Something Specific?</h2>
+    {% set writings = get_taxonomy(kind="writings") %}
+    <p class="subtitle --center">
+      {% for term in writings.items %}
+        <code class="dateandtag"><a href="{{ term.permalink }}">{{ term.name }}</a><sup>{{ term.pages | length }}</sup></code>
+      {% endfor %}
+    </p>
+</article>
 
 <h1 class="title">
   {{ section.title }}
 </h1>
+
 
 <div class="search-container js-only">
   <input id="search" type="search" placeholder="Search">
@@ -22,6 +26,7 @@
   <div class="search-results__items"></div>
   </div>
 </div>
+
 
 <script defer type="text/javascript" src="{{ get_url(path="elasticlunr.min.js") }}"></script>
 <script defer type="text/javascript" src="{{ get_url(path="search_index.en.js") }}"></script>
