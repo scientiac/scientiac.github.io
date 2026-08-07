@@ -671,7 +671,8 @@ details {
 .language {
   display: flex;
   justify-content: space-between;
-	margin: 0;
+  margin: calc(0.6 * var(--one-line));
+  margin-bottom: 0;
   font-weight: bold;
 	background-color: var(--background-color-1);
 	padding: calc(0.25 * var(--one-line)) var(--half-line);
@@ -680,6 +681,7 @@ details {
 }
 
 pre {
+  margin: calc(0.6 * var(--one-line));
   margin-top: 0px;
 }
 
@@ -687,6 +689,10 @@ pre {
   all: unset;
 	color: var(--text-highlight-1);
 	cursor: pointer;
+}
+
+blockquote:not(.exclude) {
+  margin: calc(0.6 * var(--one-line));
 }
 
 .send-webmention {
@@ -809,19 +815,19 @@ pre {
 
 /* Different icons for likes and reposts */
 .mention-profile.like::after {
-    content: "💙";
+    content: "Ã°Å¸â€™â„¢";
 }
 
 .mention-profile.repost::after {
-    content: "🔁";
+    content: "Ã°Å¸â€Â";
 }
 
 .mention-profile.link::after {
-    content: "🌐";
+    content: "Ã°Å¸Å’Â";
 }
 
 .mention-profile.reply::after {
-    content: "↩️";
+    content: "Ã¢â€ Â©Ã¯Â¸Â";
 }
 
 .target-link {
