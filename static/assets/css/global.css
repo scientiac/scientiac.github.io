@@ -142,7 +142,7 @@ nav:not(.exclude:not([data-style]), [data-style="none"]) > * {
 	border-radius: var(--half-line) var(--half-line) 0 0;
 }
 
-.syndicate p {
+.syndicate p, h1, h2, h3, pre, blockquote, .language {
 	margin: calc(0.6 * var(--one-line));
 }
 
@@ -671,7 +671,6 @@ details {
 .language {
   display: flex;
   justify-content: space-between;
-  margin: calc(0.6 * var(--one-line));
   margin-bottom: 0;
   font-weight: bold;
 	background-color: var(--background-color-1);
@@ -681,7 +680,6 @@ details {
 }
 
 pre {
-  margin: calc(0.6 * var(--one-line));
   margin-top: 0px;
 }
 
