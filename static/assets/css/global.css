@@ -693,6 +693,10 @@ details {
 	padding: var(--half-line);
 }
 
+.pre-wrapper {
+  position: relative;
+}
+
 .copy-overlay {
   position: absolute;
   right: var(--half-line);

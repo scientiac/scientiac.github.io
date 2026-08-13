@@ -5,14 +5,20 @@ let blocks = document.querySelectorAll("pre");
 blocks.forEach((block) => {
   if (!navigator.clipboard) return;
 
-  block.style.position = "relative";
+  // Create wrapper
+  let wrapper = document.createElement("div");
+  wrapper.className = "pre-wrapper";
+
+  // Put wrapper around <pre>
+  block.parentNode.insertBefore(wrapper, block);
+  wrapper.appendChild(block);
 
   // Create floating copy overlay
   let copyOverlay = document.createElement("span");
   copyOverlay.className = "copy-overlay";
   copyOverlay.innerText = copyButtonLabel;
 
-  block.appendChild(copyOverlay);
+  wrapper.appendChild(copyOverlay);
 
   copyOverlay.addEventListener("click", async () => {
     await copyCode(block);
