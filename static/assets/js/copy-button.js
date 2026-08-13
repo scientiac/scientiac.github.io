@@ -1,38 +1,28 @@
-const copyButtonLabel = "copy";
+const copyButtonLabel = "⧉";
 
 let blocks = document.querySelectorAll("pre");
 
 blocks.forEach((block) => {
-  if (navigator.clipboard) {
-    // Create the container div and add the "language" class
-    let container = document.createElement("div");
-    container.className = "language";
+  if (!navigator.clipboard) return;
 
-    // Get the language name from the data-lang attribute or class
-    let language = block.getAttribute("data-lang") || block.className.match(/language-(\w+)/)?.[1] || "txt";
+  block.style.position = "relative";
 
-    // Create language label
-    let languageLabel = document.createElement("span");
-    languageLabel.innerText = language;
+  // Create floating copy overlay
+  let copyOverlay = document.createElement("span");
+  copyOverlay.className = "copy-overlay";
+  copyOverlay.innerText = copyButtonLabel;
 
-    // Create copy button
-    let button = document.createElement("button");
-    button.innerText = copyButtonLabel;
+  block.appendChild(copyOverlay);
 
-    // Append language label and copy button to the container
-    container.appendChild(languageLabel);
-    container.appendChild(button);
+  copyOverlay.addEventListener("click", async () => {
+    await copyCode(block);
 
-    // Insert the container div above the <pre> element
-    block.parentNode.insertBefore(container, block);
+    copyOverlay.innerText = "⍻";
 
-    // Add click event to copy button
-    button.addEventListener("click", async () => {
-      await copyCode(block);
-      button.innerText = "copied!";
-      setTimeout(() => (button.innerText = copyButtonLabel), 2000);
-    });
-  }
+    setTimeout(() => {
+      copyOverlay.innerText = copyButtonLabel;
+    }, 2000);
+  });
 });
 
 async function copyCode(block) {
@@ -41,4 +31,3 @@ async function copyCode(block) {
 
   await navigator.clipboard.writeText(text);
 }
-
