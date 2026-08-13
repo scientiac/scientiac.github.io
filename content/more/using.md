@@ -4,38 +4,38 @@ title = "Currently Using"
 
 ## PC
 
-* OS - CachyOS
-* DE - KDE
-* Browser - Firefox
-* Terminal - Ghostty
-* Text Editor/IDE - Neovim
-* Vector Graphics - Inkscape 
-* Static Site Generator - Zola
-* Shell - zsh
+* OS - `NixOS`
+* DE - `GNOME`
+* Browser - `Helium`
+* Terminal - `Ghostty`
+* Text Editor/IDE - `Neovim`
+* Vector Graphics - `Inkscape` 
+* Static Site Generator - `Zola`
+* Shell - `fish`
+* Documents - `zathura`
+* Book Reading - `Foliate`
+* Speech to Text - `Handy`
+* RSS Reader - `Newsflash`
 
 ## Cross Platform
 
-* Video Player - mpv
-* Communication - Matrix, Signal, Telegram
-* Password Manager - Bitwarden (Keygurad)
-* Email - proton.me, tilde.team, gmail.com, cock.li
+* Video Player - `mpv`
+* Communication - `Signal`
+* Email - `proton.me`, `cock.li`
 
 ## Smartphone
 
-* ROM(OS) - Project InfinityX
-* RSS Reader - Read You
-* Browser - Firefox
-* App Store - Obtainium
-* Email Client - Thunderbird Android
-* Torrent Client - Libre Torrent
-* Terminal Emulator - Termux
-* Video Player - VLC Android
-* Podcast Aggregator - Antennapod
-* E-book Reader - Readest
+* ROM(OS) - `Project InfinityX`
+* RSS Reader - `Read You`
+* Browser - `Brave`
+* App Store - `Obtainium`
+* Terminal Emulator - `Termux`
+* Podcast Aggregator - `Antennapod`
+* E-book Reader - `Readest`
 
 ## TV?
 
-* OS - Android
-* Youtube - S-tube
-* Movies and Series - Cloudstream
-* Browser - TV Bro
+* OS - `Android`
+* Youtube - `S-tube`
+* Movies and Series - `Cloudstream`
+* Browser - `TV Bro`
