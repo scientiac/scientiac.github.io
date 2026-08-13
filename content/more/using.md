@@ -2,7 +2,8 @@
 title = "Currently Using"
 +++
 
-## PC
+### Laptop
+After I decided to not use my smartphone, I seem to be addicted to my Laptop.
 
 * OS - `NixOS`
 * DE - `GNOME`
@@ -17,13 +18,14 @@ title = "Currently Using"
 * Speech to Text - `Handy`
 * RSS Reader - `Newsflash`
 
-## Cross Platform
+### Cross Platform
 
 * Video Player - `mpv`
 * Communication - `Signal`
 * Email - `proton.me`, `cock.li`
 
-## Smartphone
+### Smartphone
+I don't like using my smartphone.
 
 * ROM(OS) - `Project InfinityX`
 * RSS Reader - `Read You`
@@ -33,9 +35,10 @@ title = "Currently Using"
 * Podcast Aggregator - `Antennapod`
 * E-book Reader - `Readest`
 
-## TV?
+### TV?
+Also, watching YouTube on TV nowadays.
 
 * OS - `Android`
-* Youtube - `S-tube`
+* YouTube - `S-tube`
 * Movies and Series - `Cloudstream`
 * Browser - `TV Bro`
