@@ -5,7 +5,6 @@ title = "Contact"
 ## Sites :
 
 * <https://scientiac.space>
-* <https://carboxi.de>
 * <https://3o14.com>
 
 ## Socials :
