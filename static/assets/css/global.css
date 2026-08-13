@@ -697,6 +697,10 @@ details {
   position: relative;
 }
 
+.syndicate-inside-text .copy-overlay , .syndicate-text .copy-overlay {
+  padding: 0.1em 1em;
+}
+
 .copy-overlay {
   position: absolute;
   right: var(--half-line);
@@ -852,19 +856,19 @@ blockquote:not(.exclude) {
 
 /* Different icons for likes and reposts */
 .mention-profile.like::after {
-    content: "💙";
+    content: "Ã°Å¸â€™â„¢";
 }
 
 .mention-profile.repost::after {
-    content: "🔁";
+    content: "Ã°Å¸â€Â";
 }
 
 .mention-profile.link::after {
-    content: "🌐";
+    content: "Ã°Å¸Å’Â";
 }
 
 .mention-profile.reply::after {
-    content: "↩️";
+    content: "Ã¢â€ Â©Ã¯Â¸Â";
 }
 
 .target-link {
