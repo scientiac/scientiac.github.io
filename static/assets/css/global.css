@@ -856,19 +856,19 @@ blockquote:not(.exclude) {
 
 /* Different icons for likes and reposts */
 .mention-profile.like::after {
-    content: "Ã°Å¸â€™â„¢";
+    content: "💙";
 }
 
 .mention-profile.repost::after {
-    content: "Ã°Å¸â€Â";
+    content: "🔁";
 }
 
 .mention-profile.link::after {
-    content: "Ã°Å¸Å’Â";
+    content: "🌐";
 }
 
 .mention-profile.reply::after {
-    content: "Ã¢â€ Â©Ã¯Â¸Â";
+    content: "↩️";
 }
 
 .target-link {
