@@ -137,7 +137,7 @@ Since RedoxOS is a very unstable operating system, which is heavily in developme
 Near the project submission a fresh pull from RedoxOS introduced mismatches with our overlay code: path handling and validation required fixes, some Scheme APIs (`SchemeSync` and related types) had their methods changed so we needed to implement new functions. 
 Also, the way Scheme was started changed (we later found root-start resembled our old approach, but the new init-system startup only allowed a single overlay instance). During this we also came across a runtime freeze where a std library function appeared to hang with no error or panic which was unlikely in upstream CI, so we suspected a deadlock in our code.
 
-So, we decided to limit the implementation on the older commit and settled to showing what already worked on our system in our final project demonstration. This means we won't able to contribute the implementation upstream, and to be very honest we are very insecure _(almost unsatisfied)_ about [our current implementation](https://gitlab.com/carboxide/overlayfs) which is one more excuse for us to procrastinate now that the defence is over.
+So, we decided to limit the implementation on the older commit and settled to showing what already worked on our system in our final project demonstration. This means we won't able to contribute the implementation upstream, and to be very honest we are very insecure _(almost unsatisfied)_ about [our current implementation](https://github.com/3o14-com/overlayfs) which is one more excuse for us to procrastinate now that the defence is over.
 
 ## Mentors and Developers
 Though everything I contributed to the project was mentored to me by faultypointer, he didn't have anyone who mentored him. 
