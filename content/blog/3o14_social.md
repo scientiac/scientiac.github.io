@@ -82,4 +82,4 @@ I did not do much work on the backend, [faultypointer](https://faulty.carboxi.de
 
 There isn't much to conclude here because we have achieved the basics of what we want, but the work is very incomplete and alpha. We have an android app that does work with all other servers, not just ours thanks to Fediverse, but everything is bare-bones and need many improvements. This piece of art is presentable, but I now need to host both the webui and backend on a Raspberry Pi to show that a simple device can handle your social media, and you don't have to rely on big tech for it.
 
-Lastly, here is the source for what we are working on, [github/3o14-com](https://github.com/3o14-com). Enjoy!
+Lastly, here is the source for what we are working on, [github/three0onefour](https://github.com/three0onefour). Enjoy!
