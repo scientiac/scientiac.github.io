@@ -1,0 +1,65 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><script src=/assets/js/theme-init.js></script><link href=/assets/css/themes.css rel=stylesheet><link href=/assets/css/readable.css rel=stylesheet><link href=/assets/css/global.css rel=stylesheet><link href=/assets/css/fonts.css rel=stylesheet><link href=/assets/css/logo.css rel=stylesheet><link href=https://scientiac.space/atom.xml rel=alternate title=RSS type=application/atom+xml><meta content=POSSE property=og:type><meta content=scientiac.space property=og:site_name><meta content=https://scientiac.space/res/thumbnail-light.png property=og:image><title>Multi Remote</title><meta content="Multi Remote" name=og:title><meta content="
+I wanted to keep my code in multiple remotes.
+
+github since it is still where everyone reaches to see what I'm doing.
+codeberg since it is my preferred forge.
+
+Apparently git supported multiple remotes for fetch and push, so this is how i configured my repo.
+
+After initializing git and making some commits, I first added the two remotes:
+github and codeberg respectively.
+git remote add codeberg ssh://git@codeberg.org/user/project.git
+git remote add github git@github.com:user/project.git
+Then, I set up origin so that it fetches from codeberg but pushes to both codeberg and github.
+To set the fetch URL to point to codeberg:
+git remote add origin ssh://git@codeberg.org/user/project.git
+Then, to add both codeberg and github as push URLs:
+git remote set-url --add --push origin ssh://git@codeberg.org/user/project.git
+git remote set-url --add --push origin git@github.com:user/project.git
+
+To verify that everything works properly I checked it by running the following command:
+git remote show origin* remote origin
+  Fetch URL: ssh://git@codeberg.org/user/project.git
+  Push  URL: ssh://git@codeberg.org/user/project.git
+  Push  URL: git@github.com:user/project.git
+  HEAD branch: master
+  ...
+  ...
+Now, I have my project on both places so I can ignore github and enjoy the codeberg life.
+" name=description><meta content="
+I wanted to keep my code in multiple remotes.
+
+github since it is still where everyone reaches to see what I'm doing.
+codeberg since it is my preferred forge.
+
+Apparently git supported multiple remotes for fetch and push, so this is how i configured my repo.
+
+After initializing git and making some commits, I first added the two remotes:
+github and codeberg respectively.
+git remote add codeberg ssh://git@codeberg.org/user/project.git
+git remote add github git@github.com:user/project.git
+Then, I set up origin so that it fetches from codeberg but pushes to both codeberg and github.
+To set the fetch URL to point to codeberg:
+git remote add origin ssh://git@codeberg.org/user/project.git
+Then, to add both codeberg and github as push URLs:
+git remote set-url --add --push origin ssh://git@codeberg.org/user/project.git
+git remote set-url --add --push origin git@github.com:user/project.git
+
+To verify that everything works properly I checked it by running the following command:
+git remote show origin* remote origin
+  Fetch URL: ssh://git@codeberg.org/user/project.git
+  Push  URL: ssh://git@codeberg.org/user/project.git
+  Push  URL: git@github.com:user/project.git
+  HEAD branch: master
+  ...
+  ...
+Now, I have my project on both places so I can ignore github and enjoy the codeberg life.
+" name=og:description><link rel="shortcut icon" href=/res/thumbnail.svg type=image/x-icon><meta content="width=device-width,initial-scale=1" name=viewport><meta content="rgb(253, 246, 227)" name=theme-color><script defer src=/assets/js/copy-button.js></script><link href=https://github.com/scientiac rel=me><link href=mailto:spandan@scientiac.space rel=me><link href=https://webmention.io/scientiac.space/webmention rel=webmention><meta content=@iac@polymaths.social name=fediverse:creator><script data-website-id=b098b8c6-c903-435e-b848-44853f55bc5b defer src=https://cloud.umami.is/script.js></script><body><div class=logo-container><a href=/> <div class=inner-logo-container></div> </a></div><nav data-style=classy><span><a href=/>Main</a></span><span><a href=/blog>Blog</a></span><span><a href=/syndications>Ping</a></span><span><a href=/more>More</a></span></nav><section class=section-body><div class=container><div id=html-content-holder><div class="h-entry syndicate-inside"><h2 class="p-name title syndicate-inside-title">Multi Remote</h2><div class=syndicate-pagedate><time class="dt-published dateandtag hidden" datetime=2026-08-07T00:00:00Z> 2026-08-07 </time><code class="dt-published dateandtag">2026-08-07</code><code class="u-category dateandtag">POSSE</code></div><a class="u-url hidden" href=https://scientiac.space/syndications/posse-2026-08-07/>https://scientiac.space/syndications/posse-2026-08-07/</a><div class="hidden p-author h-card"><a class=u-url href=https://scientiac.space rel=me> <img alt="Profile photo of scientiac" class=u-photo src=/res/thumbnail.png> <span class=p-name>scientiac</span> </a></div><div class="section syndicate-inside-text e-content"><a class=u-bridgy-fed hidden href=https://fed.brid.gy/></a><p>I wanted to keep my code in multiple remotes.<ul><li><code>github</code> since it is still where everyone reaches to see what I'm doing.<li><code>codeberg</code> since it is my preferred forge.</ul><p>Apparently <code>git</code> supported multiple remotes for <code>fetch</code> and <code>push</code>, so this is how i configured my repo.<hr><p>After initializing <code>git</code> and making some <code>commits</code>, I first added the two remotes:<p><code>github</code> and <code>codeberg</code> respectively.<pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=shellscript><span class=giallo-l><span style=color:#fabd2f>git</span><span style=color:#b8bb26> remote add codeberg ssh://git@codeberg.org/user/project.git</span></span>
+<span class=giallo-l><span style=color:#fabd2f>git</span><span style=color:#b8bb26> remote add github git@github.com:user/project.git</span></span></code></pre><p>Then, I set up <code>origin</code> so that it fetches from <code>codeberg</code> but pushes to both <code>codeberg</code> and <code>github</code>.<p>To set the fetch URL to point to <code>codeberg</code>:<pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=shellscript><span class=giallo-l><span style=color:#fabd2f>git</span><span style=color:#b8bb26> remote add origin ssh://git@codeberg.org/user/project.git</span></span></code></pre><p>Then, to add both <code>codeberg</code> and <code>github</code> as push URLs:<pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=shellscript><span class=giallo-l><span style=color:#fabd2f>git</span><span style=color:#b8bb26> remote set-url</span><span style=color:#d3869b> --add --push</span><span style=color:#b8bb26> origin ssh://git@codeberg.org/user/project.git</span></span>
+<span class=giallo-l><span style=color:#fabd2f>git</span><span style=color:#b8bb26> remote set-url</span><span style=color:#d3869b> --add --push</span><span style=color:#b8bb26> origin git@github.com:user/project.git</span></span></code></pre><hr><p>To verify that everything works properly I checked it by running the following command:<pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=shellscript><span class=giallo-l><span style=color:#fabd2f>git</span><span style=color:#b8bb26> remote show origin</span></span></code></pre><pre class=giallo style=color:#ebdbb2;background-color:#282828><code data-lang=plain><span class=giallo-l><span>* remote origin</span></span>
+<span class=giallo-l><span>  Fetch URL: ssh://git@codeberg.org/user/project.git</span></span>
+<span class=giallo-l><span>  Push  URL: ssh://git@codeberg.org/user/project.git</span></span>
+<span class=giallo-l><span>  Push  URL: git@github.com:user/project.git</span></span>
+<span class=giallo-l><span>  HEAD branch: master</span></span>
+<span class=giallo-l><span>  ...</span></span>
+<span class=giallo-l><span>  ...</span></span></code></pre><p>Now, I have my project on both places so I can ignore <code>github</code> and enjoy the <code>codeberg</code> life.</div></div></div><div id=webmention><hr><h2>Webmentions</h2><form action=https://webmention.io/scientiac.space/webmention class=webmention-form method=post><div id=email-comment><p>Have you written a <a href=https://indieweb.org/responses>response</a> to this? Let me know the URL, Or, you can send your response via <a href="mailto:iac@scientiac.space?subject=Reply%3A%20Multi%20Remote">mail:</a><code>iac@scientiac.space</code></div><div class=send-webmention><input name=source type=url><button>Send Webmention</button></div><div><div class="ui message"></div></div><input name=target type=hidden value=https://scientiac.space/syndications/posse-2026-08-07/></form><div class=interaction-box><div class="mention-profile like"><a href=https://ap.brid.gy/convert/web/https://gts.da-miez.de/users/irgndsondepp/liked/01KZY6D7VAYMREN0W3Q2YNP7CW> <img alt=IrgndSonDepp src=https://gts.da-miez.de/fileserver/019VJ4JF4GMYN3EB1YSVGX65WN/attachment/original/01JP0PQYSE7DAPDD9BMTKPJAYP.png> </a></div><div class="mention-profile repost"><a href=https://ap.brid.gy/convert/web/https://polymaths.social/users/iac/statuses/01KZY500WCQ6ZNF6RYZ461DJD7> <img alt=iac src=https://polymaths.social/fileserver/0176BE8NQZPC25WN4WVF5QDKHJ/attachment/original/01KE54FWZJ5KH5MMNK6XBNYNXK.png> </a></div></div></div></div><script defer src=/assets/js/themeSelector.js></script></section><div class=hidden><a href=https://polymaths.social/@iac rel=me>Fediverse</a></div><div class="hidden h-card"><img class="u-photo icon" alt=scientiac src=/res/thumbnail.png><a class="p-name u-url" href=https://scientiac.space rel=me>scientiac</a><p class=p-note>A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does.</div><footer><p class=codewithlove>I can't think of things to write on a footer. So, just <span class=main-background>imagine</span> something yourself.<p><a href=/series>Series</a> | <a href=/atom.xml>Feed</a> | <a href=https://github.com/scientiac/scientiac.github.io target=_blank>Source Code</a><div class=footer-badges><div class=badge-item><map name=indie8831><area alt=Previous coords=38,0,88,15 href=https://xn--sr8hvo.ws/previous><area alt=Next coords=38,16,88,31 href=https://xn--sr8hvo.ws/next><area alt=IndieWeb coords=0,0,38,31 href=https://xn--sr8hvo.ws></map><img alt="IndieWeb Webring" src=/assets/indieweb.png usemap=#indie8831></div><div class=badge-item><a href=https://creativecommons.org/licenses/by-sa/4.0/ target=_blank> <img alt="CC BY-SA 4.0" src=/assets/cc-by-sa.png> </a></div></div><div style=opacity:0;width:0;height:0;font-size:0;overflow:hidden><a href=https://xn--sr8hvo.ws/previous rel=prev>Previous</a><a href=https://xn--sr8hvo.ws/next rel=next>Next</a></div></footer><ol class=js-only id=themeSelector reversed></ol>
