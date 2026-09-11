@@ -18,10 +18,10 @@
   <h2><a href="{{ page.permalink | safe }}">{{ page.title }}</a></h2>
 			<p class="subtitle --center"><code class="dateandtag dt-published">{{ page.date }}</code>
           {% for tag in page.taxonomies.syndicate %}
-              <code class="u-category dateandtag">{{ tag }}</code>
               {% set genre = tag %}
+              <code class="u-category dateandtag">{{ tag }}</code>
           {% endfor %}
-      <p>
+      </p>
     <div class="syndicate-text">
     {{ page.content | safe }}
     </div>

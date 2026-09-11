@@ -7,7 +7,7 @@
 <article class="listing looking">
   <h2><a href=""></a>Looking for Something Specific?</h2>
     {% set writings = get_taxonomy(kind="writings") %}
-    <p class="subtitle --center">
+    <p class="looking-strip">
       {% for term in writings.items %}
         <code class="dateandtag"><a href="{{ term.permalink }}">{{ term.name }}</a><sup>{{ term.pages | length }}</sup></code>
       {% endfor %}

@@ -9,7 +9,7 @@
         <h2 class="p-name title syndicate-inside-title">{{ page.title }}</h2>
 
         {% if page.date %}
-        <div class="syndicate-pagedate">
+        <div class="subtitle --center">
             <time class="dt-published dateandtag hidden" datetime="{{ page.date | date(format="%Y-%m-%d") }}T00:00:00Z">
                 {{ page.date | date(format="%Y-%m-%d") }}
             </time>

@@ -14,7 +14,7 @@
   {% for page in paginator.pages %}
   <article class="syndicate">
   <h2><a href="{{ page.permalink | safe }}">{{ page.title }}</a></h2>
-    <p class="subtitle --center"><code>{{ page.date }}</code></p>
+    <p class="subtitle --center"><code class="dt-published dateandtag">{{ page.date }}</code></p>
     <div class="syndicate-text">
     {{ page.content | safe }}
     </div>

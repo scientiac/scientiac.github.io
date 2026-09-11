@@ -85,7 +85,10 @@ nav:not(.exclude:not([data-style]), [data-style="none"]) > * {
 }
 
 .options, .--center {
-	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  margin-block: 1rem;
 }
 
 .pagedate {
@@ -100,7 +103,7 @@ nav:not(.exclude:not([data-style]), [data-style="none"]) > * {
 }
 
 .listing h2 {
-	margin: 0 0 12px 0;
+	margin: 0;
 	padding: calc(0.25 * var(--one-line));
 	background-color: var(--background-color-0);
 	border-radius: var(--half-line) var(--half-line) 0 0;
@@ -112,11 +115,6 @@ nav:not(.exclude:not([data-style]), [data-style="none"]) > * {
 
 .listing p {
 	margin: calc(0.6 * var(--one-line));
-}
-
-
-.listing h2 + p.subtitle, #aboutTheAuthor h2 + p.--center {
-	margin-top: 0;
 }
 
 .listing h2 > a {
@@ -174,11 +172,6 @@ nav:not(.exclude:not([data-style]), [data-style="none"]) > * {
 	text-decoration: underline;
 }
 
-.syndicate-pagedate {
-	text-align: center;
-	padding: calc(0.6 * var(--one-line));
-}
-
 .syndicate-inside {
   background-color: var(--background-color-1);
 	border-radius: var(--half-line);
@@ -203,7 +196,7 @@ nav:not(.exclude:not([data-style]), [data-style="none"]) > * {
 	border-radius: var(--half-line) var(--half-line) 0 0;
 }
 
-.syndicate-inside code {
+.syndicate-inside code, .syndicate .dateandtag {
 		background-color: var(--background-color-0);
 }
 
@@ -309,9 +302,15 @@ pre > code {
 	margin: 0 calc(0.125 * var(--one-line));
 }
 
+.looking-strip {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
 article.listing.looking > p > code {
-	padding: calc(0.35 * var(--one-line)) calc(0.75 * var(--one-line));
-	margin: 0;
+	padding: 0 calc(0.75 * var(--one-line));
 	border-radius: 0.5rem;
 	line-height: 2rem;
 }
