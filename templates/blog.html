@@ -35,12 +35,12 @@
   {% for page in paginator.pages %}
 		<article class="listing">
 			<h2><a href="{{ page.permalink | safe }}">{{ page.title }}</a></h2>
-			<p class="subtitle --center"><code class="dateandtag">{{ page.date }}</code>
+			<div class="subtitle --center"><code class="dateandtag">{{ page.date }}</code>
           {% for tag in page.taxonomies.writings %}
               <code class="u-category dateandtag">{{ tag }}</code>
               {% set genre = tag %}
           {% endfor %}
-      <p>
+      </div>
 		</article>
 	{% endfor %}
 

@@ -3,11 +3,11 @@
 {% block content %}
 
 {% set writings = get_taxonomy(kind="syndicate") %}
-<p class="subtitle --center">
+<div class="subtitle --center">
 {% for term in writings.items %}
   <code class="dateandtag"><a href="{{ term.permalink }}">{{ term.name }}</a><sup>{{ term.pages | length }}</sup></code>
 {% endfor %}
-</p>
+</div>
 
 <div class="logs">
 <h1 class="title-writings">
@@ -16,12 +16,12 @@
   {% for page in paginator.pages %}
   <article class="syndicate">
   <h2><a href="{{ page.permalink | safe }}">{{ page.title }}</a></h2>
-			<p class="subtitle --center"><code class="dateandtag dt-published">{{ page.date }}</code>
+			<div class="subtitle --center"><code class="dateandtag dt-published">{{ page.date }}</code>
           {% for tag in page.taxonomies.syndicate %}
               {% set genre = tag %}
               <code class="u-category dateandtag">{{ tag }}</code>
           {% endfor %}
-      </p>
+      </div>
     <div class="syndicate-text">
     {{ page.content | safe }}
     </div>

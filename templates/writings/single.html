@@ -3,9 +3,9 @@
 {% block content %}
 <div class="logs">
 
-<p class="subtitle --center">
+<div class="subtitle --center">
 <code class="dateandtag"><a href="atom.xml">RSS</a></code>
-</p>
+</div>
 
 <h1 class="title-writings">
   {{ term.name }}
@@ -14,7 +14,7 @@
   {% for page in paginator.pages %}
 		<article class="syndicate">
 			<h2><a href="{{ page.permalink | safe }}">{{ page.title }}</a></h2>
-			<p class="subtitle --center"><code class="dateandtag">{{ page.date }}</code></p>
+			<div class="subtitle --center"><code class="dateandtag">{{ page.date }}</code></div>
 		</article>
 	{% endfor %}
 
