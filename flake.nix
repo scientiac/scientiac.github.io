@@ -31,6 +31,7 @@
 
           # Add any shell logic you want executed any time the environment is activated
           shellHook = ''
+            git pull
             echo "Site Update? Hell Yeah!"
           '';
         };
