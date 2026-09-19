@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="https://scientiac.space/feed.xsl" type="text/xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>scientiac::syntropy</title>
+    <subtitle>A Computer Engineering student who loves FOSS and is learning about privacy, the Internet and languages writing about the things he does.</subtitle>
+    <link href="https:&#x2F;&#x2F;scientiac.space"/>
+    <link href="https://scientiac.space/atom.xml" rel="self" type="application/atom+xml"/>
+    <updated>2026-01-10T00:00:00+00:00</updated>
+    <id>https:&#x2F;&#x2F;scientiac.space</id>
+    <entry>
+        <title>Re: Static Site Webmention</title>
+        <link href="https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;reply-2026-01-10&#x2F;"/>
+        <updated>2026-01-10T00:00:00+00:00</updated>
+        <author><name>scientiac</name></author>
+        <id>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;reply-2026-01-10&#x2F;</id>
+        <content type="html"><![CDATA[
+          <p><a class="u-in-reply-to" href="https://islandinthenet.com/sn/142426/">Khürt</a>, think you got mistaken, I am not Joel! Was the mention supposed to be for me?</p>
+<p>I see that you yourself have a <code>URL/Permalink</code> input field to send mentions, mine is the same. And it is only for the ones who haven't <a rel="external" href="https://webmention.app/docs#using-the-command-line">automated sending</a> them in their site building pipeline.</p>
+<p>It is only there as an option. In case the automation fails or is not set up.</p>
+
+          <hr/>
+          <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+        ]]></content>
+    </entry>
+    <entry>
+        <title>Faulty&#x27;s Site</title>
+        <link href="https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2025-10-26&#x2F;"/>
+        <updated>2025-10-26T00:00:00+00:00</updated>
+        <author><name>scientiac</name></author>
+        <id>https:&#x2F;&#x2F;scientiac.space&#x2F;syndications&#x2F;posse-2025-10-26&#x2F;</id>
+        <content type="html"><![CDATA[
+          <p>I just love when people use webmentions. Cool site <a rel="external" href="https://faulty.carboxi.de/one/">@faulty</a>.</p>
+
+          <hr/>
+          <p><i>You might be wondering how I know that you're awesome!</i><br/> Because I know you read this via RSS.</p>
+        ]]></content>
+    </entry>
+</feed>
