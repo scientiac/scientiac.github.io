@@ -19,7 +19,7 @@ I have grown up with Linux. I have seen it improve and become more user friendly
 
 I went from fearing the terminal to loving it the most. I learned to piece together multiple tools and automate various tasks in the computer. I learned about privacy, free and open source software, open protocols, cross compatibility and  a very faint idea of what a good software and its ecosystem would look like. 
 
-While I still don't have any Idea if such architecture and ecosystem can earn while providing value while not getting exploited. I am biased toward using such applications which fulfill my criteria for being good.
+_While I still don't have any Idea if such architecture and ecosystem can earn while providing value while not getting exploited. I am biased toward using such applications which fulfill my criteria for being good._
 
 In the process of learning how this community functions and what it accepts and what it considers to be the "proper" way of choosing and using computers and its applications. I had decided to be far from big tech unless it was not practical to function in the real world. I was a student so it didn't affect me much.
 
